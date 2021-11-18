@@ -28,7 +28,6 @@ const getLocation = (dispatch: any) => {
         latitude: location?.coords?.latitude,
         longitude: location?.coords?.longitude,
       });
-      console.log('location', location);
       
       const locationObj = {
         longitude: location?.coords?.longitude,

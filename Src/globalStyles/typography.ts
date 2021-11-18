@@ -16,6 +16,8 @@ export default  {
   FONT_SIZE_10: textScale(10),
   FONT_SIZE_30: textScale(30),
   FONT_SIZE_11: textScale(11),
+  FONT_SIZE_45: textScale(45),
+  FONT_SIZE_58: textScale(58),
   FONT_SIZE_60: textScale(60),
   FONT_SIZE_80: textScale(80),
   LINE_HEIGHT_14: moderateScale(14),

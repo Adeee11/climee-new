@@ -17,6 +17,25 @@ const styles = StyleSheet.create({
       color: colors.white,
       fontFamily: fontFamily.regular,
       marginLeft: Spacing.MARGIN_20
+  },
+  cardContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    backgroundColor: "#3C6FD1",
+    padding: Spacing.PADDING_15,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+  },
+  cardTitle: {
+    fontSize: typography.FONT_SIZE_15,
+    color: colors.white,
+    fontFamily: fontFamily.semiBold
+  },
+  newsHeadline: {
+    fontSize: typography.FONT_SIZE_13,
+    color: '#363B64',
+    fontFamily: fontFamily.regular
   }
 });
 export default styles;
