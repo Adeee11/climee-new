@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontSize: typography.FONT_SIZE_20,
     fontFamily: fontFamily.semiBold,
+    textTransform: "capitalize"
   },
   lowerView: {
     marginTop: 10,

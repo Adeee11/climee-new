@@ -3,8 +3,14 @@ import React, { useState, useEffect } from "react";
 import { Animated, StatusBar, Platform, Text } from "react-native";
 import { heightLessNum } from "../../constants/dimensions";
 import * as Location from "expo-location";
+import axios from "../../api/axios";
 import colors from "../../globalStyles/colors";
 import styles from "./styles";
+import {
+  weatherDetails,
+  weatherDetailsLoading,
+} from "../../redux/actions/weatherActions";
+import api from "../../globalStyles/api";
 
 const SplashScreen = () => {
   const [fadeAnim] = useState(new Animated.Value(0));
@@ -56,11 +62,26 @@ const SplashScreen = () => {
   useEffect(() => {
     (async () => {
       try {
+        weatherDetailsLoading(true);
         const location = await Location.getCurrentPositionAsync({});
         const place = await Location.reverseGeocodeAsync({
           latitude: location?.coords?.latitude,
           longitude: location?.coords?.longitude,
         });
+        const locationObj = {
+          longitude: location?.coords?.longitude,
+          latitude: location?.coords?.latitude,
+          city: place[0]?.city,
+          country: place[0]?.country,
+          street: place[0]?.street,
+        };
+        const response: any = await axios.get(
+          `/onecall?lat=${location?.coords?.latitude}&lon=${location?.coords?.longitude}&appid=${api}&units=metric`
+        );
+        const details  = [];
+        details.push({weatherDetails: response?.data, locationDetails: locationObj})
+        weatherDetails(details);
+        weatherDetailsLoading(false);
       } catch (err) {
         console.log(err);
       }

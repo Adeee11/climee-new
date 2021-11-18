@@ -1,3 +1,4 @@
+import moment from "moment";
 import React from "react";
 import { View, Text, FlatList, Image } from "react-native";
 import { Line, Line2, Right } from "../../../assets/svg";
@@ -9,17 +10,35 @@ const Forecast = ({ data, backgroundColor, title }: any) => {
   interface data {
     id: string;
     temp: string;
-    time: string;
+    dt: number;
     img?: any;
-    min: string;
-    max: string;
+    min?: number;
+    max: number;
   }
+
+  const time = (time: number) => {
+    const date = new Date(time * 1000);
+    let hours = date.getHours();
+    let minutes: number | string = date?.getMinutes();
+    const ampm = hours >= 12 ? "PM" : "AM";
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    const strTime = hours + " " + ampm;
+    return { strTime };
+  };
 
   const renderItems = (item: data) => (
     <View style={{ flexDirection: "row", alignItems: "center" }}>
       <View style={styles.dataContainer}>
-        <Text style={styles.timeText}>{item.time}</Text>
-        {item?.temp ? (
+        {backgroundColor ? (
+          <Text style={[styles.timeText, {color: "#C4C4C4"}]}>
+            {moment(new Date(item?.dt * 1000)).format("ddd")}
+          </Text>
+        ) : (
+          <Text style={styles.timeText}>{time(item?.dt)?.strTime}</Text>
+        )}
+        {!backgroundColor ? (
           <Text
             style={[
               styles.tempText,
@@ -28,7 +47,7 @@ const Forecast = ({ data, backgroundColor, title }: any) => {
               },
             ]}
           >
-            {item.temp}&deg;
+            {parseInt(item?.temp)?.toFixed(0)}&deg;
           </Text>
         ) : (
           <View
@@ -38,10 +57,10 @@ const Forecast = ({ data, backgroundColor, title }: any) => {
             }}
           >
             <Text style={[styles.tempText, { color: "#3C6FD1" }]}>
-              {item.min}&deg;
+              {(item?.temp?.min)?.toFixed(0)}&deg;
             </Text>
             <Text style={[styles.tempText, { color: "#6D9CF5" }]}>
-              {item.max}&deg;
+              {(item?.temp?.max)?.toFixed(0)}&deg;
             </Text>
           </View>
         )}

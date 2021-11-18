@@ -12,7 +12,7 @@ import {
 
 import styles from "./styles";
 
-const TodayDetail = () => {
+const TodayDetail = ({ weatherDetails }: any) => {
   const details = [
     {
       id: "1",

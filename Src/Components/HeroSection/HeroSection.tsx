@@ -4,10 +4,10 @@ import { AntDesign } from "@expo/vector-icons";
 import assets from "../../../assets";
 import Forecast from "../Forecast/Forecast";
 import { LinearGradient } from "expo-linear-gradient";
-import colors from "../../globalStyles/colors";
+import moment from "moment"
 import styles from "./styles";
 
-const HeroSection = () => {
+const HeroSection = ({weatherData}: any) => {
   const temp = [
     { id: "1", temp: "24", time: "1 PM", img: assets.rainy },
     { id: "2", temp: "24", time: "1 PM", img: assets.rainy },
@@ -40,17 +40,17 @@ const HeroSection = () => {
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <View style={styles.upperView}>
           <View style={{ flexDirection: "row", alignItems: "flex-start"}}>
-          <Text style={styles.degreeText}>24</Text>
+          <Text style={styles.degreeText}>{(weatherData[0]?.weatherDetails?.current?.temp)?.toFixed(0)}</Text>
           <Text style={styles.degreeSymbol}>&deg;</Text>
           </View>
-          <Text style={styles.weatherTypeText}>Sunny</Text>
+          <Text style={styles.weatherTypeText}>{weatherData[0]?.weatherDetails?.current?.weather[0]?.description}</Text>
             <View style={styles.minMaxContainer}>
               <AntDesign name="arrowdown" size={22} color="#3AE000" />
               <Text style={[styles.minmaxText, {marginRight: 10}]}>17&deg;</Text>
               <AntDesign name="arrowup" size={22} color="#E00000" />
               <Text style={styles.minmaxText}>29&deg;</Text>
             </View>
-            <Text style={styles.dateStyle}>Tuesday, 17 November</Text>
+            <Text style={styles.dateStyle}>{    moment(new Date()).format("dddd, D MMMM")}</Text>
         </View>
         <View style={styles.imageContainer}>
           <Image
@@ -61,7 +61,7 @@ const HeroSection = () => {
       </View>
       {/* Flatlist section */}
       <View style={styles.lowerView}>
-        <Forecast data={temp} title="Hourly Forecast" />
+        <Forecast data={weatherData[0]?.weatherDetails?.hourly} title="Hourly Forecast" />
       </View>
     </View>
   );
