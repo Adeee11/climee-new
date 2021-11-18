@@ -1,15 +1,11 @@
 {
   "expo": {
+    "entryPoint": "./AppWrapper.tsx",
     "name": "Climee",
-    "slug": "Climee",
+    "slug": "climee",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
+    "icon": "./assets/ClimeeLogo.png",
     "updates": {
       "fallbackToCacheTimeout": 0
     },
@@ -17,13 +13,26 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "icon": "./assets/ClimeeLogo.png",
+      "config": {
+        "googleMapsApiKey": "AIzaSyDTeX5eQeX0sTl8BTNUOu9s0iMCYUzvHDo"
+      },
+      "supportsTablet": true,
+      "bundleIdentifier": "com.iwebcode.climee",
+      "buildNumber": "1.0.0"
     },
     "android": {
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      }
+        "foregroundImage": "./assets/Applogo.png",
+        "backgroundColor": "#3C6FD1"
+      },
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyATTioV0KMt0GIUlKGu9L1AvRhqygdJ5U8"
+        }
+      },
+      "package": "com.iwebcode.climee"
     },
     "web": {
       "favicon": "./assets/favicon.png"
