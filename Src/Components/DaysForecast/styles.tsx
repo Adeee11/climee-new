@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import colors from "../../globalStyles/colors";
 import fontFamily from "../../globalStyles/fontFamily";
 import Spacing from "../../globalStyles/Spacing";
 import typography from "../../globalStyles/typography";
@@ -10,7 +11,7 @@ const styles= StyleSheet.create({
         alignItems: "center",
     },
     timeText: {
-        color: "#363B64",
+        color: colors.grey,
         fontSize: typography.FONT_SIZE_14,
         fontFamily: fontFamily.regular
     },

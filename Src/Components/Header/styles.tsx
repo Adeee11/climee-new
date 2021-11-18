@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     paddingLeft: Spacing.PADDING_15
   },
   headerText: {
-      fontSize: typography.FONT_SIZE_16,
+      fontSize: typography.FONT_SIZE_20,
       color: colors.white,
       fontFamily: fontFamily.regular,
       marginLeft: Spacing.MARGIN_20

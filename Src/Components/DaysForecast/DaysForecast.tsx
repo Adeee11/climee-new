@@ -14,10 +14,29 @@ const DaysForecast = ({ data, backgroundColor }: any) => {
     img?: any;
     min: string;
     max: string;
+    selected: boolean;
   }
+  const selectedDay = (index: string) => {
+    let val = data.map((val: any) => {
+      if (val.id == index) {
+        val.selected = true;
+        // console.log(val.selected+"s"+val.time);
+      } else {
+        val.selected = false;
+      }
+    });
+  };
   const renderItems = (item: data) => (
-    <TouchableOpacity>
-      <View style={styles.dataContainer}>
+    <TouchableOpacity onPress={() => selectedDay(item.id)}>
+      <View
+        style={{
+          ...styles.dataContainer,
+          marginHorizontal: 2,
+          // backgroundColor: "red",
+          borderBottomColor: colors.textColor,
+          borderBottomWidth: item.selected ? 5 : 0,
+        }}
+      >
         <Text style={styles.timeText}>{item.time}</Text>
         {item?.temp ? (
           <Text

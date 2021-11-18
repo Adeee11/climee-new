@@ -34,6 +34,18 @@ export default{
     nearBy:require("./images/nearBy.png"),
     settings:require("./images/settings.png"),
     weekly:require("./images/weekly.png"),
-    // appLogo:require(".././icon.png"),
-    homeButton:require("./images/homeButton.png")
+    homeButton:require("./images/homeButton.png"),
+
+
+    //newIcons
+    newDewPoint:require("./images/newDewPoint.png"),
+    newHumidity:require("./images/newHumidity.png"),
+    newMoonrise:require("./images/newMoonrise.png"),
+    newMoonset:require("./images/newMoonset.png"),
+    newPressure:require("./images/newPressure.png"),
+    newSunrise:require("./images/newSunrise.png"),
+    newSunset:require("./images/newSunset.png"),
+    newUv:require("./images/newUv.png"),
+    newWind:require("./images/newWind.png"),
+    windDirection:require("./images/windDirection.png")
 }

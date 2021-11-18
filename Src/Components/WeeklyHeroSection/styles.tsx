@@ -1,0 +1,45 @@
+import { StyleSheet } from "react-native";
+import colors from "../../globalStyles/colors";
+import fontFamily from "../../globalStyles/fontFamily";
+import Spacing from "../../globalStyles/Spacing";
+import typography from "../../globalStyles/typography";
+
+const styles = StyleSheet.create({
+  container: {
+    borderRadius: 20,
+    padding: 15,
+    margin: Spacing.MARGIN_16,
+  },
+  upperView: {
+    flex: 0.5,
+    alignItems: "flex-start",
+  },
+  DayText: {
+    color: "white",
+    fontSize: typography.FONT_SIZE_16,
+    fontFamily: fontFamily.semiBold,
+  },
+  weatherTypeText: {
+    color: "white",
+    fontSize: typography.FONT_SIZE_20,
+    fontFamily: fontFamily.semiBold,
+  },
+  dateText: {
+    color: "white",
+    fontSize: typography.FONT_SIZE_16,
+    fontFamily: fontFamily.regular,
+  },
+  tempText: {
+    color: colors.white,
+    fontSize: typography.FONT_SIZE_20,
+    fontFamily: fontFamily.semiBold,
+  },
+  minmaxContainer: {
+    flexDirection: "row",
+  },
+  lowerView: {
+    marginTop: 10,
+  },
+  imageContainer: { flex: 0.5, alignItems: "center" },
+});
+export default styles;

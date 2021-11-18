@@ -3,5 +3,6 @@ export default {
     HOURLY:"HOURLY",
     NEARBY:"NEARBY",
     SETTINGS:"SETTINGS",
-    WEEKLY:"WEEKLY"
+    WEEKLY:"WEEKLY",
+    ABOUT:"ABOUT"
 }
