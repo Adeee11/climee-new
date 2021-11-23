@@ -4,5 +4,7 @@ export default {
     NEARBY:"NEARBY",
     SETTINGS:"SETTINGS",
     WEEKLY:"WEEKLY",
-    ABOUT:"ABOUT"
+    ABOUT:"ABOUT",
+    TODAYDETAILS:"TODAYDETAILS",
+    SEARCH:"SEARCH"
 }

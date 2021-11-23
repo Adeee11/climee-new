@@ -9,9 +9,10 @@ import {
   UV,
   Wind,
 } from "../../../assets/svg";
+import navigationStrings from "../../constants/navigationStrings";
 import styles from "./styles";
 
-const TodayDetail = ({ weatherDetails }: any) => {
+const TodayDetail = ({ weatherDetails, navigation }: any) => {
   const details = [
     {
       id: "1",
@@ -130,6 +131,7 @@ const TodayDetail = ({ weatherDetails }: any) => {
             width: "30%",
             borderRadius: 10,
           }}
+          onPress={() => navigation.navigate(navigationStrings.TODAYDETAILS)}
         >
           <Text style={styles.buttonText}>See More</Text>
         </TouchableOpacity>

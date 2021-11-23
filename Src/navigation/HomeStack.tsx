@@ -1,12 +1,12 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import navigationStrings from "../constants/navigationStrings";
-import TabRoutes from "./TabRoutes";
-import { AboutApp } from "../Screens";
+import { Home } from "../Screens";
 import TodayDetails from "../Screens/TodayDetails/TodayDetails";
+import Search from "../Screens/Search/Search";
 
 const Stack = createStackNavigator();
-function MainStack() {
+function HomeStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -14,24 +14,24 @@ function MainStack() {
           headerShown: false,
         }}
         name={navigationStrings.HOME}
-        component={TabRoutes}
+        component={Home}
       />
-       <Stack.Screen
-        options={{
-          headerShown: false,
-        }}
-        name={navigationStrings.ABOUT}
-        component={AboutApp}
-      />
-          <Stack.Screen
+      <Stack.Screen
         options={{
           headerShown: false,
         }}
         name={navigationStrings.TODAYDETAILS}
         component={TodayDetails}
       />
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name={navigationStrings.SEARCH}
+        component={Search}
+      />
     </Stack.Navigator>
   );
 }
 
-export default MainStack;
+export default HomeStack;

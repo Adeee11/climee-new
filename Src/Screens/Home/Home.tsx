@@ -6,11 +6,8 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
-import colors from "../../globalStyles/colors";
 import { ScrollView } from "react-native-gesture-handler";
 import styles from "./styles";
-import assets from "../../../assets";
 import GeneralStatusBarColor from "../../Components/generateStatusBarColor/GenerateStatusBarColor";
 import HeroSection from "../../Components/HeroSection/HeroSection";
 import TodayDetail from "../../Components/TodayDetail/TodayDetail";
@@ -21,8 +18,11 @@ import { connect } from "react-redux";
 import strapi from "../../api/strapi";
 import ShowMap from "../../Components/ShowMap/ShowMap";
 import Loader from "../../Components/Loader";
+import Header from "../../Components/Header/Header";
+import navigationStrings from "../../constants/navigationStrings";
 
-const Home = ({ weatherDetails, weatherLoading }: any) => {
+
+const Home = ({ weatherDetails, weatherLoading, navigation }: any) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [news, setNews] = useState<Array<string>>([]);
 
@@ -52,10 +52,7 @@ const Home = ({ weatherDetails, weatherLoading }: any) => {
       />
       <SafeAreaView style={{ flex: 1 }}>
         {/* Header Start */}
-        <View style={styles.headerContainer}>
-          <AntDesign name="search1" size={30} color={colors.white} />
-          <Text style={styles.headerText}>Mohali, India</Text>
-        </View>
+      <Header title="Mohali" backButton={false} onPress={() => navigation.navigate(navigationStrings.SEARCH)}/>
         {/* Header End */}
         {weatherLoading || loading ? (
           <Loader />
@@ -71,7 +68,7 @@ const Home = ({ weatherDetails, weatherLoading }: any) => {
             </View>
             {/* Today's Details component  */}
             <View style={{ marginBottom: 20 }}>
-              <TodayDetail weatherDetails={weatherDetails} />
+              <TodayDetail weatherDetails={weatherDetails} navigation={navigation} />
             </View>
             {/* 7 day forecast component */}
             <View style={{ marginBottom: 20 }}>

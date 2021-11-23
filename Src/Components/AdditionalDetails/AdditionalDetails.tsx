@@ -6,7 +6,6 @@ import AdditionalElements from "../AdditionalElements/AdditionalElements"
 import styles from "./styles"
 
 const AdditionalDetails=(props:any)=>{
-    const {}=props
     return(
         <View style={styles.mainContainer}>
             <Text style={styles.title}>Additional Details</Text>
