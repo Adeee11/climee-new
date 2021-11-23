@@ -1,11 +1,10 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import navigationStrings from "../constants/navigationStrings";
-import TabRoutes from "./TabRoutes";
-import { AboutApp, News, TodaysDetails } from "../Screens";
+import { AirPollution, Home, News, TodaysDetails } from "../Screens";
 
 const Stack = createStackNavigator();
-function MainStack() {
+function HomeStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -13,25 +12,23 @@ function MainStack() {
           headerShown: false,
         }}
         name={navigationStrings.HOME}
-        component={TabRoutes}
+        component={Home}
       />
       <Stack.Screen
         options={{
           headerShown: false,
         }}
-        name={navigationStrings.ABOUT}
-        component={AboutApp}
+        name={navigationStrings.AIRPOLLUTION}
+        component={AirPollution}
       />
       <Stack.Screen
         options={{
           headerShown: false,
         }}
-        name={navigationStrings.NEWS}
-        component={News}
+        name={navigationStrings.TODAYSDETAILS}
+        component={TodaysDetails}
       />
-
-   
     </Stack.Navigator>
   );
 }
-export default MainStack;
+export default HomeStack;

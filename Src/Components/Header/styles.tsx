@@ -16,7 +16,8 @@ const styles = StyleSheet.create({
       fontSize: typography.FONT_SIZE_20,
       color: colors.white,
       fontFamily: fontFamily.regular,
-      marginLeft: Spacing.MARGIN_20
+      marginLeft: Spacing.MARGIN_20,
+      marginTop:Spacing.MARGIN_4
   }
 });
 export default styles;

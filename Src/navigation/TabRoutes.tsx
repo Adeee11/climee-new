@@ -1,13 +1,21 @@
 import React, { useEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import colors from "../globalStyles/colors";
-import { Home, Hourly, NearBy, Settings, Weekly } from "../Screens";
+import {
+  Home,
+  Hourly,
+  NearBy,
+  Settings,
+  TodaysDetails,
+  Weekly,
+} from "../Screens";
 import { Image, Platform } from "react-native";
-
 import fontFamily from "../globalStyles/fontFamily";
 import typography from "../globalStyles/typography";
 import Spacing from "../globalStyles/Spacing";
 import assets from "../../assets";
+import navigationStrings from "../constants/navigationStrings";
+import HomeStack from "./HomeStack";
 const Tab = createBottomTabNavigator();
 const TabRoutes = () => {
   return (
@@ -24,7 +32,8 @@ const TabRoutes = () => {
                 height: Spacing.HEIGHT_28,
                 width: Spacing.WIDTH_28,
                 tintColor: color,
-                marginTop: Platform.OS=="ios"?Spacing.MARGIN_5: Spacing.MARGIN_8,
+                marginTop:
+                  Platform.OS == "ios" ? Spacing.MARGIN_5 : Spacing.MARGIN_8,
               }}
               resizeMode="contain"
             />
@@ -37,7 +46,8 @@ const TabRoutes = () => {
           tabBarLabelStyle: {
             fontFamily: fontFamily.regular,
             fontSize: typography.FONT_SIZE_10,
-            marginBottom:Platform.OS=="ios"?Spacing.MARGIN_5: Spacing.MARGIN_16,
+            marginBottom:
+              Platform.OS == "ios" ? Spacing.MARGIN_5 : Spacing.MARGIN_16,
           },
           tabBarActiveTintColor: colors.darkBlue,
           tabBarInactiveTintColor: colors.white,
@@ -56,7 +66,8 @@ const TabRoutes = () => {
                 height: Spacing.HEIGHT_28,
                 width: Spacing.WIDTH_28,
                 tintColor: color,
-                marginTop: Platform.OS=="ios"?Spacing.MARGIN_5: Spacing.MARGIN_8,
+                marginTop:
+                  Platform.OS == "ios" ? Spacing.MARGIN_5 : Spacing.MARGIN_8,
               }}
               resizeMode="contain"
             />
@@ -69,7 +80,8 @@ const TabRoutes = () => {
           tabBarLabelStyle: {
             fontFamily: fontFamily.regular,
             fontSize: typography.FONT_SIZE_10,
-            marginBottom:Platform.OS=="ios"?Spacing.MARGIN_5: Spacing.MARGIN_16,
+            marginBottom:
+              Platform.OS == "ios" ? Spacing.MARGIN_5 : Spacing.MARGIN_16,
           },
           tabBarActiveTintColor: colors.darkBlue,
           tabBarInactiveTintColor: colors.white,
@@ -77,7 +89,7 @@ const TabRoutes = () => {
       />
       <Tab.Screen
         name={"Home"}
-        component={Home}
+        component={HomeStack}
         options={{
           headerShown: false,
           tabBarIcon: () => (
@@ -87,7 +99,8 @@ const TabRoutes = () => {
                 height: Spacing.HEIGHT_55,
                 width: Spacing.HEIGHT_55,
                 borderRadius: Spacing.RADIUS_82,
-                marginTop: Platform.OS=="ios"?Spacing.MARGIN_5: Spacing.MARGIN_10,
+                marginTop:
+                  Platform.OS == "ios" ? Spacing.MARGIN_5 : Spacing.MARGIN_10,
               }}
               resizeMode={"cover"}
             />
@@ -116,8 +129,8 @@ const TabRoutes = () => {
                 height: Spacing.HEIGHT_28,
                 width: Spacing.WIDTH_28,
                 tintColor: color,
-                marginTop: Platform.OS=="ios"?Spacing.MARGIN_5: Spacing.MARGIN_8,
-
+                marginTop:
+                  Platform.OS == "ios" ? Spacing.MARGIN_5 : Spacing.MARGIN_8,
               }}
               resizeMode="contain"
             />
@@ -130,7 +143,8 @@ const TabRoutes = () => {
           tabBarLabelStyle: {
             fontFamily: fontFamily.regular,
             fontSize: typography.FONT_SIZE_10,
-            marginBottom:Platform.OS=="ios"?Spacing.MARGIN_5: Spacing.MARGIN_16,
+            marginBottom:
+              Platform.OS == "ios" ? Spacing.MARGIN_5 : Spacing.MARGIN_16,
           },
           tabBarActiveTintColor: colors.darkBlue,
           tabBarInactiveTintColor: colors.white,
@@ -148,8 +162,8 @@ const TabRoutes = () => {
                 height: Spacing.HEIGHT_28,
                 width: Spacing.WIDTH_28,
                 tintColor: color,
-                marginTop: Platform.OS=="ios"?Spacing.MARGIN_5: Spacing.MARGIN_8,
-
+                marginTop:
+                  Platform.OS == "ios" ? Spacing.MARGIN_5 : Spacing.MARGIN_8,
               }}
               resizeMode="contain"
             />
@@ -162,7 +176,8 @@ const TabRoutes = () => {
           tabBarLabelStyle: {
             fontFamily: fontFamily.regular,
             fontSize: typography.FONT_SIZE_10,
-            marginBottom:Platform.OS=="ios"?Spacing.MARGIN_5: Spacing.MARGIN_16,
+            marginBottom:
+              Platform.OS == "ios" ? Spacing.MARGIN_5 : Spacing.MARGIN_16,
           },
           tabBarActiveTintColor: colors.darkBlue,
           tabBarInactiveTintColor: colors.white,

@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import colors from "../../globalStyles/colors";
+import Swiper from "react-native-swiper";
 import { ScrollView } from "react-native-gesture-handler";
 import styles from "./styles";
 import assets from "../../../assets";
@@ -21,10 +22,14 @@ import { connect } from "react-redux";
 import strapi from "../../api/strapi";
 import ShowMap from "../../Components/ShowMap/ShowMap";
 import Loader from "../../Components/Loader";
+import navigationStrings from "../../constants/navigationStrings";
+import Shadow from "../../Components/Shadow/Shadow";
+import moment from "moment";
+import { deviceHeight } from "../../constants/dimensions";
 
-const Home = ({ weatherDetails, weatherLoading }: any) => {
+const Home = ({ weatherDetails, weatherLoading, navigation }: any) => {
   const [loading, setLoading] = useState<boolean>(false);
-  const [news, setNews] = useState<Array<string>>([]);
+  const [news, setNews] = useState<Array<any>>([]);
 
   useEffect(() => {
     (async () => {
@@ -34,15 +39,59 @@ const Home = ({ weatherDetails, weatherLoading }: any) => {
         const result: any = await strapi.get("/news", {
           headers: {
             Authorization: `Bearer ${Token}`,
-          }
+          },
         });
-        setNews(result?.data);        
+        setNews(result?.data);
         setLoading(false);
       } catch (err) {
         console.log(err.message);
       }
     })();
   }, []);
+
+  const renderNews = (data: any) => {
+    return data?.map((item: any, index: any) => {
+      return (
+        <View style={{ paddingHorizontal: 5 }}>
+          <TouchableOpacity
+            style={styles.cardContainer}
+            onPress={() =>
+              navigation.navigate(navigationStrings.NEWS, { data: item })
+            }
+          >
+            <Text style={styles.cardTitle}>News</Text>
+            <Right />
+          </TouchableOpacity>
+          <View
+            style={{
+              height: 200,
+              borderBottomLeftRadius: 20,
+              borderBottomRightRadius: 20,
+            }}
+          >
+            <Image
+              source={{
+                uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1CVi919KotpE7FuciwqIeMDhhJNokHpbV1w&usqp=CAU",
+              }}
+              style={{ width: "100%", height: "100%", resizeMode: "cover" }}
+            />
+          </View>
+          <View
+            style={{
+              padding: 20,
+              backgroundColor: "white",
+              borderBottomRightRadius: 20,
+              borderBottomLeftRadius: 20,
+            }}
+          >
+            <Text style={styles.newsHeadline} numberOfLines={2}>
+              {item.Title}
+            </Text>
+          </View>
+        </View>
+      );
+    });
+  };
 
   return (
     <>
@@ -71,7 +120,7 @@ const Home = ({ weatherDetails, weatherLoading }: any) => {
             </View>
             {/* Today's Details component  */}
             <View style={{ marginBottom: 20 }}>
-              <TodayDetail weatherDetails={weatherDetails} />
+              <TodayDetail weatherDetails={weatherDetails} navigation={navigation}/>
             </View>
             {/* 7 day forecast component */}
             <View style={{ marginBottom: 20 }}>
@@ -117,36 +166,14 @@ const Home = ({ weatherDetails, weatherLoading }: any) => {
                 marginBottom: 20,
               }}
             >
-              <TouchableOpacity style={styles.cardContainer}>
-                <Text style={styles.cardTitle}>News</Text>
-                <Right />
-              </TouchableOpacity>
-              <View
-                style={{
-                  height: 200,
-                  borderBottomLeftRadius: 20,
-                  borderBottomRightRadius: 20,
-                }}
+              <Swiper
+                pagingEnabled={true}
+                loop={true}
+                key={news.length}
+                style={{ height: (deviceHeight * 50) / 100 }}
               >
-                <Image
-                  source={{
-                    uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1CVi919KotpE7FuciwqIeMDhhJNokHpbV1w&usqp=CAU",
-                  }}
-                  style={{ width: "100%", height: "100%", resizeMode: "cover" }}
-                />
-              </View>
-              <View
-                style={{
-                  padding: 20,
-                  backgroundColor: "white",
-                  borderBottomRightRadius: 20,
-                  borderBottomLeftRadius: 20,
-                }}
-              >
-                <Text style={styles.newsHeadline}>
-                {news[0]?.Title}
-                </Text>
-              </View>
+                {renderNews(news)}
+              </Swiper>
             </View>
           </ScrollView>
         )}

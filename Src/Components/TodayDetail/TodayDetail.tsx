@@ -9,9 +9,10 @@ import {
   UV,
   Wind,
 } from "../../../assets/svg";
+import navigationStrings from "../../constants/navigationStrings";
 import styles from "./styles";
 
-const TodayDetail = ({ weatherDetails }: any) => {
+const TodayDetail = ({ weatherDetails,navigation }: any) => {
   const details = [
     {
       id: "1",
@@ -122,6 +123,7 @@ const TodayDetail = ({ weatherDetails }: any) => {
           renderItem={({ item }) => renderItem(item)}
         />
         <TouchableOpacity
+        onPress={()=>navigation.navigate(navigationStrings.TODAYSDETAILS)}
           style={{
             marginVertical: 20,
             alignSelf: "center",

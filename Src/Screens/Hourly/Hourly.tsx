@@ -5,9 +5,10 @@ import assets from "../../../assets";
 import GeneralStatusBarColor from "../../Components/generateStatusBarColor/GenerateStatusBarColor";
 import Header from "../../Components/Header/Header";
 import HourlyInformation from "../../Components/HourlyInformation/HourlyInformation";
+import navigationStrings from "../../constants/navigationStrings";
 import colors from "../../globalStyles/colors";
 import styles from "./styles";
-const Hourly = () => {
+const Hourly = ({props}:any) => {
   const data = [
     {
       id: "1",
@@ -65,7 +66,7 @@ const Hourly = () => {
         barStyle={"dark-content"}
         backgroundColor={colors.blueTheme}
       />
-      <Header title={"Hourly"} />
+      <Header title={"Hourly"} onPress={()=>props.navigation.navigate(navigationStrings.HOME)} />
       <ScrollView showsVerticalScrollIndicator={false}bounces={false} style={{ backgroundColor: "#F5F5F5" }}>
       <HourlyInformation data={data} date={"Tuesday, 24 August"} />
       <HourlyInformation data={data} date={"Wednesday, 25 August"} />
