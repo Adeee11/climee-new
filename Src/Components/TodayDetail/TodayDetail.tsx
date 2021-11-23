@@ -9,7 +9,6 @@ import {
   UV,
   Wind,
 } from "../../../assets/svg";
-
 import styles from "./styles";
 
 const TodayDetail = ({ weatherDetails }: any) => {
@@ -18,45 +17,50 @@ const TodayDetail = ({ weatherDetails }: any) => {
       id: "1",
       icon: <Wind width={18} height={18} />,
       title: "Wind",
-      value: "32 MPH",
     },
     {
       id: "2",
       icon: <Humidity width={18} height={18} />,
       title: "Humidity",
-      value: "54 %",
     },
     {
       id: "3",
       icon: <Dew width={18} height={18} />,
       title: "Dew Point",
-      value: `12°`,
     },
     {
       id: "4",
       icon: <Pressure width={18} height={18} />,
       title: "Pressure",
-      value: "1014 MB",
     },
     {
       id: "5",
       icon: <UV width={18} height={18} />,
       title: "UV Index",
-      value: "3.86",
     },
     {
       id: "6",
       icon: <Sunrise width={18} height={18} />,
       title: "Sunrise",
-      value: "6:00 AM",
     },
     {
       id: "7",
       icon: <Sunset width={18} height={18} />,
       title: "Sunset",
-      value: "7:00 PM",
     },
   ];
+
+  const time = (time: number) => {
+    const date = new Date(time * 1000);
+    let hours = date.getHours();
+    let minutes: number | string = date.getMinutes();
+    const ampm = hours >= 12 ? "PM" : "AM";
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    const strTime = hours + ":" + minutes + " " + ampm;
+    return { strTime };
+  };
 
   const renderItem = (item: any) => (
     <View>
@@ -66,7 +70,41 @@ const TodayDetail = ({ weatherDetails }: any) => {
           <Text style={styles.detailText}>{item.title}</Text>
         </View>
         <View>
-          <Text style={styles.detailText}>{item.value}</Text>
+          {item?.id === "1" ? (
+            <Text style={styles.detailText}>
+              {weatherDetails[0]?.weatherDetails?.current?.wind_speed}
+            </Text>
+          ) : item?.id === "2" ? (
+            <Text style={styles.detailText}>
+              {weatherDetails[0]?.weatherDetails?.current?.humidity}%
+            </Text>
+          ) : item?.id === "3" ? (
+            <Text style={styles.detailText}>
+              {weatherDetails[0]?.weatherDetails?.current?.dew_point}&deg;
+            </Text>
+          ) : item?.id === "4" ? (
+            <Text style={styles.detailText}>
+              {weatherDetails[0]?.weatherDetails?.current?.pressure} MB
+            </Text>
+          ) : item?.id === "5" ? (
+            <Text style={styles.detailText}>
+              {weatherDetails[0]?.weatherDetails?.current?.uvi}
+            </Text>
+          ) : item?.id === "6" ? (
+            <Text style={styles.detailText}>
+              {
+                time(weatherDetails[0]?.weatherDetails?.current?.sunrise)
+                  ?.strTime
+              }
+            </Text>
+          ) : item?.id === "7" ? (
+            <Text style={styles.detailText}>
+              {
+                time(weatherDetails[0]?.weatherDetails?.current?.sunset)
+                  ?.strTime
+              }
+            </Text>
+          ) : null}
         </View>
       </View>
     </View>

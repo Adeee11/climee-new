@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -14,27 +14,35 @@ import assets from "../../../assets";
 import GeneralStatusBarColor from "../../Components/generateStatusBarColor/GenerateStatusBarColor";
 import HeroSection from "../../Components/HeroSection/HeroSection";
 import TodayDetail from "../../Components/TodayDetail/TodayDetail";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Right } from "../../../assets/svg";
 import Forecast from "../../Components/Forecast/Forecast";
 import { connect } from "react-redux";
+import strapi from "../../api/strapi";
 import ShowMap from "../../Components/ShowMap/ShowMap";
 import Loader from "../../Components/Loader";
 
 const Home = ({ weatherDetails, weatherLoading }: any) => {
-  const temp = [
-    { id: "1", min: "17", max: "30", time: "Wed", img: assets.rainy },
-    { id: "2", min: "17", max: "30", time: "Thu", img: assets.rainy },
-    { id: "3", min: "17", max: "30", time: "Fri", img: assets.rainy },
-    { id: "4", min: "17", max: "30", time: "Sat", img: assets.rainy },
-    { id: "5", min: "17", max: "30", time: "Sun", img: assets.rainy },
-    { id: "6", min: "17", max: "30", time: "Mon", img: assets.rainy },
-    { id: "7", min: "17", max: "30", time: "Tue", img: assets.rainy },
-  ];
+  const [loading, setLoading] = useState<boolean>(false);
+  const [news, setNews] = useState<Array<string>>([]);
 
   useEffect(() => {
-    console.log("weatherDetails", weatherDetails[0]?.weatherDetails?.current?.temp);
-    console.log(weatherLoading);
-  }, [weatherDetails]);
+    (async () => {
+      try {
+        setLoading(true);
+        const Token = await AsyncStorage.getItem("cmsAuthToken");
+        const result: any = await strapi.get("/news", {
+          headers: {
+            Authorization: `Bearer ${Token}`,
+          }
+        });
+        setNews(result?.data);        
+        setLoading(false);
+      } catch (err) {
+        console.log(err.message);
+      }
+    })();
+  }, []);
 
   return (
     <>
@@ -49,7 +57,7 @@ const Home = ({ weatherDetails, weatherLoading }: any) => {
           <Text style={styles.headerText}>Mohali, India</Text>
         </View>
         {/* Header End */}
-        {weatherLoading ? (
+        {weatherLoading || loading ? (
           <Loader />
         ) : (
           <ScrollView
@@ -59,11 +67,11 @@ const Home = ({ weatherDetails, weatherLoading }: any) => {
           >
             {/* hero component */}
             <View style={{ marginVertical: 20 }}>
-              <HeroSection weatherData={weatherDetails}/>
+              <HeroSection weatherData={weatherDetails} />
             </View>
             {/* Today's Details component  */}
             <View style={{ marginBottom: 20 }}>
-              <TodayDetail weatherDetails={weatherDetails}/>
+              <TodayDetail weatherDetails={weatherDetails} />
             </View>
             {/* 7 day forecast component */}
             <View style={{ marginBottom: 20 }}>
@@ -136,8 +144,7 @@ const Home = ({ weatherDetails, weatherLoading }: any) => {
                 }}
               >
                 <Text style={styles.newsHeadline}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor{" "}
+                {news[0]?.Title}
                 </Text>
               </View>
             </View>
