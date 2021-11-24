@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     fontSize: typography.FONT_SIZE_30,
   },
   text2: {
-    color: colors.headerBlue,
+    color: colors.textColor,
     fontFamily: fontFamily.regular,
     textAlign: "left",
     fontSize: typography.FONT_SIZE_12,
@@ -28,10 +28,10 @@ const styles = StyleSheet.create({
   },
   blurContainer: {
     flex: 1,
-    backgroundColor: colors.themeColor,
+    backgroundColor: colors.blueTheme,
   },
   UnitsView: {
-    flex: 0.2,
+    flex: 0.25,
     paddingHorizontal: Spacing.PADDING_16,
     paddingTop: Spacing.PADDING_16,
     justifyContent: "space-between",

@@ -16,9 +16,9 @@ headingText:{
     fontFamily:fontFamily.semiBold
 },
 AirPollutionView:{
-    padding:Spacing.PADDING_16,
+    // padding:Spacing.PADDING_16,
     backgroundColor:colors.white,
-    margin:Spacing.MARGIN_16,
+    // margin:Spacing.MARGIN_10,
     borderRadius:Spacing.RADIUS_20
 },
 pollutionHeading:{
@@ -31,6 +31,20 @@ buttonText: {
     fontSize: typography.FONT_SIZE_12, 
     textAlign: "center", 
     fontFamily: fontFamily.regular 
+  },
+  cardContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    backgroundColor: "#3C6FD1",
+    padding: Spacing.PADDING_15,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+  },
+  cardTitle: {
+    fontSize: typography.FONT_SIZE_15,
+    color: colors.white,
+    fontFamily: fontFamily.semiBold
   },
 })
 export default styles;

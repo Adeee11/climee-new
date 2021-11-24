@@ -15,22 +15,7 @@ function MainStack() {
         name={navigationStrings.HOME}
         component={TabRoutes}
       />
-      <Stack.Screen
-        options={{
-          headerShown: false,
-        }}
-        name={navigationStrings.ABOUT}
-        component={AboutApp}
-      />
-      <Stack.Screen
-        options={{
-          headerShown: false,
-        }}
-        name={navigationStrings.NEWS}
-        component={News}
-      />
-
-   
+    
     </Stack.Navigator>
   );
 }

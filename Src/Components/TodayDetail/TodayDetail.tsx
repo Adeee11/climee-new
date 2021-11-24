@@ -12,7 +12,7 @@ import {
 import navigationStrings from "../../constants/navigationStrings";
 import styles from "./styles";
 
-const TodayDetail = ({ weatherDetails,navigation }: any) => {
+const TodayDetail = ({ weatherDetails, navigation, windDegree }: any) => {
   const details = [
     {
       id: "1",
@@ -73,7 +73,14 @@ const TodayDetail = ({ weatherDetails,navigation }: any) => {
         <View>
           {item?.id === "1" ? (
             <Text style={styles.detailText}>
-              {weatherDetails[0]?.weatherDetails?.current?.wind_speed}
+              {windDegree == "mph"
+                ? (
+                    weatherDetails[0]?.weatherDetails?.current?.wind_speed *
+                    2.237
+                  )?.toFixed(2)
+                : weatherDetails[0]?.weatherDetails?.current?.wind_speed?.toFixed(
+                    2
+                  )}
             </Text>
           ) : item?.id === "2" ? (
             <Text style={styles.detailText}>
@@ -123,7 +130,9 @@ const TodayDetail = ({ weatherDetails,navigation }: any) => {
           renderItem={({ item }) => renderItem(item)}
         />
         <TouchableOpacity
-        onPress={()=>navigation.navigate(navigationStrings.TODAYSDETAILS)}
+          onPress={() =>
+            navigation.navigate(navigationStrings.TODAYSDETAILS)
+          }
           style={{
             marginVertical: 20,
             alignSelf: "center",
@@ -132,7 +141,6 @@ const TodayDetail = ({ weatherDetails,navigation }: any) => {
             width: "30%",
             borderRadius: 10,
           }}
-        
         >
           <Text style={styles.buttonText}>See More</Text>
         </TouchableOpacity>

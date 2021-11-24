@@ -18,7 +18,7 @@ const styles= StyleSheet.create({
     tempText: {
         color: "#fff",
         fontSize: typography.FONT_SIZE_15,
-        fontFamily: fontFamily.semiBold,
+        fontFamily: fontFamily.regular,
     }
 })
 export default styles;

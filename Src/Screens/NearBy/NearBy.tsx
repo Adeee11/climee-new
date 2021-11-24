@@ -4,12 +4,14 @@ import { View, Text, SafeAreaView, Image, ScrollView } from "react-native";
 import assets from "../../../assets";
 import { Location, Rectangle } from "../../../assets/svg";
 import AdditionalDetails from "../../Components/AdditionalDetails/AdditionalDetails";
+import AirQuality from "../../Components/AirQuality/AirQuality";
 import GeneralStatusBarColor from "../../Components/generateStatusBarColor/GenerateStatusBarColor";
 import Header from "../../Components/Header/Header";
 import ShowMap from "../../Components/ShowMap/ShowMap";
+import Spacing from "../../globalStyles/Spacing";
 import styles from "./styles";
 
-const NearBy = () => {
+const NearBy = (navigation:any) => {
   return (
     <>
       <GeneralStatusBarColor
@@ -68,6 +70,10 @@ const NearBy = () => {
           {/* Additional details container */}
           <ScrollView>
           <AdditionalDetails />
+          <View style={{margin:Spacing.MARGIN_16}}>
+          <AirQuality navigation={navigation}/>
+          </View>
+          
           </ScrollView>
         </View>
       </SafeAreaView>

@@ -56,6 +56,8 @@ const SplashScreen = () => {
     ]).start();
   }, []);
   useEffect(() => {
+
+    
     (async () => {
       try {
         weatherDetailsLoading(true);
@@ -71,6 +73,7 @@ const SplashScreen = () => {
           country: place[0]?.country,
           street: place[0]?.street,
         };
+        console.log(location.coords);
         const response: any = await axios.get(
           `/onecall?lat=${location?.coords?.latitude}&lon=${location?.coords?.longitude}&appid=${api}&units=metric`
         );
@@ -79,7 +82,7 @@ const SplashScreen = () => {
         weatherDetails(details);
         weatherDetailsLoading(false);
       } catch (err) {
-        console.log(err);
+        console.log(err,"error");
       }
     })();
   }, []);

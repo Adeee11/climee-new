@@ -1,12 +1,20 @@
 import moment from "moment";
-import React from "react";
-import { View, Text, FlatList, Image } from "react-native";
+import React, { useEffect } from "react";
+import { View, Text, FlatList, Image, TouchableOpacity } from "react-native";
+import assets from "../../../assets";
 import { Line, Line2, Right } from "../../../assets/svg";
+import navigationStrings from "../../constants/navigationStrings";
 import colors from "../../globalStyles/colors";
 import Spacing from "../../globalStyles/Spacing";
 import styles from "./style";
 
-const Forecast = ({ data, backgroundColor, title }: any) => {
+const Forecast = ({
+  data,
+  backgroundColor,
+  title,
+  weatherDegree,
+  navigation,
+}: any) => {
   interface data {
     id: string;
     temp: string;
@@ -15,7 +23,6 @@ const Forecast = ({ data, backgroundColor, title }: any) => {
     min?: number;
     max: number;
   }
-
   const time = (time: number) => {
     const date = new Date(time * 1000);
     let hours = date.getHours();
@@ -27,51 +34,83 @@ const Forecast = ({ data, backgroundColor, title }: any) => {
     const strTime = hours + " " + ampm;
     return { strTime };
   };
+  const showImage = (item: string) => {
+    return item === "Thunderstorm"
+      ? { img: assets.thunder }
+      : item === "Drizzle"
+      ? { img: assets.sunnyRainy }
+      : item === "Rain"
+      ? { img: assets.rainy }
+      : item === "Snow"
+      ? { img: assets.snow }
+      : item === "Atmosphere"
+      ? { img: assets.haze }
+      : item === "Haze"
+      ? { img: assets.haze }
+      : item === "Clear"
+      ? { img: assets.sunny }
+      : item === "Clouds"
+      ? { img: assets.cloudy }
+      : { img: assets.partlyCloudy };
+  };
 
-  const renderItems = (item: data) => (
-    <View style={{ flexDirection: "row", alignItems: "center" }}>
-      <View style={styles.dataContainer}>
-        {backgroundColor ? (
-          <Text style={[styles.timeText, {color: "#C4C4C4"}]}>
-            {moment(new Date(item?.dt * 1000)).format("ddd")}
-          </Text>
-        ) : (
-          <Text style={styles.timeText}>{time(item?.dt)?.strTime}</Text>
-        )}
-        {!backgroundColor ? (
-          <Text
-            style={[
-              styles.tempText,
-              {
+  const renderItems = (item: data) => {
+    // console.log(item);
+
+    return (
+      <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <View style={styles.dataContainer}>
+          {backgroundColor ? (
+            <Text style={[styles.timeText, { color: "#C4C4C4" }]}>
+              {moment(new Date(item?.dt * 1000)).format("ddd")}
+            </Text>
+          ) : (
+            <Text style={styles.timeText}>{time(item?.dt)?.strTime}</Text>
+          )}
+          {!backgroundColor ? (
+            <Text
+              style={[
+                styles.tempText,
+                {
+                  paddingVertical: Spacing.PADDING_10,
+                },
+              ]}
+            >
+              {weatherDegree == "F"
+                ? (parseInt(item?.temp) * 1.8 + 32)?.toFixed(0)
+                : parseInt(item?.temp)?.toFixed(0)}
+              &deg;
+            </Text>
+          ) : (
+            <View
+              style={{
+                alignItems: "center",
                 paddingVertical: Spacing.PADDING_10,
-              },
-            ]}
-          >
-            {parseInt(item?.temp)?.toFixed(0)}&deg;
-          </Text>
-        ) : (
-          <View
-            style={{
-              alignItems: "center",
-              paddingVertical: Spacing.PADDING_10,
-            }}
-          >
-            <Text style={[styles.tempText, { color: "#3C6FD1" }]}>
-              {(item?.temp?.min)?.toFixed(0)}&deg;
-            </Text>
-            <Text style={[styles.tempText, { color: "#6D9CF5" }]}>
-              {(item?.temp?.max)?.toFixed(0)}&deg;
-            </Text>
-          </View>
-        )}
-        <Image
-          source={item.img}
-          style={{ width: 40, height: 40, resizeMode: "contain" }}
-        />
+              }}
+            >
+              <Text style={[styles.tempText, { color: "#3C6FD1" }]}>
+                {weatherDegree == "F"
+                  ? (parseInt(item?.temp?.min) * 1.8 + 32)?.toFixed(0)
+                  : item?.temp?.min?.toFixed(0)}
+                &deg;
+              </Text>
+              <Text style={[styles.tempText, { color: "#6D9CF5" }]}>
+                {weatherDegree == "F"
+                  ? (parseInt(item?.temp?.max) * 1.8 + 32)?.toFixed(0)
+                  : item?.temp?.max?.toFixed(0)}
+                &deg;
+              </Text>
+            </View>
+          )}
+          <Image
+            source={showImage(item?.weather[0]?.main)?.img}
+            style={{ width: 40, height: 40, resizeMode: "contain" }}
+          />
+        </View>
+        {backgroundColor ? <Line /> : <Line2 />}
       </View>
-      {backgroundColor ? <Line /> : <Line2 />}
-    </View>
-  );
+    );
+  };
 
   return (
     <View
@@ -80,21 +119,25 @@ const Forecast = ({ data, backgroundColor, title }: any) => {
         borderRadius: 20,
       }}
     >
-      <View
-        style={[
-          styles.titleContainer,
-          {
-            backgroundColor: backgroundColor ? "#3C6FD1" : "transparent",
-            alignItems: backgroundColor ? "center" : "flex-end",
-            paddingHorizontal: backgroundColor ? Spacing.PADDING_15 : 0,
-          },
-        ]}
+      <TouchableOpacity
+        onPress={() => navigation.navigate(navigationStrings.HOURLY)}
       >
-        <Text style={styles.titleStyle}>{title}</Text>
-        <View style={{ marginBottom: 5 }}>
-          <Right />
+        <View
+          style={[
+            styles.titleContainer,
+            {
+              backgroundColor: backgroundColor ? "#3C6FD1" : "transparent",
+              alignItems: backgroundColor ? "center" : "flex-end",
+              paddingHorizontal: backgroundColor ? Spacing.PADDING_15 : 0,
+            },
+          ]}
+        >
+          <Text style={styles.titleStyle}>{title}</Text>
+          <View style={{ marginBottom: 5 }}>
+            <Right />
+          </View>
         </View>
-      </View>
+      </TouchableOpacity>
       <View>
         <FlatList
           data={data}

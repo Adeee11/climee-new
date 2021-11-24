@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, ScrollView } from "react-native";
+import { connect } from "react-redux";
 import assets from "../../../assets";
 import AdditionalDetails from "../../Components/AdditionalDetails/AdditionalDetails";
 import DaysForecast from "../../Components/DaysForecast/DaysForecast";
@@ -7,7 +8,10 @@ import GeneralStatusBarColor from "../../Components/generateStatusBarColor/Gener
 import Header from "../../Components/Header/Header";
 import WeeklyHeroSection from "../../Components/WeeklyHeroSection/WeeklyHeroSection";
 import colors from "../../globalStyles/colors";
-const Weekly = () => {
+const Weekly = ({ weatherDegree, windDegree, weatherDetails }: any) => {
+  useEffect(() => {
+    // console.log(weatherDetails[0]?.weatherDetails?.daily);
+  }, []);
   const temp = [
     {
       id: "1",
@@ -66,6 +70,17 @@ const Weekly = () => {
       selected: false,
     },
   ];
+  const time = (time: number) => {
+    const date = new Date(time * 1000);
+    let hours = date.getHours();
+    let minutes: number | string = date.getMinutes();
+    const ampm = hours >= 12 ? "PM" : "AM";
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    const strTime = hours + ":" + minutes + " " + ampm;
+    return { strTime };
+  };
   return (
     <>
       <GeneralStatusBarColor
@@ -73,12 +88,56 @@ const Weekly = () => {
         backgroundColor={colors.blueTheme}
       />
       <Header title={"7 Days"} />
-      <ScrollView showsVerticalScrollIndicator={false} style={{backgroundColor:"#E8E8E8"}}>
-        <DaysForecast data={temp} backgroundColor={true} />
-        <WeeklyHeroSection />
-        <AdditionalDetails />
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={{ backgroundColor: "#E8E8E8" }}
+      >
+        <DaysForecast
+        weatherDegree={weatherDegree}
+          data={weatherDetails[0]?.weatherDetails?.daily}
+          backgroundColor={true}
+        />
+        <WeeklyHeroSection
+          weatherDetails={weatherDetails}
+          weatherDegree={weatherDegree}
+        />
+        <AdditionalDetails
+          wind={
+            windDegree == "mph"
+              ? (
+                  weatherDetails[0]?.weatherDetails?.current?.wind_speed * 2.237
+                )?.toFixed(2)
+              : weatherDetails[0]?.weatherDetails?.current?.wind_speed?.toFixed(
+                  2
+                )
+          }
+          humidity={weatherDetails[0]?.weatherDetails?.current?.humidity}
+          DewPoint={weatherDetails[0]?.weatherDetails?.current?.dew_point}
+          Pressure={weatherDetails[0]?.weatherDetails?.current?.pressure}
+          UvIndex={weatherDetails[0]?.weatherDetails?.current?.uvi}
+          SunRise={
+            time(weatherDetails[0]?.weatherDetails?.current?.sunrise)?.strTime
+          }
+          SunSet={
+            time(weatherDetails[0]?.weatherDetails?.current?.sunset)?.strTime
+          }
+          MoonRise={
+            time(weatherDetails[0]?.weatherDetails.daily[0].moonrise)?.strTime
+          }
+          MoonSet={
+            time(weatherDetails[0]?.weatherDetails.daily[0].moonset)?.strTime
+          }
+        />
       </ScrollView>
     </>
   );
 };
-export default Weekly;
+const mapStateToProps = (state: any) => {
+  return {
+    weatherDegree: state?.switchReducer?.weatherDegree,
+    windDegree: state?.switchReducer?.windDegree,
+    weatherDetails: state?.WeatherDetailsReducer?.weatherDetails,
+  };
+};
+
+export default connect(mapStateToProps)(Weekly);

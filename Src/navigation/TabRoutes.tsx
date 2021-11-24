@@ -48,7 +48,8 @@ const TabRoutes = () => {
             fontFamily: fontFamily.regular,
             fontSize: typography.FONT_SIZE_10,
             marginTop:
-            Platform.OS == "ios" ? Spacing.MARGIN_5 : Spacing.MARGIN_16,
+              Platform.OS == "ios" ? Spacing.MARGIN_5 : Spacing.MARGIN_5,
+            marginBottom: Platform.OS == "android" && Spacing.MARGIN_10,
           },
           tabBarActiveTintColor: colors.darkBlue,
           tabBarInactiveTintColor: colors.white,
@@ -82,7 +83,8 @@ const TabRoutes = () => {
             fontFamily: fontFamily.regular,
             fontSize: typography.FONT_SIZE_10,
             marginTop:
-            Platform.OS == "ios" ? Spacing.MARGIN_5 : Spacing.MARGIN_16,
+              Platform.OS == "ios" ? Spacing.MARGIN_5 : Spacing.MARGIN_5,
+            marginBottom: Platform.OS == "android" && Spacing.MARGIN_10,
           },
           tabBarActiveTintColor: colors.darkBlue,
           tabBarInactiveTintColor: colors.white,
@@ -102,8 +104,8 @@ const TabRoutes = () => {
                 borderRadius: Spacing.RADIUS_82,
                 marginTop:
                   Platform.OS == "ios" ? Spacing.MARGIN_24 : Spacing.MARGIN_10,
-                  resizeMode: "contain"
               }}
+              resizeMode="contain"
             />
           ),
           tabBarLabel: "",
@@ -143,7 +145,8 @@ const TabRoutes = () => {
             fontFamily: fontFamily.regular,
             fontSize: typography.FONT_SIZE_10,
             marginTop:
-            Platform.OS == "ios" ? Spacing.MARGIN_5 : Spacing.MARGIN_16,
+              Platform.OS == "ios" ? Spacing.MARGIN_5 : Spacing.MARGIN_5,
+            marginBottom: Platform.OS == "android" && Spacing.MARGIN_10,
           },
           tabBarActiveTintColor: colors.darkBlue,
           tabBarInactiveTintColor: colors.white,
@@ -176,7 +179,8 @@ const TabRoutes = () => {
             fontFamily: fontFamily.regular,
             fontSize: typography.FONT_SIZE_10,
             marginTop:
-              Platform.OS == "ios" ? Spacing.MARGIN_5 : Spacing.MARGIN_16,
+              Platform.OS == "ios" ? Spacing.MARGIN_5 : Spacing.MARGIN_5,
+            marginBottom: Platform.OS == "android" && Spacing.MARGIN_10,
           },
           tabBarActiveTintColor: colors.darkBlue,
           tabBarInactiveTintColor: colors.white,

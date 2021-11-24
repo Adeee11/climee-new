@@ -6,7 +6,7 @@ import styles from "./styles";
 import { Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import assets from "../../../assets";
-const WeeklyHeroSection = () => {
+const WeeklyHeroSection = ({ weatherDegree, weatherDetails }: any) => {
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -52,11 +52,13 @@ const WeeklyHeroSection = () => {
             style={{
               flexDirection: "row",
               alignItems: "flex-start",
-            //   backgroundColor: "red",
+              //   backgroundColor: "red",
             }}
           >
             <AntDesign name="arrowdown" size={25} color="#3AE000" />
-            <Text style={{...styles.tempText,marginRight:15}}>17 &deg;</Text>
+            <Text style={{ ...styles.tempText, marginRight: 15 }}>
+              17 &deg;
+            </Text>
             <AntDesign name="arrowup" size={25} color="#E00000" />
             <Text style={styles.tempText}>29 &deg;</Text>
           </View>

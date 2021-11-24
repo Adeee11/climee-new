@@ -19,7 +19,17 @@ import Spacing from "../../globalStyles/Spacing";
 import AdditionalDetails from "../../Components/AdditionalDetails/AdditionalDetails";
 import navigationStrings from "../../constants/navigationStrings";
 import AirQuality from "../../Components/AirQuality/AirQuality";
-const TodaysDetails = (props: any) => {
+import { useEffect } from "react";
+import { connect } from "react-redux";
+const TodaysDetails = ({
+  weatherDetails,
+  weatherDegree,
+  windDegree,
+  navigation,
+}: any) => {
+  useEffect(() => {
+    // console.log(weatherDetails[0]?.weatherDetails.daily[0].moonrise);
+  }, []);
   const labels = [
     "10PM",
     "11PM",
@@ -31,22 +41,47 @@ const TodaysDetails = (props: any) => {
     "5AM",
     "6AM",
     "7AM",
+    "8AM",
+    "9AM",
+    "10AM",
+    "11AM",
+    "12PM",
+    "1PM",
+    "2PM",
+    "3PM",
+    "4PM",
+    "5PM",
+    "6PM",
+    "7PM",
+    "8PM",
+    "9PM",
   ];
   const datasets = [
     {
-      data: [24, 25, 23, 24, 25, 26, 24, 26, 27, 28, 29],
+      data: [
+        24, 25, 23, 24, 25, 26, 24, 26, 27, 28, 29, 28, 27, 26, 25, 24, 23, 22,
+        21,
+      ],
     },
   ];
+  const time = (time: number) => {
+    const date = new Date(time * 1000);
+    let hours = date.getHours();
+    let minutes: number | string = date.getMinutes();
+    const ampm = hours >= 12 ? "PM" : "AM";
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    const strTime = hours + ":" + minutes + " " + ampm;
+    return { strTime };
+  };
   return (
     <>
       <GeneralStatusBarColor
         barStyle={"dark-content"}
         backgroundColor={colors.blueTheme}
       />
-      <Header
-        title={"Today's Details"}
-        onPress={() => props.navigation.goBack()}
-      />
+      <Header title={"Today's Details"} onPress={() => navigation.goBack()} />
       <ScrollView
         showsVerticalScrollIndicator={false}
         bounces={false}
@@ -61,7 +96,7 @@ const TodaysDetails = (props: any) => {
               labels,
               datasets,
             }}
-            width={699}
+            width={1000}
             height={250}
             // withDots={false}
             // withInnerLines={false}
@@ -98,11 +133,47 @@ const TodaysDetails = (props: any) => {
             fromZero
           />
         </ScrollView>
-        <AirQuality navigation={props.navigation} />
+        <View style={{ margin: Spacing.MARGIN_16 }}>
+          <AirQuality navigation={navigation} />
+        </View>
 
-        <AdditionalDetails />
+        <AdditionalDetails
+          wind={
+            windDegree == "mph"
+              ? (
+                  weatherDetails[0]?.weatherDetails?.current?.wind_speed * 2.237
+                )?.toFixed(2)
+              : weatherDetails[0]?.weatherDetails?.current?.wind_speed?.toFixed(
+                  2
+                )
+          }
+          humidity={weatherDetails[0]?.weatherDetails?.current?.humidity}
+          DewPoint={weatherDetails[0]?.weatherDetails?.current?.dew_point}
+          Pressure={weatherDetails[0]?.weatherDetails?.current?.pressure}
+          UvIndex={weatherDetails[0]?.weatherDetails?.current?.uvi}
+          SunRise={
+            time(weatherDetails[0]?.weatherDetails?.current?.sunrise)?.strTime
+          }
+          SunSet={
+            time(weatherDetails[0]?.weatherDetails?.current?.sunset)?.strTime
+          }
+          MoonRise={
+            time(weatherDetails[0]?.weatherDetails.daily[0].moonrise)?.strTime
+          }
+          MoonSet={
+            time(weatherDetails[0]?.weatherDetails.daily[0].moonset)?.strTime
+          }
+        />
       </ScrollView>
     </>
   );
 };
-export default TodaysDetails;
+const mapStateToProps = (state: any) => {
+  return {
+    weatherDegree: state?.switchReducer?.weatherDegree,
+    windDegree: state?.switchReducer?.windDegree,
+    weatherDetails: state?.WeatherDetailsReducer?.weatherDetails,
+  };
+};
+
+export default connect(mapStateToProps)(TodaysDetails);

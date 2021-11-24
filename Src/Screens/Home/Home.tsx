@@ -26,12 +26,21 @@ import Shadow from "../../Components/Shadow/Shadow";
 import moment from "moment";
 import { deviceHeight } from "../../constants/dimensions";
 import Header from "../../Components/Header/Header";
+import AirQuality from "../../Components/AirQuality/AirQuality";
 
-const Home = ({ weatherDetails, weatherLoading, navigation }: any) => {
+const Home = ({
+  weatherDetails,
+  weatherLoading,
+  navigation,
+  weatherDegree,
+  windDegree,
+}: any) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [news, setNews] = useState<Array<any>>([]);
 
   useEffect(() => {
+    console.log(weatherDetails);
+
     (async () => {
       try {
         setLoading(true);
@@ -101,7 +110,11 @@ const Home = ({ weatherDetails, weatherLoading, navigation }: any) => {
       />
       <SafeAreaView style={{ flex: 1 }}>
         {/* Header Start */}
-      <Header title="Mohali" backButton={false} onPress={() => navigation.navigate(navigationStrings.SEARCH)}/>
+        <Header
+          title="Mohali"
+          backButton={false}
+          onPress={() => navigation.navigate(navigationStrings.SEARCH)}
+        />
         {/* Header End */}
         {weatherLoading || loading ? (
           <Loader />
@@ -113,11 +126,19 @@ const Home = ({ weatherDetails, weatherLoading, navigation }: any) => {
           >
             {/* hero component */}
             <View style={{ marginVertical: 20 }}>
-              <HeroSection weatherData={weatherDetails} />
+              <HeroSection
+                weatherData={weatherDetails}
+                weatherDegree={weatherDegree}
+                navigation={navigation}
+              />
             </View>
             {/* Today's Details component  */}
             <View style={{ marginBottom: 20 }}>
-              <TodayDetail weatherDetails={weatherDetails} navigation={navigation}/>
+              <TodayDetail
+                weatherDetails={weatherDetails}
+                navigation={navigation}
+                windDegree={windDegree}
+              />
             </View>
             {/* 7 day forecast component */}
             <View style={{ marginBottom: 20 }}>
@@ -125,9 +146,18 @@ const Home = ({ weatherDetails, weatherLoading, navigation }: any) => {
                 data={weatherDetails[0]?.weatherDetails?.daily}
                 title="7 Days Forecast"
                 backgroundColor={true}
+                weatherDegree={weatherDegree}
+                navigation={navigation}
               />
             </View>
-
+            {/* Air Pollution */}
+            <View
+              style={{
+                marginBottom: 20,
+              }}
+            >
+              <AirQuality navigation={navigation} background={true} />
+            </View>
             {/* nearby locations view */}
             <View
               style={{

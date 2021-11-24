@@ -18,16 +18,17 @@ const locationReducer = (state: any, action: any) => {
 const getLocation = (dispatch: any) => {
   return async () => {
     try {
-      // const { status } = await Location.requestForegroundPermissionsAsync();
-      // if (status !== "granted") {
-      //   Alert.alert("Please grant location permission.");
-      //   await Location.requestForegroundPermissionsAsync();
-      // }
+      const { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        Alert.alert("Please grant location permission.");
+        await Location.requestForegroundPermissionsAsync();
+      }
       const location = await Location.getCurrentPositionAsync({});
       const place = await Location.reverseGeocodeAsync({
         latitude: location?.coords?.latitude,
         longitude: location?.coords?.longitude,
       });
+      console.log(location);
       
       const locationObj = {
         longitude: location?.coords?.longitude,

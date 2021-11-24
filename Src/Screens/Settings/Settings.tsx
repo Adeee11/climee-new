@@ -120,7 +120,7 @@ const Setting = (props: any) => {
                   flexDirection: "row",
                 }}
               >
-                <TouchableOpacity
+                {/* <TouchableOpacity
                   onPress={() =>
                     Linking.openURL("mailto: Climee.app@gmail.com").catch(
                       (err) => {
@@ -134,7 +134,7 @@ const Setting = (props: any) => {
                     resizeMode={"contain"}
                     style={styles.iconStyle}
                   />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
                 <TouchableOpacity
                   onPress={() => Linking.openURL("https://fb.me/climee01")}
                 >
