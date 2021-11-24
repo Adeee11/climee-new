@@ -1,9 +1,11 @@
 import moment from "moment";
 import React from "react";
 import { View, Text, FlatList, Image } from "react-native";
+import assets from "../../../assets";
 import { Line, Line2, Right } from "../../../assets/svg";
 import colors from "../../globalStyles/colors";
 import Spacing from "../../globalStyles/Spacing";
+import WeatherImage from "../WeatherImage/WeatherImage";
 import styles from "./style";
 
 const Forecast = ({ data, backgroundColor, title }: any) => {
@@ -15,6 +17,7 @@ const Forecast = ({ data, backgroundColor, title }: any) => {
     min?: number;
     max: number;
   }
+  
 
   const time = (time: number) => {
     const date = new Date(time * 1000);
@@ -32,7 +35,7 @@ const Forecast = ({ data, backgroundColor, title }: any) => {
     <View style={{ flexDirection: "row", alignItems: "center" }}>
       <View style={styles.dataContainer}>
         {backgroundColor ? (
-          <Text style={[styles.timeText, {color: "#C4C4C4"}]}>
+          <Text style={[styles.timeText, { color: "#C4C4C4" }]}>
             {moment(new Date(item?.dt * 1000)).format("ddd")}
           </Text>
         ) : (
@@ -57,17 +60,18 @@ const Forecast = ({ data, backgroundColor, title }: any) => {
             }}
           >
             <Text style={[styles.tempText, { color: "#3C6FD1" }]}>
-              {(item?.temp?.min)?.toFixed(0)}&deg;
+              {item?.temp?.min?.toFixed(0)}&deg;
             </Text>
             <Text style={[styles.tempText, { color: "#6D9CF5" }]}>
-              {(item?.temp?.max)?.toFixed(0)}&deg;
+              {item?.temp?.max?.toFixed(0)}&deg;
             </Text>
           </View>
         )}
-        <Image
+        {/* <Image
           source={item.img}
           style={{ width: 40, height: 40, resizeMode: "contain" }}
-        />
+        /> */}
+        <WeatherImage img={item?.weather[0]?.main} height={35} width={35}/>
       </View>
       {backgroundColor ? <Line /> : <Line2 />}
     </View>

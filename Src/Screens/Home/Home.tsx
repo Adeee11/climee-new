@@ -26,6 +26,7 @@ import Shadow from "../../Components/Shadow/Shadow";
 import moment from "moment";
 import { deviceHeight } from "../../constants/dimensions";
 import Header from "../../Components/Header/Header";
+import AirQuality from "../../Components/AirQuality/AirQuality";
 
 const Home = ({ weatherDetails, weatherLoading, navigation }: any) => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -52,7 +53,8 @@ const Home = ({ weatherDetails, weatherLoading, navigation }: any) => {
   const renderNews = (data: any) => {
     return data?.map((item: any, index: any) => {
       return (
-        <View style={{ paddingHorizontal: 5 }}>
+        <>
+        <View style={{ paddingHorizontal: 5, height: (deviceHeight * 38 ) / 100 }}>
           <TouchableOpacity
             style={styles.cardContainer}
             onPress={() =>
@@ -89,6 +91,7 @@ const Home = ({ weatherDetails, weatherLoading, navigation }: any) => {
             </Text>
           </View>
         </View>
+        </>
       );
     });
   };
@@ -129,7 +132,7 @@ const Home = ({ weatherDetails, weatherLoading, navigation }: any) => {
             </View>
 
             {/* nearby locations view */}
-            <View
+            {/* <View
               style={{
                 marginBottom: 20,
               }}
@@ -155,7 +158,9 @@ const Home = ({ weatherDetails, weatherLoading, navigation }: any) => {
                   // updatedCoordinates={getCoordinates}
                 />
               </View>
-            </View>
+            </View> */}
+
+            <AirQuality navigation={navigation}/>
 
             {/* News view */}
             <View
@@ -167,7 +172,7 @@ const Home = ({ weatherDetails, weatherLoading, navigation }: any) => {
                 pagingEnabled={true}
                 loop={true}
                 key={news.length}
-                style={{ height: (deviceHeight * 50) / 100 }}
+                style={{ height: (deviceHeight * 38 ) / 100 }}
               >
                 {renderNews(news)}
               </Swiper>

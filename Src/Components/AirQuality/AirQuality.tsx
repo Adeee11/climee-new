@@ -6,8 +6,10 @@ import colors from "../../globalStyles/colors";
 import fontFamily from "../../globalStyles/fontFamily";
 import navigationStrings from "../../constants/navigationStrings";
 import styles from "./styles";
+
 const AirQuality=(props:any)=>{
     const{navigation}=props
+    
     return(
         <View style={styles.AirPollutionView}>
         <Text style={styles.pollutionHeading}>Air Pollution</Text>
