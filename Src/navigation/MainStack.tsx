@@ -34,4 +34,5 @@ function MainStack() {
     </Stack.Navigator>
   );
 }
+
 export default MainStack;

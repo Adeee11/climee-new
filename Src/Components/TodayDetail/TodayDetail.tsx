@@ -132,6 +132,7 @@ const TodayDetail = ({ weatherDetails,navigation }: any) => {
             width: "30%",
             borderRadius: 10,
           }}
+        
         >
           <Text style={styles.buttonText}>See More</Text>
         </TouchableOpacity>

@@ -11,7 +11,6 @@ import colors from "../../globalStyles/colors";
 import Swiper from "react-native-swiper";
 import { ScrollView } from "react-native-gesture-handler";
 import styles from "./styles";
-import assets from "../../../assets";
 import GeneralStatusBarColor from "../../Components/generateStatusBarColor/GenerateStatusBarColor";
 import HeroSection from "../../Components/HeroSection/HeroSection";
 import TodayDetail from "../../Components/TodayDetail/TodayDetail";
@@ -26,6 +25,7 @@ import navigationStrings from "../../constants/navigationStrings";
 import Shadow from "../../Components/Shadow/Shadow";
 import moment from "moment";
 import { deviceHeight } from "../../constants/dimensions";
+import Header from "../../Components/Header/Header";
 
 const Home = ({ weatherDetails, weatherLoading, navigation }: any) => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -101,10 +101,7 @@ const Home = ({ weatherDetails, weatherLoading, navigation }: any) => {
       />
       <SafeAreaView style={{ flex: 1 }}>
         {/* Header Start */}
-        <View style={styles.headerContainer}>
-          <AntDesign name="search1" size={30} color={colors.white} />
-          <Text style={styles.headerText}>Mohali, India</Text>
-        </View>
+      <Header title="Mohali" backButton={false} onPress={() => navigation.navigate(navigationStrings.SEARCH)}/>
         {/* Header End */}
         {weatherLoading || loading ? (
           <Loader />
