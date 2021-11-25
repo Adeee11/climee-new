@@ -12,6 +12,7 @@ import { RootSiblingParent } from "react-native-root-siblings";
 import SplashScreen from "./Src/Screens/SplashScreen/SplashScreen";
 import AppLoading from "expo-app-loading";
 import InternetError from "./Src/Components/InternetError";
+
 const AppWrapper = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [intConnection, setIntConnection] = useState<any>("");

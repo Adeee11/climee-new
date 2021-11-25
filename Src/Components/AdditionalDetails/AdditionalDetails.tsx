@@ -6,18 +6,20 @@ import Spacing from "../../globalStyles/Spacing";
 import AdditionalElements from "../AdditionalElements/AdditionalElements";
 import styles from "./styles";
 
-const AdditionalDetails = (props: any) => {
-  const {
-    wind,
-    humidity,
-    UvIndex,
-    DewPoint,
-    Pressure,
-    SunRise,
-    SunSet,
-    MoonRise,
-    MoonSet,
-  } = props;
+const AdditionalDetails = ({details}: any) => {  
+
+  const time = (time: number) => {
+    const date = new Date(time * 1000);
+    let hours = date.getHours();
+    let minutes: number | string = date.getMinutes();
+    const ampm = hours >= 12 ? "PM" : "AM";
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    const strTime = hours + ":" + minutes + " " + ampm;
+    return { strTime };
+  };
+
   return (
     <View style={styles.mainContainer}>
       <Text style={styles.title}>Additional Details</Text>
@@ -26,52 +28,52 @@ const AdditionalDetails = (props: any) => {
           <View style={{ marginLeft: Spacing.MARGIN_12 }}>
             <AdditionalElements
               name={"Wind"}
-              value={wind}
+              value={details?.wind_speed}
               img={assets.newWind}
             />
           </View>
           <AdditionalElements
             name={"Humidity"}
-            value={humidity + "%"}
+            value={details?.humidity + "%"}
             img={assets.newHumidity}
           />
           <AdditionalElements
             name={"Uv Index"}
-            value={UvIndex}
+            value={details?.uvi}
             img={assets.newUv}
           />
         </View>
         <View style={styles.elementSection}>
           <AdditionalElements
             name={"Dew Point"}
-            value={DewPoint}
+            value={details?.dew_point}
             img={assets.newDewPoint}
           />
           <AdditionalElements
             name={"Pressure"}
-            value={Pressure}
+            value={details?.pressure}
             img={assets.newPressure}
           />
           <AdditionalElements
             name={"Sunrise"}
-            value={SunRise}
+            value={time(details?.sunrise)?.strTime}
             img={assets.newSunrise}
           />
         </View>
         <View style={styles.elementSection}>
           <AdditionalElements
             name={"Sunset"}
-            value={SunSet}
+            value={time(details?.sunset)?.strTime}
             img={assets.newSunset}
           />
           <AdditionalElements
             name={"Moonrise"}
-            value={MoonRise}
+            value={time(details?.moonrise)?.strTime}
             img={assets.newMoonrise}
           />
           <AdditionalElements
             name={"Moonset"}
-            value={MoonSet}
+            value={time(details?.moonset)?.strTime}
             img={assets.newMoonset}
           />
         </View>

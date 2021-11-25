@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, ScrollView } from "react-native";
 import { connect } from "react-redux";
 import assets from "../../../assets";
@@ -8,68 +8,18 @@ import GeneralStatusBarColor from "../../Components/generateStatusBarColor/Gener
 import Header from "../../Components/Header/Header";
 import WeeklyHeroSection from "../../Components/WeeklyHeroSection/WeeklyHeroSection";
 import colors from "../../globalStyles/colors";
-const Weekly = ({ weatherDegree, windDegree, weatherDetails }: any) => {
+const Weekly = ({
+  weatherDegree,
+  windDegree,
+  weatherDetails,
+  navigation,
+}: any) => {
+const [selectedDay, setSelectedDay] = useState()
+
   useEffect(() => {
     // console.log(weatherDetails[0]?.weatherDetails?.daily);
   }, []);
-  const temp = [
-    {
-      id: "1",
-      min: "17",
-      max: "30",
-      time: "Wed",
-      img: assets.rainy,
-      selected: false,
-    },
-    {
-      id: "2",
-      min: "17",
-      max: "30",
-      time: "Thu",
-      img: assets.rainy,
-      selected: false,
-    },
-    {
-      id: "3",
-      min: "17",
-      max: "30",
-      time: "Fri",
-      img: assets.rainy,
-      selected: false,
-    },
-    {
-      id: "4",
-      min: "17",
-      max: "30",
-      time: "Sat",
-      img: assets.rainy,
-      selected: false,
-    },
-    {
-      id: "5",
-      min: "17",
-      max: "30",
-      time: "Sun",
-      img: assets.rainy,
-      selected: false,
-    },
-    {
-      id: "6",
-      min: "17",
-      max: "30",
-      time: "Mon",
-      img: assets.rainy,
-      selected: false,
-    },
-    {
-      id: "7",
-      min: "17",
-      max: "30",
-      time: "Tue",
-      img: assets.rainy,
-      selected: false,
-    },
-  ];
+
   const time = (time: number) => {
     const date = new Date(time * 1000);
     let hours = date.getHours();
@@ -81,57 +31,43 @@ const Weekly = ({ weatherDegree, windDegree, weatherDetails }: any) => {
     const strTime = hours + ":" + minutes + " " + ampm;
     return { strTime };
   };
+
+  const handleSelectedDay = (val: any) => {
+    setSelectedDay(val);
+  };
+
   return (
     <>
       <GeneralStatusBarColor
         barStyle={"dark-content"}
         backgroundColor={colors.blueTheme}
       />
-      <Header title={"7 Days"} />
+      <Header
+        title={"7 Days"}
+        backButton={true}
+        onPress={() => navigation.goBack()}
+      />
       <ScrollView
+        bounces={false}
         showsVerticalScrollIndicator={false}
         style={{ backgroundColor: "#E8E8E8" }}
       >
         <DaysForecast
-        weatherDegree={weatherDegree}
+          weatherDegree={weatherDegree}
           data={weatherDetails[0]?.weatherDetails?.daily}
           backgroundColor={true}
+          selectedDay={handleSelectedDay}
         />
         <WeeklyHeroSection
-          weatherDetails={weatherDetails}
+          weatherDetails={selectedDay === undefined ? weatherDetails[0]?.weatherDetails?.daily[0] : selectedDay}
           weatherDegree={weatherDegree}
         />
-        <AdditionalDetails
-          wind={
-            windDegree == "mph"
-              ? (
-                  weatherDetails[0]?.weatherDetails?.current?.wind_speed * 2.237
-                )?.toFixed(2)
-              : weatherDetails[0]?.weatherDetails?.current?.wind_speed?.toFixed(
-                  2
-                )
-          }
-          humidity={weatherDetails[0]?.weatherDetails?.current?.humidity}
-          DewPoint={weatherDetails[0]?.weatherDetails?.current?.dew_point}
-          Pressure={weatherDetails[0]?.weatherDetails?.current?.pressure}
-          UvIndex={weatherDetails[0]?.weatherDetails?.current?.uvi}
-          SunRise={
-            time(weatherDetails[0]?.weatherDetails?.current?.sunrise)?.strTime
-          }
-          SunSet={
-            time(weatherDetails[0]?.weatherDetails?.current?.sunset)?.strTime
-          }
-          MoonRise={
-            time(weatherDetails[0]?.weatherDetails.daily[0].moonrise)?.strTime
-          }
-          MoonSet={
-            time(weatherDetails[0]?.weatherDetails.daily[0].moonset)?.strTime
-          }
-        />
+        <AdditionalDetails details={ selectedDay === undefined ? weatherDetails[0]?.weatherDetails?.daily[0] : selectedDay} />
       </ScrollView>
     </>
   );
 };
+
 const mapStateToProps = (state: any) => {
   return {
     weatherDegree: state?.switchReducer?.weatherDegree,

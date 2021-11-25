@@ -60,10 +60,11 @@ const TodaysDetails = ({
     {
       data: [
         24, 25, 23, 24, 25, 26, 24, 26, 27, 28, 29, 28, 27, 26, 25, 24, 23, 22,
-        21,
+        21, 22, 23, 23, 23, 24
       ],
     },
   ];
+
   const time = (time: number) => {
     const date = new Date(time * 1000);
     let hours = date.getHours();
@@ -96,7 +97,7 @@ const TodaysDetails = ({
               labels,
               datasets,
             }}
-            width={1000}
+            width={1500}
             height={250}
             // withDots={false}
             // withInnerLines={false}

@@ -3,14 +3,22 @@ import { Text, View } from "react-native";
 import colors from "../../globalStyles/colors";
 import { AntDesign } from "@expo/vector-icons";
 import styles from "./styles";
-import { Image } from "react-native";
+import moment from "moment";
 import { LinearGradient } from "expo-linear-gradient";
 import assets from "../../../assets";
+import WeatherImage from "../WeatherImage/WeatherImage";
+
 const WeeklyHeroSection = ({ weatherDegree, weatherDetails }: any) => {
+  const getDay = (time: number) => {
+    const date = new Date(time * 1000);
+    const day = moment(date).format("ddd");
+    const strDate = moment(date).format("DD MMM");
+    return { day, strDate };
+  };
+
   return (
     <View style={styles.container}>
       <LinearGradient
-        // Background Linear Gradient
         colors={[colors.blueTheme, colors.white]}
         style={{
           position: "absolute",
@@ -23,7 +31,13 @@ const WeeklyHeroSection = ({ weatherDegree, weatherDetails }: any) => {
         }}
         end={{ x: 2, y: 9 }}
       />
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
         <View style={styles.upperView}>
           <View
             style={{
@@ -33,7 +47,9 @@ const WeeklyHeroSection = ({ weatherDegree, weatherDetails }: any) => {
               //   backgroundColor:"red"
             }}
           >
-            <Text style={styles.DayText}>Wed</Text>
+            <Text style={styles.DayText}>
+              {getDay(weatherDetails?.dt)?.day}
+            </Text>
             <View
               style={{
                 height: 25,
@@ -43,30 +59,36 @@ const WeeklyHeroSection = ({ weatherDegree, weatherDetails }: any) => {
                 marginHorizontal: 10,
               }}
             />
-            <Text style={styles.dateText}>20 Nov</Text>
+            <Text style={styles.dateText}>
+              {getDay(weatherDetails?.dt)?.strDate}
+            </Text>
           </View>
 
-          <Text style={styles.weatherTypeText}>Sunny</Text>
+          <Text style={styles.weatherTypeText}>
+            {weatherDetails?.weather[0]?.description}
+          </Text>
 
           <View
             style={{
               flexDirection: "row",
-              alignItems: "flex-start",
-              //   backgroundColor: "red",
+              alignItems: "center",
             }}
           >
             <AntDesign name="arrowdown" size={25} color="#3AE000" />
             <Text style={{ ...styles.tempText, marginRight: 15 }}>
-              17 &deg;
+              {parseInt(weatherDetails?.temp?.min)} &deg;
             </Text>
             <AntDesign name="arrowup" size={25} color="#E00000" />
-            <Text style={styles.tempText}>29 &deg;</Text>
+            <Text style={styles.tempText}>
+              {parseInt(weatherDetails?.temp?.max)} &deg;
+            </Text>
           </View>
         </View>
         <View style={styles.imageContainer}>
-          <Image
-            source={assets.sunny}
-            style={{ width: 100, height: 100, resizeMode: "contain" }}
+          <WeatherImage
+            img={weatherDetails?.weather[0]?.main}
+            height={100}
+            width={100}
           />
         </View>
       </View>

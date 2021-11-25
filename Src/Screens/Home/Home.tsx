@@ -39,7 +39,6 @@ const Home = ({
   const [news, setNews] = useState<Array<any>>([]);
 
   useEffect(() => {
-    console.log(weatherDetails);
 
     (async () => {
       try {
@@ -113,11 +112,11 @@ const Home = ({
       <SafeAreaView style={{ flex: 1 }}>
         {/* Header Start */}
         <Header
-          title="Mohali"
+          title={weatherDetails[0]?.locationDetails?.city}
           backButton={false}
           onPress={() => navigation.navigate(navigationStrings.SEARCH)}
         />
-        {/* Header End */}
+        
         {weatherLoading || loading ? (
           <Loader />
         ) : (
@@ -160,37 +159,7 @@ const Home = ({
             >
               <AirQuality navigation={navigation} background={true} />
             </View>
-            {/* nearby locations view */}
-            {/* <View
-              style={{
-                marginBottom: 20,
-              }}
-            >
-              <View style={styles.cardContainer}>
-                <Text style={styles.cardTitle}>Near by Location</Text>
-                <Right />
-              </View>
-              <View
-                style={{
-                  height: 200,
-                  borderBottomLeftRadius: 20,
-                  borderBottomRightRadius: 20,
-                }}
-              >
-                <ShowMap
-                  latitude={30.7046}
-                  longitude={76.7179}
-                  customStyles={{
-                    height: "99%",
-                    borderRadius: 20,
-                  }}
-                  // updatedCoordinates={getCoordinates}
-                />
-              </View>
-            </View> */}
-
-            <AirQuality navigation={navigation}/>
-
+      
             {/* News view */}
             <View
               style={{
