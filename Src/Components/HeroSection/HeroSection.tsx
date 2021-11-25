@@ -9,7 +9,7 @@ import styles from "./styles";
 import WeatherImage from "../WeatherImage/WeatherImage";
 
 const HeroSection = ({ weatherData, weatherDegree ,navigation}: any) => {
-  console.log(weatherData[0]?.weatherDetails.daily[0].temp.min);
+  // console.log(weatherData[0]?.weatherDetails.daily[0].temp.min);
 
   // const temp = [
   //   { id: "1", temp: "24", time: "1 PM", img: assets.rainy },

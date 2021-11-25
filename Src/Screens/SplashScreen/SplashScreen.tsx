@@ -7,6 +7,7 @@ import axios from "../../api/axios";
 import colors from "../../globalStyles/colors";
 import styles from "./styles";
 import {
+  pollutionDetails,
   weatherDetails,
   weatherDetailsLoading,
 } from "../../redux/actions/weatherActions";
@@ -56,8 +57,6 @@ const SplashScreen = () => {
     ]).start();
   }, []);
   useEffect(() => {
-
-    
     (async () => {
       try {
         weatherDetailsLoading(true);
@@ -73,20 +72,43 @@ const SplashScreen = () => {
           country: place[0]?.country,
           street: place[0]?.street,
         };
-        console.log(location.coords);
         const response: any = await axios.get(
           `/onecall?lat=${location?.coords?.latitude}&lon=${location?.coords?.longitude}&appid=${api}&units=metric`
         );
-        const details  = [];
-        details.push({weatherDetails: response?.data, locationDetails: locationObj})
+        const resp: any = await axios.get(
+          `/air_pollution?lat=${location?.coords?.latitude}&lon=${location?.coords?.longitude}&appid=${api}`
+        );
+        const details = [];
+        const pollution = [];
+        details.push({
+          weatherDetails: response?.data,
+          locationDetails: locationObj,
+        });
+        pollution.push({
+          pollutionDetails: resp?.data?.list[0],
+        });
         weatherDetails(details);
         weatherDetailsLoading(false);
+        pollutionDetails(pollution);
       } catch (err) {
-        console.log(err,"error");
+        console.log(err, "error");
       }
     })();
   }, []);
-  
+
+  // useEffect(() => {
+  //   (async () => {
+  //     try {
+  //       const response: any = await axios.get(
+  //         `/air_pollution?lat=${state?.latitude}&lon=${state?.longitude}&appid=${api}`
+  //       );
+  //       // setairQuality(response?.data?.list[0]?.components?.pm2_5);
+  //       // setCondition(response?.data?.list[0]?.main?.aqi);
+  //     } catch (Err) {
+  //       console.log(Err, "error");
+  //     }
+  //   })();
+  // }, []);
   return (
     <>
       {Platform.OS === "ios" ? (

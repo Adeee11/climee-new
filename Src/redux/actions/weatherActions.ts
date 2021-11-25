@@ -16,3 +16,10 @@ export function weatherDetailsLoading(data: any) {
       payload: data,
     });
   }
+
+  export function pollutionDetails(data: any) {
+    dispatch({
+      type: types.POLLUTIONDETAILS,
+      payload: data,
+    });
+  }

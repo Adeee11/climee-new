@@ -9,6 +9,7 @@ import navigationStrings from "../../constants/navigationStrings";
 import colors from "../../globalStyles/colors";
 import { connect } from "react-redux";
 import styles from "./styles";
+import moment from "moment";
 
 const Hourly = ({weatherDetails, navigation}:any) => {
   
@@ -71,7 +72,8 @@ const Hourly = ({weatherDetails, navigation}:any) => {
       />
       <Header title={"Hourly"} onPress={()=> navigation.navigate(navigationStrings.HOME)} />
       <ScrollView showsVerticalScrollIndicator={false}bounces={false} style={{ backgroundColor: "#F5F5F5" }}>
-      <HourlyInformation data={weatherDetails[0]?.weatherDetails?.hourly} date={"Tuesday, 24 August"} />
+      <HourlyInformation data={weatherDetails[0]?.weatherDetails?.hourly} date=  {moment(new Date())?.format("dddd, D MMMM")} />
+      
       {/* <HourlyInformation data={data} date={"Wednesday, 25 August"} /> */}
       </ScrollView>
     </>
