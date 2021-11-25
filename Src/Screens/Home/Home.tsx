@@ -34,6 +34,7 @@ const Home = ({
   navigation,
   weatherDegree,
   windDegree,
+  pollutionDetails,
 }: any) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [news, setNews] = useState<Array<any>>([]);
@@ -61,43 +62,45 @@ const Home = ({
     return data?.map((item: any, index: any) => {
       return (
         <>
-        <View style={{ paddingHorizontal: 5, height: (deviceHeight * 38 ) / 100 }}>
-          <TouchableOpacity
-            style={styles.cardContainer}
-            onPress={() =>
-              navigation.navigate(navigationStrings.NEWS, { data: item })
-            }
-          >
-            <Text style={styles.cardTitle}>News</Text>
-            <Right />
-          </TouchableOpacity>
           <View
-            style={{
-              height: 200,
-              borderBottomLeftRadius: 20,
-              borderBottomRightRadius: 20,
-            }}
+            style={{ paddingHorizontal: 5, height: (deviceHeight * 38) / 100 }}
           >
-            <Image
-              source={{
-                uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1CVi919KotpE7FuciwqIeMDhhJNokHpbV1w&usqp=CAU",
+            <TouchableOpacity
+              style={styles.cardContainer}
+              onPress={() =>
+                navigation.navigate(navigationStrings.NEWS, { data: item })
+              }
+            >
+              <Text style={styles.cardTitle}>News</Text>
+              <Right />
+            </TouchableOpacity>
+            <View
+              style={{
+                height: 200,
+                borderBottomLeftRadius: 20,
+                borderBottomRightRadius: 20,
               }}
-              style={{ width: "100%", height: "100%", resizeMode: "cover" }}
-            />
+            >
+              <Image
+                source={{
+                  uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1CVi919KotpE7FuciwqIeMDhhJNokHpbV1w&usqp=CAU",
+                }}
+                style={{ width: "100%", height: "100%", resizeMode: "cover" }}
+              />
+            </View>
+            <View
+              style={{
+                padding: 20,
+                backgroundColor: "white",
+                borderBottomRightRadius: 20,
+                borderBottomLeftRadius: 20,
+              }}
+            >
+              <Text style={styles.newsHeadline} numberOfLines={2}>
+                {item.Title}
+              </Text>
+            </View>
           </View>
-          <View
-            style={{
-              padding: 20,
-              backgroundColor: "white",
-              borderBottomRightRadius: 20,
-              borderBottomLeftRadius: 20,
-            }}
-          >
-            <Text style={styles.newsHeadline} numberOfLines={2}>
-              {item.Title}
-            </Text>
-          </View>
-        </View>
         </>
       );
     });
@@ -157,20 +160,23 @@ const Home = ({
                 marginBottom: 20,
               }}
             >
-              <AirQuality navigation={navigation} background={true} />
+              <AirQuality
+                navigation={navigation}
+                background={true}
+                val={pollutionDetails[0].pollutionDetails.components.pm2_5.toFixed(
+                  0
+                )}
+              />
             </View>
-      
-            {/* News view */}
             <View
               style={{
-                marginBottom: 20,
               }}
             >
               <Swiper
                 pagingEnabled={true}
                 loop={true}
                 key={news.length}
-                style={{ height: (deviceHeight * 38 ) / 100 }}
+                style={{ height: (deviceHeight * 38) / 100 }}
               >
                 {renderNews(news)}
               </Swiper>
@@ -189,6 +195,7 @@ const mapStateToProps = (state: any) => {
     notify: state?.switchReducer?.notify,
     weatherDetails: state?.WeatherDetailsReducer?.weatherDetails,
     weatherLoading: state?.WeatherDetailsReducer?.loading,
+    pollutionDetails: state?.WeatherDetailsReducer?.pollutionDetails,
   };
 };
 

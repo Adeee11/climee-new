@@ -26,6 +26,7 @@ const TodaysDetails = ({
   weatherDegree,
   windDegree,
   navigation,
+  pollutionDetails,
 }: any) => {
   useEffect(() => {
     // console.log(weatherDetails[0]?.weatherDetails.daily[0].moonrise);
@@ -135,10 +136,15 @@ const TodaysDetails = ({
           />
         </ScrollView>
         <View style={{ margin: Spacing.MARGIN_16 }}>
-          <AirQuality navigation={navigation} />
+          <AirQuality
+            navigation={navigation}
+            val={pollutionDetails[0].pollutionDetails.components.pm2_5.toFixed(
+              0
+            )}
+          />
         </View>
 
-        <AdditionalDetails
+        <AdditionalDetails 
           wind={
             windDegree == "mph"
               ? (
@@ -174,6 +180,7 @@ const mapStateToProps = (state: any) => {
     weatherDegree: state?.switchReducer?.weatherDegree,
     windDegree: state?.switchReducer?.windDegree,
     weatherDetails: state?.WeatherDetailsReducer?.weatherDetails,
+    pollutionDetails: state?.WeatherDetailsReducer?.pollutionDetails,
   };
 };
 

@@ -3,6 +3,7 @@ import types from "../types";
 const initialState = {
   weatherDetails: [],
   loading: false,
+  pollutionDetails: [],
 };
 
 const WeatherDetailsReducer = (
@@ -21,6 +22,13 @@ const WeatherDetailsReducer = (
       return {
         ...state,
         laoding: action.payload,
+      };
+    }
+    case types.POLLUTIONDETAILS: {
+      console.log(action.payload);
+      return {
+        ...state,
+        pollutionDetails: action.payload,
       };
     }
     default:

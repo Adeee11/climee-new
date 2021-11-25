@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
     paddingVertical: Spacing.PADDING_20,
     alignItems: "flex-start",
     justifyContent: "flex-start",
+
   },
   mainContainer: {
     padding: Spacing.PADDING_16,
@@ -27,6 +28,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingVertical: Spacing.PADDING_10,
+    flex:1
   },
   timeText: {
     fontFamily: fontFamily.light,

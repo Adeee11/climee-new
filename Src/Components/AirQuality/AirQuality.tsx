@@ -1,5 +1,4 @@
 import React from "react";
-import ProgressCircle from "react-native-progress-circle";
 import { Text, TouchableOpacity, View } from "react-native";
 import Spacing from "../../globalStyles/Spacing";
 import colors from "../../globalStyles/colors";
@@ -7,8 +6,22 @@ import fontFamily from "../../globalStyles/fontFamily";
 import navigationStrings from "../../constants/navigationStrings";
 import styles from "./styles";
 import { Right } from "../../../assets/svg";
-const AirQuality = (props: any) => {
-  const { navigation, background = false } = props;
+import ProgressBar from "../ProgressBar/ProgressBar";
+const AirQuality = ({ navigation, background = false,val }: any) => {
+  
+  const cond = (item: any) => {
+    return item < 20
+      ? { condition:"Good" }
+      : item < 40
+      ?  { condition:"Satisfactory" }
+      : item < 60
+      ?  { condition:"Lightly Polluted" }
+      : item < 80
+      ?  { condition:"Moderately Polluted" }
+      : item < 100
+      ?  { condition:"Heavily Polluted" }
+      :  { condition:"No Data Available" }
+  };
   return (
     <View style={styles.AirPollutionView}>
       {background ? (
@@ -20,7 +33,12 @@ const AirQuality = (props: any) => {
           <Right />
         </TouchableOpacity>
       ) : (
-        <View style={{ paddingHorizontal: Spacing.PADDING_16,paddingTop:Spacing.PADDING_16 }}>
+        <View
+          style={{
+            paddingHorizontal: Spacing.PADDING_16,
+            paddingTop: Spacing.PADDING_16,
+          }}
+        >
           <Text style={styles.pollutionHeading}>Air Pollution</Text>
         </View>
       )}
@@ -31,18 +49,9 @@ const AirQuality = (props: any) => {
           padding: background ? Spacing.PADDING_16 : Spacing.PADDING_10,
         }}
       >
-        <ProgressCircle
-          percent={85}
-          radius={40}
-          borderWidth={5}
-          color="#FFDE00"
-          shadowColor={colors.grey}
-          bgColor="#fff"
-        >
-          <Text style={styles.pollutionHeading}>{"193"}</Text>
-        </ProgressCircle>
+        <ProgressBar val={val/250*100}/>
         <View style={{ paddingHorizontal: Spacing.PADDING_20 }}>
-          <Text style={styles.pollutionHeading}>{"Moderate"}</Text>
+          <Text style={styles.pollutionHeading}>{cond(val/250*100)?.condition}</Text>
           <Text style={{ ...styles.headingText, fontFamily: fontFamily.light }}>
             {"Fine particles / PM2.5"}
           </Text>

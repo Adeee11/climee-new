@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily.regular,
   },
   headingText: {
-    fontSize: typography.FONT_SIZE_14,
+    fontSize: typography.FONT_SIZE_15,
     color: colors.grey,
     fontFamily: fontFamily.semiBold,
   },
