@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     margin: Spacing.MARGIN_16,
   },
   upperView: {
-    flex: 0.5,
+    flex: 0.6,
     alignItems: "flex-start",
   },
   DayText: {
@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: typography.FONT_SIZE_20,
     fontFamily: fontFamily.semiBold,
+    textTransform: 'capitalize'
   },
   dateText: {
     color: "white",
@@ -40,6 +41,6 @@ const styles = StyleSheet.create({
   lowerView: {
     marginTop: 10,
   },
-  imageContainer: { flex: 0.5, alignItems: "center" },
+  imageContainer: { flex: 0.4, alignItems: "center" },
 });
 export default styles;

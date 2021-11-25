@@ -40,7 +40,6 @@ const Home = ({
   const [news, setNews] = useState<Array<any>>([]);
 
   useEffect(() => {
-    console.log(pollutionDetails[0].pollutionDetails);
 
     (async () => {
       try {
@@ -116,11 +115,11 @@ const Home = ({
       <SafeAreaView style={{ flex: 1 }}>
         {/* Header Start */}
         <Header
-          title="Mohali"
+          title={weatherDetails[0]?.locationDetails?.city}
           backButton={false}
           onPress={() => navigation.navigate(navigationStrings.SEARCH)}
         />
-        {/* Header End */}
+        
         {weatherLoading || loading ? (
           <Loader />
         ) : (
@@ -171,7 +170,6 @@ const Home = ({
             </View>
             <View
               style={{
-                marginBottom: 20,
               }}
             >
               <Swiper

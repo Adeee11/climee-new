@@ -9,20 +9,6 @@ import styles from "./styles";
 import WeatherImage from "../WeatherImage/WeatherImage";
 
 const HeroSection = ({ weatherData, weatherDegree ,navigation}: any) => {
-  // console.log(weatherData[0]?.weatherDetails.daily[0].temp.min);
-
-  // const temp = [
-  //   { id: "1", temp: "24", time: "1 PM", img: assets.rainy },
-  //   { id: "2", temp: "24", time: "1 PM", img: assets.rainy },
-  //   { id: "3", temp: "24", time: "1 PM", img: assets.rainy },
-  //   { id: "4", temp: "24", time: "1 PM", img: assets.rainy },
-  //   { id: "5", temp: "24", time: "1 PM", img: assets.rainy },
-  //   { id: "6", temp: "24", time: "1 PM", img: assets.rainy },
-  //   { id: "7", temp: "24", time: "1 PM", img: assets.rainy },
-  //   { id: "8", temp: "24", time: "1 PM", img: assets.rainy },
-  //   { id: "9", temp: "24", time: "1 PM", img: assets.rainy },
-  //   { id: "10", temp: "24", time: "1 PM", img: assets.rainy },
-  // ];
 
   return (
     <View style={styles.container}>

@@ -16,6 +16,7 @@ const Forecast = ({
   weatherDegree,
   navigation,
 }: any) => {
+
   interface data {
     id: string;
     temp: string;
@@ -24,6 +25,7 @@ const Forecast = ({
     min?: number;
     max: number;
   }
+  
   const time = (time: number) => {
     const date = new Date(time * 1000);
     let hours = date.getHours();
@@ -35,29 +37,8 @@ const Forecast = ({
     const strTime = hours + " " + ampm;
     return { strTime };
   };
-  const showImage = (item: string) => {
-    return item === "Thunderstorm"
-      ? { img: assets.thunder }
-      : item === "Drizzle"
-      ? { img: assets.sunnyRainy }
-      : item === "Rain"
-      ? { img: assets.rainy }
-      : item === "Snow"
-      ? { img: assets.snow }
-      : item === "Atmosphere"
-      ? { img: assets.haze }
-      : item === "Haze"
-      ? { img: assets.haze }
-      : item === "Clear"
-      ? { img: assets.sunny }
-      : item === "Clouds"
-      ? { img: assets.cloudy }
-      : { img: assets.partlyCloudy };
-  };
 
   const renderItems = (item: data) => {
-    // console.log(item);
-
     return (
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <View style={styles.dataContainer}>
@@ -103,10 +84,11 @@ const Forecast = ({
               </Text>
             </View>
           )}
-          <Image
+          {/* <Image
             source={showImage(item?.weather[0]?.main)?.img}
             style={{ width: 40, height: 40, resizeMode: "contain" }}
-          />
+          /> */}
+          <WeatherImage img={item?.weather[0]?.main} width={40} height={40} />
         </View>
         {backgroundColor ? <Line /> : <Line2 />}
       </View>

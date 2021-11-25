@@ -5,15 +5,16 @@ import Spacing from "../../globalStyles/Spacing";
 import typography from "../../globalStyles/typography";
 const styles = StyleSheet.create({
   headerContainer: {
-    height: 60,
+    height: Spacing.HEIGHT_48,
     backgroundColor: "#7CA9FF",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-start",
-    paddingLeft: Spacing.PADDING_15
+    paddingLeft: Spacing.PADDING_15,
+    // backgroundColor: 'red'
   },
   headerText: {
-      fontSize: typography.FONT_SIZE_20,
+      fontSize: typography.FONT_SIZE_18,
       color: colors.white,
       fontFamily: fontFamily.regular,
       marginLeft: Spacing.MARGIN_20,

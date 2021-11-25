@@ -49,7 +49,7 @@ const TabRoutes = () => {
             fontSize: typography.FONT_SIZE_10,
             marginTop:
               Platform.OS == "ios" ? Spacing.MARGIN_5 : Spacing.MARGIN_5,
-            marginBottom: Platform.OS == "android" && Spacing.MARGIN_10,
+            marginBottom: Platform.OS == "android" ? Spacing.MARGIN_10: 0,
           },
           tabBarActiveTintColor: colors.darkBlue,
           tabBarInactiveTintColor: colors.white,
@@ -84,7 +84,7 @@ const TabRoutes = () => {
             fontSize: typography.FONT_SIZE_10,
             marginTop:
               Platform.OS == "ios" ? Spacing.MARGIN_5 : Spacing.MARGIN_5,
-            marginBottom: Platform.OS == "android" && Spacing.MARGIN_10,
+            marginBottom: Platform.OS == "android" ? Spacing.MARGIN_10 : 0,
           },
           tabBarActiveTintColor: colors.darkBlue,
           tabBarInactiveTintColor: colors.white,
@@ -146,7 +146,7 @@ const TabRoutes = () => {
             fontSize: typography.FONT_SIZE_10,
             marginTop:
               Platform.OS == "ios" ? Spacing.MARGIN_5 : Spacing.MARGIN_5,
-            marginBottom: Platform.OS == "android" && Spacing.MARGIN_10,
+            marginBottom: Platform.OS == "android" ? Spacing.MARGIN_10 : 0,
           },
           tabBarActiveTintColor: colors.darkBlue,
           tabBarInactiveTintColor: colors.white,
@@ -180,7 +180,7 @@ const TabRoutes = () => {
             fontSize: typography.FONT_SIZE_10,
             marginTop:
               Platform.OS == "ios" ? Spacing.MARGIN_5 : Spacing.MARGIN_5,
-            marginBottom: Platform.OS == "android" && Spacing.MARGIN_10,
+            marginBottom: Platform.OS == "android" ? Spacing.MARGIN_10 : 0,
           },
           tabBarActiveTintColor: colors.darkBlue,
           tabBarInactiveTintColor: colors.white,
