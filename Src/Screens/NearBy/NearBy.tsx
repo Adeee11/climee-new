@@ -1,6 +1,6 @@
 import { LinearGradient } from "expo-linear-gradient";
-import React from "react";
-import { View, Text, SafeAreaView, Image, ScrollView } from "react-native";
+import React, {useEffect, useState} from "react";
+import { View, Text, SafeAreaView, Image, ScrollView, PanResponder, Animated, Dimensions } from "react-native";
 import { connect } from "react-redux";
 import assets from "../../../assets";
 import { Location, Rectangle } from "../../../assets/svg";
@@ -13,6 +13,35 @@ import Spacing from "../../globalStyles/Spacing";
 import styles from "./styles";
 
 const NearBy = ({ weatherDetails, navigation }: any) => {
+  const [changedDeviceHeight, setChangedDeviceHeight] = useState<number>(200);
+  const [height2] = useState(new Animated.Value(300));
+  const [deviceHeight] = useState(
+    Dimensions.get("window").height
+  );
+  useEffect(() => {
+    panResponder;
+  }, []);
+
+  const panResponder = PanResponder.create({
+    onMoveShouldSetPanResponderCapture: () => true,
+
+    onPanResponderMove: (gestureState: any) => {
+     
+      gestureState.moveY > deviceHeight - changedDeviceHeight
+        ? Animated.timing(height2, {
+            toValue: deviceHeight - 200,
+            duration: 1000,
+            useNativeDriver: false,  
+          }).start(() => setChangedDeviceHeight(500))
+        :  Animated.timing(height2, {
+            toValue: 200,
+            duration: 1000,
+            useNativeDriver: false,
+          }).start(() => setChangedDeviceHeight(300))
+    },
+    
+  });
+
   return (
     <>
       <GeneralStatusBarColor
