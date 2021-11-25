@@ -86,6 +86,7 @@ const SplashScreen = () => {
       }
     })();
   }, []);
+  
   return (
     <>
       {Platform.OS === "ios" ? (

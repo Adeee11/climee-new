@@ -61,7 +61,8 @@ const Home = ({
   const renderNews = (data: any) => {
     return data?.map((item: any, index: any) => {
       return (
-        <View style={{ paddingHorizontal: 5 }}>
+        <>
+        <View style={{ paddingHorizontal: 5, height: (deviceHeight * 38 ) / 100 }}>
           <TouchableOpacity
             style={styles.cardContainer}
             onPress={() =>
@@ -98,6 +99,7 @@ const Home = ({
             </Text>
           </View>
         </View>
+        </>
       );
     });
   };
@@ -159,7 +161,7 @@ const Home = ({
               <AirQuality navigation={navigation} background={true} />
             </View>
             {/* nearby locations view */}
-            <View
+            {/* <View
               style={{
                 marginBottom: 20,
               }}
@@ -185,7 +187,9 @@ const Home = ({
                   // updatedCoordinates={getCoordinates}
                 />
               </View>
-            </View>
+            </View> */}
+
+            <AirQuality navigation={navigation}/>
 
             {/* News view */}
             <View
@@ -197,7 +201,7 @@ const Home = ({
                 pagingEnabled={true}
                 loop={true}
                 key={news.length}
-                style={{ height: (deviceHeight * 50) / 100 }}
+                style={{ height: (deviceHeight * 38 ) / 100 }}
               >
                 {renderNews(news)}
               </Swiper>

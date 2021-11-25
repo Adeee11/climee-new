@@ -7,8 +7,11 @@ import Header from "../../Components/Header/Header";
 import HourlyInformation from "../../Components/HourlyInformation/HourlyInformation";
 import navigationStrings from "../../constants/navigationStrings";
 import colors from "../../globalStyles/colors";
+import { connect } from "react-redux";
 import styles from "./styles";
-const Hourly = ({props}:any) => {
+
+const Hourly = ({weatherDetails, navigation}:any) => {
+  
   const data = [
     {
       id: "1",
@@ -66,12 +69,23 @@ const Hourly = ({props}:any) => {
         barStyle={"dark-content"}
         backgroundColor={colors.blueTheme}
       />
-      <Header title={"Hourly"} onPress={()=>props.navigation.navigate(navigationStrings.HOME)} />
+      <Header title={"Hourly"} onPress={()=> navigation.navigate(navigationStrings.HOME)} />
       <ScrollView showsVerticalScrollIndicator={false}bounces={false} style={{ backgroundColor: "#F5F5F5" }}>
-      <HourlyInformation data={data} date={"Tuesday, 24 August"} />
-      <HourlyInformation data={data} date={"Wednesday, 25 August"} />
+      <HourlyInformation data={weatherDetails[0]?.weatherDetails?.hourly} date={"Tuesday, 24 August"} />
+      {/* <HourlyInformation data={data} date={"Wednesday, 25 August"} /> */}
       </ScrollView>
     </>
   );
 };
-export default Hourly;
+
+const mapStateToProps = (state: any) => {
+  return {
+    weatherDegree: state?.switchReducer?.weatherDegree,
+    windDegree: state?.switchReducer?.windDegree,
+    notify: state?.switchReducer?.notify,
+    weatherDetails: state?.WeatherDetailsReducer?.weatherDetails,
+    weatherLoading: state?.WeatherDetailsReducer?.loading,
+  };
+};
+
+export default connect(mapStateToProps)(Hourly);

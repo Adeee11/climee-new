@@ -1,11 +1,12 @@
 import moment from "moment";
-import React, { useEffect } from "react";
+import React from "react";
 import { View, Text, FlatList, Image, TouchableOpacity } from "react-native";
 import assets from "../../../assets";
 import { Line, Line2, Right } from "../../../assets/svg";
 import navigationStrings from "../../constants/navigationStrings";
 import colors from "../../globalStyles/colors";
 import Spacing from "../../globalStyles/Spacing";
+import WeatherImage from "../WeatherImage/WeatherImage";
 import styles from "./style";
 
 const Forecast = ({

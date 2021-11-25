@@ -6,6 +6,7 @@ import Forecast from "../Forecast/Forecast";
 import { LinearGradient } from "expo-linear-gradient";
 import moment from "moment";
 import styles from "./styles";
+import WeatherImage from "../WeatherImage/WeatherImage";
 
 const HeroSection = ({ weatherData, weatherDegree ,navigation}: any) => {
   console.log(weatherData[0]?.weatherDetails.daily[0].temp.min);
@@ -82,9 +83,10 @@ const HeroSection = ({ weatherData, weatherDegree ,navigation}: any) => {
           </Text>
         </View>
         <View style={styles.imageContainer}>
-          <Image
-            source={assets.sunny}
-            style={{ width: 100, height: 100, resizeMode: "contain" }}
+          <WeatherImage
+            img={weatherData[0]?.weatherDetails?.current?.weather[0]?.main}
+            height={100}
+            width={100}
           />
         </View>
       </View>
