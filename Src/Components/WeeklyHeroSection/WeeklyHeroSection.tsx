@@ -76,11 +76,17 @@ const WeeklyHeroSection = ({ weatherDegree, weatherDetails }: any) => {
           >
             <AntDesign name="arrowdown" size={25} color="#3AE000" />
             <Text style={{ ...styles.tempText, marginRight: 15 }}>
-              {parseInt(weatherDetails?.temp?.min)} &deg;
+            {weatherDegree == "F"
+                ? (weatherDetails?.temp?.min * 1.8 + 32)?.toFixed(0)
+                : weatherDetails?.temp?.min.toFixed(0)}
+              &deg;
             </Text>
             <AntDesign name="arrowup" size={25} color="#E00000" />
             <Text style={styles.tempText}>
-              {parseInt(weatherDetails?.temp?.max)} &deg;
+              {weatherDegree == "F"
+                ? (weatherDetails?.temp?.max * 1.8 + 32)?.toFixed(0)
+                : weatherDetails?.temp?.max.toFixed(0)}
+              &deg;
             </Text>
           </View>
         </View>

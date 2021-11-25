@@ -6,8 +6,6 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
-import colors from "../../globalStyles/colors";
 import Swiper from "react-native-swiper";
 import { ScrollView } from "react-native-gesture-handler";
 import styles from "./styles";
@@ -19,11 +17,8 @@ import { Right } from "../../../assets/svg";
 import Forecast from "../../Components/Forecast/Forecast";
 import { connect } from "react-redux";
 import strapi from "../../api/strapi";
-import ShowMap from "../../Components/ShowMap/ShowMap";
 import Loader from "../../Components/Loader";
 import navigationStrings from "../../constants/navigationStrings";
-import Shadow from "../../Components/Shadow/Shadow";
-import moment from "moment";
 import { deviceHeight } from "../../constants/dimensions";
 import Header from "../../Components/Header/Header";
 import AirQuality from "../../Components/AirQuality/AirQuality";
@@ -40,7 +35,6 @@ const Home = ({
   const [news, setNews] = useState<Array<any>>([]);
 
   useEffect(() => {
-
     (async () => {
       try {
         setLoading(true);
@@ -119,7 +113,7 @@ const Home = ({
           backButton={false}
           onPress={() => navigation.navigate(navigationStrings.SEARCH)}
         />
-        
+
         {weatherLoading || loading ? (
           <Loader />
         ) : (
@@ -163,20 +157,18 @@ const Home = ({
               <AirQuality
                 navigation={navigation}
                 background={true}
-                val={pollutionDetails[0].pollutionDetails.components.pm2_5.toFixed(
+                val={pollutionDetails[0]?.pollutionDetails?.components.pm2_5.toFixed(
                   0
                 )}
               />
             </View>
-            <View
-              style={{
-              }}
-            >
+            {/* News Section */}
+            <View style={{}}>
               <Swiper
                 pagingEnabled={true}
                 loop={true}
                 key={news.length}
-                style={{ height: (deviceHeight * 38) / 100 }}
+                style={{ height: (deviceHeight * 50) / 100 }}
               >
                 {renderNews(news)}
               </Swiper>

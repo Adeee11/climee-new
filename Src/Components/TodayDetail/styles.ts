@@ -7,8 +7,8 @@ import typography from "../../globalStyles/typography";
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.white,
-    paddingTop: Spacing.PADDING_20,
-    paddingHorizontal: Spacing.PADDING_20,
+    // paddingTop: Spacing.PADDING_20,
+    // paddingHorizontal: Spacing.PADDING_20,
     borderRadius: 20,
   },
   headingContainer: {
@@ -43,6 +43,20 @@ const styles = StyleSheet.create({
     fontSize: typography.FONT_SIZE_12, 
     textAlign: "center", 
     fontFamily: fontFamily.regular 
+  },
+  cardContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    backgroundColor: "#3C6FD1",
+    padding: Spacing.PADDING_15,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+  },
+  cardTitle: {
+    fontSize: typography.FONT_SIZE_15,
+    color: colors.white,
+    fontFamily: fontFamily.semiBold
   },
 });
 

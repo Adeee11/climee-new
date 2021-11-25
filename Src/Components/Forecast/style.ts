@@ -31,6 +31,20 @@ const styles = StyleSheet.create({
     fontSize: typography.FONT_SIZE_15,
     fontFamily: fontFamily.regular,
   },
+  cardContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+
+    paddingVertical: Spacing.PADDING_15,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+  },
+  cardTitle: {
+    fontSize: typography.FONT_SIZE_15,
+    color: colors.white,
+    fontFamily: fontFamily.semiBold,
+  },
 });
 
 export default styles;

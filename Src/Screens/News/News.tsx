@@ -61,7 +61,7 @@ const News = ({ navigation, route }: any) => {
             flex: 0.52,
             paddingHorizontal: Spacing.PADDING_8,
             marginHorizontal: Spacing.MARGIN_10,
-            marginBottom: Spacing.MARGIN_10,
+            // marginBottom: Spacing.MARGIN_10,
           }}
         >
           <View style={styles.newsHeadingView}>
@@ -71,7 +71,7 @@ const News = ({ navigation, route }: any) => {
           <Text style={styles.textColor14}>{data.Content}</Text>
         </ScrollView>
       </SafeAreaView>
-      <View style={styles.newsView}>
+      {/* <View style={styles.newsView}>
         <View>
           <Text style={styles.headingStyle}>Weather News</Text>
         </View>
@@ -81,7 +81,7 @@ const News = ({ navigation, route }: any) => {
             <Text style={styles.shareStyle}>Share it</Text>
           </View>
         </TouchableOpacity>
-      </View>
+      </View> */}
     </>
   );
 };

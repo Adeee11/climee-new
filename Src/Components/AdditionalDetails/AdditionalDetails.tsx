@@ -6,8 +6,7 @@ import Spacing from "../../globalStyles/Spacing";
 import AdditionalElements from "../AdditionalElements/AdditionalElements";
 import styles from "./styles";
 
-const AdditionalDetails = ({details}: any) => {  
-
+const AdditionalDetails = ({ details, windDegree }: any) => {
   const time = (time: number) => {
     const date = new Date(time * 1000);
     let hours = date.getHours();
@@ -28,7 +27,12 @@ const AdditionalDetails = ({details}: any) => {
           <View style={{ marginLeft: Spacing.MARGIN_12 }}>
             <AdditionalElements
               name={"Wind"}
-              value={details?.wind_speed}
+              value={
+                windDegree == "mph"
+                  ? (details?.wind_speed * 2.237)?.toFixed(2)
+                  : details?.wind_speed?.toFixed(2)
+              }
+              // value={details?.wind_speed}
               img={assets.newWind}
             />
           </View>

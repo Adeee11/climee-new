@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FlatList, ScrollView } from "react-native";
 import { View, Text } from "react-native";
 import assets from "../../../assets";
@@ -10,71 +10,62 @@ import colors from "../../globalStyles/colors";
 import { connect } from "react-redux";
 import styles from "./styles";
 import moment from "moment";
+import { useState } from "react";
 
-const Hourly = ({weatherDetails, navigation}:any) => {
-  
-  const data = [
-    {
-      id: "1",
-      time: "5 PM",
-      temp: "25",
-      wind: "5",
-      img: assets.sunny,
-    },
-    {
-      id: "2",
-      time: "5 PM",
-      temp: "25",
-      wind: "5",
-      img: assets.sunny,
-    },
-    {
-      id: "3",
-      time: "5 PM",
-      temp: "25",
-      wind: "5",
-      img: assets.sunny,
-    },
-    {
-      id: "4",
-      time: "5 PM",
-      temp: "25",
-      wind: "5",
-      img: assets.sunny,
-    },
-    {
-      id: "5",
-      time: "5 PM",
-      temp: "25",
-      wind: "5",
-      img: assets.sunny,
-    },
-    {
-      id: "6",
-      time: "5 PM",
-      temp: "25",
-      wind: "5",
-      img: assets.sunny,
-    },
-    {
-      id: "7",
-      time: "5 PM",
-      temp: "25",
-      wind: "5",
-      img: assets.sunny,
-    },
-  ];
+const Hourly = ({
+  weatherDetails,
+  navigation,
+  weatherDegree,
+  windDegree,
+}: any) => {
+  const [todayHourly, setTodayHourly] = useState<any>();
+  const [tomorrowHourly, setTomorrowHourly] = useState<any>();
+
+  useEffect(() => {
+    const today = new Date()?.toISOString()?.split("T")[0];
+    const tomorrow = new Date(new Date()?.getTime() + 24 * 60 * 60 * 1000)
+      ?.toISOString()
+      ?.split("T")[0];
+
+    const r = weatherDetails[0]?.weatherDetails?.hourly?.filter((e: any) => {
+      return new Date(e?.dt * 1000)?.toISOString()?.split("T")[0] == today;
+    });
+    setTodayHourly(r);
+
+    const filt = weatherDetails[0]?.weatherDetails?.hourly?.filter((e: any) => {
+      return new Date(e?.dt * 1000)?.toISOString()?.split("T")[0] == tomorrow;
+    });
+    setTomorrowHourly(filt);
+  }, []);
+
   return (
     <>
       <GeneralStatusBarColor
         barStyle={"dark-content"}
         backgroundColor={colors.blueTheme}
       />
-      <Header title={"Hourly"} onPress={()=> navigation.navigate(navigationStrings.HOME)} />
-      <ScrollView showsVerticalScrollIndicator={false}bounces={false} style={{ backgroundColor: "#F5F5F5" }}>
-      <HourlyInformation data={weatherDetails[0]?.weatherDetails?.hourly} date=  {moment(new Date())?.format("dddd, D MMMM")} />
-      
-      {/* <HourlyInformation data={data} date={"Wednesday, 25 August"} /> */}
+      <Header
+        title={"Hourly"}
+        onPress={() => navigation.navigate(navigationStrings.HOME)}
+      />
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        bounces={false}
+        style={{ backgroundColor: "#F5F5F5" }}
+      >
+        <HourlyInformation
+          data={todayHourly}
+          date={moment(new Date())?.format("dddd, D MMMM")}
+          weatherDegree={weatherDegree}
+          windDegree={windDegree}
+        />
+        <HourlyInformation
+          data={tomorrowHourly}
+          date={moment().add(1, "days").format("dddd, D MMMM").toString()}
+          weatherDegree={weatherDegree}
+          windDegree={windDegree}
+        />
+        {/* <HourlyInformation data={data} date={"Wednesday, 25 August"} /> */}
       </ScrollView>
     </>
   );

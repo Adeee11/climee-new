@@ -4,7 +4,7 @@ import assets from "../../../assets";
 import WeatherImage from "../WeatherImage/WeatherImage";
 import styles from "./styles";
 const HourlyInformation = (props: any) => {
-  const { data, date } = props;
+  const { data, date, weatherDegree, windDegree } = props;
 
   const time = (time: number) => {
     const date = new Date(time * 1000);
@@ -58,8 +58,19 @@ const HourlyInformation = (props: any) => {
             flexDirection: "row",
           }}
         >
-          <Text style={styles.tempText}>{item.temp.toFixed(0)}&deg;</Text>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <Text style={styles.tempText}>
+            {weatherDegree == "F"
+              ? (item.temp.toFixed(0) * 1.8 + 32)?.toFixed(0)
+              : item.temp.toFixed(0)}
+            &deg;
+          </Text>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
             <Image
               source={assets.windDirection}
               style={{
@@ -71,7 +82,10 @@ const HourlyInformation = (props: any) => {
               resizeMode={"contain"}
             />
             <Text style={styles.timeText}>
-              {item.wind_speed.toFixed(0)} km/h
+              {windDegree == "mph"
+                ? ((item.wind_speed / 3.6) * 2.237)?.toFixed(2)
+                : (item.wind_speed / 3.6).toFixed(2)}{" "}
+              {props.windDegree == "null" ? "m/s" : props.windDegree}
             </Text>
           </View>
         </View>

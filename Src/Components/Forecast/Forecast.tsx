@@ -16,7 +16,6 @@ const Forecast = ({
   weatherDegree,
   navigation,
 }: any) => {
-
   interface data {
     id: string;
     temp: string;
@@ -25,7 +24,7 @@ const Forecast = ({
     min?: number;
     max: number;
   }
-  
+
   const time = (time: number) => {
     const date = new Date(time * 1000);
     let hours = date.getHours();
@@ -103,23 +102,21 @@ const Forecast = ({
       }}
     >
       <TouchableOpacity
-        onPress={() => navigation.navigate(navigationStrings.HOURLY)}
+        style={{
+          ...styles.cardContainer,
+          backgroundColor: backgroundColor ? "#3C6FD1" : "transparent",
+          paddingHorizontal: backgroundColor ? Spacing.PADDING_15 : 0,
+        }}
+        onPress={() =>
+          navigation.navigate(
+            backgroundColor
+              ? navigationStrings.WEEKLY
+              : navigationStrings.HOURLY
+          )
+        }
       >
-        <View
-          style={[
-            styles.titleContainer,
-            {
-              backgroundColor: backgroundColor ? "#3C6FD1" : "transparent",
-              alignItems: backgroundColor ? "center" : "flex-end",
-              paddingHorizontal: backgroundColor ? Spacing.PADDING_15 : 0,
-            },
-          ]}
-        >
-          <Text style={styles.titleStyle}>{title}</Text>
-          <View style={{ marginBottom: 5 }}>
-            <Right />
-          </View>
-        </View>
+        <Text style={styles.cardTitle}>{title}</Text>
+        <Right />
       </TouchableOpacity>
       <View>
         <FlatList

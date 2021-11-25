@@ -4,12 +4,14 @@ import {
   Dew,
   Humidity,
   Pressure,
+  Right,
   Sunrise,
   Sunset,
   UV,
   Wind,
 } from "../../../assets/svg";
 import navigationStrings from "../../constants/navigationStrings";
+import Spacing from "../../globalStyles/Spacing";
 import styles from "./styles";
 
 const TodayDetail = ({ weatherDetails, navigation, windDegree }: any) => {
@@ -34,21 +36,7 @@ const TodayDetail = ({ weatherDetails, navigation, windDegree }: any) => {
       icon: <Pressure width={18} height={18} />,
       title: "Pressure",
     },
-    {
-      id: "5",
-      icon: <UV width={18} height={18} />,
-      title: "UV Index",
-    },
-    {
-      id: "6",
-      icon: <Sunrise width={18} height={18} />,
-      title: "Sunrise",
-    },
-    {
-      id: "7",
-      icon: <Sunset width={18} height={18} />,
-      title: "Sunset",
-    },
+ 
   ];
 
   const time = (time: number) => {
@@ -64,7 +52,7 @@ const TodayDetail = ({ weatherDetails, navigation, windDegree }: any) => {
   };
 
   const renderItem = (item: any) => (
-    <View>
+    <View style={{ paddingHorizontal: Spacing.PADDING_20 }}>
       <View style={styles.detailContainer}>
         <View style={styles.detailLeftWrapper}>
           <View>{item.icon}</View>
@@ -94,24 +82,6 @@ const TodayDetail = ({ weatherDetails, navigation, windDegree }: any) => {
             <Text style={styles.detailText}>
               {weatherDetails[0]?.weatherDetails?.current?.pressure} MB
             </Text>
-          ) : item?.id === "5" ? (
-            <Text style={styles.detailText}>
-              {weatherDetails[0]?.weatherDetails?.current?.uvi}
-            </Text>
-          ) : item?.id === "6" ? (
-            <Text style={styles.detailText}>
-              {
-                time(weatherDetails[0]?.weatherDetails?.current?.sunrise)
-                  ?.strTime
-              }
-            </Text>
-          ) : item?.id === "7" ? (
-            <Text style={styles.detailText}>
-              {
-                time(weatherDetails[0]?.weatherDetails?.current?.sunset)
-                  ?.strTime
-              }
-            </Text>
           ) : null}
         </View>
       </View>
@@ -120,16 +90,25 @@ const TodayDetail = ({ weatherDetails, navigation, windDegree }: any) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.headingContainer}>
-        <Text style={styles.headingText}>Today&apos;s Detail</Text>
-      </View>
+      {/* <View style={styles.headingContainer}> */}
+      <TouchableOpacity
+        style={{
+          ...styles.cardContainer,
+        }}
+        onPress={() => navigation.navigate(navigationStrings.TODAYSDETAILS)}
+      >
+        <Text style={styles.cardTitle}>Today&apos;s Detail</Text>
+        <Right />
+      </TouchableOpacity>
+      {/* <Text style={styles.headingText}>Today&apos;s Detail</Text> */}
+      {/* </View> */}
       <View>
         <FlatList
           data={details}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => renderItem(item)}
         />
-        <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={() =>
             navigation.navigate(navigationStrings.TODAYSDETAILS)
           }
@@ -143,7 +122,7 @@ const TodayDetail = ({ weatherDetails, navigation, windDegree }: any) => {
           }}
         >
           <Text style={styles.buttonText}>See More</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         {/* <View style={styles.detailContainer}>
             <View style={styles.detailLeftWrapper}>
               <Wind height={15} width={15}/>
