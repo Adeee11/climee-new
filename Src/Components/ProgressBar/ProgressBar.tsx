@@ -6,7 +6,7 @@ import fontFamily from "../../globalStyles/fontFamily";
 import typography from "../../globalStyles/typography";
 
 const ProgressBar = ({val,perc=true}: any) => {
-  console.log(val);
+  // console.log(val);
   
   const color = (item: any) => {
     return item < 20

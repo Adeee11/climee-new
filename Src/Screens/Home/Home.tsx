@@ -22,6 +22,7 @@ import navigationStrings from "../../constants/navigationStrings";
 import { deviceHeight } from "../../constants/dimensions";
 import Header from "../../Components/Header/Header";
 import AirQuality from "../../Components/AirQuality/AirQuality";
+import colors from "../../globalStyles/colors";
 
 const Home = ({
   weatherDetails,
@@ -30,11 +31,15 @@ const Home = ({
   weatherDegree,
   windDegree,
   pollutionDetails,
+  firstColor,
+  secondColor,
 }: any) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [news, setNews] = useState<Array<any>>([]);
 
   useEffect(() => {
+    console.log(weatherDetails[0].weatherDetails.hourly);
+
     (async () => {
       try {
         setLoading(true);
@@ -104,9 +109,9 @@ const Home = ({
     <>
       <GeneralStatusBarColor
         barStyle={"dark-content"}
-        backgroundColor={"#7CA9FF"}
+        backgroundColor={"#3C6FD1"}
       />
-      <SafeAreaView style={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: colors.appBackground }}>
         {/* Header Start */}
         <Header
           title={weatherDetails[0]?.locationDetails?.city}
@@ -128,6 +133,18 @@ const Home = ({
                 weatherData={weatherDetails}
                 weatherDegree={weatherDegree}
                 navigation={navigation}
+                firstColor={colors.blueTheme}
+                secondColor={colors.white}
+              />
+            </View>
+            <View style={{ marginBottom: 20 }}>
+              <Forecast
+                data={weatherDetails[0]?.weatherDetails?.hourly}
+                title="Hourly Forecast"
+                weatherDegree={weatherDegree}
+                navigation={navigation}
+                // backgroundColor={true}
+                // hourly={true}
               />
             </View>
             {/* Today's Details component  */}
@@ -188,6 +205,8 @@ const mapStateToProps = (state: any) => {
     weatherDetails: state?.WeatherDetailsReducer?.weatherDetails,
     weatherLoading: state?.WeatherDetailsReducer?.loading,
     pollutionDetails: state?.WeatherDetailsReducer?.pollutionDetails,
+    firstColor: state?.colorThemeReducer?.firstColor,
+    secondColor: state?.colorThemeReducer?.secondColor,
   };
 };
 

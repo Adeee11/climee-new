@@ -25,7 +25,7 @@ const WeatherDetailsReducer = (
       };
     }
     case types.POLLUTIONDETAILS: {
-      console.log(action.payload);
+      // console.log(action.payload);
       return {
         ...state,
         pollutionDetails: action.payload,

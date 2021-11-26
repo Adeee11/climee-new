@@ -2,9 +2,16 @@ import store from "../store";
 import types from "../types";
 
 const { dispatch } = store;
-export function themeColor(data: any) {
+export function themeColorOne(data: any) {
   dispatch({
-    type: types.COLORTHEME,
+    type: types.FIRSTCOLOR,
+    payload: data,
+  });
+}
+
+export function themeColorTwo(data: any) {
+  dispatch({
+    type: types.SECONDCOLOR,
     payload: data,
   });
 }

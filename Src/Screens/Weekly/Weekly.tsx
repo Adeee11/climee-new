@@ -16,10 +16,6 @@ const Weekly = ({
 }: any) => {
   const [selectedDay, setSelectedDay] = useState();
 
-  useEffect(() => {
-    // console.log(weatherDetails[0]?.weatherDetails?.daily);
-  }, []);
-
   const time = (time: number) => {
     const date = new Date(time * 1000);
     let hours = date.getHours();

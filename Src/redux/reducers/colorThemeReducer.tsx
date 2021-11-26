@@ -1,18 +1,28 @@
 import types from "../types";
 
 const initialState = {
-  themeColor: "",
+  firstColor: "",
+  secondColor: "",
 };
 const colorThemeReducer = (
   state = initialState,
   action: { type: any; payload: any }
 ) => {
   switch (action.type) {
-    case types.COLORTHEME: {
+    case types.FIRSTCOLOR: {
       const data = action.payload;
+      console.log(data, "FirstColor");
+
       return {
         ...state,
-        themeColor: data,
+        firstColor: data,
+      };
+    }
+    case types.SECONDCOLOR: {
+      console.log(action.payload, "SecondColor");
+      return {
+        ...state,
+        secondColor: action.payload,
       };
     }
 

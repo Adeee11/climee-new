@@ -25,7 +25,7 @@ const ToggleButton = ({
       >
         {getSelectionMode === option1 ? (
           <LinearGradient
-            colors={[colors.blueTheme, colors.white]}
+            colors={[colors.darkBlue, colors.white]}
             style={{
               position: "absolute",
               left: 0,
@@ -34,7 +34,7 @@ const ToggleButton = ({
               top: 0,
               borderRadius: 15,
             }}
-            end={{ x: 0, y: 3.5 }}
+            end={{ x: 0.1, y: 1.8 }}
           />
         ) : null}
         <Text
@@ -63,7 +63,7 @@ const ToggleButton = ({
               top: 0,
               borderRadius: 15,
             }}
-            end={{ x: 0, y: 3.5 }}
+            end={{ x: 0.1, y: 1.8 }}
           />
         ) : null}
         <Text

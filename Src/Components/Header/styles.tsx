@@ -6,7 +6,7 @@ import typography from "../../globalStyles/typography";
 const styles = StyleSheet.create({
   headerContainer: {
     height: Spacing.HEIGHT_48,
-    backgroundColor: "#7CA9FF",
+    backgroundColor:"#3C6FD1",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-start",
