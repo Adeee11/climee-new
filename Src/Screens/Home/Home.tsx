@@ -23,6 +23,7 @@ import { deviceHeight } from "../../constants/dimensions";
 import Header from "../../Components/Header/Header";
 import AirQuality from "../../Components/AirQuality/AirQuality";
 import colors from "../../globalStyles/colors";
+import Shadow from "../../Components/Shadow/Shadow";
 
 const Home = ({
   weatherDetails,
@@ -38,7 +39,7 @@ const Home = ({
   const [news, setNews] = useState<Array<any>>([]);
 
   useEffect(() => {
-    console.log(weatherDetails[0].weatherDetails.hourly);
+    console.log(weatherDetails[0]?.weatherDetails.hourly);
 
     (async () => {
       try {
@@ -60,47 +61,50 @@ const Home = ({
   const renderNews = (data: any) => {
     return data?.map((item: any, index: any) => {
       return (
-        <>
-          <View
-            style={{ paddingHorizontal: 5, height: (deviceHeight * 38) / 100 }}
+        <View
+          style={{
+            paddingHorizontal: 20,
+            height: (deviceHeight * 38) / 100,
+            ...Shadow.shadowStyle,
+          }}
+        >
+          <TouchableOpacity
+            style={styles.cardContainer}
+            onPress={() =>
+              navigation.navigate(navigationStrings.NEWS, { data: item })
+            }
           >
-            <TouchableOpacity
-              style={styles.cardContainer}
-              onPress={() =>
-                navigation.navigate(navigationStrings.NEWS, { data: item })
-              }
-            >
-              <Text style={styles.cardTitle}>News</Text>
-              <Right />
-            </TouchableOpacity>
-            <View
-              style={{
-                height: 200,
-                borderBottomLeftRadius: 20,
-                borderBottomRightRadius: 20,
+            <Text style={styles.cardTitle}>News</Text>
+            <Right />
+          </TouchableOpacity>
+          <View
+            style={{
+              height: 200,
+              borderBottomLeftRadius: 20,
+              borderBottomRightRadius: 20,
+            }}
+          >
+            <Image
+              source={{
+                uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1CVi919KotpE7FuciwqIeMDhhJNokHpbV1w&usqp=CAU",
               }}
-            >
-              <Image
-                source={{
-                  uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1CVi919KotpE7FuciwqIeMDhhJNokHpbV1w&usqp=CAU",
-                }}
-                style={{ width: "100%", height: "100%", resizeMode: "cover" }}
-              />
-            </View>
-            <View
-              style={{
-                padding: 20,
-                backgroundColor: "white",
-                borderBottomRightRadius: 20,
-                borderBottomLeftRadius: 20,
-              }}
-            >
-              <Text style={styles.newsHeadline} numberOfLines={2}>
-                {item.Title}
-              </Text>
-            </View>
+              style={{ width: "100%", height: "100%", resizeMode: "cover" }}
+            />
           </View>
-        </>
+          <View
+            style={{
+              padding: 20,
+              backgroundColor: "white",
+              borderBottomRightRadius: 20,
+              borderBottomLeftRadius: 20,
+              ...Shadow.shadowStyle
+            }}
+          >
+            <Text style={styles.newsHeadline} numberOfLines={2}>
+              {item.Title}
+            </Text>
+          </View>
+        </View>
       );
     });
   };
@@ -108,8 +112,8 @@ const Home = ({
   return (
     <>
       <GeneralStatusBarColor
-        barStyle={"dark-content"}
-        backgroundColor={"#3C6FD1"}
+        barStyle={"light-content"}
+        backgroundColor={colors.darkBlue}
       />
       <SafeAreaView style={{ flex: 1, backgroundColor: colors.appBackground }}>
         {/* Header Start */}
@@ -124,31 +128,22 @@ const Home = ({
         ) : (
           <ScrollView
             bounces={false}
-            style={{ marginHorizontal: 20 }}
+            // style={{ marginHorizontal: 20 }}
             showsVerticalScrollIndicator={false}
           >
             {/* hero component */}
-            <View style={{ marginVertical: 20 }}>
+            <View style={{ margin: 20 }}>
               <HeroSection
                 weatherData={weatherDetails}
                 weatherDegree={weatherDegree}
                 navigation={navigation}
-                firstColor={colors.blueTheme}
+                firstColor={colors.darkBlue}
                 secondColor={colors.white}
               />
             </View>
-            <View style={{ marginBottom: 20 }}>
-              <Forecast
-                data={weatherDetails[0]?.weatherDetails?.hourly}
-                title="Hourly Forecast"
-                weatherDegree={weatherDegree}
-                navigation={navigation}
-                // backgroundColor={true}
-                // hourly={true}
-              />
-            </View>
+
             {/* Today's Details component  */}
-            <View style={{ marginBottom: 20 }}>
+            <View style={{ marginBottom: 20, marginHorizontal: 20 }}>
               <TodayDetail
                 weatherDetails={weatherDetails}
                 navigation={navigation}
@@ -156,7 +151,7 @@ const Home = ({
               />
             </View>
             {/* 7 day forecast component */}
-            <View style={{ marginBottom: 20 }}>
+            <View style={{ marginBottom: 20, marginHorizontal: 20 }}>
               <Forecast
                 data={weatherDetails[0]?.weatherDetails?.daily}
                 title="7 Days Forecast"
@@ -169,18 +164,19 @@ const Home = ({
             <View
               style={{
                 marginBottom: 20,
+                marginHorizontal: 20,
               }}
             >
               <AirQuality
                 navigation={navigation}
                 background={true}
                 val={pollutionDetails[0]?.pollutionDetails?.components.pm2_5?.toFixed(
-                  2
+                  0
                 )}
               />
             </View>
             {/* News Section */}
-            <View style={{}}>
+            <View style={Shadow.shadowStyle}>
               <Swiper
                 pagingEnabled={true}
                 loop={true}
@@ -190,6 +186,7 @@ const Home = ({
                 {renderNews(news)}
               </Swiper>
             </View>
+            {/* </View> */}
           </ScrollView>
         )}
       </SafeAreaView>

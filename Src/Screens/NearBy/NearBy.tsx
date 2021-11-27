@@ -20,6 +20,7 @@ import axios from "../../api/axios";
 import styles from "./styles";
 import api from "../../globalStyles/api";
 import WeatherImage from "../../Components/WeatherImage/WeatherImage";
+import colors from "../../globalStyles/colors";
 
 const NearBy = ({ weatherDetails, navigation }: any) => {
   const [changedDeviceHeight, setChangedDeviceHeight] = useState<number>(300);
@@ -114,8 +115,8 @@ const NearBy = ({ weatherDetails, navigation }: any) => {
   return (
     <>
       <GeneralStatusBarColor
-        barStyle={"dark-content"}
-        backgroundColor={"#7CA9FF"}
+        barStyle={"light-content"}
+        backgroundColor={colors.darkBlue}
       />
       <SafeAreaView style={{ flex: 1, justifyContent: "center" }}>
         <Header title={"Nearby"} />

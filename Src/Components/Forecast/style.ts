@@ -22,9 +22,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   timeText: {
-    color: "#363B64",
+    color: colors.textColor,
     fontSize: typography.FONT_SIZE_14,
-    fontFamily: fontFamily.regular,
+    fontFamily: fontFamily.semiBold,
   },
   tempText: {
     color: "#fff",

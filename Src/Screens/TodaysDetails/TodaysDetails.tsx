@@ -80,8 +80,8 @@ const TodaysDetails = ({
   return (
     <>
       <GeneralStatusBarColor
-        barStyle={"dark-content"}
-        backgroundColor={colors.blueTheme}
+        barStyle={"light-content"}
+        backgroundColor={colors.darkBlue}
       />
       <Header title={"Today's Details"} onPress={() => navigation.goBack()} />
       <ScrollView

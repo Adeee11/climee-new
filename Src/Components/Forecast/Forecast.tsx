@@ -1,11 +1,11 @@
 import moment from "moment";
 import React from "react";
-import { View, Text, FlatList, Image, TouchableOpacity } from "react-native";
-import assets from "../../../assets";
+import { View, Text, FlatList, TouchableOpacity } from "react-native";
 import { Line, Line2, Right } from "../../../assets/svg";
 import navigationStrings from "../../constants/navigationStrings";
 import colors from "../../globalStyles/colors";
 import Spacing from "../../globalStyles/Spacing";
+import Shadow from "../Shadow/Shadow";
 import WeatherImage from "../WeatherImage/WeatherImage";
 import styles from "./style";
 
@@ -37,21 +37,19 @@ const Forecast = ({
     return { strTime };
   };
 
-  const renderItems = (item: data) => {
+  const renderItems = (item: any) => {
     return (
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <View style={styles.dataContainer}>
           {backgroundColor ? (
-            <Text style={[styles.timeText]}>
+            <Text style={[styles.timeText, {}]}>
               {moment(new Date(item?.dt * 1000)).format("ddd")}
             </Text>
           ) : (
             <Text style={styles.timeText}>{time(item?.dt)?.strTime}</Text>
           )}
           {!backgroundColor ? (
-            <Text
-            style={[styles.tempText, { color: "#3C6FD1",paddingBottom:Spacing.PADDING_5 }]}
-            >
+            <Text style={[styles.tempText]}>
               {weatherDegree == "F"
                 ? (parseInt(item?.temp) * 1.8 + 32)?.toFixed(0)
                 : parseInt(item?.temp)?.toFixed(0)}
@@ -78,29 +76,33 @@ const Forecast = ({
               </Text>
             </View>
           )}
-          {/* <Image
-            source={showImage(item?.weather[0]?.main)?.img}
-            style={{ width: 40, height: 40, resizeMode: "contain" }}
-          /> */}
           <WeatherImage img={item?.weather[0]?.main} width={40} height={40} />
         </View>
-         <Line /> 
+        {backgroundColor ? <Line /> : <Line2 />}
       </View>
     );
   };
 
   return (
     <View
-      style={{
-        backgroundColor: colors.white,
-        borderRadius: 20,
-      }}
+      style={
+        backgroundColor
+          ? {
+              backgroundColor: backgroundColor ? colors.white : "transparent",
+              borderRadius: 20,
+              ...Shadow.shadowStyle,
+            }
+          : {
+              backgroundColor: backgroundColor ? colors.white : "transparent",
+              borderRadius: 20,
+            }
+      }
     >
       <TouchableOpacity
         style={{
           ...styles.cardContainer,
-          backgroundColor: "#3C6FD1" ,
-          paddingHorizontal:  Spacing.PADDING_15 ,
+          backgroundColor: backgroundColor ? colors.darkBlue : "transparent",
+          paddingHorizontal: backgroundColor ? Spacing.PADDING_15 : 0,
         }}
         onPress={() =>
           navigation.navigate(

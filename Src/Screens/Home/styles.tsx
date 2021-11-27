@@ -6,7 +6,7 @@ import typography from "../../globalStyles/typography";
 const styles = StyleSheet.create({
   headerContainer: {
     height: 60,
-    backgroundColor: "#7CA9FF",
+    backgroundColor: colors.blueTheme,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-start",
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    backgroundColor: "#3C6FD1",
+    backgroundColor: colors.darkBlue,
     padding: Spacing.PADDING_15,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   },
   newsHeadline: {
     fontSize: typography.FONT_SIZE_13,
-    color: '#363B64',
+    color: colors.darkBlue,
     fontFamily: fontFamily.regular
   }
 });

@@ -82,8 +82,8 @@ const Setting = (props: any) => {
   return (
     <>
       <GeneralStatusBarColor
-        barStyle={"dark-content"}
-        backgroundColor={colors.blueTheme}
+        barStyle={"light-content"}
+        backgroundColor={colors.darkBlue}
       />
       <Header
         title={"Settings"}
@@ -120,21 +120,6 @@ const Setting = (props: any) => {
                   flexDirection: "row",
                 }}
               >
-                {/* <TouchableOpacity
-                  onPress={() =>
-                    Linking.openURL("mailto: Climee.app@gmail.com").catch(
-                      (err) => {
-                        console.log(err);
-                      }
-                    )
-                  }
-                >
-                  <Image
-                    source={assets.googlePlus}
-                    resizeMode={"contain"}
-                    style={styles.iconStyle}
-                  />
-                </TouchableOpacity> */}
                 <TouchableOpacity
                   onPress={() => Linking.openURL("https://fb.me/climee01")}
                 >
@@ -352,7 +337,7 @@ const Setting = (props: any) => {
                       console.log(err);
                     })
                   }
-                  style={{ color: colors.blueTheme }}
+                  style={{ color: colors.darkBlue }}
                 >
                   {" "}
                   IWEBCODE

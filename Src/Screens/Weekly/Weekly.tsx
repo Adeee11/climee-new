@@ -35,8 +35,8 @@ const Weekly = ({
   return (
     <>
       <GeneralStatusBarColor
-        barStyle={"dark-content"}
-        backgroundColor={colors.blueTheme}
+        barStyle={"light-content"}
+        backgroundColor={colors.darkBlue}
       />
       <Header
         title={"7 Days"}
@@ -46,7 +46,7 @@ const Weekly = ({
       <ScrollView
         bounces={false}
         showsVerticalScrollIndicator={false}
-        style={{ backgroundColor: "#E8E8E8" }}
+        style={{ backgroundColor: colors.appBackground }}
       >
         <DaysForecast
           weatherDegree={weatherDegree}

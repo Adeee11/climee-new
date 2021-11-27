@@ -9,7 +9,7 @@ const Shadow = StyleSheet.create({
     },
     shadowOpacity: 0.22,
     shadowRadius: 1,
-    elevation: 1,
+    elevation: 5,
   },
 });
 

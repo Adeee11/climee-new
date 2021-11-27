@@ -58,7 +58,12 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     paddingVertical: 8,
   },
-  iconStyle: { height: 24, width: 24, marginHorizontal: 4 },
+  iconStyle: {
+    height: 24,
+    width: 24,
+    marginHorizontal: 4,
+    tintColor: colors.darkBlue,
+  },
   actionsheetTextStyle: {
     fontSize: 16,
     fontFamily: fontFamily.regular,
@@ -69,6 +74,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-start",
     paddingHorizontal: Spacing.PADDING_10,
-  }
+  },
 });
 export default styles;

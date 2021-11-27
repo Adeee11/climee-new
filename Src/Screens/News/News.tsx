@@ -34,9 +34,9 @@ const News = ({ navigation, route }: any) => {
 
   return (
     <>
-      <GeneralStatusBarColor
-        barStyle={"dark-content"}
-        backgroundColor={colors.blueTheme}
+     <GeneralStatusBarColor
+        barStyle={"light-content"}
+        backgroundColor={colors.darkBlue}
       />
       <Header title={"News"} onPress={() => navigation.goBack()} />
       <SafeAreaView style={styles.mainWrapper}>

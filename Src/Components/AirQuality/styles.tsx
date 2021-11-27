@@ -3,6 +3,7 @@ import colors from "../../globalStyles/colors";
 import fontFamily from "../../globalStyles/fontFamily";
 import Spacing from "../../globalStyles/Spacing";
 import typography from "../../globalStyles/typography";
+import Shadow from "../Shadow/Shadow";
 
 const styles= StyleSheet.create({
 heading:{
@@ -19,7 +20,8 @@ AirPollutionView:{
     // padding:Spacing.PADDING_16,
     backgroundColor:colors.white,
     // margin:Spacing.MARGIN_10,
-    borderRadius:Spacing.RADIUS_20
+    borderRadius:Spacing.RADIUS_20,
+    ...Shadow.shadowStyle
 },
 pollutionHeading:{
     fontSize:typography.FONT_SIZE_16,
@@ -36,7 +38,7 @@ buttonText: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    backgroundColor: "#3C6FD1",
+    backgroundColor: colors.darkBlue,
     padding: Spacing.PADDING_15,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,

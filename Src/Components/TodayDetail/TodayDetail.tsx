@@ -100,98 +100,12 @@ const TodayDetail = ({ weatherDetails, navigation, windDegree }: any) => {
         <Text style={styles.cardTitle}>Today&apos;s Detail</Text>
         <Right />
       </TouchableOpacity>
-      {/* <Text style={styles.headingText}>Today&apos;s Detail</Text> */}
-      {/* </View> */}
       <View>
         <FlatList
           data={details}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => renderItem(item)}
         />
-        {/* <TouchableOpacity
-          onPress={() =>
-            navigation.navigate(navigationStrings.TODAYSDETAILS)
-          }
-          style={{
-            marginVertical: 20,
-            alignSelf: "center",
-            padding: 10,
-            backgroundColor: "#3C6FD1",
-            width: "30%",
-            borderRadius: 10,
-          }}
-        >
-          <Text style={styles.buttonText}>See More</Text>
-        </TouchableOpacity> */}
-        {/* <View style={styles.detailContainer}>
-            <View style={styles.detailLeftWrapper}>
-              <Wind height={15} width={15}/>
-            <Text style={styles.detailText}>Wind</Text>
-            </View>
-            <View>
-                <Text style={styles.detailText}>3 MPH</Text>
-            </View>
-          </View>
-
-          <View style={styles.detailContainer}>
-            <View style={styles.detailLeftWrapper}>
-              <Humidity height={15} width={15}/>
-            <Text style={styles.detailText}>Humidity</Text>
-            </View>
-            <View>
-                <Text style={styles.detailText}>54 %</Text>
-            </View>
-          </View>
-
-          <View style={styles.detailContainer}>
-            <View style={styles.detailLeftWrapper}>
-              <Dew height={15} width={15}/>
-            <Text style={styles.detailText}>Dew Point</Text>
-            </View>
-            <View>
-                <Text style={styles.detailText}>12 &deg;</Text>
-            </View>
-          </View>
-
-          <View style={styles.detailContainer}>
-            <View style={styles.detailLeftWrapper}>
-              <Pressure height={15} width={15}/>
-            <Text style={styles.detailText}>Pressure</Text>
-            </View>
-            <View>
-                <Text style={styles.detailText}>1014 MB</Text>
-            </View>
-          </View>
-
-          <View style={styles.detailContainer}>
-            <View style={styles.detailLeftWrapper}>
-              <UV height={15} width={15}/>
-            <Text style={styles.detailText}>UV Index</Text>
-            </View>
-            <View>
-                <Text style={styles.detailText}>3.86</Text>
-            </View>
-          </View>
-
-          <View style={styles.detailContainer}>
-            <View style={styles.detailLeftWrapper}>
-              <Sunrise height={15} width={15}/>
-            <Text style={styles.detailText}>Sunrise</Text>
-            </View>
-            <View>
-                <Text style={styles.detailText}>6:00 AM</Text>
-            </View>
-          </View>
-
-          <View style={styles.detailContainer}>
-            <View style={styles.detailLeftWrapper}>
-              <Sunset />
-            <Text style={styles.detailText}>Sunset</Text>
-            </View>
-            <View>
-                <Text style={styles.detailText}>7:00 PM</Text>
-            </View>
-          </View> */}
       </View>
     </View>
   );

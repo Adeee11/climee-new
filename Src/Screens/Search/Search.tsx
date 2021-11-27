@@ -14,6 +14,7 @@ import LocationCard from "../../Components/LocationCard/LocationCard";
 import Spacing from "../../globalStyles/Spacing";
 import { AntDesign, Feather } from "@expo/vector-icons";
 import assets from "../../../assets";
+import colors from "../../globalStyles/colors";
 
 const Search = ({ navigation }: any) => {
   const details = [
@@ -67,8 +68,8 @@ const Search = ({ navigation }: any) => {
   return (
     <>
       <GeneralStatusBarColor
-        barStyle={"dark-content"}
-        backgroundColor={"#7CA9FF"}
+        barStyle={"light-content"}
+        backgroundColor={colors.darkBlue}
       />
       <SafeAreaView>
         {/* Search Bar */}

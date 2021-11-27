@@ -70,7 +70,7 @@ const DaysForecast = ({
             <View
               style={{
                 borderBottomWidth: 3,
-                borderColor: "#3C6FD1",
+                borderColor: colors.darkBlue,
                 width: "100%",
               }}
             />

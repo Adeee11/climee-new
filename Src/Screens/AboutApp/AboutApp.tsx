@@ -19,8 +19,8 @@ const AboutApp = (props: any) => {
   return (
     <>
       <GeneralStatusBarColor
-        barStyle={"dark-content"}
-        backgroundColor={colors.blueTheme}
+        barStyle={"light-content"}
+        backgroundColor={colors.darkBlue}
       />
       <SafeAreaView style={styles.mainWrapper}>
         <Header title={"About Us"} onPress={() => props.navigation.goBack()} />

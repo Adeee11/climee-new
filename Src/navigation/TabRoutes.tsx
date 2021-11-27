@@ -41,7 +41,7 @@ const TabRoutes = () => {
           ),
 
           tabBarStyle: {
-            backgroundColor: colors.blueTheme,
+            backgroundColor: colors.darkBlue,
             height: Spacing.HEIGHT_80,
           },
           tabBarLabelStyle: {
@@ -49,7 +49,7 @@ const TabRoutes = () => {
             fontSize: typography.FONT_SIZE_10,
             marginTop:
               Platform.OS == "ios" ? Spacing.MARGIN_5 : Spacing.MARGIN_5,
-            marginBottom: Platform.OS == "android" ? Spacing.MARGIN_10: 0,
+            marginBottom: Platform.OS == "android" ? Spacing.MARGIN_10 : 0,
           },
           tabBarActiveTintColor: colors.textColor,
           tabBarInactiveTintColor: colors.white,
@@ -76,7 +76,7 @@ const TabRoutes = () => {
           ),
 
           tabBarStyle: {
-            backgroundColor: colors.blueTheme,
+            backgroundColor: colors.darkBlue,
             height: Spacing.HEIGHT_80,
           },
           tabBarLabelStyle: {
@@ -110,7 +110,7 @@ const TabRoutes = () => {
           ),
           tabBarLabel: "",
           tabBarStyle: {
-            backgroundColor: colors.blueTheme,
+            backgroundColor: colors.darkBlue,
             height: Spacing.HEIGHT_80,
           },
           tabBarActiveTintColor: colors.blueTheme,
@@ -138,7 +138,7 @@ const TabRoutes = () => {
           ),
 
           tabBarStyle: {
-            backgroundColor: colors.blueTheme,
+            backgroundColor: colors.darkBlue,
             height: Spacing.HEIGHT_80,
           },
           tabBarLabelStyle: {
@@ -172,7 +172,7 @@ const TabRoutes = () => {
           ),
 
           tabBarStyle: {
-            backgroundColor: colors.blueTheme,
+            backgroundColor: colors.darkBlue,
             height: Spacing.HEIGHT_80,
           },
           tabBarLabelStyle: {

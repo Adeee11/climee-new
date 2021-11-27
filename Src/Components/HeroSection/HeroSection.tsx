@@ -5,6 +5,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import moment from "moment";
 import styles from "./styles";
 import WeatherImage from "../WeatherImage/WeatherImage";
+import Forecast from "../Forecast/Forecast";
 
 const HeroSection = ({
   weatherData,
@@ -27,7 +28,7 @@ const HeroSection = ({
           flex: 0,
           borderRadius: 20,
         }}
-        end={{ x: 0.2, y: 3 }}
+        end={{ x: 0.2, y: 2.5 }}
       />
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <View style={styles.upperView}>
@@ -78,6 +79,16 @@ const HeroSection = ({
             width={100}
           />
         </View>
+      </View>
+      <View style={styles.lowerView}>
+                 <Forecast
+                  data={weatherData[0]?.weatherDetails?.hourly}
+                  title="Hourly Forecast"
+                  weatherDegree={weatherDegree}
+                  navigation={navigation}
+                  // backgroundColor={true}
+                  // hourly={true}
+                />
       </View>
     </View>
   );

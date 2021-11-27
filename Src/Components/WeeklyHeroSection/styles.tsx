@@ -3,12 +3,14 @@ import colors from "../../globalStyles/colors";
 import fontFamily from "../../globalStyles/fontFamily";
 import Spacing from "../../globalStyles/Spacing";
 import typography from "../../globalStyles/typography";
+import Shadow from "../Shadow/Shadow";
 
 const styles = StyleSheet.create({
   container: {
     borderRadius: 20,
     padding: 15,
     margin: Spacing.MARGIN_16,
+    ...Shadow.shadowStyle
   },
   upperView: {
     flex: 0.6,

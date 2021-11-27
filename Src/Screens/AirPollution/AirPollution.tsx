@@ -16,8 +16,8 @@ const AirPollution = (props: any) => {
   return (
     <>
       <GeneralStatusBarColor
-        barStyle={"dark-content"}
-        backgroundColor={colors.blueTheme}
+        barStyle={"light-content"}
+        backgroundColor={colors.darkBlue}
       />
       <Header
         title={"Air Pollution"}
@@ -34,7 +34,7 @@ const AirPollution = (props: any) => {
             <PollutionBars
               name1={"Fine Particles/PM2.5"}
               value={pollutionDetails[0].pollutionDetails.components.pm2_5}
-              highest={250}
+              highest={500}
             />
             <PollutionBars
               name1={"Inhalable particles/PM10"}

@@ -27,6 +27,6 @@ export default {
   partialCloudySecondColor: "rgba(148, 232, 255, 1)",
   sunnyFirstColor: "rgba(249, 217, 118, 1)",
   sunnySecondColor: "rgba(243, 159, 134, 1)",
-  cloudyFirstColor:"rgba(156, 156, 156, 1)",
-  cloudySecondColor:"rgba(225, 217, 201, 1)"
+  cloudyFirstColor: "rgba(156, 156, 156, 1)",
+  cloudySecondColor: "rgba(225, 217, 201, 1)",
 };
