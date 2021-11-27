@@ -12,50 +12,57 @@ import {
   weatherDetailsLoading,
 } from "../../redux/actions/weatherActions";
 import api from "../../globalStyles/api";
+import { Video } from 'expo-av';
+
 const SplashScreen = () => {
   const [fadeAnim] = useState(new Animated.Value(0));
   const height = new Animated.Value(300);
   const width = new Animated.Value(350);
+
   useEffect(() => {
-    Animated.timing(fadeAnim, {
-      toValue: 1,
-      duration: 500,
-      useNativeDriver: true,
-    }).start();
-    Animated.sequence([
-      Animated.parallel([
-        Animated.timing(width, {
-          toValue: 180,
-          delay: 1000,
-          duration: 500,
-          useNativeDriver: false,
-        }),
-        Animated.timing(height, {
-          toValue: 80,
-          delay: 1000,
-          duration: 500,
-          useNativeDriver: false,
-        }),
-      ]),
-      Animated.parallel([
-        Animated.timing(width, {
-          toValue: heightLessNum ? 1800 : 2500,
-          duration: 500,
-          useNativeDriver: false,
-        }),
-        Animated.timing(height, {
-          toValue: heightLessNum ? 1300 : 5000,
-          duration: 500,
-          useNativeDriver: false,
-        }), // Starts the animation
-        Animated.timing(fadeAnim, {
-          toValue: 0,
-          duration: 500,
-          useNativeDriver: true,
-        }),
-      ]),
-    ]).start();
+    // Animated.timing()
+    // Animated.timing(fadeAnim, {
+    //   toValue: 1,
+    //   duration: 500,
+    //   useNativeDriver: true,
+    // }).start();
+    // Animated.sequence([
+    //   Animated.parallel([
+    //     Animated.timing(width, {
+    //       toValue: 180,
+    //       delay: 1000,
+    //       duration: 500,
+    //       useNativeDriver: false,
+    //     }),
+    //     Animated.timing(height, {
+    //       toValue: 80,
+    //       delay: 1000,
+    //       duration: 500,
+    //       useNativeDriver: false,
+    //     }),
+    //   ]),
+    //   Animated.parallel([
+    //     Animated.timing(width, {
+    //       toValue: heightLessNum ? 1800 : 2500,
+    //       duration: 500,
+    //       useNativeDriver: false,
+    //     }),
+    //     Animated.timing(height, {
+    //       toValue: heightLessNum ? 1300 : 5000,
+    //       duration: 500,
+    //       useNativeDriver: false,
+    //     }), // Starts the animation
+    //     Animated.timing(fadeAnim, {
+    //       toValue: 0,
+    //       duration: 500,
+    //       useNativeDriver: true,
+    //     }),
+    //   ]),
+    // ]).start();
+
+    
   }, []);
+
   useEffect(() => {
     (async () => {
       try {
@@ -88,27 +95,14 @@ const SplashScreen = () => {
           pollutionDetails: resp?.data?.list[0],
         });
         weatherDetails(details);
-        weatherDetailsLoading(false);
         pollutionDetails(pollution);
+        weatherDetailsLoading(false);
       } catch (err) {
         console.log(err, "error");
       }
     })();
   }, []);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     try {
-  //       const response: any = await axios.get(
-  //         `/air_pollution?lat=${state?.latitude}&lon=${state?.longitude}&appid=${api}`
-  //       );
-  //       // setairQuality(response?.data?.list[0]?.components?.pm2_5);
-  //       // setCondition(response?.data?.list[0]?.main?.aqi);
-  //     } catch (Err) {
-  //       console.log(Err, "error");
-  //     }
-  //   })();
-  // }, []);
   return (
     <>
       {Platform.OS === "ios" ? (
@@ -120,7 +114,7 @@ const SplashScreen = () => {
       ) : (
         <StatusBar backgroundColor={colors.blueTheme} hidden={false} />
       )}
-      <Animated.View style={[styles.imageWrapper, { opacity: fadeAnim }]}>
+      {/* <Animated.View style={[styles.imageWrapper, { opacity: fadeAnim }]}>
         <LinearGradient
           // Background Linear Gradient
           colors={[colors.blueTheme, colors.white]}
@@ -141,11 +135,22 @@ const SplashScreen = () => {
             height: height,
             resizeMode: "contain",
           }}
-        />
-        <Text style={styles.text1}>Climee</Text>
+        /> */}
+        {/* <Text style={styles.text1}>Climee</Text>
         <Text style={styles.text2}>Dont worry about</Text>
         <Text style={styles.text2}>the weather we all here</Text>
-      </Animated.View>
+      </Animated.View> */}
+       <Video
+        // ref={video}
+        style={{flex: 1}}
+        source={require("../../../assets/video3.mov")}
+        // useNativeControls
+        resizeMode="cover"
+        shouldPlay
+        
+        isLooping={false}
+        // onPlaybackStatusUpdate={status => setStatus(() => status)}
+      />
     </>
   );
 };

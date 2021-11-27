@@ -18,51 +18,57 @@ const styles = StyleSheet.create({
     padding: Spacing.PADDING_15,
   },
   streetText: {
-      color: '#363B64',
-      fontFamily: fontFamily.semiBold,
-      fontSize: typography.FONT_SIZE_14
+    color: "#363B64",
+    fontFamily: fontFamily.semiBold,
+    fontSize: typography.FONT_SIZE_14,
   },
   locationText: {
-    color: '#363B64',
+    color: "#363B64",
     fontFamily: fontFamily.regular,
-    fontSize: typography.FONT_SIZE_14
+    fontSize: typography.FONT_SIZE_14,
   },
   tempContainer: {
     position: "absolute",
     top: 125,
-    right: 100,
-    left: 100,
+    right: 90,
+    left: 90,
     borderRadius: 20,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     backgroundColor: "blue",
-    paddingVertical: Spacing.PADDING_15,
-    paddingHorizontal: Spacing.PADDING_32
+    paddingVertical: Spacing.PADDING_20,
+    paddingHorizontal: Spacing.PADDING_10
   },
   tempText: {
-      color: colors.white,
-      fontFamily: fontFamily.semiBold,
-      fontSize: typography.FONT_SIZE_22
+    color: colors.white,
+    fontFamily: fontFamily.semiBold,
+    fontSize: typography.FONT_SIZE_24,
+    alignSelf: 'center'
   },
   weatherText: {
     color: colors.white,
-    fontFamily: fontFamily.regular,
-    fontSize: typography.FONT_SIZE_16
+    fontFamily: fontFamily.semiBold,
+    fontSize: typography.FONT_SIZE_16,
+    textTransform: 'capitalize'
   },
   bottomContainer: {
-    backgroundColor: "#f5f5f5",
     position: "absolute",
-    bottom: 0,
-    right: 0,
-    left: 0,
-    borderTopRightRadius: 20,
-    borderTopLeftRadius: 20,
-},
+    bottom: 25,
+    right: 30,
+    left: 30,
+    padding: Spacing.PADDING_10,
+    borderRadius: 20,
+  },
   additionalDetailsContainer: {
-      backgroundColor: "#fff",
-
-  }
+    backgroundColor: "#fff",
+  },
+  seemoreText: {
+    color: "white",
+    fontFamily: fontFamily.regular,
+    fontSize: typography.FONT_SIZE_13,
+    marginRight: Spacing.MARGIN_10,
+  },
 });
 
 export default styles;

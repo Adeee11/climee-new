@@ -163,8 +163,8 @@ const Home = ({
               <AirQuality
                 navigation={navigation}
                 background={true}
-                val={pollutionDetails[0].pollutionDetails.components.pm2_5.toFixed(
-                  0
+                val={pollutionDetails[0]?.pollutionDetails?.components.pm2_5?.toFixed(
+                  2
                 )}
               />
             </View>

@@ -16,7 +16,7 @@ import InternetError from "./Src/Components/InternetError";
 const AppWrapper = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [intConnection, setIntConnection] = useState<any>("");
-  const [locations, setLocations] = useState<any>(null);
+
   useEffect(() => {
     strapi
       .post("/auth/local", {
@@ -30,11 +30,13 @@ const AppWrapper = () => {
     unsubscribe();
     setTimeout(() => {
       setLoading(false);
-    }, 3000);
+    }, 1500);
   }, []);
+
   NetInfo.fetch().then((state) => {
     setIntConnection(state?.isConnected);
   });
+
   const [fontLoading] = useFonts({
     PoppinsRegular: require("./assets/fonts/Poppins-Regular.ttf"),
     PoppinsSemiBold: require("./assets/fonts/Poppins-SemiBold.ttf"),
@@ -43,6 +45,7 @@ const AppWrapper = () => {
     PoppinsLight: require("./assets/fonts/Poppins-Light.ttf"),
     PoppinsExtraLight: require("./assets/fonts/Poppins-ExtraLight.ttf"),
   });
+  
   if (!fontLoading) {
     return <AppLoading />;
   } else {
@@ -65,4 +68,5 @@ const AppWrapper = () => {
     );
   }
 };
+
 export default registerRootComponent(AppWrapper);

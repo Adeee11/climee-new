@@ -23,9 +23,11 @@ const App = ({ notify, alert }: any) => {
   const notificationListener = useRef<any>();
   const { getLocation }: any = useContext(LocationContext);
   const responseListener = useRef<any>();
+  
   useEffect(() => {
     schedulePushNotification(alert);
   }, [alert]);
+
   async function schedulePushNotification(alert: any) {
     await Notifications.scheduleNotificationAsync({
       content: {
@@ -59,6 +61,7 @@ const App = ({ notify, alert }: any) => {
     getLocationPermission();
     Notifications.registerTaskAsync(BACKGROUND_NOTIFICATION_TASK);
   }, [expoPushToken]);
+
   const getLocationPermission = async () => {
     try {
       const Token = await AsyncStorage.getItem("cmsAuthToken");
@@ -79,6 +82,7 @@ const App = ({ notify, alert }: any) => {
       console.log(err.message);
     }
   };
+
   useEffect(() => {
     getLocation();
     registerForPushNotificationsAsync().then((token) => {
