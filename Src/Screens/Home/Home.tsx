@@ -5,6 +5,10 @@ import {
   SafeAreaView,
   Image,
   TouchableOpacity,
+  StatusBar,
+  Modal,
+  TouchableWithoutFeedback,
+  Platform,
 } from "react-native";
 import Swiper from "react-native-swiper";
 import { ScrollView } from "react-native-gesture-handler";
@@ -13,7 +17,7 @@ import GeneralStatusBarColor from "../../Components/generateStatusBarColor/Gener
 import HeroSection from "../../Components/HeroSection/HeroSection";
 import TodayDetail from "../../Components/TodayDetail/TodayDetail";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Right } from "../../../assets/svg";
+import { Back, Right } from "../../../assets/svg";
 import Forecast from "../../Components/Forecast/Forecast";
 import { connect } from "react-redux";
 import strapi from "../../api/strapi";
@@ -23,6 +27,7 @@ import { deviceHeight } from "../../constants/dimensions";
 import Header from "../../Components/Header/Header";
 import AirQuality from "../../Components/AirQuality/AirQuality";
 import colors from "../../globalStyles/colors";
+import Search from "../../Components/Search/Search";
 
 const Home = ({
   weatherDetails,
@@ -31,15 +36,12 @@ const Home = ({
   weatherDegree,
   windDegree,
   pollutionDetails,
-  firstColor,
-  secondColor,
 }: any) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [news, setNews] = useState<Array<any>>([]);
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
 
   useEffect(() => {
-    console.log(weatherDetails[0].weatherDetails.hourly);
-
     (async () => {
       try {
         setLoading(true);
@@ -105,6 +107,10 @@ const Home = ({
     });
   };
 
+  const handleModalVisible = (val: boolean) => {
+    setModalVisible(val);
+  };
+
   return (
     <>
       <GeneralStatusBarColor
@@ -116,7 +122,7 @@ const Home = ({
         <Header
           title={weatherDetails[0]?.locationDetails?.city}
           backButton={false}
-          onPress={() => navigation.navigate(navigationStrings.SEARCH)}
+          onPress={() => setModalVisible(true)}
         />
 
         {weatherLoading || loading ? (
@@ -193,6 +199,42 @@ const Home = ({
           </ScrollView>
         )}
       </SafeAreaView>
+
+      <Modal
+        statusBarTranslucent={Platform.OS === "ios" ? true : false}
+        animationType="fade"
+        transparent={true}
+        visible={modalVisible}
+      >
+        {/* <SafeAreaView style={{ flex: 1 }}> */}
+        <StatusBar
+          translucent={false}
+          barStyle={"light-content"}
+          backgroundColor="rgba(0,0,0,0.6)"
+        />
+        <View
+          style={{
+            backgroundColor: "rgba(0,0,0,0.6)",
+          }}
+        >
+          <Search ModalVisible={handleModalVisible} />
+        </View>
+        <TouchableWithoutFeedback
+          onPressOut={() => {
+            setModalVisible(false);
+          }}
+        >
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "rgba(0,0,0,0.6)",
+            }}
+          ></View>
+        </TouchableWithoutFeedback>
+        {/* </SafeAreaView> */}
+      </Modal>
     </>
   );
 };

@@ -36,7 +36,7 @@ const Weekly = ({
     <>
       <GeneralStatusBarColor
         barStyle={"dark-content"}
-        backgroundColor={colors.blueTheme}
+        backgroundColor={colors.darkBlue}
       />
       <Header
         title={"7 Days"}

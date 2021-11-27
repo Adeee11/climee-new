@@ -81,19 +81,18 @@ const Setting = (props: any) => {
 
   return (
     <>
-      <GeneralStatusBarColor
-        barStyle={"dark-content"}
-        backgroundColor={colors.blueTheme}
-      />
-      <Header
-        title={"Settings"}
-        onPress={() => props.navigation.navigate(navigationStrings.HOME)}
-      />
+          <GeneralStatusBarColor
+           barStyle={"dark-content"}
+           backgroundColor={"#3C6FD1"}
+         />
       <SafeAreaView
         style={{
-          flex: 1,
-        }}
-      >
+          flex: 1
+        }}>
+        <Header
+          title={"Settings"}
+          onPress={() => props.navigation.navigate(navigationStrings.HOME)}
+        />
         <View>
           <ScrollView showsVerticalScrollIndicator={false} bounces={false}>
             <View

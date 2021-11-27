@@ -6,8 +6,8 @@ import styles from './style';
 const Loader = () => {
   return (
     <SafeAreaView style={[styles.container, styles.horizontal]}>
-      <StatusBar backgroundColor={colors.themeColor} hidden={false} barStyle="light-content" />
-      <ActivityIndicator size={50} color={colors.themeColor} />
+      <StatusBar backgroundColor={colors.darkBlue} hidden={false} barStyle="light-content" />
+      <ActivityIndicator size={100} color={colors.darkBlue} />
     </SafeAreaView>
   );
 };

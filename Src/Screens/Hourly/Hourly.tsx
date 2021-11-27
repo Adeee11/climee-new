@@ -42,7 +42,7 @@ const Hourly = ({
     <>
       <GeneralStatusBarColor
         barStyle={"dark-content"}
-        backgroundColor={colors.blueTheme}
+        backgroundColor={colors.darkBlue}
       />
       <Header
         title={"Hourly"}

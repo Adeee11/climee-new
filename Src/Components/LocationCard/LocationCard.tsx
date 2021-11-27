@@ -1,11 +1,26 @@
 import React from "react";
-import { View, Image, Text } from "react-native";
+import { View, Image, Text, TouchableOpacity } from "react-native";
 import assets from "../../../assets";
 import { Location } from "../../../assets/svg";
 import { AntDesign } from "@expo/vector-icons";
 import styles from "./styles";
 
-const LocationCard = ({ current, city, state, country }: any) => {
+const LocationCard = ({
+  current,
+  city,
+  street,
+  country,
+  removeLocation,
+}: any) => {
+  const handleRemoveLocation = () => {
+    const locationObject = {
+      city: city,
+      street: street,
+      country: country,
+    };
+    removeLocation(locationObject);
+  };
+
   return (
     <>
       <View style={styles.currentLocationContainer}>
@@ -24,21 +39,33 @@ const LocationCard = ({ current, city, state, country }: any) => {
           24&deg;
         </Text>
         <View
-          style={{ alignItems: "flex-start", width: current ? "100%" : "57%" }}
+          style={{ alignItems: "flex-start", width: current ? "100%" : "61%" }}
         >
           {current ? (
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Location height={18} width={18} />
-              <Text style={styles.currentLocationText}>Current Location</Text>
-            </View>
+            <>
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <Location height={18} width={18} />
+                <Text style={styles.currentLocationText}>Current Location</Text>
+              </View>
+              <Text style={styles.locationText}>
+                {city}, {country}
+              </Text>
+            </>
           ) : (
-            <Text style={styles.currentLocationText}>{city}</Text>
+            <>
+              <Text style={styles.currentLocationText}>{street}</Text>
+              <Text style={styles.locationText}>
+                {city}, {country}
+              </Text>
+            </>
           )}
-          <Text style={styles.locationText}>
-            {state}, {country}
-          </Text>
+          {/* <Text style={styles.currentLocationText}>{street}</Text> */}
         </View>
-        {current ? null : <AntDesign name="star" size={24} color="#F5CA04" />}
+        {current ? null : (
+          <TouchableOpacity onPress={handleRemoveLocation}>
+            <AntDesign name="star" size={24} color="#F5CA04" />
+          </TouchableOpacity>
+        )}
       </View>
     </>
   );
