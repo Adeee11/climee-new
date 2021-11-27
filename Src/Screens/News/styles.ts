@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     backgroundColor: colors.white,
   },
-  imageWrapper: { flex: 0.45, alignItems: "center", justifyContent: "center" },
+  imageWrapper: { flex: 0.55, alignItems: "center", justifyContent: "center" },
   headingStyle: {
     fontFamily: fontFamily.semiBold,
     fontSize: 12,

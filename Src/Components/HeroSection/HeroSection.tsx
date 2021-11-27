@@ -1,20 +1,23 @@
 import React from "react";
 import { View, Text, Image } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import assets from "../../../assets";
-import Forecast from "../Forecast/Forecast";
 import { LinearGradient } from "expo-linear-gradient";
 import moment from "moment";
 import styles from "./styles";
 import WeatherImage from "../WeatherImage/WeatherImage";
 
-const HeroSection = ({ weatherData, weatherDegree ,navigation}: any) => {
-
+const HeroSection = ({
+  weatherData,
+  weatherDegree,
+  navigation,
+  firstColor,
+  secondColor,
+}: any) => {
   return (
     <View style={styles.container}>
       <LinearGradient
         // Background Linear Gradient
-        colors={["#3C6FD1", "#7CA9FF"]}
+        colors={[firstColor, secondColor]}
         style={{
           position: "absolute",
           left: 0,
@@ -24,7 +27,7 @@ const HeroSection = ({ weatherData, weatherDegree ,navigation}: any) => {
           flex: 0,
           borderRadius: 20,
         }}
-        end={{ x: 0.2, y: 1.1 }}
+        end={{ x: 0.2, y: 3 }}
       />
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <View style={styles.upperView}>
@@ -75,15 +78,6 @@ const HeroSection = ({ weatherData, weatherDegree ,navigation}: any) => {
             width={100}
           />
         </View>
-      </View>
-      {/* Flatlist section */}
-      <View style={styles.lowerView}>
-        <Forecast
-          data={weatherData[0]?.weatherDetails?.hourly}
-          title="Hourly Forecast"
-          weatherDegree={weatherDegree}
-          navigation={navigation}
-        />
       </View>
     </View>
   );

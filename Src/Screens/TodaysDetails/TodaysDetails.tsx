@@ -61,7 +61,7 @@ const TodaysDetails = ({
     {
       data: [
         24, 25, 23, 24, 25, 26, 24, 26, 27, 28, 29, 28, 27, 26, 25, 24, 23, 22,
-        21, 22, 23, 23, 23, 24
+        21, 22, 23, 23, 23, 24,
       ],
     },
   ];
@@ -144,32 +144,9 @@ const TodaysDetails = ({
           />
         </View>
 
-        <AdditionalDetails 
-          wind={
-            windDegree == "mph"
-              ? (
-                  weatherDetails[0]?.weatherDetails?.current?.wind_speed * 2.237
-                )?.toFixed(2)
-              : weatherDetails[0]?.weatherDetails?.current?.wind_speed?.toFixed(
-                  2
-                )
-          }
-          humidity={weatherDetails[0]?.weatherDetails?.current?.humidity}
-          DewPoint={weatherDetails[0]?.weatherDetails?.current?.dew_point}
-          Pressure={weatherDetails[0]?.weatherDetails?.current?.pressure}
-          UvIndex={weatherDetails[0]?.weatherDetails?.current?.uvi}
-          SunRise={
-            time(weatherDetails[0]?.weatherDetails?.current?.sunrise)?.strTime
-          }
-          SunSet={
-            time(weatherDetails[0]?.weatherDetails?.current?.sunset)?.strTime
-          }
-          MoonRise={
-            time(weatherDetails[0]?.weatherDetails.daily[0].moonrise)?.strTime
-          }
-          MoonSet={
-            time(weatherDetails[0]?.weatherDetails.daily[0].moonset)?.strTime
-          }
+        <AdditionalDetails
+          details={weatherDetails[0]?.weatherDetails?.daily[0]}
+          windDegree={windDegree}
         />
       </ScrollView>
     </>

@@ -11,7 +11,7 @@ import styles from "./styles";
 const AirPollution = (props: any) => {
   const { pollutionDetails } = props;
   useEffect(() => {
-    console.log(pollutionDetails[0].pollutionDetails.components);
+    // console.log(pollutionDetails[0].pollutionDetails.components);
   }, []);
   return (
     <>

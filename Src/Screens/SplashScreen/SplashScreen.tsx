@@ -14,6 +14,10 @@ import {
 import api from "../../globalStyles/api";
 import { Video } from 'expo-av';
 
+import {
+  themeColorOne,
+  themeColorTwo,
+} from "../../redux/actions/colorThemeAction";
 const SplashScreen = () => {
   const [fadeAnim] = useState(new Animated.Value(0));
   const height = new Animated.Value(300);
@@ -85,6 +89,7 @@ const SplashScreen = () => {
         const resp: any = await axios.get(
           `/air_pollution?lat=${location?.coords?.latitude}&lon=${location?.coords?.longitude}&appid=${api}`
         );
+        changeAppTheme(response.data.current.weather[0].main);
         const details = [];
         const pollution = [];
         details.push({
@@ -103,6 +108,28 @@ const SplashScreen = () => {
     })();
   }, []);
 
+  const changeAppTheme = (weather: string) => {
+    return weather === "Thunderstorm"
+      ? (themeColorOne(colors.thunderStormFirstColor),
+        themeColorTwo(colors.thunderStormSecondColor))
+      : weather === "Drizzle"
+      ? (themeColorOne(colors.rainyFirstColor),
+        themeColorTwo(colors.rainySecondColor))
+      : weather === "Rain"
+      ? (themeColorOne(colors.rainyFirstColor),
+        themeColorTwo(colors.rainySecondColor))
+      : weather === "Snow"
+      ? (themeColorOne(colors.snowFirstColor),
+        themeColorTwo(colors.snowSecondColor))
+      : weather === "Clear"
+      ? (themeColorOne(colors.sunnyFirstColor),
+        themeColorTwo(colors.sunnySecondColor))
+      : weather === "Clouds"
+      ? (themeColorOne(colors.cloudyFirstColor),
+        themeColorTwo(colors.cloudySecondColor))
+      : (themeColorOne(colors.hazeFirstColor),
+        themeColorTwo(colors.hazeSecondColor));
+  };
   return (
     <>
       {Platform.OS === "ios" ? (

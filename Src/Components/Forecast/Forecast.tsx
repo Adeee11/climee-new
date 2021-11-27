@@ -16,7 +16,6 @@ const Forecast = ({
   weatherDegree,
   navigation,
 }: any) => {
-
   interface data {
     id: string;
     temp: string;
@@ -25,7 +24,7 @@ const Forecast = ({
     min?: number;
     max: number;
   }
-  
+
   const time = (time: number) => {
     const date = new Date(time * 1000);
     let hours = date.getHours();
@@ -43,7 +42,7 @@ const Forecast = ({
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <View style={styles.dataContainer}>
           {backgroundColor ? (
-            <Text style={[styles.timeText, { color: "#C4C4C4" }]}>
+            <Text style={[styles.timeText]}>
               {moment(new Date(item?.dt * 1000)).format("ddd")}
             </Text>
           ) : (
@@ -51,12 +50,7 @@ const Forecast = ({
           )}
           {!backgroundColor ? (
             <Text
-              style={[
-                styles.tempText,
-                {
-                  paddingVertical: Spacing.PADDING_10,
-                },
-              ]}
+            style={[styles.tempText, { color: "#3C6FD1",paddingBottom:Spacing.PADDING_5 }]}
             >
               {weatherDegree == "F"
                 ? (parseInt(item?.temp) * 1.8 + 32)?.toFixed(0)
@@ -90,7 +84,7 @@ const Forecast = ({
           /> */}
           <WeatherImage img={item?.weather[0]?.main} width={40} height={40} />
         </View>
-        {backgroundColor ? <Line /> : <Line2 />}
+         <Line /> 
       </View>
     );
   };
@@ -98,28 +92,26 @@ const Forecast = ({
   return (
     <View
       style={{
-        backgroundColor: backgroundColor ? colors.white : "transparent",
+        backgroundColor: colors.white,
         borderRadius: 20,
       }}
     >
       <TouchableOpacity
-        onPress={() => navigation.navigate(navigationStrings.HOURLY)}
+        style={{
+          ...styles.cardContainer,
+          backgroundColor: "#3C6FD1" ,
+          paddingHorizontal:  Spacing.PADDING_15 ,
+        }}
+        onPress={() =>
+          navigation.navigate(
+            backgroundColor
+              ? navigationStrings.WEEKLY
+              : navigationStrings.HOURLY
+          )
+        }
       >
-        <View
-          style={[
-            styles.titleContainer,
-            {
-              backgroundColor: backgroundColor ? "#3C6FD1" : "transparent",
-              alignItems: backgroundColor ? "center" : "flex-end",
-              paddingHorizontal: backgroundColor ? Spacing.PADDING_15 : 0,
-            },
-          ]}
-        >
-          <Text style={styles.titleStyle}>{title}</Text>
-          <View style={{ marginBottom: 5 }}>
-            <Right />
-          </View>
-        </View>
+        <Text style={styles.cardTitle}>{title}</Text>
+        <Right />
       </TouchableOpacity>
       <View>
         <FlatList

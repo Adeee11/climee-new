@@ -51,7 +51,7 @@ const TabRoutes = () => {
               Platform.OS == "ios" ? Spacing.MARGIN_5 : Spacing.MARGIN_5,
             marginBottom: Platform.OS == "android" ? Spacing.MARGIN_10: 0,
           },
-          tabBarActiveTintColor: colors.darkBlue,
+          tabBarActiveTintColor: colors.textColor,
           tabBarInactiveTintColor: colors.white,
         }}
       />
@@ -86,7 +86,7 @@ const TabRoutes = () => {
               Platform.OS == "ios" ? Spacing.MARGIN_5 : Spacing.MARGIN_5,
             marginBottom: Platform.OS == "android" ? Spacing.MARGIN_10 : 0,
           },
-          tabBarActiveTintColor: colors.darkBlue,
+          tabBarActiveTintColor: colors.textColor,
           tabBarInactiveTintColor: colors.white,
         }}
       />
@@ -148,7 +148,7 @@ const TabRoutes = () => {
               Platform.OS == "ios" ? Spacing.MARGIN_5 : Spacing.MARGIN_5,
             marginBottom: Platform.OS == "android" ? Spacing.MARGIN_10 : 0,
           },
-          tabBarActiveTintColor: colors.darkBlue,
+          tabBarActiveTintColor: colors.textColor,
           tabBarInactiveTintColor: colors.white,
         }}
       />
@@ -182,7 +182,7 @@ const TabRoutes = () => {
               Platform.OS == "ios" ? Spacing.MARGIN_5 : Spacing.MARGIN_5,
             marginBottom: Platform.OS == "android" ? Spacing.MARGIN_10 : 0,
           },
-          tabBarActiveTintColor: colors.darkBlue,
+          tabBarActiveTintColor: colors.textColor,
           tabBarInactiveTintColor: colors.white,
         }}
       />

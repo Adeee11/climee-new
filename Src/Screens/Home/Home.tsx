@@ -6,8 +6,6 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
-import colors from "../../globalStyles/colors";
 import Swiper from "react-native-swiper";
 import { ScrollView } from "react-native-gesture-handler";
 import styles from "./styles";
@@ -19,14 +17,12 @@ import { Right } from "../../../assets/svg";
 import Forecast from "../../Components/Forecast/Forecast";
 import { connect } from "react-redux";
 import strapi from "../../api/strapi";
-import ShowMap from "../../Components/ShowMap/ShowMap";
 import Loader from "../../Components/Loader";
 import navigationStrings from "../../constants/navigationStrings";
-import Shadow from "../../Components/Shadow/Shadow";
-import moment from "moment";
 import { deviceHeight } from "../../constants/dimensions";
 import Header from "../../Components/Header/Header";
 import AirQuality from "../../Components/AirQuality/AirQuality";
+import colors from "../../globalStyles/colors";
 
 const Home = ({
   weatherDetails,
@@ -35,11 +31,14 @@ const Home = ({
   weatherDegree,
   windDegree,
   pollutionDetails,
+  firstColor,
+  secondColor,
 }: any) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [news, setNews] = useState<Array<any>>([]);
 
   useEffect(() => {
+    console.log(weatherDetails[0].weatherDetails.hourly);
 
     (async () => {
       try {
@@ -110,16 +109,16 @@ const Home = ({
     <>
       <GeneralStatusBarColor
         barStyle={"dark-content"}
-        backgroundColor={"#7CA9FF"}
+        backgroundColor={"#3C6FD1"}
       />
-      <SafeAreaView style={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: colors.appBackground }}>
         {/* Header Start */}
         <Header
           title={weatherDetails[0]?.locationDetails?.city}
           backButton={false}
           onPress={() => navigation.navigate(navigationStrings.SEARCH)}
         />
-        
+
         {weatherLoading || loading ? (
           <Loader />
         ) : (
@@ -134,6 +133,18 @@ const Home = ({
                 weatherData={weatherDetails}
                 weatherDegree={weatherDegree}
                 navigation={navigation}
+                firstColor={colors.blueTheme}
+                secondColor={colors.white}
+              />
+            </View>
+            <View style={{ marginBottom: 20 }}>
+              <Forecast
+                data={weatherDetails[0]?.weatherDetails?.hourly}
+                title="Hourly Forecast"
+                weatherDegree={weatherDegree}
+                navigation={navigation}
+                // backgroundColor={true}
+                // hourly={true}
               />
             </View>
             {/* Today's Details component  */}
@@ -168,15 +179,13 @@ const Home = ({
                 )}
               />
             </View>
-            <View
-              style={{
-              }}
-            >
+            {/* News Section */}
+            <View style={{}}>
               <Swiper
                 pagingEnabled={true}
                 loop={true}
                 key={news.length}
-                style={{ height: (deviceHeight * 38) / 100 }}
+                style={{ height: (deviceHeight * 50) / 100 }}
               >
                 {renderNews(news)}
               </Swiper>
@@ -196,6 +205,8 @@ const mapStateToProps = (state: any) => {
     weatherDetails: state?.WeatherDetailsReducer?.weatherDetails,
     weatherLoading: state?.WeatherDetailsReducer?.loading,
     pollutionDetails: state?.WeatherDetailsReducer?.pollutionDetails,
+    firstColor: state?.colorThemeReducer?.firstColor,
+    secondColor: state?.colorThemeReducer?.secondColor,
   };
 };
 

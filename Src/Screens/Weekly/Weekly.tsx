@@ -14,11 +14,7 @@ const Weekly = ({
   weatherDetails,
   navigation,
 }: any) => {
-const [selectedDay, setSelectedDay] = useState()
-
-  useEffect(() => {
-    // console.log(weatherDetails[0]?.weatherDetails?.daily);
-  }, []);
+  const [selectedDay, setSelectedDay] = useState();
 
   const time = (time: number) => {
     const date = new Date(time * 1000);
@@ -59,10 +55,21 @@ const [selectedDay, setSelectedDay] = useState()
           selectedDay={handleSelectedDay}
         />
         <WeeklyHeroSection
-          weatherDetails={selectedDay === undefined ? weatherDetails[0]?.weatherDetails?.daily[0] : selectedDay}
+          weatherDetails={
+            selectedDay === undefined
+              ? weatherDetails[0]?.weatherDetails?.daily[0]
+              : selectedDay
+          }
           weatherDegree={weatherDegree}
         />
-        <AdditionalDetails details={ selectedDay === undefined ? weatherDetails[0]?.weatherDetails?.daily[0] : selectedDay} />
+        <AdditionalDetails
+          details={
+            selectedDay === undefined
+              ? weatherDetails[0]?.weatherDetails?.daily[0]
+              : selectedDay
+          }
+          windDegree={windDegree}
+        />
       </ScrollView>
     </>
   );
