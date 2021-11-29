@@ -51,7 +51,7 @@ const Hourly = ({
       <ScrollView
         showsVerticalScrollIndicator={false}
         bounces={false}
-        style={{ backgroundColor: "#F5F5F5" }}
+        style={{ backgroundColor: colors.appBackground }}
       >
         <HourlyInformation
           data={todayHourly}

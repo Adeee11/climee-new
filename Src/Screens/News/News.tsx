@@ -38,7 +38,7 @@ const News = ({ navigation, route }: any) => {
         barStyle={"light-content"}
         backgroundColor={colors.darkBlue}
       />
-      <Header title={"News"} onPress={() => navigation.goBack()} />
+      <Header title={"News"} onPress={() => navigation.goBack()} tab={false}/>
       <SafeAreaView style={styles.mainWrapper}>
         <View style={styles.imageWrapper}>
           <Image

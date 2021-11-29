@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Dimensions,
   ScrollView,
@@ -28,44 +28,6 @@ const TodaysDetails = ({
   navigation,
   pollutionDetails,
 }: any) => {
-  useEffect(() => {
-    // console.log(weatherDetails[0]?.weatherDetails.daily[0].moonrise);
-  }, []);
-  const labels = [
-    "10PM",
-    "11PM",
-    "12Pm",
-    "1Am",
-    "2AM",
-    "3AM",
-    "4AM",
-    "5AM",
-    "6AM",
-    "7AM",
-    "8AM",
-    "9AM",
-    "10AM",
-    "11AM",
-    "12PM",
-    "1PM",
-    "2PM",
-    "3PM",
-    "4PM",
-    "5PM",
-    "6PM",
-    "7PM",
-    "8PM",
-    "9PM",
-  ];
-  const datasets = [
-    {
-      data: [
-        24, 25, 23, 24, 25, 26, 24, 26, 27, 28, 29, 28, 27, 26, 25, 24, 23, 22,
-        21, 22, 23, 23, 23, 24,
-      ],
-    },
-  ];
-
   const time = (time: number) => {
     const date = new Date(time * 1000);
     let hours = date.getHours();
@@ -74,16 +36,48 @@ const TodaysDetails = ({
     hours = hours % 12;
     hours = hours ? hours : 12; // the hour '0' should be '12'
     minutes = minutes < 10 ? "0" + minutes : minutes;
-    const strTime = hours + ":" + minutes + " " + ampm;
+    const strTime = hours + " " + ampm;
     return { strTime };
   };
+
+  // const [todayHourly, setTodayHourly] = useState<any>();
+  // useEffect(() => {
+  //   const today = new Date()?.toISOString()?.split("T")[0];
+  //   const tomorrow = new Date(new Date()?.getTime() + 24 * 60 * 60 * 1000)
+  //     ?.toISOString()
+  //     ?.split("T")[0];
+
+  //   const r = weatherDetails[0]?.weatherDetails?.hourly?.filter((e: any) => {
+  //     return new Date(e?.dt * 1000)?.toISOString()?.split("T")[0] == today;
+  //   });
+  //   setTodayHourly(r);
+
+  //   const filt = weatherDetails[0]?.weatherDetails?.hourly?.filter((e: any) => {
+  //     return new Date(e?.dt * 1000)?.toISOString()?.split("T")[0] == tomorrow;
+  //   });
+  //   // setTomorrowHourly(filt);
+  //   console.log(todayHourly);
+
+  // }, []);
+
+  const labels = weatherDetails[0]?.weatherDetails?.hourly?.map(
+    (valTemp: any) => time(valTemp?.dt).strTime
+  );
+  const dataPoints = weatherDetails[0]?.weatherDetails?.hourly?.map(
+    (valTemp: any) => valTemp.temp.toFixed(0)
+  );
+
   return (
     <>
       <GeneralStatusBarColor
         barStyle={"light-content"}
         backgroundColor={colors.darkBlue}
       />
-      <Header title={"Today's Details"} onPress={() => navigation.goBack()} />
+      <Header
+        title={"Today's Details"}
+        onPress={() => navigation.goBack()}
+        tab={false}
+      />
       <ScrollView
         showsVerticalScrollIndicator={false}
         bounces={false}
@@ -96,9 +90,13 @@ const TodaysDetails = ({
           <LineChart
             data={{
               labels,
-              datasets,
+              datasets: [
+                {
+                  data: dataPoints,
+                },
+              ],
             }}
-            width={1500}
+            width={dataPoints.length * 50}
             height={250}
             // withDots={false}
             // withInnerLines={false}
@@ -107,9 +105,9 @@ const TodaysDetails = ({
             withHorizontalLabels={false}
             // withVerticalLabels={false}
             chartConfig={{
-              backgroundColor: "#fff",
-              backgroundGradientFrom: "#fff",
-              backgroundGradientTo: "#fff",
+              backgroundColor: colors.white,
+              backgroundGradientFrom: colors.white,
+              backgroundGradientTo: colors.white,
               decimalPlaces: 2, // optional, defaults to 2dp
               color: (opacity = 1) => `rgba(124, 169, 255, ${opacity})`,
               labelColor: (opacity = 1) => `rgba(124, 169, 255, ${opacity})`,
@@ -129,7 +127,11 @@ const TodaysDetails = ({
                   fontFamily: fontFamily.regular,
                 }}
               >
-                {datasets[0].data[index] + "°C"}
+                {weatherDegree == "F"
+                  ? (dataPoints[index] * 1.8 + 32)?.toFixed(0)
+                  : dataPoints[index]}
+                &deg;
+                {weatherDegree == "F" ? " F" : " C"}
               </Text>
             )}
             fromZero
@@ -139,7 +141,7 @@ const TodaysDetails = ({
           <AirQuality
             navigation={navigation}
             val={pollutionDetails[0].pollutionDetails.components.pm2_5.toFixed(
-              0
+              2
             )}
           />
         </View>

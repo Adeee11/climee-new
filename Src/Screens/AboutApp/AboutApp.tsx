@@ -23,7 +23,7 @@ const AboutApp = (props: any) => {
         backgroundColor={colors.darkBlue}
       />
       <SafeAreaView style={styles.mainWrapper}>
-        <Header title={"About Us"} onPress={() => props.navigation.goBack()} />
+        <Header title={"About Us"} onPress={() => props.navigation.goBack()} tab={false} />
 
         <View style={[styles.UnitsView, Shadow.shadowStyle]}>
           <View style={[styles.UnitSubContainer, Shadow.shadowStyle]}>

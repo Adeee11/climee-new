@@ -85,20 +85,21 @@ const Setting = (props: any) => {
         barStyle={"light-content"}
         backgroundColor={colors.darkBlue}
       />
-      <Header
-        title={"Settings"}
-        onPress={() => props.navigation.navigate(navigationStrings.HOME)}
-      />
       <SafeAreaView
         style={{
-          flex: 1
-        }}>
+          flex: 1,
+        }}
+      >
         <Header
           title={"Settings"}
           onPress={() => props.navigation.navigate(navigationStrings.HOME)}
         />
         <View>
-          <ScrollView showsVerticalScrollIndicator={false} bounces={false}>
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            bounces={false}
+            style={{ marginBottom: 50 }}
+          >
             <View
               style={{
                 flex: 0.14,

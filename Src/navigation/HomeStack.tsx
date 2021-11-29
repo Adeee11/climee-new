@@ -1,5 +1,5 @@
 import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
+import { CardStyleInterpolators, createStackNavigator, TransitionPresets, TransitionSpecs } from "@react-navigation/stack";
 import navigationStrings from "../constants/navigationStrings";
 import {
   AboutApp,
@@ -18,6 +18,9 @@ function HomeStack() {
       <Stack.Screen
         options={{
           headerShown: false,
+
+          cardStyleInterpolator:
+            CardStyleInterpolators.forFadeFromCenter,
         }}
         name={navigationStrings.HOME}
         component={Home}
@@ -25,6 +28,7 @@ function HomeStack() {
       <Stack.Screen
         options={{
           headerShown: false,
+          ...TransitionPresets.ModalPresentationIOS,
         }}
         name={navigationStrings.AIRPOLLUTION}
         component={AirPollution}
@@ -32,6 +36,7 @@ function HomeStack() {
       <Stack.Screen
         options={{
           headerShown: false,
+          ...TransitionPresets.ModalPresentationIOS,
         }}
         name={navigationStrings.TODAYSDETAILS}
         component={TodaysDetails}
@@ -39,6 +44,7 @@ function HomeStack() {
       <Stack.Screen
         options={{
           headerShown: false,
+          ...TransitionPresets.ModalPresentationIOS,
         }}
         name={navigationStrings.NEWS}
         component={News}
@@ -46,6 +52,7 @@ function HomeStack() {
       <Stack.Screen
         options={{
           headerShown: false,
+          ...TransitionPresets.ModalPresentationIOS,
         }}
         name={navigationStrings.ABOUT}
         component={AboutApp}
@@ -53,6 +60,7 @@ function HomeStack() {
       <Stack.Screen
         options={{
           headerShown: false,
+          ...TransitionPresets.ModalSlideFromBottomIOS,
         }}
         name={navigationStrings.HOURLY}
         component={Hourly}
@@ -60,6 +68,7 @@ function HomeStack() {
       <Stack.Screen
         options={{
           headerShown: false,
+          ...TransitionPresets.ModalSlideFromBottomIOS,
         }}
         name={navigationStrings.WEEKLY}
         component={Weekly}

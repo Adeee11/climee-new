@@ -22,6 +22,7 @@ const AirPollution = (props: any) => {
       <Header
         title={"Air Pollution"}
         onPress={() => props.navigation.goBack()}
+        tab={false}
       />
       <ScrollView
         showsVerticalScrollIndicator={false}

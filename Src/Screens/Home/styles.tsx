@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   },
   newsHeadline: {
     fontSize: typography.FONT_SIZE_13,
-    color: colors.darkBlue,
+    color: colors.textColor,
     fontFamily: fontFamily.regular
   }
 });

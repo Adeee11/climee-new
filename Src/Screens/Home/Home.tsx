@@ -29,6 +29,7 @@ import AirQuality from "../../Components/AirQuality/AirQuality";
 import colors from "../../globalStyles/colors";
 import Shadow from "../../Components/Shadow/Shadow";
 import Search from "../../Components/Search/Search";
+import url from "../../globalStyles/cms-url";
 
 const Home = ({
   weatherDetails,
@@ -87,9 +88,7 @@ const Home = ({
             }}
           >
             <Image
-              source={{
-                uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1CVi919KotpE7FuciwqIeMDhhJNokHpbV1w&usqp=CAU",
-              }}
+              source={{ uri: `${url}${item?.image?.url}` }}
               style={{ width: "100%", height: "100%", resizeMode: "cover" }}
             />
           </View>
@@ -99,7 +98,7 @@ const Home = ({
               backgroundColor: "white",
               borderBottomRightRadius: 20,
               borderBottomLeftRadius: 20,
-              ...Shadow.shadowStyle
+              ...Shadow.shadowStyle,
             }}
           >
             <Text style={styles.newsHeadline} numberOfLines={2}>
@@ -126,6 +125,7 @@ const Home = ({
         <Header
           title={weatherDetails[0]?.locationDetails?.city}
           backButton={false}
+          tab={false}
           onPress={() => setModalVisible(true)}
         />
 
