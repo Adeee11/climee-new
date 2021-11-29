@@ -174,7 +174,6 @@ const SplashScreen = () => {
         // useNativeControls
         resizeMode="cover"
         shouldPlay
-        
         isLooping={false}
         // onPlaybackStatusUpdate={status => setStatus(() => status)}
       />

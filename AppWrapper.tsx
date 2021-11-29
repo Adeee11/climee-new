@@ -11,6 +11,7 @@ import { Provider as LocationProvider } from "./Src/Context/locationContext";
 import { RootSiblingParent } from "react-native-root-siblings";
 import SplashScreen from "./Src/Screens/SplashScreen/SplashScreen";
 import AppLoading from "expo-app-loading";
+import { MenuProvider } from 'react-native-popup-menu';
 import InternetError from "./Src/Components/InternetError";
 
 const AppWrapper = () => {
@@ -57,11 +58,13 @@ const AppWrapper = () => {
           <InternetError />
         ) : (
           <Provider store={store}>
+            <MenuProvider>
             <LocationProvider>
               <RootSiblingParent>
                 <App />
               </RootSiblingParent>
             </LocationProvider>
+            </MenuProvider>
           </Provider>
         )}
       </>

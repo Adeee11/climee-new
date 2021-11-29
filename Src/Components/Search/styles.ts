@@ -1,11 +1,11 @@
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 import fontFamily from "../../globalStyles/fontFamily";
 import Spacing from "../../globalStyles/Spacing";
 import typography from "../../globalStyles/typography";
 
 const styles = StyleSheet.create({
   searchContainer: {
-    padding: Spacing.PADDING_15,
+    paddingHorizontal: Spacing.PADDING_15,
     backgroundColor: "white",
     flexDirection: "row",
     alignItems: "center",
@@ -14,7 +14,10 @@ const styles = StyleSheet.create({
   searchInput: {
     width: "90%",
     fontSize: typography.FONT_SIZE_15,
-    height: Spacing.HEIGHT_24,
+    paddingVertical: Spacing.PADDING_15,
+    // height: Platform.OS === 'ios' ?  Spacing.HEIGHT_28 : Spacing.HEIGHT_55,
+    // backgroundColor: "red",
+    textAlignVertical: 'center',
     fontFamily: fontFamily.regular,
   },
   currentLocationContainer: {

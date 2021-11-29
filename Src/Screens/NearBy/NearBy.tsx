@@ -1,5 +1,5 @@
 import { LinearGradient } from "expo-linear-gradient";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, createRef } from "react";
 import {
   View,
   Text,
@@ -10,6 +10,7 @@ import {
   Dimensions,
   TouchableOpacity,
 } from "react-native";
+import ActionSheet from "react-native-actions-sheet";
 import { connect } from "react-redux";
 import * as location from "expo-location";
 import { Location, SeeMoreArrow } from "../../../assets/svg";
@@ -20,12 +21,13 @@ import axios from "../../api/axios";
 import styles from "./styles";
 import api from "../../globalStyles/api";
 import WeatherImage from "../../Components/WeatherImage/WeatherImage";
+import AdditionalDetails from "../../Components/AdditionalDetails/AdditionalDetails";
+import AirQuality from "../../Components/AirQuality/AirQuality";
 import colors from "../../globalStyles/colors";
+import Loader from "../../Components/Loader";
+import Spacing from "../../globalStyles/Spacing";
 
 const NearBy = ({ weatherDetails, navigation }: any) => {
-  const [changedDeviceHeight, setChangedDeviceHeight] = useState<number>(300);
-  const [height2] = useState(new Animated.Value(300));
-  const [deviceHeight] = useState(Dimensions.get("window").height);
   const [coordinates, setCoordinates] = useState<any>({
     latitude: weatherDetails[0]?.locationDetails?.latitude,
     longitude: weatherDetails[0]?.locationDetails?.longitude,
@@ -36,41 +38,24 @@ const NearBy = ({ weatherDetails, navigation }: any) => {
     city: "",
     country: "",
   });
-
-  // useEffect(() => {
-  //   panResponder;
-  // }, []);
-
+  const [loading, setLoading] = useState<boolean>(false);
+  const actionSheetRef = createRef<any>();
+  const [airQuality, setAirQuality] = useState();
   const getCoordinates = (val: any) => {
     setCoordinates(val);
   };
 
-  // const panResponder = PanResponder.create({
-  //   onMoveShouldSetPanResponderCapture: () => true,
-  //   onMoveShouldSetPanResponder: () => true,
-
-  //   onPanResponderMove: (e, gestureState) => {
-  //     gestureState.moveY < deviceHeight - changedDeviceHeight
-  //       ? Animated.timing(height2, {
-  //           toValue: deviceHeight - 480,
-  //           duration: 1000,
-  //           useNativeDriver: false,
-  //         }).start(() => setChangedDeviceHeight(500))
-  //       : Animated.timing(height2, {
-  //           toValue: 300,
-  //           duration: 1000,
-  //           useNativeDriver: false,
-  //         }).start(() => setChangedDeviceHeight(300));
-  //   },
-  // });
-
   useEffect(() => {
     (async () => {
       try {
-        // setLoading(true);
+        setLoading(true);
         const result: any = await axios.get(
           `/onecall?lat=${coordinates?.latitude}&lon=${coordinates?.longitude}&appid=${api}&units=metric`
         );
+        const response: any = await axios.get(
+          `/air_pollution?lat=${coordinates?.latitude}&lon=${coordinates?.longitude}&appid=${api}`
+        );
+        setAirQuality(response?.data?.list[0]?.components?.pm2_5);
 
         setWeather(result?.data);
         const r: any = await location.reverseGeocodeAsync({
@@ -82,35 +67,29 @@ const NearBy = ({ weatherDetails, navigation }: any) => {
           city: r[0]?.city,
           country: r[0]?.country,
         });
-        // setLoading(false);
+        setLoading(false);
       } catch (err) {
         console.log(err.message);
       }
     })();
   }, [coordinates]);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        // setLoading(true);
-        const response: any = await axios.get(
-          `/air_pollution?lat=${coordinates?.latitude}&lon=${coordinates?.longitude}&appid=${api}`
-        );
-        console.log("pollution", response?.data);
-
-        // setAirQuality(response?.data?.list[0]?.components?.pm2_5);
-        // setCondition(response?.data?.list[0]?.main?.aqi);
-        // setLoading(false);
-      } catch (Err) {
-        console.log(Err);
-
-        // setError(true);
-        // setTimeout(() => {
-        //   setError(false);
-        // }, 2000);
-      }
-    })();
-  }, [coordinates]);
+  const headerComponent = () => {
+    return (
+      <View
+        style={{
+          height: 20,
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundColor: colors.appBackground,
+          borderTopLeftRadius: 10,
+          borderTopRightRadius: 10,
+        }}
+      >
+        <View style={{ borderBottomWidth: 3, width: "20%" }} />
+      </View>
+    );
+  };
 
   return (
     <>
@@ -118,7 +97,7 @@ const NearBy = ({ weatherDetails, navigation }: any) => {
         barStyle={"light-content"}
         backgroundColor={colors.darkBlue}
       />
-      <SafeAreaView style={{ flex: 1, justifyContent: "center" }}>
+      <SafeAreaView style={{ flex: 1 }}>
         <Header title={"Nearby"} />
         <ShowMap
           latitude={weatherDetails[0]?.locationDetails?.latitude}
@@ -127,84 +106,104 @@ const NearBy = ({ weatherDetails, navigation }: any) => {
         />
 
         {/* Location container */}
-        <View style={styles.locationContainer}>
-          <Location height={35} width={35} />
-          <View style={{ marginLeft: 15 }}>
-            <Text style={styles.streetText}>{currLocation?.street}</Text>
-            <Text style={styles.locationText}>
-              {currLocation?.city}, {currLocation?.country}
-            </Text>
-          </View>
-        </View>
+        {loading ? (
+          <Loader />
+        ) : (
+          <>
+            <View style={styles.locationContainer}>
+              <Location height={35} width={35} />
+              <View style={{ marginLeft: 15 }}>
+                <Text style={styles.streetText}>
+                  {currLocation?.street === null
+                    ? "unnamed"
+                    : currLocation?.street}
+                </Text>
+                <Text style={styles.locationText}>
+                  {currLocation?.city === null ? "unnamed" : currLocation?.city}
+                  , {currLocation?.country}
+                </Text>
+              </View>
+            </View>
 
-        {/* Temperature Container */}
-        <View style={styles.tempContainer}>
-          <LinearGradient
-            colors={["#3C6FD1", "#7CA9FF"]}
-            style={{
-              position: "absolute",
-              left: 0,
-              right: 0,
-              bottom: 0,
-              top: 0,
-              flex: 0,
-              borderRadius: 20,
-            }}
-            end={{ x: 0.5, y: 1.2 }}
-          />
-          <View style={{ alignItems: "flex-start", flex: 0.7, }}>
-            <Text style={styles.tempText}>{parseInt(weather?.current?.temp)}&deg;</Text>
-            <Text style={styles.weatherText}>
-              {weather?.current?.weather[0]?.description}
-            </Text>
-          </View>
-          <View style={{flex: 0.3, alignItems: "center"}}>
-          <WeatherImage
-            img={weather?.current?.weather[0]?.main}
-            height={70}
-            width={70}
-          />
-          </View>
-        </View>
-
-        {/* Additionals details */}
-        {/* <Animated.View
-          {...panResponder.panHandlers}
-          style={[styles.bottomContainer, { height: height2 }]}
-        >
-          <View style={{ alignSelf: "center", paddingVertical: 20 }}>
-            <Rectangle />
-          </View>
-
-          {/* Additional details container */}
-          {/* <ScrollView bounces={false} showsVerticalScrollIndicator={false}> */}
-            {/* <AdditionalDetails details={weather?.current} /> */}
-            {/* <View style={{ margin: Spacing.MARGIN_16 }}>
-              <AirQuality navigation={navigation} />
-            </View> */}
-          {/* </ScrollView> */}
-        {/* </Animated.View> */} 
-
-        <TouchableOpacity style={styles.bottomContainer}>
-        <LinearGradient
-            colors={["#3C6FD1", "#7CA9FF"]}
-            style={{
-              position: "absolute",
-              left: 0,
-              right: 0,
-              bottom: 0,
-              top: 0,
-              flex: 0,
-              borderRadius: 20,
-            }}
-            end={{ x: 0.5, y: 1.2 }}
-          />
-          <View style={{flexDirection: "row", justifyContent: "center", alignItems: "center"}}>
-          <Text style={styles.seemoreText}>See More Details</Text>
-          <SeeMoreArrow />
-          </View>
-        </TouchableOpacity>
+            {/* Temperature Container */}
+            <View style={styles.tempContainer}>
+              <LinearGradient
+                colors={["#3C6FD1", "#7CA9FF"]}
+                style={{
+                  position: "absolute",
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  top: 0,
+                  flex: 0,
+                  borderRadius: 20,
+                }}
+                end={{ x: 0.5, y: 1.2 }}
+              />
+              <View style={{ alignItems: "center", flex: 0.7 }}>
+                <Text style={styles.tempText}>
+                  {parseInt(weather?.current?.temp)}&deg;
+                </Text>
+                <Text style={styles.weatherText}>
+                  {weather?.current?.weather[0]?.description}
+                </Text>
+              </View>
+              <View style={{ flex: 0.3, alignItems: "center" }}>
+                <WeatherImage
+                  img={weather?.current?.weather[0]?.main}
+                  height={70}
+                  width={70}
+                />
+              </View>
+            </View>
+            <TouchableOpacity
+              style={styles.bottomContainer}
+              onPress={() => actionSheetRef.current?.setModalVisible()}
+            >
+              <LinearGradient
+                colors={["#3C6FD1", "#7CA9FF"]}
+                style={{
+                  position: "absolute",
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  top: 0,
+                  flex: 0,
+                  borderRadius: 20,
+                }}
+                end={{ x: 0.5, y: 1.2 }}
+              />
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Text style={styles.seemoreText}>See More Details</Text>
+                <SeeMoreArrow />
+              </View>
+            </TouchableOpacity>
+          </>
+        )}
       </SafeAreaView>
+
+      <ActionSheet
+        ref={actionSheetRef}
+        headerAlwaysVisible={true}
+        CustomHeaderComponent={headerComponent()}
+      >
+        <View style={{ backgroundColor: colors.appBackground }}>
+          <View style={{ marginTop: 10 }}>
+            <AdditionalDetails details={weather?.current} />
+          </View>
+          <View
+            style={{ marginHorizontal: Spacing.MARGIN_16, marginBottom: 20 }}
+          >
+            <AirQuality navigation={navigation} val={airQuality} />
+          </View>
+        </View>
+      </ActionSheet>
     </>
   );
 };

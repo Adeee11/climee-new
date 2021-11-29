@@ -91,9 +91,12 @@ const Setting = (props: any) => {
       />
       <SafeAreaView
         style={{
-          flex: 1,
-        }}
-      >
+          flex: 1
+        }}>
+        <Header
+          title={"Settings"}
+          onPress={() => props.navigation.navigate(navigationStrings.HOME)}
+        />
         <View>
           <ScrollView showsVerticalScrollIndicator={false} bounces={false}>
             <View

@@ -7,7 +7,7 @@ import typography from "../../globalStyles/typography";
 const styles = StyleSheet.create({
   locationContainer: {
     position: "absolute",
-    top: 50,
+    top: 80,
     right: 20,
     left: 20,
     backgroundColor: "white",
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   },
   tempContainer: {
     position: "absolute",
-    top: 125,
+    top: 155,
     right: 90,
     left: 90,
     borderRadius: 20,
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   weatherText: {
     color: colors.white,
     fontFamily: fontFamily.semiBold,
-    fontSize: typography.FONT_SIZE_16,
+    fontSize: typography.FONT_SIZE_14,
     textTransform: 'capitalize'
   },
   bottomContainer: {
