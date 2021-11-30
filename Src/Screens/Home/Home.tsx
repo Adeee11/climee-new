@@ -17,7 +17,7 @@ import GeneralStatusBarColor from "../../Components/generateStatusBarColor/Gener
 import HeroSection from "../../Components/HeroSection/HeroSection";
 import TodayDetail from "../../Components/TodayDetail/TodayDetail";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Back, Right } from "../../../assets/svg";
+import { Right } from "../../../assets/svg";
 import Forecast from "../../Components/Forecast/Forecast";
 import { connect } from "react-redux";
 import strapi from "../../api/strapi";
@@ -217,7 +217,7 @@ const Home = ({
             backgroundColor: "rgba(0,0,0,0.6)",
           }}
         >
-          <Search ModalVisible={handleModalVisible} />
+          <Search ModalVisible={handleModalVisible}   weatherDetail={weatherDetails} />
         </View>
         <TouchableWithoutFeedback
           onPressOut={() => {
