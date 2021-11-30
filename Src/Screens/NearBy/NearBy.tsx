@@ -128,7 +128,7 @@ const NearBy = ({ weatherDetails, navigation }: any) => {
             {/* Temperature Container */}
             <View style={styles.tempContainer}>
               <LinearGradient
-                colors={["#3C6FD1", "#7CA9FF"]}
+                colors={[colors.darkBlue, colors.blueTheme]}
                 style={{
                   position: "absolute",
                   left: 0,
@@ -148,7 +148,7 @@ const NearBy = ({ weatherDetails, navigation }: any) => {
                   {weather?.current?.weather[0]?.description}
                 </Text>
               </View>
-              <View style={{ flex: 0.3, alignItems: "center" }}>
+              <View style={{ flex: 0.5, alignItems: "center" }}>
                 <WeatherImage
                   img={weather?.current?.weather[0]?.main}
                   height={70}
@@ -161,7 +161,7 @@ const NearBy = ({ weatherDetails, navigation }: any) => {
               onPress={() => actionSheetRef.current?.setModalVisible()}
             >
               <LinearGradient
-                colors={["#3C6FD1", "#7CA9FF"]}
+                colors={[colors.darkBlue, colors.blueTheme]}
                 style={{
                   position: "absolute",
                   left: 0,

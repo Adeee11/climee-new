@@ -77,7 +77,7 @@ const Home = ({
               navigation.navigate(navigationStrings.NEWS, { data: item })
             }
           >
-            <Text style={styles.cardTitle}>News</Text>
+            <Text style={styles.cardTitle}>{"News"}</Text>
             <Right />
           </TouchableOpacity>
           <View
@@ -95,7 +95,7 @@ const Home = ({
           <View
             style={{
               padding: 20,
-              backgroundColor: "white",
+              backgroundColor: colors.white,
               borderBottomRightRadius: 20,
               borderBottomLeftRadius: 20,
               ...Shadow.shadowStyle,

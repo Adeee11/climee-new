@@ -1,7 +1,6 @@
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import Spacing from "../../globalStyles/Spacing";
-import colors from "../../globalStyles/colors";
 import fontFamily from "../../globalStyles/fontFamily";
 import navigationStrings from "../../constants/navigationStrings";
 import styles from "./styles";
@@ -32,12 +31,7 @@ const AirQuality = ({ navigation, background = false, val }: any) => {
           <Right />
         </TouchableOpacity>
       ) : (
-        <View
-          style={{
-            paddingHorizontal: Spacing.PADDING_16,
-            paddingTop: Spacing.PADDING_16,
-          }}
-        >
+        <View style={styles.headingView}>
           <Text style={styles.pollutionHeading}>Air Pollution</Text>
         </View>
       )}
@@ -64,13 +58,7 @@ const AirQuality = ({ navigation, background = false, val }: any) => {
               onPress={() =>
                 navigation.navigate(navigationStrings.AIRPOLLUTION)
               }
-              style={{
-                marginVertical: 5,
-                padding: 10,
-                backgroundColor: colors.darkBlue,
-                width: "80%",
-                borderRadius: 10,
-              }}
+              style={styles.seeMoreButton}
             >
               <Text style={styles.buttonText}>See More</Text>
             </TouchableOpacity>

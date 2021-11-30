@@ -19,45 +19,15 @@ const HourlyInformation = (props: any) => {
   };
 
   const renderItems = (item: any) => {
-    // console.log(item);
-
     return (
       <View style={styles.infoContainer}>
-        <View
-          style={{
-            flex: 0.2,
-            alignItems: "flex-start",
-            // backgroundColor: "yellow",
-          }}
-        >
+        <View style={styles.subContainer}>
           <Text style={styles.timeText}>{time(item.dt)?.strTime}</Text>
         </View>
-        {/* <Image
-          style={{
-            height: 23,
-            width: 23,
-          }}
-          source={item.img}
-          resizeMode="contain"
-        /> */}
-        <View
-          style={{
-            flex: 0.2,
-            alignItems: "flex-start",
-            // backgroundColor: "red",
-          }}
-        >
+        <View style={styles.subContainer}>
           <WeatherImage img={item?.weather[0]?.main} height={30} width={30} />
         </View>
-        <View
-          style={{
-            flex: 0.5,
-            // backgroundColor: "green",
-            justifyContent: "space-between",
-            alignItems: "center",
-            flexDirection: "row",
-          }}
-        >
+        <View style={styles.tempView}>
           <Text style={styles.tempText}>
             {weatherDegree == "F"
               ? (item.temp.toFixed(0) * 1.8 + 32)?.toFixed(0)

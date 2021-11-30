@@ -15,7 +15,6 @@ const styles = StyleSheet.create({
     paddingVertical: Spacing.PADDING_20,
     alignItems: "flex-start",
     justifyContent: "flex-start",
-
   },
   mainContainer: {
     padding: Spacing.PADDING_16,
@@ -28,7 +27,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingVertical: Spacing.PADDING_10,
-    flex:1
+    flex: 1,
   },
   timeText: {
     fontFamily: fontFamily.light,
@@ -39,6 +38,16 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily.regular,
     fontSize: typography.FONT_SIZE_16,
     color: colors.textColor,
+  },
+  subContainer: {
+    flex: 0.2,
+    alignItems: "flex-start",
+  },
+  tempView: {
+    flex: 0.5,
+    justifyContent: "space-between",
+    alignItems: "center",
+    flexDirection: "row",
   },
 });
 export default styles;

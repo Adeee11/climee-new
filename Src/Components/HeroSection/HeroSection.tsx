@@ -1,11 +1,13 @@
 import React from "react";
-import { View, Text, Image } from "react-native";
+import { View, Text} from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import moment from "moment";
 import styles from "./styles";
 import WeatherImage from "../WeatherImage/WeatherImage";
 import Forecast from "../Forecast/Forecast";
+import colors from "../../globalStyles/colors";
+import Spacing from "../../globalStyles/Spacing";
 
 const HeroSection = ({
   weatherData,
@@ -47,8 +49,10 @@ const HeroSection = ({
             {weatherData[0]?.weatherDetails?.current?.weather[0]?.description}
           </Text>
           <View style={styles.minMaxContainer}>
-            <AntDesign name="arrowdown" size={22} color="#3AE000" />
-            <Text style={[styles.minmaxText, { marginRight: 10 }]}>
+            <AntDesign name="arrowdown" size={22} color={colors.good} />
+            <Text
+              style={[styles.minmaxText, { marginRight: Spacing.MARGIN_10 }]}
+            >
               {weatherDegree == "F"
                 ? (
                     weatherData[0]?.weatherDetails.daily[0].temp.min * 1.8 +
@@ -57,7 +61,11 @@ const HeroSection = ({
                 : weatherData[0]?.weatherDetails.daily[0].temp.min.toFixed(0)}
               &deg;
             </Text>
-            <AntDesign name="arrowup" size={22} color="#E00000" />
+            <AntDesign
+              name="arrowup"
+              size={22}
+              color={colors.moderatelyPolluted}
+            />
             <Text style={styles.minmaxText}>
               {weatherDegree == "F"
                 ? (
@@ -81,14 +89,12 @@ const HeroSection = ({
         </View>
       </View>
       <View style={styles.lowerView}>
-                 <Forecast
-                  data={weatherData[0]?.weatherDetails?.hourly}
-                  title="Hourly Forecast"
-                  weatherDegree={weatherDegree}
-                  navigation={navigation}
-                  // backgroundColor={true}
-                  // hourly={true}
-                />
+        <Forecast
+          data={weatherData[0]?.weatherDetails?.hourly}
+          title="Hourly Forecast"
+          weatherDegree={weatherDegree}
+          navigation={navigation}
+        />
       </View>
     </View>
   );

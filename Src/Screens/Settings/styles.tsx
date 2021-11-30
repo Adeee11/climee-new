@@ -70,7 +70,6 @@ const styles = StyleSheet.create({
     marginHorizontal: Spacing.MARGIN_5,
   },
   bottomWrapper: {
-    flex: 0.07,
     alignItems: "center",
     justifyContent: "flex-start",
     paddingHorizontal: Spacing.PADDING_10,

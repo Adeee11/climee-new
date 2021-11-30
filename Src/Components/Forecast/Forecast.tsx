@@ -42,7 +42,7 @@ const Forecast = ({
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <View style={styles.dataContainer}>
           {backgroundColor ? (
-            <Text style={[styles.timeText, {}]}>
+            <Text style={styles.timeText}>
               {moment(new Date(item?.dt * 1000)).format("ddd")}
             </Text>
           ) : (
@@ -56,19 +56,14 @@ const Forecast = ({
               &deg;
             </Text>
           ) : (
-            <View
-              style={{
-                alignItems: "center",
-                paddingVertical: Spacing.PADDING_10,
-              }}
-            >
-              <Text style={[styles.tempText, { color: "#3C6FD1" }]}>
+            <View style={styles.tempView}>
+              <Text style={[styles.tempText, { color: colors.darkBlue }]}>
                 {weatherDegree == "F"
                   ? (parseInt(item?.temp?.min) * 1.8 + 32)?.toFixed(0)
                   : item?.temp?.min?.toFixed(0)}
                 &deg;
               </Text>
-              <Text style={[styles.tempText, { color: "#6D9CF5" }]}>
+              <Text style={[styles.tempText, { color: colors.tempColor }]}>
                 {weatherDegree == "F"
                   ? (parseInt(item?.temp?.max) * 1.8 + 32)?.toFixed(0)
                   : item?.temp?.max?.toFixed(0)}

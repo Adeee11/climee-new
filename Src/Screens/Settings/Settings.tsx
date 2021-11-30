@@ -94,12 +94,8 @@ const Setting = (props: any) => {
           title={"Settings"}
           onPress={() => props.navigation.navigate(navigationStrings.HOME)}
         />
-        <View>
-          <ScrollView
-            showsVerticalScrollIndicator={false}
-            bounces={false}
-            style={{ marginBottom: 50 }}
-          >
+        <View style={{ flex: 0.98 }}>
+          <ScrollView showsVerticalScrollIndicator={false} bounces={false}>
             <View
               style={{
                 flex: 0.14,
@@ -331,25 +327,26 @@ const Setting = (props: any) => {
                 </TouchableOpacity>
               </View>
             </View>
-
-            <View style={styles.bottomWrapper}>
-              <Text style={styles.grey12}>
-                Made with ❤ by
-                <Text
-                  onPress={() =>
-                    Linking.openURL("https://iwebcode.design/").catch((err) => {
-                      console.log(err);
-                    })
-                  }
-                  style={{ color: colors.darkBlue }}
-                >
-                  {" "}
-                  IWEBCODE
-                </Text>{" "}
-                team
-              </Text>
-            </View>
           </ScrollView>
+        </View>
+        <View style={{ flex: 0.05, backgroundColor: colors.appBackground }}>
+          <View style={styles.bottomWrapper}>
+            <Text style={styles.grey12}>
+              Made with ❤ by
+              <Text
+                onPress={() =>
+                  Linking.openURL("https://iwebcode.design/").catch((err) => {
+                    console.log(err);
+                  })
+                }
+                style={{ color: colors.darkBlue }}
+              >
+                {" "}
+                IWEBCODE
+              </Text>{" "}
+              team
+            </Text>
+          </View>
         </View>
         {openIOSModal ? (
           ActionSheetIOS.showActionSheetWithOptions(
