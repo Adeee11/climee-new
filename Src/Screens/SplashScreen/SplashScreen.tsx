@@ -18,6 +18,8 @@ import {
   themeColorOne,
   themeColorTwo,
 } from "../../redux/actions/colorThemeAction";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 const SplashScreen = () => {
   const [fadeAnim] = useState(new Animated.Value(0));
   const height = new Animated.Value(300);
@@ -83,6 +85,7 @@ const SplashScreen = () => {
           country: place[0]?.country,
           street: place[0]?.street,
         };
+       await AsyncStorage.setItem("climeeCurrentLocation", JSON.stringify(locationObj));
         const response: any = await axios.get(
           `/onecall?lat=${location?.coords?.latitude}&lon=${location?.coords?.longitude}&appid=${api}&units=metric`
         );

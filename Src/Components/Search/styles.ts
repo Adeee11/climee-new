@@ -1,4 +1,5 @@
 import { Platform, StyleSheet } from "react-native";
+import colors from "../../globalStyles/colors";
 import fontFamily from "../../globalStyles/fontFamily";
 import Spacing from "../../globalStyles/Spacing";
 import typography from "../../globalStyles/typography";
@@ -69,6 +70,25 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+  },
+  bottomView1: {
+    backgroundColor: "#fff",
+    // borderBottomLeftRadius: 20,
+    // borderBottomRightRadius: 20,
+    // height: 200,
+    padding: Spacing.PADDING_10,
+    alignItems: "flex-start",
+    // position: "absolute",
+  },
+  searchTextWrapper: {
+    borderBottomWidth: 0.7,
+    padding: Spacing.PADDING_20,
+    borderBottomColor: "#f5f5f5",
+  },
+  searchTextStyle: {
+    color: colors.textColor,
+    fontFamily: fontFamily.regular,
+    fontSize: typography.FONT_SIZE_12,
   },
 });
 

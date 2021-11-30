@@ -13,7 +13,6 @@ import colors from "../../globalStyles/colors";
 import fontFamily from "../../globalStyles/fontFamily";
 import { width } from "../../globalStyles/resposiveStyle";
 import typography from "../../globalStyles/typography";
-
 import styles from "./styles";
 import Spacing from "../../globalStyles/Spacing";
 import AdditionalDetails from "../../Components/AdditionalDetails/AdditionalDetails";
@@ -21,6 +20,7 @@ import navigationStrings from "../../constants/navigationStrings";
 import AirQuality from "../../Components/AirQuality/AirQuality";
 import { useEffect } from "react";
 import { connect } from "react-redux";
+
 const TodaysDetails = ({
   weatherDetails,
   weatherDegree,
@@ -40,33 +40,17 @@ const TodaysDetails = ({
     return { strTime };
   };
 
-  // const [todayHourly, setTodayHourly] = useState<any>();
-  // useEffect(() => {
-  //   const today = new Date()?.toISOString()?.split("T")[0];
-  //   const tomorrow = new Date(new Date()?.getTime() + 24 * 60 * 60 * 1000)
-  //     ?.toISOString()
-  //     ?.split("T")[0];
-
-  //   const r = weatherDetails[0]?.weatherDetails?.hourly?.filter((e: any) => {
-  //     return new Date(e?.dt * 1000)?.toISOString()?.split("T")[0] == today;
-  //   });
-  //   setTodayHourly(r);
-
-  //   const filt = weatherDetails[0]?.weatherDetails?.hourly?.filter((e: any) => {
-  //     return new Date(e?.dt * 1000)?.toISOString()?.split("T")[0] == tomorrow;
-  //   });
-  //   // setTomorrowHourly(filt);
-  //   console.log(todayHourly);
-
-  // }, []);
-
-  const labels = weatherDetails[0]?.weatherDetails?.hourly?.map(
+  const labels = weatherDetails[0]?.weatherDetails.hourly.map(
     (valTemp: any) => time(valTemp?.dt).strTime
   );
-  const dataPoints = weatherDetails[0]?.weatherDetails?.hourly?.map(
+
+  const dataPoints = weatherDetails[0]?.weatherDetails.hourly.map(
     (valTemp: any) => valTemp.temp.toFixed(0)
   );
-
+  
+  useEffect(() => {
+    // console.log(dataPoints);
+  }, []);
   return (
     <>
       <GeneralStatusBarColor
@@ -145,7 +129,6 @@ const TodaysDetails = ({
             )}
           />
         </View>
-
         <AdditionalDetails
           details={weatherDetails[0]?.weatherDetails?.daily[0]}
           windDegree={windDegree}
@@ -162,5 +145,4 @@ const mapStateToProps = (state: any) => {
     pollutionDetails: state?.WeatherDetailsReducer?.pollutionDetails,
   };
 };
-
 export default connect(mapStateToProps)(TodaysDetails);
