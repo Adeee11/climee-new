@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   },
   shareStyle: {
     fontFamily: fontFamily.light,
-    fontSize: 14,
+    fontSize: typography.FONT_SIZE_14,
     color: colors.grey,
     textAlign: "left",
     marginLeft: Spacing.MARGIN_4,

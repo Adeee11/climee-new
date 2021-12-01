@@ -29,6 +29,7 @@ import ToggleButton from "../../Components/ToggleButton/ToggleButton";
 import Shadow from "../../Components/Shadow/Shadow";
 import GeneralStatusBarColor from "../../Components/generateStatusBarColor/GenerateStatusBarColor";
 import Header from "../../Components/Header/Header";
+import typography from "../../globalStyles/typography";
 
 const Setting = (props: any) => {
   const actionSheetRef = createRef<any>();
@@ -98,14 +99,15 @@ const Setting = (props: any) => {
           <ScrollView showsVerticalScrollIndicator={false} bounces={false}>
             <View
               style={{
-                flex: 0.14,
+                flex: 0.2,
                 alignItems: "center",
+                marginVertical: Spacing.MARGIN_10,
                 justifyContent: "flex-start",
               }}
             >
               <Text
                 style={{
-                  fontSize: 30,
+                  fontSize: typography.FONT_SIZE_30,
                   fontFamily: fontFamily.bold,
                   color: colors.textColor,
                   lineHeight: 44,

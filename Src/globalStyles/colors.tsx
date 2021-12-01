@@ -4,10 +4,13 @@ export default {
   darkBlue: "#3C6FD1",
   textColor: "#363B64",
   grey: "rgba(196, 196, 196, 1)",
-  toggleColor: "rgba(36, 75, 214, 1)",
+  toggleColor: "rgba(36, 75, 214, 0.06)",
   appBackground: "rgba(245, 245, 245, 1)",
   tempColor: "#6D9CF5",
-
+  darkGrey: "#9B9B9B",
+  purple: "#363B64",
+  mustard: "#F5CA04",
+  black: "rgba(0,0,0,0.6)",
   //progressBarColors
   good: "rgb(0, 204, 0)",
   satisfactory: "#ff0",

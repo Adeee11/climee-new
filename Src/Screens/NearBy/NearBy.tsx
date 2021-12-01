@@ -1,15 +1,6 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React, { useEffect, useState, createRef } from "react";
-import {
-  View,
-  Text,
-  SafeAreaView,
-  Image,
-  ScrollView,
-  Animated,
-  Dimensions,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, SafeAreaView, TouchableOpacity } from "react-native";
 import ActionSheet from "react-native-actions-sheet";
 import { connect } from "react-redux";
 import * as location from "expo-location";
@@ -76,17 +67,8 @@ const NearBy = ({ weatherDetails, navigation }: any) => {
 
   const headerComponent = () => {
     return (
-      <View
-        style={{
-          height: 20,
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: colors.appBackground,
-          borderTopLeftRadius: 10,
-          borderTopRightRadius: 10,
-        }}
-      >
-        <View style={{ borderBottomWidth: 3, width: "20%" }} />
+      <View style={styles.headerComponent}>
+        <View style={styles.subHeaderComponent} />
       </View>
     );
   };
@@ -173,13 +155,7 @@ const NearBy = ({ weatherDetails, navigation }: any) => {
                 }}
                 end={{ x: 0.5, y: 1.2 }}
               />
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
+              <View style={styles.seemore}>
                 <Text style={styles.seemoreText}>See More Details</Text>
                 <SeeMoreArrow />
               </View>
@@ -194,11 +170,14 @@ const NearBy = ({ weatherDetails, navigation }: any) => {
         CustomHeaderComponent={headerComponent()}
       >
         <View style={{ backgroundColor: colors.appBackground }}>
-          <View style={{ marginTop: 10 }}>
+          <View style={{ marginTop: Spacing.MARGIN_10 }}>
             <AdditionalDetails details={weather?.current} />
           </View>
           <View
-            style={{ marginHorizontal: Spacing.MARGIN_16, marginBottom: 20 }}
+            style={{
+              marginHorizontal: Spacing.MARGIN_16,
+              marginBottom: Spacing.MARGIN_20,
+            }}
           >
             <AirQuality navigation={navigation} val={airQuality} />
           </View>

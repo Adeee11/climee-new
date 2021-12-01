@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, ScrollView } from "react-native";
+import React, { useState } from "react";
+import { ScrollView } from "react-native";
 import { connect } from "react-redux";
-import assets from "../../../assets";
 import AdditionalDetails from "../../Components/AdditionalDetails/AdditionalDetails";
 import DaysForecast from "../../Components/DaysForecast/DaysForecast";
 import GeneralStatusBarColor from "../../Components/generateStatusBarColor/GenerateStatusBarColor";
@@ -15,19 +14,6 @@ const Weekly = ({
   navigation,
 }: any) => {
   const [selectedDay, setSelectedDay] = useState();
-
-  const time = (time: number) => {
-    const date = new Date(time * 1000);
-    let hours = date.getHours();
-    let minutes: number | string = date.getMinutes();
-    const ampm = hours >= 12 ? "PM" : "AM";
-    hours = hours % 12;
-    hours = hours ? hours : 12; // the hour '0' should be '12'
-    minutes = minutes < 10 ? "0" + minutes : minutes;
-    const strTime = hours + ":" + minutes + " " + ampm;
-    return { strTime };
-  };
-
   const handleSelectedDay = (val: any) => {
     setSelectedDay(val);
   };

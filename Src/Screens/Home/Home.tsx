@@ -9,9 +9,9 @@ import {
   Modal,
   TouchableWithoutFeedback,
   Platform,
+  ScrollView,
 } from "react-native";
 import Swiper from "react-native-swiper";
-import { ScrollView } from "react-native-gesture-handler";
 import styles from "./styles";
 import GeneralStatusBarColor from "../../Components/generateStatusBarColor/GenerateStatusBarColor";
 import HeroSection from "../../Components/HeroSection/HeroSection";
@@ -30,6 +30,7 @@ import colors from "../../globalStyles/colors";
 import Shadow from "../../Components/Shadow/Shadow";
 import Search from "../../Components/Search/Search";
 import url from "../../globalStyles/cms-url";
+import Spacing from "../../globalStyles/Spacing";
 
 const Home = ({
   weatherDetails,
@@ -64,13 +65,7 @@ const Home = ({
   const renderNews = (data: any) => {
     return data?.map((item: any, index: any) => {
       return (
-        <View
-          style={{
-            paddingHorizontal: 20,
-            height: (deviceHeight * 38) / 100,
-            ...Shadow.shadowStyle,
-          }}
-        >
+        <View style={styles.newsContainer}>
           <TouchableOpacity
             style={styles.cardContainer}
             onPress={() =>
@@ -80,27 +75,13 @@ const Home = ({
             <Text style={styles.cardTitle}>{"News"}</Text>
             <Right />
           </TouchableOpacity>
-          <View
-            style={{
-              height: 200,
-              borderBottomLeftRadius: 20,
-              borderBottomRightRadius: 20,
-            }}
-          >
+          <View style={styles.imgContainer}>
             <Image
               source={{ uri: `${url}${item?.image?.url}` }}
-              style={{ width: "100%", height: "100%", resizeMode: "cover" }}
+              style={styles.newsImg}
             />
           </View>
-          <View
-            style={{
-              padding: 20,
-              backgroundColor: colors.white,
-              borderBottomRightRadius: 20,
-              borderBottomLeftRadius: 20,
-              ...Shadow.shadowStyle,
-            }}
-          >
+          <View style={styles.newsTtile}>
             <Text style={styles.newsHeadline} numberOfLines={2}>
               {item.Title}
             </Text>
@@ -120,7 +101,7 @@ const Home = ({
         barStyle={"light-content"}
         backgroundColor={colors.darkBlue}
       />
-      <SafeAreaView style={{ flex: 1, backgroundColor: colors.appBackground }}>
+      <SafeAreaView style={styles.mainContainer}>
         {/* Header Start */}
         <Header
           title={weatherDetails[0]?.locationDetails?.city}
@@ -132,13 +113,9 @@ const Home = ({
         {weatherLoading || loading ? (
           <Loader />
         ) : (
-          <ScrollView
-            bounces={false}
-            // style={{ marginHorizontal: 20 }}
-            showsVerticalScrollIndicator={false}
-          >
+          <ScrollView bounces={false} showsVerticalScrollIndicator={false}>
             {/* hero component */}
-            <View style={{ margin: 20 }}>
+            <View style={{ margin: Spacing.MARGIN_20 }}>
               <HeroSection
                 weatherData={weatherDetails}
                 weatherDegree={weatherDegree}
@@ -149,15 +126,16 @@ const Home = ({
             </View>
 
             {/* Today's Details component  */}
-            <View style={{ marginBottom: 20, marginHorizontal: 20 }}>
+            <View style={styles.componentStyle}>
               <TodayDetail
                 weatherDetails={weatherDetails}
                 navigation={navigation}
                 windDegree={windDegree}
               />
             </View>
+
             {/* 7 day forecast component */}
-            <View style={{ marginBottom: 20, marginHorizontal: 20 }}>
+            <View style={styles.componentStyle}>
               <Forecast
                 data={weatherDetails[0]?.weatherDetails?.daily}
                 title="7 Days Forecast"
@@ -166,13 +144,9 @@ const Home = ({
                 navigation={navigation}
               />
             </View>
+
             {/* Air Pollution */}
-            <View
-              style={{
-                marginBottom: 20,
-                marginHorizontal: 20,
-              }}
-            >
+            <View style={styles.componentStyle}>
               <AirQuality
                 navigation={navigation}
                 background={true}
@@ -181,18 +155,18 @@ const Home = ({
                 )}
               />
             </View>
+
             {/* News Section */}
             <View style={Shadow.shadowStyle}>
               <Swiper
                 pagingEnabled={true}
                 loop={true}
                 key={news.length}
-                style={{ height: (deviceHeight * 50) / 100 }}
+                style={{ height: (deviceHeight / 7) * 3.1 }}
               >
                 {renderNews(news)}
               </Swiper>
             </View>
-            {/* </View> */}
           </ScrollView>
         )}
       </SafeAreaView>
@@ -207,28 +181,24 @@ const Home = ({
         <StatusBar
           translucent={false}
           barStyle={"light-content"}
-          backgroundColor="rgba(0,0,0,0.6)"
+          backgroundColor={colors.black}
         />
         <View
           style={{
-            backgroundColor: "rgba(0,0,0,0.6)",
+            backgroundColor: colors.black,
           }}
         >
-          <Search ModalVisible={handleModalVisible}   weatherDetail={weatherDetails} />
+          <Search
+            ModalVisible={handleModalVisible}
+            weatherDetail={weatherDetails}
+          />
         </View>
         <TouchableWithoutFeedback
           onPressOut={() => {
             setModalVisible(false);
           }}
         >
-          <View
-            style={{
-              flex: 1,
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: "rgba(0,0,0,0.6)",
-            }}
-          ></View>
+          <View style={styles.modalView}></View>
         </TouchableWithoutFeedback>
         {/* </SafeAreaView> */}
       </Modal>

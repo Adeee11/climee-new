@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import {
-  Dimensions,
   ScrollView,
   Text,
-  TouchableOpacity,
   View,
 } from "react-native";
 import { LineChart } from "react-native-chart-kit";
@@ -11,12 +9,10 @@ import GeneralStatusBarColor from "../../Components/generateStatusBarColor/Gener
 import Header from "../../Components/Header/Header";
 import colors from "../../globalStyles/colors";
 import fontFamily from "../../globalStyles/fontFamily";
-import { width } from "../../globalStyles/resposiveStyle";
 import typography from "../../globalStyles/typography";
 import styles from "./styles";
 import Spacing from "../../globalStyles/Spacing";
 import AdditionalDetails from "../../Components/AdditionalDetails/AdditionalDetails";
-import navigationStrings from "../../constants/navigationStrings";
 import AirQuality from "../../Components/AirQuality/AirQuality";
 import { useEffect } from "react";
 import { connect } from "react-redux";
@@ -48,9 +44,6 @@ const TodaysDetails = ({
     (valTemp: any) => valTemp.temp.toFixed(0)
   );
   
-  useEffect(() => {
-    // console.log(dataPoints);
-  }, []);
   return (
     <>
       <GeneralStatusBarColor
