@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import Shadow from "../../Components/Shadow/Shadow";
 import colors from "../../globalStyles/colors";
 import fontFamily from "../../globalStyles/fontFamily";
 import Spacing from "../../globalStyles/Spacing";
@@ -19,13 +20,14 @@ const styles = StyleSheet.create({
     fontSize: typography.FONT_SIZE_13,
     color: colors.textColor,
     paddingLeft: Spacing.PADDING_20,
-    paddingVertical: Spacing.PADDING_8,
+    paddingVertical: Spacing.PADDING_5,
   },
   UnitSubContainer: {
     backgroundColor: colors.white,
     paddingHorizontal: Spacing.PADDING_24,
     paddingVertical: Spacing.PADDING_10,
     borderRadius: Spacing.RADIUS_20,
+    ...Shadow.shadowStyle
   },
   flexRow: {
     flexDirection: "row",
@@ -59,7 +61,7 @@ const styles = StyleSheet.create({
     height: 24,
     width: 24,
     marginHorizontal: Spacing.MARGIN_4,
-    tintColor: colors.darkBlue,
+    // tintColor: colors.darkBlue,
   },
   actionsheetTextStyle: {
     fontSize: typography.FONT_SIZE_16,

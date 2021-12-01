@@ -14,12 +14,19 @@ const Tab = createMaterialBottomTabNavigator();
 const TabRoutes = () => {
   return (
     <Tab.Navigator
-      shifting={true}
+      // shifting={true}
       activeColor={colors.textColor}
       inactiveColor={colors.white}
       initialRouteName={navigationStrings.HOME}
       screenOptions={{ tabBarColor: colors.darkBlue }}
-      // barStyle={{ height: Spacing.HEIGHT_70, backgroundColor: colors.darkBlue }}
+      // // barStyle={{ marginBottom: Spacing.PADDING_10,backgroundColor:colors.darkBlue }}
+      // barStyle={{
+      //   borderTopLeftRadius: 25,
+      //   borderTopRightRadius: 25,
+      //   position: "absolute",
+      //   bottom: 0,
+      //   backgroundColor: colors.darkBlue,
+      // }}
     >
       <Tab.Screen
         name={navigationStrings.HOURLY}
@@ -30,9 +37,10 @@ const TabRoutes = () => {
             <Image
               source={assets.hourly}
               style={{
-                height: Spacing.HEIGHT_28,
+                height: Spacing.HEIGHT_24,
                 width: Spacing.WIDTH_28,
                 tintColor: color,
+                marginBottom: 5,
               }}
               resizeMode="contain"
             />
@@ -48,7 +56,7 @@ const TabRoutes = () => {
             <Image
               source={assets.weekly}
               style={{
-                height: Spacing.HEIGHT_28,
+                height: Spacing.HEIGHT_24,
                 width: Spacing.WIDTH_28,
                 tintColor: color,
               }}
@@ -66,7 +74,7 @@ const TabRoutes = () => {
             <Image
               source={assets.homeButton}
               style={{
-                height: Spacing.HEIGHT_55,
+                height: Spacing.HEIGHT_50,
                 width: Spacing.HEIGHT_55,
                 borderRadius: Spacing.RADIUS_82,
                 marginTop: Platform.OS == "ios" ? Spacing.MARGIN_24 : -8,
@@ -85,7 +93,7 @@ const TabRoutes = () => {
             <Image
               source={assets.nearBy}
               style={{
-                height: Spacing.HEIGHT_28,
+                height: Spacing.HEIGHT_24,
                 width: Spacing.WIDTH_28,
                 tintColor: color,
               }}
@@ -104,7 +112,7 @@ const TabRoutes = () => {
             <Image
               source={assets.settings}
               style={{
-                height: Spacing.HEIGHT_28,
+                height: Spacing.HEIGHT_24,
                 width: Spacing.WIDTH_28,
                 tintColor: color,
               }}

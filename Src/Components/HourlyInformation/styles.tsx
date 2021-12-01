@@ -3,16 +3,17 @@ import colors from "../../globalStyles/colors";
 import fontFamily from "../../globalStyles/fontFamily";
 import Spacing from "../../globalStyles/Spacing";
 import typography from "../../globalStyles/typography";
+import Shadow from "../Shadow/Shadow";
 
 const styles = StyleSheet.create({
   dateText: {
-    fontSize: typography.FONT_SIZE_18,
+    fontSize: typography.FONT_SIZE_16,
     fontFamily: fontFamily.regular,
     color: colors.textColor,
   },
   headingView: {
     paddingHorizontal: Spacing.PADDING_16,
-    paddingVertical: Spacing.PADDING_20,
+    paddingVertical: Spacing.PADDING_16,
     alignItems: "flex-start",
     justifyContent: "flex-start",
   },
@@ -21,6 +22,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     borderTopWidth: 0.2,
     borderTopColor: colors.grey,
+    ...Shadow.shadowStyle
   },
   infoContainer: {
     flexDirection: "row",
@@ -28,6 +30,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingVertical: Spacing.PADDING_10,
     flex: 1,
+
   },
   timeText: {
     fontFamily: fontFamily.light,

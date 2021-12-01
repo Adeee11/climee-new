@@ -30,6 +30,8 @@ import Shadow from "../../Components/Shadow/Shadow";
 import GeneralStatusBarColor from "../../Components/generateStatusBarColor/GenerateStatusBarColor";
 import Header from "../../Components/Header/Header";
 import typography from "../../globalStyles/typography";
+import * as StoreReview from "expo-store-review";
+import { showMessage } from "react-native-flash-message";
 
 const Setting = (props: any) => {
   const actionSheetRef = createRef<any>();
@@ -38,7 +40,8 @@ const Setting = (props: any) => {
   const handleShare = async () => {
     try {
       const result = await Share.share({
-        message: "Download the Climee app",
+        message:
+          "Download the Climee app from https://play.google.com/store/apps/details?id=com.iwebcode.climee",
       });
       if (result.action === Share.sharedAction) {
       } else if (result.action === Share.dismissedAction) {
@@ -64,7 +67,7 @@ const Setting = (props: any) => {
     });
   }, []);
 
-  const handleActionSheet = () => {
+  const   handleActionSheet = () => {
     Platform.OS === "ios"
       ? setOpenIOSModal(true)
       : actionSheetRef.current?.setModalVisible();
@@ -206,9 +209,9 @@ const Setting = (props: any) => {
               </View>
             </View>
 
-            <View style={[styles.UnitsView, Shadow.shadowStyle]}>
+            <View style={[styles.UnitsView]}>
               <Text style={styles.heading}>{"Apps"}</Text>
-              <View style={[styles.UnitSubContainer, Shadow.shadowStyle]}>
+              <View style={[styles.UnitSubContainer]}>
                 <TouchableOpacity
                   onPress={() =>
                     props.navigation.navigate(navigationStrings.ABOUT)
@@ -267,9 +270,27 @@ const Setting = (props: any) => {
               </View>
             </View>
 
-            <View style={[styles.UnitsView]}>
-              <View style={[styles.UnitSubContainer, Shadow.shadowStyle]}>
-                <TouchableOpacity>
+            <View style={styles.UnitsView}>
+              <View style={[styles.UnitSubContainer]}>
+                <TouchableOpacity
+                  onPress={() => {
+                    if (StoreReview.hasAction()) {
+                      if (StoreReview.isAvailableAsync()) {
+                        StoreReview.requestReview()
+                          .then(() => {
+                            const url = `https://play.google.com/store/apps/details?id=com.iwebcode.climee&showAllReviews=true`;
+                            Linking.openURL(url);
+                          })
+                          .catch(() => {
+                            showMessage({
+                              message: "Some error occured",
+                              type: "danger",
+                            });
+                          });
+                      }
+                    }
+                  }}
+                >
                   <View style={styles.flexRow}>
                     <View style={styles.rowEnd}>
                       <Image

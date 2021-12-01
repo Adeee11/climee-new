@@ -1,8 +1,12 @@
 import React from "react";
-import { CardStyleInterpolators, createStackNavigator, TransitionPresets, TransitionSpecs } from "@react-navigation/stack";
+import {
+  CardStyleInterpolators,
+  createStackNavigator,
+  TransitionPresets,
+  TransitionSpecs,
+} from "@react-navigation/stack";
 import navigationStrings from "../constants/navigationStrings";
 import {
-  AboutApp,
   AirPollution,
   Home,
   Hourly,
@@ -19,8 +23,7 @@ function HomeStack() {
         options={{
           headerShown: false,
 
-          cardStyleInterpolator:
-            CardStyleInterpolators.forFadeFromCenter,
+          cardStyleInterpolator: CardStyleInterpolators.forFadeFromCenter,
         }}
         name={navigationStrings.HOME}
         component={Home}
@@ -49,14 +52,7 @@ function HomeStack() {
         name={navigationStrings.NEWS}
         component={News}
       />
-      <Stack.Screen
-        options={{
-          headerShown: false,
-          ...TransitionPresets.ModalPresentationIOS,
-        }}
-        name={navigationStrings.ABOUT}
-        component={AboutApp}
-      />
+
       <Stack.Screen
         options={{
           headerShown: false,

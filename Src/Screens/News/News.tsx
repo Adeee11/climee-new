@@ -18,18 +18,6 @@ import Header from "../../Components/Header/Header";
 const News = ({ navigation, route }: any) => {
   const { data } = route.params;
 
-  const handleShare = async () => {
-    try {
-      const result = await Share.share({
-        message:
-          "Download the Climee app from https://play.google.com/store/apps/details?id=com.iwebcode.climee",
-      });
-      if (result.action === Share.sharedAction) {
-      } else if (result.action === Share.dismissedAction) {
-      }
-    } catch (e) {}
-  };
-
   return (
     <>
       <GeneralStatusBarColor

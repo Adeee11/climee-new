@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  ScrollView,
-  Text,
-  View,
-} from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import { LineChart } from "react-native-chart-kit";
 import GeneralStatusBarColor from "../../Components/generateStatusBarColor/GenerateStatusBarColor";
 import Header from "../../Components/Header/Header";
@@ -43,7 +39,7 @@ const TodaysDetails = ({
   const dataPoints = weatherDetails[0]?.weatherDetails.hourly.map(
     (valTemp: any) => valTemp.temp.toFixed(0)
   );
-  
+
   return (
     <>
       <GeneralStatusBarColor

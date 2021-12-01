@@ -71,7 +71,6 @@ const HourlyInformation = (props: any) => {
       <View style={styles.mainContainer}>
         <FlatList
           data={data}
-          showsVerticalScrollIndicator={false}
           keyExtractor={(item) => item?.id}
           renderItem={({ item }) => renderItems(item)}
           bounces={false}
