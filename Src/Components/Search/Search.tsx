@@ -29,10 +29,20 @@ const Search = ({ ModalVisible, weatherDetail }: any) => {
     description: string;
   }
 
+  interface location {
+    latitude: number;
+    longitude: number;
+    street: string;
+    city: string;
+    country: string;
+    place_id: string
+  }
+
+  const [loading, setLoading] = useState<boolean>(false)
   const [searchText, setSearchText] = useState<string>("");
   const [favouriteCity, setFavouriteCity] = useState<Array<string>>([]);
-  const [recents, setRecents] = useState<Array<object>>([
-    { latitude: 0, longitude: 0, street: "", city: "", country: "" },
+  const [recents, setRecents] = useState<Array<location>>([
+    { latitude: 0, longitude: 0, street: "", city: "", country: "", place_id: '' },
   ]);
   const [searchResult, setSearchResult] = useState<Array<Searchresult>>([]);
   const [placeId, setPlaceId] = useState<string | null>(null);
@@ -45,16 +55,16 @@ const Search = ({ ModalVisible, weatherDetail }: any) => {
         m.push(item);
         await AsyncStorage.setItem("climeeFavouriteCity", JSON.stringify(m));
       } else {
-        let d = JSON.parse(data);
+        const d = JSON.parse(data);
         d.push(item);
         await AsyncStorage.setItem("climeeFavouriteCity", JSON.stringify(d));
-        const Recent = await AsyncStorage.getItem("climeeRecentsCity");
-        const r = JSON.parse(Recent);
-        const ds = r?.filter((e) => e?.street !== item?.street);
+        const Recent: any = await AsyncStorage.getItem("climeeRecentsCity");
+        const r :any = JSON.parse(Recent);
+        const ds = r?.filter((e: any) => e?.street !== item?.street);
         await AsyncStorage.setItem("climeeRecentsCity", JSON.stringify(ds));
-        const Recents = await AsyncStorage.getItem("climeeRecentsCity");
+        const Recents: any= await AsyncStorage.getItem("climeeRecentsCity");
         setRecents(JSON.parse(Recents));
-        const datas = await AsyncStorage.getItem("climeeFavouriteCity");
+        const datas: any = await AsyncStorage.getItem("climeeFavouriteCity");
         setFavouriteCity(JSON.parse(datas));
       }
     } catch (error) {
@@ -65,10 +75,9 @@ const Search = ({ ModalVisible, weatherDetail }: any) => {
   useEffect(() => {
     (async () => {
       try {
-        const data = await AsyncStorage.getItem("climeeFavouriteCity");
+        const data: any= await AsyncStorage.getItem("climeeFavouriteCity");
         setFavouriteCity(JSON.parse(data));
-        //  await AsyncStorage.removeItem("climeeFavouriteCity");
-        const Recent = await AsyncStorage.getItem("climeeRecentsCity");
+        const Recent: any= await AsyncStorage.getItem("climeeRecentsCity");
         setRecents(JSON.parse(Recent));
       } catch (error) {
         console.log(error);
@@ -79,25 +88,24 @@ const Search = ({ ModalVisible, weatherDetail }: any) => {
   useEffect(() => {
     (async () => {
       try {
-        // setLoading(true);
+        setLoading(true);
         const res: any = await axios.get(
           `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${searchText}&types=geocode&key=AIzaSyBXG8JrE9C2wKktMK-lDJkHNbYyuL4cr34`
         );
-        await setSearchResult(res?.data?.predictions);
-        console.log(searchText);
-        
+        await setSearchResult(res?.data?.predictions);        
+        setLoading(false);
       } catch (Err) {
         console.log(Err);
       }
-      // setLoading(false);
     })();
   }, [searchText]);
 
   useEffect(() => {
     (async () => {
       try {
+        setLoading(true);
         weatherDetailsLoading(true);
-        const currLoc = await AsyncStorage.getItem("climeeCurrentLocation");
+        const currLoc: any= await AsyncStorage.getItem("climeeCurrentLocation");
         const res: any = await axios.get(
           `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=AIzaSyBXG8JrE9C2wKktMK-lDJkHNbYyuL4cr34`
         );
@@ -122,7 +130,6 @@ const Search = ({ ModalVisible, weatherDetail }: any) => {
         const resp: any = await weatherApi.get(
           `/air_pollution?lat=${res?.data?.result?.geometry?.location?.lat}&lon=${res?.data?.result?.geometry?.location?.lng}&appid=${api}`
         );
-        // changeAppTheme(response.data.current.weather[0].main);
         const details = [];
         const pollution = [];
         details.push({
@@ -134,39 +141,28 @@ const Search = ({ ModalVisible, weatherDetail }: any) => {
         });
         weatherDetails(details);
         pollutionDetails(pollution);
-        // handleFavourite();
-        const data = await favouriteCity?.filter((e) => {
-          console.log(e);
-          
-          return e?.place_id === placeId;
-        });
-        console.log('placeId ', placeId);
-        
-        // console.log(JSON.parse(currLoc)?.street?.toLowerCase());
-        // console.log(place[0]?.street?.toLowerCase())
-        console.log('data', data)
-        // console.log(data !== undefined || data?.length !== 0 || data !== null || JSON.parse(currLoc)?.street?.toLowerCase() !== place[0]?.street?.toLowerCase());
-        // console.log(data?.length !== 0);
-        // console.log(JSON.parse(currLoc)?.street?.toLowerCase() !== place[0]?.street?.toLowerCase());
-        
-        
-        if (JSON.parse(currLoc)?.street?.toLowerCase() !== place[0]?.street?.toLowerCase() && data?.length !== 0) {
+        if (JSON.parse(currLoc)?.street?.toLowerCase() !== place[0]?.street?.toLowerCase()) {
           handleSearchSubmit(locationObj);
+          weatherDetailsLoading(false);
+          setSearchResult([]);
+          ModalVisible(false);
+          return
         }
+        handleSearchSubmit(locationObj);
         weatherDetailsLoading(false);
         setSearchResult([]);
+        setLoading(false);
         ModalVisible(false);
       } catch (err) {
         console.log(err);
       }
-      // setLoading(false);
     })();
   }, [placeId]);
 
   const handleRemoveLocation = async (item: any) => {
     try {
-      const d = await AsyncStorage.getItem("climeeFavouriteCity");
-      const data = JSON.parse(d);
+      const d: any = await AsyncStorage.getItem("climeeFavouriteCity");
+      const data = JSON.parse(d);      
       const newLocations = await data?.filter(
         (e: any) => e?.street?.toLowerCase() !== item?.street?.toLowerCase()
       );
@@ -181,12 +177,10 @@ const Search = ({ ModalVisible, weatherDetail }: any) => {
   };
 
   const handleShowDetails = async (item: any) => {
-    // setSearchText(item?.city)
-    // console.log(item);
     const str = `${item?.street}, ${item?.city}, ${item?.country}`;
     const res: any = await axios.get(
       `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${str}&types=geocode&key=AIzaSyBXG8JrE9C2wKktMK-lDJkHNbYyuL4cr34`
-    );
+    );    
     setPlaceId(res?.data?.predictions[0]?.place_id);
   };
 
@@ -233,8 +227,8 @@ const Search = ({ ModalVisible, weatherDetail }: any) => {
       country: value?.country,
       place_id: value?.place_id,
     };
-    let m = [];
-    const data = await AsyncStorage.getItem("climeeRecentsCity");
+    const m = [];
+    const data: any= await AsyncStorage.getItem("climeeRecentsCity");
     const d = JSON.parse(data);
     if (d === undefined || d === null || d?.length === 0) {
       m.push(locationobj);
@@ -243,10 +237,16 @@ const Search = ({ ModalVisible, weatherDetail }: any) => {
       d.push(locationobj);
       AsyncStorage.setItem("climeeRecentsCity", JSON.stringify(d));
     }
-    const Recent = await AsyncStorage.getItem("climeeRecentsCity");
+    const Recent: any= await AsyncStorage.getItem("climeeRecentsCity");
     setRecents(JSON.parse(Recent));
     setSearchText("");
   };
+
+   function uniqueKeepLAst(data:any, key:any) {
+     return [
+       ...new Map(data.map((x: any) => [key(x), x])).values()
+     ]
+   }
 
   return (
     <>
@@ -304,7 +304,7 @@ const Search = ({ ModalVisible, weatherDetail }: any) => {
         {/* Favourite Cities */}
         <View style={{ marginBottom: Spacing.MARGIN_5 }}>
           <FlatList
-            data={favouriteCity}
+            data={uniqueKeepLAst(favouriteCity, (it: any) => it.street)}
             bounces={false}
             keyExtractor={(item) => item?.id}
             renderItem={({ item }) => (
@@ -328,7 +328,7 @@ const Search = ({ ModalVisible, weatherDetail }: any) => {
         {/* Recent Searchs*/}
         {recents === null ? null : (
           <FlatList
-            data={recents?.filter((e) => e?.street !== "")}
+            data={uniqueKeepLAst(recents?.filter((e) => e?.street !== ""), it => it.street)}
             bounces={false}
             keyExtractor={(item) => item?.id}
             renderItem={({ item }) => renderRecentSearchs(item)}
