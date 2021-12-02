@@ -22,9 +22,9 @@ const ProgressBar = ({ val, perc = true }: any) => {
   return (
     <>
       <ProgressCircle
-        percent={val}
+        percent={parseInt(val)}
         radius={40}
-        borderWidth={5}
+        borderWidth={4}
         color={color(val)?.colour}
         shadowColor={colors.grey}
         bgColor={colors.white}

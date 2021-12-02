@@ -20,7 +20,7 @@ const HourlyInformation = (props: any) => {
 
   const renderItems = (item: any) => {
     return (
-      <View style={styles.infoContainer}>
+      <View key={item?.id} style={styles.infoContainer}>
         <View style={styles.subContainer}>
           <Text style={styles.timeText}>{time(item.dt)?.strTime}</Text>
         </View>
@@ -69,12 +69,13 @@ const HourlyInformation = (props: any) => {
         <Text style={styles.dateText}>{date}</Text>
       </View>
       <View style={styles.mainContainer}>
-        <FlatList
+        {data?.map((item: any) => renderItems(item))}
+        {/* <FlatList
           data={data}
           keyExtractor={(item) => item?.id}
           renderItem={({ item }) => renderItems(item)}
           bounces={false}
-        />
+        /> */}
       </View>
     </>
   );

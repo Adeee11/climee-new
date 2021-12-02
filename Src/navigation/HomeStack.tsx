@@ -6,14 +6,7 @@ import {
   TransitionSpecs,
 } from "@react-navigation/stack";
 import navigationStrings from "../constants/navigationStrings";
-import {
-  AirPollution,
-  Home,
-  Hourly,
-  News,
-  TodaysDetails,
-  Weekly,
-} from "../Screens";
+import { AirPollution, Home, News, TodaysDetails } from "../Screens";
 
 const Stack = createStackNavigator();
 function HomeStack() {
@@ -51,23 +44,6 @@ function HomeStack() {
         }}
         name={navigationStrings.NEWS}
         component={News}
-      />
-
-      <Stack.Screen
-        options={{
-          headerShown: false,
-          ...TransitionPresets.ModalSlideFromBottomIOS,
-        }}
-        name={navigationStrings.HOURLY}
-        component={Hourly}
-      />
-      <Stack.Screen
-        options={{
-          headerShown: false,
-          ...TransitionPresets.ModalSlideFromBottomIOS,
-        }}
-        name={navigationStrings.WEEKLY}
-        component={Weekly}
       />
     </Stack.Navigator>
   );

@@ -41,10 +41,7 @@ const Hourly = ({
         barStyle={"light-content"}
         backgroundColor={colors.darkBlue}
       />
-      <Header
-        title={"Hourly"}
-        onPress={() => navigation.navigate(navigationStrings.HOME)}
-      />
+      <Header title={"Hourly"} />
       <ScrollView
         showsVerticalScrollIndicator={false}
         bounces={false}

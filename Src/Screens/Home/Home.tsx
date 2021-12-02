@@ -56,7 +56,7 @@ const Home = ({
         });
         setNews(result?.data);
         setLoading(false);
-      } catch (err) {
+      } catch (err: any) {
         console.log(err.message);
       }
     })();
@@ -65,7 +65,7 @@ const Home = ({
   const renderNews = (data: any) => {
     return data?.map((item: any, index: any) => {
       return (
-        <View style={styles.newsContainer}>
+        <View key={index} style={styles.newsContainer}>
           <TouchableOpacity
             style={styles.cardContainer}
             onPress={() =>

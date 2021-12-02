@@ -67,7 +67,7 @@ const Setting = (props: any) => {
     });
   }, []);
 
-  const   handleActionSheet = () => {
+  const handleActionSheet = () => {
     Platform.OS === "ios"
       ? setOpenIOSModal(true)
       : actionSheetRef.current?.setModalVisible();
@@ -96,7 +96,6 @@ const Setting = (props: any) => {
       >
         <Header
           title={"Settings"}
-          onPress={() => props.navigation.navigate(navigationStrings.HOME)}
         />
         <View style={{ flex: 0.98 }}>
           <ScrollView showsVerticalScrollIndicator={false} bounces={false}>
@@ -273,9 +272,9 @@ const Setting = (props: any) => {
             <View style={styles.UnitsView}>
               <View style={[styles.UnitSubContainer]}>
                 <TouchableOpacity
-                  onPress={() => {
-                    if (StoreReview.hasAction()) {
-                      if (StoreReview.isAvailableAsync()) {
+                  onPress={async () => {
+                    if (await StoreReview.hasAction()) {
+                      if (await StoreReview.isAvailableAsync()) {
                         StoreReview.requestReview()
                           .then(() => {
                             const url = `https://play.google.com/store/apps/details?id=com.iwebcode.climee&showAllReviews=true`;

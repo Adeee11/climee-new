@@ -36,23 +36,10 @@ const TodayDetail = ({ weatherDetails, navigation, windDegree }: any) => {
       icon: <Pressure width={18} height={18} />,
       title: "Pressure",
     },
- 
   ];
 
-  const time = (time: number) => {
-    const date = new Date(time * 1000);
-    let hours = date.getHours();
-    let minutes: number | string = date.getMinutes();
-    const ampm = hours >= 12 ? "PM" : "AM";
-    hours = hours % 12;
-    hours = hours ? hours : 12; // the hour '0' should be '12'
-    minutes = minutes < 10 ? "0" + minutes : minutes;
-    const strTime = hours + ":" + minutes + " " + ampm;
-    return { strTime };
-  };
-
-  const renderItem = (item: any) => (
-    <View style={{ paddingHorizontal: Spacing.PADDING_20 }}>
+  const renderItem = (item: any, index: string) => (
+    <View key={index} style={{ paddingHorizontal: Spacing.PADDING_20 }}>
       <View style={styles.detailContainer}>
         <View style={styles.detailLeftWrapper}>
           <View>{item.icon}</View>
@@ -100,13 +87,7 @@ const TodayDetail = ({ weatherDetails, navigation, windDegree }: any) => {
         <Text style={styles.cardTitle}>Today&apos;s Detail</Text>
         <Right />
       </TouchableOpacity>
-      <View>
-        <FlatList
-          data={details}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => renderItem(item)}
-        />
-      </View>
+      <View>{details.map((item, index) => renderItem(item, item.id))}</View>
     </View>
   );
 };

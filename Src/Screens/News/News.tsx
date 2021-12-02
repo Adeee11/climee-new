@@ -14,6 +14,7 @@ import url from "../../globalStyles/cms-url";
 import Spacing from "../../globalStyles/Spacing";
 import GeneralStatusBarColor from "../../Components/generateStatusBarColor/GenerateStatusBarColor";
 import Header from "../../Components/Header/Header";
+import { deviceHeight } from "../../constants/dimensions";
 
 const News = ({ navigation, route }: any) => {
   const { data } = route.params;
@@ -30,8 +31,8 @@ const News = ({ navigation, route }: any) => {
           <Image
             source={{ uri: `${url}${data?.image?.url}` }}
             style={{
-              borderRadius: 20,
-              height: 170,
+              borderRadius: Spacing.RADIUS_20,
+              height: deviceHeight/7*2,
               width: "90%",
               resizeMode: "cover",
             }}
