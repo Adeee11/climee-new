@@ -32,7 +32,6 @@ const AdditionalDetails = ({ details, windDegree }: any) => {
                   ? (details?.wind_speed * 2.237)?.toFixed(2)
                   : details?.wind_speed?.toFixed(2)
               }
-              // value={details?.wind_speed}
               img={assets.newWind}
             />
           </View>

@@ -11,8 +11,9 @@ import { Provider as LocationProvider } from "./Src/Context/locationContext";
 import { RootSiblingParent } from "react-native-root-siblings";
 import SplashScreen from "./Src/Screens/SplashScreen/SplashScreen";
 import AppLoading from "expo-app-loading";
-import { MenuProvider } from 'react-native-popup-menu';
+import { MenuProvider } from "react-native-popup-menu";
 import InternetError from "./Src/Components/InternetError";
+import FlashMessage from "react-native-flash-message";
 
 const AppWrapper = () => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -46,7 +47,7 @@ const AppWrapper = () => {
     PoppinsLight: require("./assets/fonts/Poppins-Light.ttf"),
     PoppinsExtraLight: require("./assets/fonts/Poppins-ExtraLight.ttf"),
   });
-  
+
   if (!fontLoading) {
     return <AppLoading />;
   } else {
@@ -59,11 +60,12 @@ const AppWrapper = () => {
         ) : (
           <Provider store={store}>
             <MenuProvider>
-            <LocationProvider>
-              <RootSiblingParent>
-                <App />
-              </RootSiblingParent>
-            </LocationProvider>
+              <LocationProvider>
+                <RootSiblingParent>
+                  <FlashMessage position="top" />
+                  <App />
+                </RootSiblingParent>
+              </LocationProvider>
             </MenuProvider>
           </Provider>
         )}

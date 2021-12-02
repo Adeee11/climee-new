@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import Shadow from "../../Components/Shadow/Shadow";
 import colors from "../../globalStyles/colors";
 import fontFamily from "../../globalStyles/fontFamily";
 import Spacing from "../../globalStyles/Spacing";
@@ -36,6 +37,7 @@ const styles = StyleSheet.create({
     paddingTop: Spacing.PADDING_16,
     justifyContent: "space-between",
     alignItems: "flex-start",
+    ...Shadow.shadowStyle,
   },
   heading: {
     fontFamily: fontFamily.semiBold,
@@ -50,6 +52,7 @@ const styles = StyleSheet.create({
     paddingVertical: Spacing.PADDING_10,
     borderRadius: Spacing.RADIUS_10,
     width: "100%",
+    ...Shadow.shadowStyle,
   },
   flexRow: {
     flexDirection: "row",
@@ -80,7 +83,7 @@ const styles = StyleSheet.create({
     paddingVertical: Spacing.PADDING_8,
   },
   footer: {
-    flex: 0.1,
+    flex: 0.05,
     justifyContent: "center",
     alignItems: "center",
     paddingHorizontal: Spacing.PADDING_10,

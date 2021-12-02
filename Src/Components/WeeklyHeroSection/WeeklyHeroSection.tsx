@@ -5,9 +5,9 @@ import { AntDesign } from "@expo/vector-icons";
 import styles from "./styles";
 import moment from "moment";
 import { LinearGradient } from "expo-linear-gradient";
-import assets from "../../../assets";
 import WeatherImage from "../WeatherImage/WeatherImage";
 import { useEffect } from "react";
+import Spacing from "../../globalStyles/Spacing";
 
 const WeeklyHeroSection = ({ weatherDegree, weatherDetails }: any) => {
   const [colorOne, setColorOne] = useState(colors.blueTheme);
@@ -58,22 +58,9 @@ const WeeklyHeroSection = ({ weatherDegree, weatherDetails }: any) => {
         }}
         end={{ x: 1.2, y: 3 }}
       />
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-      >
+      <View style={styles.mainContainer}>
         <View style={styles.upperView}>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-              //   backgroundColor:"red"
-            }}
-          >
+          <View style={styles.mainContainer}>
             <Text style={styles.DayText}>
               {getDay(weatherDetails?.dt)?.day}
             </Text>
@@ -83,7 +70,7 @@ const WeeklyHeroSection = ({ weatherDegree, weatherDetails }: any) => {
                 width: 1,
                 backgroundColor: colors.white,
                 alignSelf: "center",
-                marginHorizontal: 10,
+                marginHorizontal: Spacing.MARGIN_10,
               }}
             />
             <Text style={styles.dateText}>
@@ -101,14 +88,18 @@ const WeeklyHeroSection = ({ weatherDegree, weatherDetails }: any) => {
               alignItems: "center",
             }}
           >
-            <AntDesign name="arrowdown" size={25} color="#3AE000" />
+            <AntDesign name="arrowdown" size={25} color={colors.good} />
             <Text style={{ ...styles.tempText, marginRight: 15 }}>
               {weatherDegree == "F"
                 ? (weatherDetails?.temp?.min * 1.8 + 32)?.toFixed(0)
                 : weatherDetails?.temp?.min.toFixed(0)}
               &deg;
             </Text>
-            <AntDesign name="arrowup" size={25} color="#E00000" />
+            <AntDesign
+              name="arrowup"
+              size={25}
+              color={colors.moderatelyPolluted}
+            />
             <Text style={styles.tempText}>
               {weatherDegree == "F"
                 ? (weatherDetails?.temp?.max * 1.8 + 32)?.toFixed(0)

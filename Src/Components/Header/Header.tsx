@@ -6,17 +6,19 @@ import { AntDesign, Ionicons } from "@expo/vector-icons";
 import Spacing from "../../globalStyles/Spacing";
 
 export default function Header(props: any) {
-  const { title, backButton = true, onPress } = props;
+  const { title, backButton = true, onPress, tab = true } = props;
   return (
     <View style={styles.headerContainer}>
-      {backButton ? // <TouchableOpacity onPress={onPress}>
-      //   <Ionicons name="arrow-back" size={30} color={colors.white} />
-      // </TouchableOpacity>
-      null : (
+      {tab ? null : backButton ? (
+        <TouchableOpacity onPress={onPress}>
+          <Ionicons name="arrow-back" size={30} color={colors.white} />
+        </TouchableOpacity>
+      ) : (
         <TouchableOpacity onPress={onPress}>
           <AntDesign name="search1" size={30} color={colors.white} />
         </TouchableOpacity>
       )}
+
       <Text
         style={[
           styles.headerText,

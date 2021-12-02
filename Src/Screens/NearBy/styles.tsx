@@ -10,20 +10,20 @@ const styles = StyleSheet.create({
     top: 80,
     right: 20,
     left: 20,
-    backgroundColor: "white",
-    borderRadius: 20,
+    backgroundColor: colors.white,
+    borderRadius: Spacing.RADIUS_20,
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "center",
     padding: Spacing.PADDING_15,
   },
   streetText: {
-    color: "#363B64",
+    color: colors.purple,
     fontFamily: fontFamily.semiBold,
     fontSize: typography.FONT_SIZE_14,
   },
   locationText: {
-    color: "#363B64",
+    color: colors.purple,
     fontFamily: fontFamily.regular,
     fontSize: typography.FONT_SIZE_14,
   },
@@ -32,25 +32,24 @@ const styles = StyleSheet.create({
     top: 155,
     right: 90,
     left: 90,
-    borderRadius: 20,
+    borderRadius: Spacing.RADIUS_20,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    backgroundColor: "blue",
     paddingVertical: Spacing.PADDING_20,
-    paddingHorizontal: Spacing.PADDING_10
+    paddingHorizontal: Spacing.PADDING_10,
   },
   tempText: {
     color: colors.white,
     fontFamily: fontFamily.semiBold,
     fontSize: typography.FONT_SIZE_24,
-    alignSelf: 'center'
+    alignSelf: "center",
   },
   weatherText: {
     color: colors.white,
     fontFamily: fontFamily.semiBold,
     fontSize: typography.FONT_SIZE_14,
-    textTransform: 'capitalize'
+    textTransform: "capitalize",
   },
   bottomContainer: {
     position: "absolute",
@@ -58,16 +57,30 @@ const styles = StyleSheet.create({
     right: 30,
     left: 30,
     padding: Spacing.PADDING_10,
-    borderRadius: 20,
+    borderRadius: Spacing.RADIUS_20,
   },
   additionalDetailsContainer: {
-    backgroundColor: "#fff",
+    backgroundColor: colors.white,
   },
   seemoreText: {
-    color: "white",
+    color: colors.white,
     fontFamily: fontFamily.regular,
     fontSize: typography.FONT_SIZE_13,
     marginRight: Spacing.MARGIN_10,
+  },
+  headerComponent: {
+    height: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: colors.appBackground,
+    borderTopLeftRadius: Spacing.RADIUS_10,
+    borderTopRightRadius: Spacing.RADIUS_10,
+  },
+  subHeaderComponent: { borderBottomWidth: 3, width: "20%" },
+  seemore: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

@@ -1,7 +1,5 @@
 import React from "react";
 import { Text, View } from "react-native";
-import ProgressCircle from "react-native-progress-circle";
-import colors from "../../globalStyles/colors";
 import fontFamily from "../../globalStyles/fontFamily";
 import Spacing from "../../globalStyles/Spacing";
 import ProgressBar from "../ProgressBar/ProgressBar";

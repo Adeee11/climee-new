@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     padding: Spacing.PADDING_10,
   },
   mainContainer: {
-    flex: 0.1,
+    flex: 0.07,
     // paddingTop: Spacing.PADDING_8,
     marginHorizontal: Spacing.MARGIN_10,
     justifyContent: "flex-start",
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   },
   shareStyle: {
     fontFamily: fontFamily.light,
-    fontSize: 14,
+    fontSize: typography.FONT_SIZE_14,
     color: colors.grey,
     textAlign: "left",
     marginLeft: Spacing.MARGIN_4,

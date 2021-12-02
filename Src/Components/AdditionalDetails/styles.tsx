@@ -3,6 +3,7 @@ import colors from "../../globalStyles/colors";
 import fontFamily from "../../globalStyles/fontFamily";
 import Spacing from "../../globalStyles/Spacing";
 import typography from "../../globalStyles/typography";
+import Shadow from "../Shadow/Shadow";
 
 const styles = StyleSheet.create({
 mainContainer:{
@@ -11,7 +12,8 @@ mainContainer:{
     paddingTop:Spacing.PADDING_24,
     borderRadius:Spacing.RADIUS_20,
     marginHorizontal:Spacing.MARGIN_16,
-    marginBottom:Spacing.MARGIN_16
+    marginBottom:Spacing.MARGIN_16,
+    ...Shadow.shadowStyle
 },
 title:{
     fontFamily:fontFamily.semiBold,

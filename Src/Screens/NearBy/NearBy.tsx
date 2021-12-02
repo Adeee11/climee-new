@@ -1,15 +1,6 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React, { useEffect, useState, createRef } from "react";
-import {
-  View,
-  Text,
-  SafeAreaView,
-  Image,
-  ScrollView,
-  Animated,
-  Dimensions,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, SafeAreaView, TouchableOpacity } from "react-native";
 import ActionSheet from "react-native-actions-sheet";
 import { connect } from "react-redux";
 import * as location from "expo-location";
@@ -22,13 +13,12 @@ import styles from "./styles";
 import api from "../../globalStyles/api";
 import WeatherImage from "../../Components/WeatherImage/WeatherImage";
 import AdditionalDetails from "../../Components/AdditionalDetails/AdditionalDetails";
-import Spacing from "../../globalStyles/Spacing";
 import AirQuality from "../../Components/AirQuality/AirQuality";
 import colors from "../../globalStyles/colors";
 import Loader from "../../Components/Loader";
+import Spacing from "../../globalStyles/Spacing";
 
 const NearBy = ({ weatherDetails, navigation }: any) => {
-  const [airQuality, setAirQuality] = useState<number>(0);
   const [coordinates, setCoordinates] = useState<any>({
     latitude: weatherDetails[0]?.locationDetails?.latitude,
     longitude: weatherDetails[0]?.locationDetails?.longitude,
@@ -41,7 +31,7 @@ const NearBy = ({ weatherDetails, navigation }: any) => {
   });
   const [loading, setLoading] = useState<boolean>(false);
   const actionSheetRef = createRef<any>();
-
+  const [airQuality, setAirQuality] = useState();
   const getCoordinates = (val: any) => {
     setCoordinates(val);
   };
@@ -77,17 +67,8 @@ const NearBy = ({ weatherDetails, navigation }: any) => {
 
   const headerComponent = () => {
     return (
-      <View
-        style={{
-          height: 20,
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: colors.appBackground,
-          borderTopLeftRadius: 10,
-          borderTopRightRadius: 10,
-        }}
-      >
-        <View style={{ borderBottomWidth: 3, width: "20%" }} />
+      <View style={styles.headerComponent}>
+        <View style={styles.subHeaderComponent} />
       </View>
     );
   };
@@ -95,8 +76,8 @@ const NearBy = ({ weatherDetails, navigation }: any) => {
   return (
     <>
       <GeneralStatusBarColor
-        barStyle={"dark-content"}
-        backgroundColor={"#3C6FD1"}
+        barStyle={"light-content"}
+        backgroundColor={colors.darkBlue}
       />
       <SafeAreaView style={{ flex: 1 }}>
         <Header title={"Nearby"} />
@@ -129,7 +110,7 @@ const NearBy = ({ weatherDetails, navigation }: any) => {
             {/* Temperature Container */}
             <View style={styles.tempContainer}>
               <LinearGradient
-                colors={["#3C6FD1", "#7CA9FF"]}
+                colors={[colors.darkBlue, colors.blueTheme]}
                 style={{
                   position: "absolute",
                   left: 0,
@@ -149,7 +130,7 @@ const NearBy = ({ weatherDetails, navigation }: any) => {
                   {weather?.current?.weather[0]?.description}
                 </Text>
               </View>
-              <View style={{ flex: 0.3, alignItems: "center" }}>
+              <View style={{ flex: 0.5, alignItems: "center" }}>
                 <WeatherImage
                   img={weather?.current?.weather[0]?.main}
                   height={70}
@@ -162,7 +143,7 @@ const NearBy = ({ weatherDetails, navigation }: any) => {
               onPress={() => actionSheetRef.current?.setModalVisible()}
             >
               <LinearGradient
-                colors={["#3C6FD1", "#7CA9FF"]}
+                colors={[colors.darkBlue, colors.blueTheme]}
                 style={{
                   position: "absolute",
                   left: 0,
@@ -174,13 +155,7 @@ const NearBy = ({ weatherDetails, navigation }: any) => {
                 }}
                 end={{ x: 0.5, y: 1.2 }}
               />
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
+              <View style={styles.seemore}>
                 <Text style={styles.seemoreText}>See More Details</Text>
                 <SeeMoreArrow />
               </View>
@@ -195,11 +170,14 @@ const NearBy = ({ weatherDetails, navigation }: any) => {
         CustomHeaderComponent={headerComponent()}
       >
         <View style={{ backgroundColor: colors.appBackground }}>
-          <View style={{ marginTop: 10 }}>
+          <View style={{ marginTop: Spacing.MARGIN_10 }}>
             <AdditionalDetails details={weather?.current} />
           </View>
           <View
-            style={{ marginHorizontal: Spacing.MARGIN_16, marginBottom: 20 }}
+            style={{
+              marginHorizontal: Spacing.MARGIN_16,
+              marginBottom: Spacing.MARGIN_20,
+            }}
           >
             <AirQuality navigation={navigation} val={airQuality} />
           </View>

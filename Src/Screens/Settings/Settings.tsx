@@ -29,6 +29,9 @@ import ToggleButton from "../../Components/ToggleButton/ToggleButton";
 import Shadow from "../../Components/Shadow/Shadow";
 import GeneralStatusBarColor from "../../Components/generateStatusBarColor/GenerateStatusBarColor";
 import Header from "../../Components/Header/Header";
+import typography from "../../globalStyles/typography";
+import * as StoreReview from "expo-store-review";
+import { showMessage } from "react-native-flash-message";
 
 const Setting = (props: any) => {
   const actionSheetRef = createRef<any>();
@@ -37,7 +40,8 @@ const Setting = (props: any) => {
   const handleShare = async () => {
     try {
       const result = await Share.share({
-        message: "Download the Climee app",
+        message:
+          "Download the Climee app from https://play.google.com/store/apps/details?id=com.iwebcode.climee",
       });
       if (result.action === Share.sharedAction) {
       } else if (result.action === Share.dismissedAction) {
@@ -81,30 +85,31 @@ const Setting = (props: any) => {
 
   return (
     <>
-          <GeneralStatusBarColor
-           barStyle={"dark-content"}
-           backgroundColor={"#3C6FD1"}
-         />
+      <GeneralStatusBarColor
+        barStyle={"light-content"}
+        backgroundColor={colors.darkBlue}
+      />
       <SafeAreaView
         style={{
-          flex: 1
-        }}>
+          flex: 1,
+        }}
+      >
         <Header
           title={"Settings"}
-          onPress={() => props.navigation.navigate(navigationStrings.HOME)}
         />
-        <View>
+        <View style={{ flex: 0.98 }}>
           <ScrollView showsVerticalScrollIndicator={false} bounces={false}>
             <View
               style={{
-                flex: 0.14,
+                flex: 0.2,
                 alignItems: "center",
+                marginVertical: Spacing.MARGIN_10,
                 justifyContent: "flex-start",
               }}
             >
               <Text
                 style={{
-                  fontSize: 30,
+                  fontSize: typography.FONT_SIZE_30,
                   fontFamily: fontFamily.bold,
                   color: colors.textColor,
                   lineHeight: 44,
@@ -119,21 +124,6 @@ const Setting = (props: any) => {
                   flexDirection: "row",
                 }}
               >
-                {/* <TouchableOpacity
-                  onPress={() =>
-                    Linking.openURL("mailto: Climee.app@gmail.com").catch(
-                      (err) => {
-                        console.log(err);
-                      }
-                    )
-                  }
-                >
-                  <Image
-                    source={assets.googlePlus}
-                    resizeMode={"contain"}
-                    style={styles.iconStyle}
-                  />
-                </TouchableOpacity> */}
                 <TouchableOpacity
                   onPress={() => Linking.openURL("https://fb.me/climee01")}
                 >
@@ -218,9 +208,9 @@ const Setting = (props: any) => {
               </View>
             </View>
 
-            <View style={[styles.UnitsView, Shadow.shadowStyle]}>
+            <View style={[styles.UnitsView]}>
               <Text style={styles.heading}>{"Apps"}</Text>
-              <View style={[styles.UnitSubContainer, Shadow.shadowStyle]}>
+              <View style={[styles.UnitSubContainer]}>
                 <TouchableOpacity
                   onPress={() =>
                     props.navigation.navigate(navigationStrings.ABOUT)
@@ -279,9 +269,27 @@ const Setting = (props: any) => {
               </View>
             </View>
 
-            <View style={[styles.UnitsView]}>
-              <View style={[styles.UnitSubContainer, Shadow.shadowStyle]}>
-                <TouchableOpacity>
+            <View style={styles.UnitsView}>
+              <View style={[styles.UnitSubContainer]}>
+                <TouchableOpacity
+                  onPress={async () => {
+                    if (await StoreReview.hasAction()) {
+                      if (await StoreReview.isAvailableAsync()) {
+                        StoreReview.requestReview()
+                          .then(() => {
+                            const url = `https://play.google.com/store/apps/details?id=com.iwebcode.climee&showAllReviews=true`;
+                            Linking.openURL(url);
+                          })
+                          .catch(() => {
+                            showMessage({
+                              message: "Some error occured",
+                              type: "danger",
+                            });
+                          });
+                      }
+                    }
+                  }}
+                >
                   <View style={styles.flexRow}>
                     <View style={styles.rowEnd}>
                       <Image
@@ -341,25 +349,26 @@ const Setting = (props: any) => {
                 </TouchableOpacity>
               </View>
             </View>
-
-            <View style={styles.bottomWrapper}>
-              <Text style={styles.grey12}>
-                Made with ❤ by
-                <Text
-                  onPress={() =>
-                    Linking.openURL("https://iwebcode.design/").catch((err) => {
-                      console.log(err);
-                    })
-                  }
-                  style={{ color: colors.blueTheme }}
-                >
-                  {" "}
-                  IWEBCODE
-                </Text>{" "}
-                team
-              </Text>
-            </View>
           </ScrollView>
+        </View>
+        <View style={{ flex: 0.05, backgroundColor: colors.appBackground }}>
+          <View style={styles.bottomWrapper}>
+            <Text style={styles.grey12}>
+              Made with ❤ by
+              <Text
+                onPress={() =>
+                  Linking.openURL("https://iwebcode.design/").catch((err) => {
+                    console.log(err);
+                  })
+                }
+                style={{ color: colors.darkBlue }}
+              >
+                {" "}
+                IWEBCODE
+              </Text>{" "}
+              team
+            </Text>
+          </View>
         </View>
         {openIOSModal ? (
           ActionSheetIOS.showActionSheetWithOptions(

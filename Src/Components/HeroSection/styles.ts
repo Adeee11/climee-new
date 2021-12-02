@@ -6,8 +6,8 @@ import typography from "../../globalStyles/typography";
 
 const styles = StyleSheet.create({
   container: {
-    borderRadius: 20,
-    padding: 20,
+    borderRadius: Spacing.RADIUS_20,
+    padding: Spacing.PADDING_20,
   },
   upperView: {
     flex: 0.5,
@@ -22,10 +22,10 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontSize: typography.FONT_SIZE_20,
     fontFamily: fontFamily.semiBold,
-    textTransform: "capitalize"
+    textTransform: "capitalize",
   },
   lowerView: {
-    marginTop: 10,
+    marginTop: Spacing.MARGIN_10,
   },
   imageContainer: { flex: 0.5, alignItems: "center" },
   degreeSymbol: {
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontSize: typography.FONT_SIZE_11,
     fontFamily: fontFamily.regular,
-  }
+  },
 });
 
 export default styles;

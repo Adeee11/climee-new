@@ -1,26 +1,24 @@
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import Spacing from "../../globalStyles/Spacing";
-import colors from "../../globalStyles/colors";
 import fontFamily from "../../globalStyles/fontFamily";
 import navigationStrings from "../../constants/navigationStrings";
 import styles from "./styles";
 import { Right } from "../../../assets/svg";
 import ProgressBar from "../ProgressBar/ProgressBar";
-const AirQuality = ({ navigation, background = false,val }: any) => {
-  
+const AirQuality = ({ navigation, background = false, val }: any) => {
   const cond = (item: any) => {
     return item < 20
-      ? { condition:"Good" }
+      ? { condition: "Good" }
       : item < 40
-      ?  { condition:"Satisfactory" }
+      ? { condition: "Satisfactory" }
       : item < 60
-      ?  { condition:"Lightly Polluted" }
+      ? { condition: "Lightly Polluted" }
       : item < 80
-      ?  { condition:"Moderately Polluted" }
+      ? { condition: "Moderately Polluted" }
       : item < 100
-      ?  { condition:"Heavily Polluted" }
-      :  { condition:"No Data Available" }
+      ? { condition: "Heavily Polluted" }
+      : { condition: "No Data Available" };
   };
   return (
     <View style={styles.AirPollutionView}>
@@ -33,12 +31,7 @@ const AirQuality = ({ navigation, background = false,val }: any) => {
           <Right />
         </TouchableOpacity>
       ) : (
-        <View
-          style={{
-            paddingHorizontal: Spacing.PADDING_16,
-            paddingTop: Spacing.PADDING_16,
-          }}
-        >
+        <View style={styles.headingView}>
           <Text style={styles.pollutionHeading}>Air Pollution</Text>
         </View>
       )}
@@ -49,9 +42,14 @@ const AirQuality = ({ navigation, background = false,val }: any) => {
           padding: background ? Spacing.PADDING_16 : Spacing.PADDING_10,
         }}
       >
-        <ProgressBar val={val/250*100}/>
+        <ProgressBar
+          val={val > 100 ? ((val / 500) * 100).toFixed(1) : val}
+          perc={val < 100 ? false : true}
+        />
         <View style={{ paddingHorizontal: Spacing.PADDING_20 }}>
-          <Text style={styles.pollutionHeading}>{cond(val/250*100)?.condition}</Text>
+          <Text style={styles.pollutionHeading}>
+            {cond(val > 100 ? (val / 500) * 100 : val)?.condition}
+          </Text>
           <Text style={{ ...styles.headingText, fontFamily: fontFamily.light }}>
             {"Fine particles / PM2.5"}
           </Text>
@@ -60,13 +58,7 @@ const AirQuality = ({ navigation, background = false,val }: any) => {
               onPress={() =>
                 navigation.navigate(navigationStrings.AIRPOLLUTION)
               }
-              style={{
-                marginVertical: 5,
-                padding: 10,
-                backgroundColor: "#3C6FD1",
-                width: "80%",
-                borderRadius: 10,
-              }}
+              style={styles.seeMoreButton}
             >
               <Text style={styles.buttonText}>See More</Text>
             </TouchableOpacity>

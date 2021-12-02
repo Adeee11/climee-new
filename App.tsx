@@ -78,7 +78,7 @@ const App = ({ notify, alert }: any) => {
           },
         }
       );
-    } catch (err) {
+    } catch (err:any) {
       console.log(err.message);
     }
   };

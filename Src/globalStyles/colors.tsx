@@ -6,6 +6,11 @@ export default {
   grey: "rgba(196, 196, 196, 1)",
   toggleColor: "rgba(36, 75, 214, 0.06)",
   appBackground: "rgba(245, 245, 245, 1)",
+  tempColor: "#6D9CF5",
+  darkGrey: "#9B9B9B",
+  purple: "#363B64",
+  mustard: "#F5CA04",
+  black: "rgba(0,0,0,0.6)",
 
   //progressBarColors
   good: "rgb(0, 204, 0)",
@@ -27,6 +32,6 @@ export default {
   partialCloudySecondColor: "rgba(148, 232, 255, 1)",
   sunnyFirstColor: "rgba(249, 217, 118, 1)",
   sunnySecondColor: "rgba(243, 159, 134, 1)",
-  cloudyFirstColor:"rgba(156, 156, 156, 1)",
-  cloudySecondColor:"rgba(225, 217, 201, 1)"
+  cloudyFirstColor: "rgba(156, 156, 156, 1)",
+  cloudySecondColor: "rgba(225, 217, 201, 1)",
 };

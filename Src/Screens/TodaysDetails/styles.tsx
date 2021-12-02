@@ -27,7 +27,7 @@ pollutionHeading:{
     fontFamily:fontFamily.semiBold
 },
 buttonText: { 
-    color: "white", 
+    color: colors.white, 
     fontSize: typography.FONT_SIZE_12, 
     textAlign: "center", 
     fontFamily: fontFamily.regular 

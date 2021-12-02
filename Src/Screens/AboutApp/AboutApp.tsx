@@ -10,7 +10,6 @@ import {
 import colors from "../../globalStyles/colors";
 import styles from "./styles";
 import { MaterialIcons } from "@expo/vector-icons";
-import Shadow from "../../Components/Shadow/Shadow";
 import Spacing from "../../globalStyles/Spacing";
 import GeneralStatusBarColor from "../../Components/generateStatusBarColor/GenerateStatusBarColor";
 import Header from "../../Components/Header/Header";
@@ -19,14 +18,18 @@ const AboutApp = (props: any) => {
   return (
     <>
       <GeneralStatusBarColor
-        barStyle={"dark-content"}
-        backgroundColor={colors.blueTheme}
+        barStyle={"light-content"}
+        backgroundColor={colors.darkBlue}
       />
       <SafeAreaView style={styles.mainWrapper}>
-        <Header title={"About Us"} onPress={() => props.navigation.goBack()} />
+        <Header
+          title={"About Us"}
+          onPress={() => props.navigation.goBack()}
+          tab={false}
+        />
 
-        <View style={[styles.UnitsView, Shadow.shadowStyle]}>
-          <View style={[styles.UnitSubContainer, Shadow.shadowStyle]}>
+        <View style={styles.UnitsView}>
+          <View style={styles.UnitSubContainer}>
             <TouchableOpacity
               onPress={() =>
                 Linking.openURL("https://climee.netlify.app/privacy-policy")
@@ -64,8 +67,8 @@ const AboutApp = (props: any) => {
             </TouchableOpacity>
           </View>
         </View>
-        <View style={{ flex: 0.7, marginHorizontal: Spacing.MARGIN_16 }}>
-          <View style={[styles.UnitSubContainer, Shadow.shadowStyle]}>
+        <View style={{ flex: 0.85, marginHorizontal: Spacing.MARGIN_16 }}>
+          <View style={styles.UnitSubContainer}>
             <ScrollView showsVerticalScrollIndicator={false} bounces={false}>
               <Text style={styles.text2}>
                 Weather app is the most helping app for the people who are

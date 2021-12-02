@@ -8,14 +8,15 @@ const Stack = createStackNavigator();
 function MainStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen
+      {/* <Stack.Screen
         options={{
           headerShown: false,
         }}
         name={navigationStrings.HOME}
         component={TabRoutes}
       />
-    
+     */}
+     <TabRoutes/>
     </Stack.Navigator>
   );
 }

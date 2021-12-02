@@ -1,27 +1,22 @@
-import React, { useEffect } from "react";
-import { View } from "react-native";
-import { Text } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import React from "react";
+import { View,Text,ScrollView } from "react-native";
 import { connect } from "react-redux";
 import GeneralStatusBarColor from "../../Components/generateStatusBarColor/GenerateStatusBarColor";
 import Header from "../../Components/Header/Header";
 import PollutionBars from "../../Components/PollutionBars/PollutionBars";
 import colors from "../../globalStyles/colors";
 import styles from "./styles";
-const AirPollution = (props: any) => {
-  const { pollutionDetails } = props;
-  useEffect(() => {
-    // console.log(pollutionDetails[0].pollutionDetails.components);
-  }, []);
+const AirPollution = ({ pollutionDetails, navigation }: any) => {
   return (
     <>
       <GeneralStatusBarColor
-        barStyle={"dark-content"}
-        backgroundColor={colors.blueTheme}
+        barStyle={"light-content"}
+        backgroundColor={colors.darkBlue}
       />
       <Header
         title={"Air Pollution"}
-        onPress={() => props.navigation.goBack()}
+        onPress={() => navigation.goBack()}
+        tab={false}
       />
       <ScrollView
         showsVerticalScrollIndicator={false}
@@ -29,19 +24,19 @@ const AirPollution = (props: any) => {
         style={{ backgroundColor: colors.appBackground }}
       >
         <View style={styles.mainContainer}>
-          <Text style={styles.pollutionHeading}>Air Pollution</Text>
+          <Text style={styles.pollutionHeading}>{"Air Pollution"}</Text>
           <View style={styles.subContainer}>
             <PollutionBars
               name1={"Fine Particles/PM2.5"}
               value={pollutionDetails[0].pollutionDetails.components.pm2_5}
-              highest={250}
+              highest={500}
             />
             <PollutionBars
               name1={"Inhalable particles/PM10"}
               value={pollutionDetails[0].pollutionDetails.components.pm10}
               highest={430}
             />
-         
+
             <PollutionBars
               name1={"NO2"}
               name2={"(Nitrogen Dioxide)"}

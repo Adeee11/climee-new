@@ -1,15 +1,12 @@
 import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
-import navigationStrings from "../constants/navigationStrings";
 import {
-  AboutApp,
-  AirPollution,
-  Home,
-  Hourly,
-  News,
-  TodaysDetails,
-  Weekly,
-} from "../Screens";
+  CardStyleInterpolators,
+  createStackNavigator,
+  TransitionPresets,
+  TransitionSpecs,
+} from "@react-navigation/stack";
+import navigationStrings from "../constants/navigationStrings";
+import { AirPollution, Home, News, TodaysDetails } from "../Screens";
 
 const Stack = createStackNavigator();
 function HomeStack() {
@@ -18,6 +15,8 @@ function HomeStack() {
       <Stack.Screen
         options={{
           headerShown: false,
+
+          cardStyleInterpolator: CardStyleInterpolators.forFadeFromCenter,
         }}
         name={navigationStrings.HOME}
         component={Home}
@@ -25,6 +24,7 @@ function HomeStack() {
       <Stack.Screen
         options={{
           headerShown: false,
+          ...TransitionPresets.ModalPresentationIOS,
         }}
         name={navigationStrings.AIRPOLLUTION}
         component={AirPollution}
@@ -32,6 +32,7 @@ function HomeStack() {
       <Stack.Screen
         options={{
           headerShown: false,
+          ...TransitionPresets.ModalPresentationIOS,
         }}
         name={navigationStrings.TODAYSDETAILS}
         component={TodaysDetails}
@@ -39,30 +40,10 @@ function HomeStack() {
       <Stack.Screen
         options={{
           headerShown: false,
+          ...TransitionPresets.ModalPresentationIOS,
         }}
         name={navigationStrings.NEWS}
         component={News}
-      />
-      <Stack.Screen
-        options={{
-          headerShown: false,
-        }}
-        name={navigationStrings.ABOUT}
-        component={AboutApp}
-      />
-      <Stack.Screen
-        options={{
-          headerShown: false,
-        }}
-        name={navigationStrings.HOURLY}
-        component={Hourly}
-      />
-      <Stack.Screen
-        options={{
-          headerShown: false,
-        }}
-        name={navigationStrings.WEEKLY}
-        component={Weekly}
       />
     </Stack.Navigator>
   );

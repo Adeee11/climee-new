@@ -1,14 +1,11 @@
 import React, { useEffect } from "react";
-import { FlatList, ScrollView } from "react-native";
-import { View, Text } from "react-native";
-import assets from "../../../assets";
+import { ScrollView } from "react-native";
 import GeneralStatusBarColor from "../../Components/generateStatusBarColor/GenerateStatusBarColor";
 import Header from "../../Components/Header/Header";
 import HourlyInformation from "../../Components/HourlyInformation/HourlyInformation";
 import navigationStrings from "../../constants/navigationStrings";
 import colors from "../../globalStyles/colors";
 import { connect } from "react-redux";
-import styles from "./styles";
 import moment from "moment";
 import { useState } from "react";
 
@@ -41,17 +38,14 @@ const Hourly = ({
   return (
     <>
       <GeneralStatusBarColor
-        barStyle={"dark-content"}
+        barStyle={"light-content"}
         backgroundColor={colors.darkBlue}
       />
-      <Header
-        title={"Hourly"}
-        onPress={() => navigation.navigate(navigationStrings.HOME)}
-      />
+      <Header title={"Hourly"} />
       <ScrollView
         showsVerticalScrollIndicator={false}
         bounces={false}
-        style={{ backgroundColor: "#F5F5F5" }}
+        style={{ backgroundColor: colors.appBackground }}
       >
         <HourlyInformation
           data={todayHourly}
@@ -65,7 +59,6 @@ const Hourly = ({
           weatherDegree={weatherDegree}
           windDegree={windDegree}
         />
-        {/* <HourlyInformation data={data} date={"Wednesday, 25 August"} /> */}
       </ScrollView>
     </>
   );
@@ -75,7 +68,6 @@ const mapStateToProps = (state: any) => {
   return {
     weatherDegree: state?.switchReducer?.weatherDegree,
     windDegree: state?.switchReducer?.windDegree,
-    notify: state?.switchReducer?.notify,
     weatherDetails: state?.WeatherDetailsReducer?.weatherDetails,
     weatherLoading: state?.WeatherDetailsReducer?.loading,
   };

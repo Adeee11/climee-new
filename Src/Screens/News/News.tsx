@@ -5,47 +5,34 @@ import {
   ScrollView,
   Share,
   Text,
-  TouchableOpacity,
   View,
 } from "react-native";
 import colors from "../../globalStyles/colors";
-import { Entypo } from "@expo/vector-icons";
 import moment from "moment";
 import styles from "./styles";
 import url from "../../globalStyles/cms-url";
 import Spacing from "../../globalStyles/Spacing";
 import GeneralStatusBarColor from "../../Components/generateStatusBarColor/GenerateStatusBarColor";
 import Header from "../../Components/Header/Header";
-import navigationStrings from "../../constants/navigationStrings";
+import { deviceHeight } from "../../constants/dimensions";
 
 const News = ({ navigation, route }: any) => {
   const { data } = route.params;
 
-  const handleShare = async () => {
-    try {
-      const result = await Share.share({
-        message: "Download the Climee app",
-      });
-      if (result.action === Share.sharedAction) {
-      } else if (result.action === Share.dismissedAction) {
-      }
-    } catch (e) {}
-  };
-
   return (
     <>
       <GeneralStatusBarColor
-        barStyle={"dark-content"}
-        backgroundColor={colors.blueTheme}
+        barStyle={"light-content"}
+        backgroundColor={colors.darkBlue}
       />
-      <Header title={"News"} onPress={() => navigation.goBack()} />
+      <Header title={"News"} onPress={() => navigation.goBack()} tab={false} />
       <SafeAreaView style={styles.mainWrapper}>
         <View style={styles.imageWrapper}>
           <Image
             source={{ uri: `${url}${data?.image?.url}` }}
             style={{
-              borderRadius: 20,
-              height: 170,
+              borderRadius: Spacing.RADIUS_20,
+              height: deviceHeight/7*2,
               width: "90%",
               resizeMode: "cover",
             }}
@@ -61,7 +48,6 @@ const News = ({ navigation, route }: any) => {
             flex: 0.52,
             paddingHorizontal: Spacing.PADDING_8,
             marginHorizontal: Spacing.MARGIN_10,
-            // marginBottom: Spacing.MARGIN_10,
           }}
         >
           <View style={styles.newsHeadingView}>
@@ -71,17 +57,6 @@ const News = ({ navigation, route }: any) => {
           <Text style={styles.textColor14}>{data.Content}</Text>
         </ScrollView>
       </SafeAreaView>
-      {/* <View style={styles.newsView}>
-        <View>
-          <Text style={styles.headingStyle}>Weather News</Text>
-        </View>
-        <TouchableOpacity onPress={handleShare}>
-          <View style={styles.bottomTextWrapper}>
-            <Entypo name="share" size={24} color={colors.grey} />
-            <Text style={styles.shareStyle}>Share it</Text>
-          </View>
-        </TouchableOpacity>
-      </View> */}
     </>
   );
 };

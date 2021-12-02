@@ -1,22 +1,14 @@
 import React from "react";
-import {
-  Dimensions,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import { LineChart } from "react-native-chart-kit";
 import GeneralStatusBarColor from "../../Components/generateStatusBarColor/GenerateStatusBarColor";
 import Header from "../../Components/Header/Header";
 import colors from "../../globalStyles/colors";
 import fontFamily from "../../globalStyles/fontFamily";
-import { width } from "../../globalStyles/resposiveStyle";
 import typography from "../../globalStyles/typography";
 import styles from "./styles";
 import Spacing from "../../globalStyles/Spacing";
 import AdditionalDetails from "../../Components/AdditionalDetails/AdditionalDetails";
-import navigationStrings from "../../constants/navigationStrings";
 import AirQuality from "../../Components/AirQuality/AirQuality";
 import { useEffect } from "react";
 import { connect } from "react-redux";
@@ -28,7 +20,6 @@ const TodaysDetails = ({
   navigation,
   pollutionDetails,
 }: any) => {
-
   const time = (time: number) => {
     const date = new Date(time * 1000);
     let hours = date.getHours();
@@ -45,13 +36,10 @@ const TodaysDetails = ({
     (valTemp: any) => time(valTemp?.dt).strTime
   );
 
-  const dataPoints = weatherDetails[0]?.weatherDetails.hourly.map(
+  const dataPoints = weatherDetails[0]?.weatherDetails?.hourly.map(
     (valTemp: any) => valTemp.temp.toFixed(0)
   );
-  
-  useEffect(() => {
-    // console.log(dataPoints);
-  }, []);
+
   return (
     <>
       <GeneralStatusBarColor
@@ -81,7 +69,7 @@ const TodaysDetails = ({
                 },
               ],
             }}
-            width={2500}
+            width={dataPoints?.length * 50}
             height={250}
             // withDots={false}
             // withInnerLines={false}
@@ -125,7 +113,7 @@ const TodaysDetails = ({
         <View style={{ margin: Spacing.MARGIN_16 }}>
           <AirQuality
             navigation={navigation}
-            val={pollutionDetails[0].pollutionDetails.components.pm2_5.toFixed(
+            val={pollutionDetails[0]?.pollutionDetails?.components.pm2_5?.toFixed(
               2
             )}
           />

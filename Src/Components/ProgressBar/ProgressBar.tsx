@@ -5,9 +5,7 @@ import colors from "../../globalStyles/colors";
 import fontFamily from "../../globalStyles/fontFamily";
 import typography from "../../globalStyles/typography";
 
-const ProgressBar = ({val,perc=true}: any) => {
-  // console.log(val);
-  
+const ProgressBar = ({ val, perc = true }: any) => {
   const color = (item: any) => {
     return item < 20
       ? { colour: colors.good }
@@ -24,14 +22,17 @@ const ProgressBar = ({val,perc=true}: any) => {
   return (
     <>
       <ProgressCircle
-        percent={val}
+        percent={parseInt(val)}
         radius={40}
-        borderWidth={5}
+        borderWidth={4}
         color={color(val)?.colour}
         shadowColor={colors.grey}
-        bgColor="#fff"
+        bgColor={colors.white}
       >
-        <Text style={styles.pollutionHeading}>{val}{perc?"%":""}</Text>
+        <Text style={styles.pollutionHeading}>
+          {val}
+          {perc ? "%" : ""}
+        </Text>
       </ProgressCircle>
     </>
   );

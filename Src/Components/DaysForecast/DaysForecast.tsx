@@ -1,10 +1,8 @@
 import moment from "moment";
 import React from "react";
-import { useEffect } from "react";
 import { useState } from "react";
-import { View, Text, FlatList, Image, TouchableOpacity } from "react-native";
-import assets from "../../../assets";
-import { Line, Right } from "../../../assets/svg";
+import { View, Text, FlatList, TouchableOpacity } from "react-native";
+import { Line } from "../../../assets/svg";
 import colors from "../../globalStyles/colors";
 import Spacing from "../../globalStyles/Spacing";
 import WeatherImage from "../WeatherImage/WeatherImage";
@@ -25,25 +23,20 @@ const DaysForecast = ({
     return (
       <>
         <View>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <View style={styles.mainContainer}>
             <TouchableOpacity
               onPress={() => [setSelected(item?.dt), handleSelectedDay(item)]}
             >
               <View
                 style={{
                   ...styles.dataContainer,
-                  marginHorizontal: 2,
+                  marginHorizontal: Spacing.MARGIN_2,
                 }}
               >
                 <Text style={styles.timeText}>
                   {moment(new Date(item?.dt * 1000)).format("ddd")}
                 </Text>
-                <View
-                  style={{
-                    paddingVertical: Spacing.PADDING_10,
-                    alignItems: "center",
-                  }}
-                >
+                <View style={styles.tempView}>
                   <Text style={[styles.tempText, { color: colors.darkBlue }]}>
                     {weatherDegree == "F"
                       ? (parseInt(item?.temp?.max) * 1.8 + 32)?.toFixed(0)
@@ -66,17 +59,9 @@ const DaysForecast = ({
             </TouchableOpacity>
             <Line />
           </View>
-          {selected === item?.dt ? (
-            <View
-              style={{
-                borderBottomWidth: 3,
-                borderColor: "#3C6FD1",
-                width: "100%",
-              }}
-            />
-          ) : null}
+          {selected === item?.dt ? <View style={styles.selectedLine} /> : null}
         </View>
-      </>  
+      </>
     );
   };
 
@@ -99,9 +84,8 @@ const DaysForecast = ({
         {selected === 0 ? (
           <View
             style={{
-              borderBottomWidth: 3,
+              ...styles.selectedLine,
               width: "20%",
-              borderColor: "#3C6FD1",
             }}
           />
         ) : null}

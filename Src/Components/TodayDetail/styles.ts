@@ -3,6 +3,7 @@ import colors from "../../globalStyles/colors";
 import fontFamily from "../../globalStyles/fontFamily";
 import Spacing from "../../globalStyles/Spacing";
 import typography from "../../globalStyles/typography";
+import Shadow from "../Shadow/Shadow";
 
 const styles = StyleSheet.create({
   container: {
@@ -10,6 +11,7 @@ const styles = StyleSheet.create({
     // paddingTop: Spacing.PADDING_20,
     // paddingHorizontal: Spacing.PADDING_20,
     borderRadius: 20,
+    ...Shadow.shadowStyle
   },
   headingContainer: {
     height: Spacing.HEIGHT_40,
@@ -48,7 +50,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    backgroundColor: "#3C6FD1",
+    backgroundColor: colors.darkBlue,
     padding: Spacing.PADDING_15,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
