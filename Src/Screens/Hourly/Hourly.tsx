@@ -3,18 +3,12 @@ import { ScrollView } from "react-native";
 import GeneralStatusBarColor from "../../Components/generateStatusBarColor/GenerateStatusBarColor";
 import Header from "../../Components/Header/Header";
 import HourlyInformation from "../../Components/HourlyInformation/HourlyInformation";
-import navigationStrings from "../../constants/navigationStrings";
 import colors from "../../globalStyles/colors";
 import { connect } from "react-redux";
 import moment from "moment";
 import { useState } from "react";
 
-const Hourly = ({
-  weatherDetails,
-  navigation,
-  weatherDegree,
-  windDegree,
-}: any) => {
+const Hourly = ({ weatherDetails, weatherDegree, windDegree }: any) => {
   const [todayHourly, setTodayHourly] = useState<any>();
   const [tomorrowHourly, setTomorrowHourly] = useState<any>();
 

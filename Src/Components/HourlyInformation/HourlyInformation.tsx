@@ -69,7 +69,7 @@ const HourlyInformation = (props: any) => {
         <Text style={styles.dateText}>{date}</Text>
       </View>
       <View style={styles.mainContainer}>
-        {data?.map((item: any) => renderItems(item))}
+        {data?.map((item: any, index: number) => renderItems(item, index))}
         {/* <FlatList
           data={data}
           keyExtractor={(item) => item?.id}
