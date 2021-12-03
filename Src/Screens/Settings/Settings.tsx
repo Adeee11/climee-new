@@ -94,9 +94,7 @@ const Setting = (props: any) => {
           flex: 1,
         }}
       >
-        <Header
-          title={"Settings"}
-        />
+        <Header title={"Settings"} />
         <View style={{ flex: 0.98 }}>
           <ScrollView showsVerticalScrollIndicator={false} bounces={false}>
             <View
@@ -133,7 +131,13 @@ const Setting = (props: any) => {
                     style={styles.iconStyle}
                   />
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() =>
+                    Linking.openURL(
+                      "https://play.google.com/store/apps/details?id=com.iwebcode.climee"
+                    )
+                  }
+                >
                   <Image
                     source={
                       Platform.OS === "ios"
@@ -141,7 +145,11 @@ const Setting = (props: any) => {
                         : assets.googlePlay
                     }
                     resizeMode={"contain"}
-                    style={styles.iconStyle}
+                    style={
+                      Platform.OS === "ios"
+                        ? { ...styles.iconStyle, tintColor: colors.darkBlue }
+                        : styles.iconStyle
+                    }
                   />
                 </TouchableOpacity>
                 <TouchableOpacity

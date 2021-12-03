@@ -65,7 +65,7 @@ const AirPollution = ({ pollutionDetails, navigation }: any) => {
               name1={"CO"}
               name2={"(Carbon Monoxide)"}
               value={pollutionDetails[0].pollutionDetails.components.co}
-              highest={10000}
+              highest={2000}
             />
           </View>
         </View>

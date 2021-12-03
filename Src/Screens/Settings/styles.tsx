@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.PADDING_24,
     paddingVertical: Spacing.PADDING_10,
     borderRadius: Spacing.RADIUS_20,
-    ...Shadow.shadowStyle
+    ...Shadow.shadowStyle,
   },
   flexRow: {
     flexDirection: "row",
@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
     height: 24,
     width: 24,
     marginHorizontal: Spacing.MARGIN_4,
+    borderRadius: Spacing.RADIUS_10,
     // tintColor: colors.darkBlue,
   },
   actionsheetTextStyle: {

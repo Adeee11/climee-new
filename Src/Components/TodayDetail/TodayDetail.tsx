@@ -1,15 +1,6 @@
 import React from "react";
 import { View, Text, FlatList, TouchableOpacity } from "react-native";
-import {
-  Dew,
-  Humidity,
-  Pressure,
-  Right,
-  Sunrise,
-  Sunset,
-  UV,
-  Wind,
-} from "../../../assets/svg";
+import { Dew, Humidity, Pressure, Right, Wind } from "../../../assets/svg";
 import navigationStrings from "../../constants/navigationStrings";
 import Spacing from "../../globalStyles/Spacing";
 import styles from "./styles";
