@@ -11,6 +11,7 @@ export default {
   purple: "#363B64",
   mustard: "#F5CA04",
   black: "rgba(0,0,0,0.6)",
+  greyTextcolor: '#797979',
 
   //progressBarColors
   good: "rgb(0, 204, 0)",

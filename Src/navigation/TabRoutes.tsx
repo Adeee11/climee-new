@@ -77,7 +77,7 @@ const TabRoutes = () => {
                 height: Spacing.HEIGHT_50,
                 width: Spacing.HEIGHT_55,
                 borderRadius: Spacing.RADIUS_82,
-                marginTop: Platform.OS == "ios" ? Spacing.MARGIN_24 : -8,
+                marginTop:  -8,
               }}
               resizeMode="contain"
             />

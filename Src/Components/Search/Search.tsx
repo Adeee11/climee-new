@@ -22,6 +22,8 @@ import {
   weatherDetailsLoading,
 } from "../../redux/actions/weatherActions";
 import api from "../../globalStyles/api";
+import Loader from "../Loader";
+import { deviceHeight } from "../../constants/dimensions";
 
 const Search = ({ ModalVisible, weatherDetail }: any) => {
   interface Searchresult {
@@ -244,7 +246,7 @@ const Search = ({ ModalVisible, weatherDetail }: any) => {
 
    function uniqueKeepLAst(data:any, key:any) {
      return [
-       ...new Map(data.map((x: any) => [key(x), x])).values()
+       ...new Map(data?.map((x: any) => [key(x), x])).values()
      ]
    }
 
@@ -252,7 +254,13 @@ const Search = ({ ModalVisible, weatherDetail }: any) => {
     <>
       <SafeAreaView>
         {/* Search Bar */}
-        <View style={styles.searchContainer}>
+          {loading ? 
+          <View style={{height: (deviceHeight * 100) / 100, position: 'absolute', top: 0, bottom: 0, left: 0, right: 0}}>
+            <Loader />
+          </View> 
+           :   
+          <>
+      <View style={styles.searchContainer}>
           <TouchableOpacity onPress={() => ModalVisible(false)}>
             <Back />
           </TouchableOpacity>
@@ -328,13 +336,13 @@ const Search = ({ ModalVisible, weatherDetail }: any) => {
         {/* Recent Searchs*/}
         {recents === null ? null : (
           <FlatList
-            data={uniqueKeepLAst(recents?.filter((e) => e?.street !== ""), it => it.street)}
-            bounces={false}
-            keyExtractor={(item) => item?.id}
-            renderItem={({ item }) => renderRecentSearchs(item)}
-            ListHeaderComponent={() => {
-              return (
-                <View style={styles.recentContainer}>
+          data={uniqueKeepLAst(recents?.filter((e) => e?.street !== ""), it => it.street)}
+          bounces={false}
+          keyExtractor={(item) => item?.id}
+          renderItem={({ item }) => renderRecentSearchs(item)}
+          ListHeaderComponent={() => {
+            return (
+              <View style={styles.recentContainer}>
                   <Text style={styles.recentText}>Recents</Text>
                   <TouchableOpacity onPress={handleAllRemoveLocation}>
                     <FontAwesome name="trash-o" size={24} color="#9B9B9B" />
@@ -342,8 +350,10 @@ const Search = ({ ModalVisible, weatherDetail }: any) => {
                 </View>
               );
             }}
-          />
-        )}
+            />
+            )}
+            </>
+            }
       </SafeAreaView>
     </>
   );

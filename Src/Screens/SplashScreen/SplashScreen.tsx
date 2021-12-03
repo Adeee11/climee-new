@@ -1,6 +1,6 @@
 import { LinearGradient } from "expo-linear-gradient";
-import React, { useState, useEffect } from "react";
-import { Animated, StatusBar, Platform, Text } from "react-native";
+import React, { useState, useEffect, useRef } from "react";
+import { StatusBar, Platform, Animated } from "react-native";
 import { heightLessNum } from "../../constants/dimensions";
 import * as Location from "expo-location";
 import axios from "../../api/axios";
@@ -12,18 +12,24 @@ import {
   weatherDetailsLoading,
 } from "../../redux/actions/weatherActions";
 import api from "../../globalStyles/api";
-import { Video } from 'expo-av';
+import { Video } from "expo-av";
+// import { useSharedValue, interpolate } from 'react-native-reanimated' // version 2.x
+import Chroma from "chroma-js";
 
 import {
   themeColorOne,
   themeColorTwo,
 } from "../../redux/actions/colorThemeAction";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { GradientHelper } from "../../Components/GradientHelper";
 
 const SplashScreen = () => {
-  const [fadeAnim] = useState(new Animated.Value(0));
-  const height = new Animated.Value(300);
-  const width = new Animated.Value(350);
+  const AnimatedGradientHelper =
+    Animated.createAnimatedComponent(GradientHelper);
+
+  // const [fadeAnim] = useState(new Animated.Value(0));
+  // const height = new Animated.Value(300);
+  // const width = new Animated.Value(350);
 
   useEffect(() => {
     // Animated.timing()
@@ -65,8 +71,6 @@ const SplashScreen = () => {
     //     }),
     //   ]),
     // ]).start();
-
-    
   }, []);
 
   useEffect(() => {
@@ -133,54 +137,129 @@ const SplashScreen = () => {
       : (themeColorOne(colors.hazeFirstColor),
         themeColorTwo(colors.hazeSecondColor));
   };
+  // const animation = useStatnew Animated.Value(0))
+  // .current;
+  const animation = new Animated.Value(0);
+  const animation1 = new Animated.Value(0);
+  const height = new Animated.Value(0);
+  const width = new Animated.Value(0);
+  const top = new Animated.Value(0);
+  const bottom = new Animated.Value(0);
+  const [fadeAnim] = useState(new Animated.Value(1));
+  const [fadeAnimIn] = useState(new Animated.Value(0));
+
+  const boxInterpolation = animation.interpolate({
+    inputRange: [0, 1],
+    outputRange: ["blue", "red"],
+  });
+
+  const boxInterpolation1 = animation1.interpolate({
+    inputRange: [0, 1],
+    outputRange: ["red", "blue"],
+  });
+
+  useEffect(() => {
+    Animated.timing(animation, {
+      toValue: 1,
+      duration: 2000,
+      useNativeDriver: false,
+    }).start();
+
+    Animated.timing(animation1, {
+      toValue: 1,
+      duration: 2000,
+      useNativeDriver: false,
+    }).start();
+
+    Animated.sequence([
+      Animated.parallel([
+        Animated.timing(height, {
+          toValue: 400,
+          duration: 2000,
+          useNativeDriver: false,
+        }),
+        Animated.timing(width, {
+          toValue: 400,
+          duration: 2000,
+          useNativeDriver: false,
+        }),
+        Animated.timing(top, {
+          toValue: 280,
+          duration: 2000,
+          useNativeDriver: false,
+        }),
+        Animated.timing(bottom, {
+          toValue: 50,
+          duration: 2000,
+          useNativeDriver: false,
+        }),
+      ]),
+      Animated.parallel([
+        Animated.timing(height, {
+          toValue: 350,
+          duration: 1000,
+          useNativeDriver: false,
+        }),
+        Animated.timing(width, {
+          toValue: 350,
+          duration: 1000,
+          useNativeDriver: false,
+        }),
+      ]),
+      Animated.sequence([
+        Animated.timing(fadeAnim, {
+          toValue: 0,
+          duration: 400,
+          useNativeDriver: false,
+        }),
+        Animated.timing(fadeAnimIn, {
+          toValue: 1,
+          duration: 400,
+          useNativeDriver: false,
+        }),
+      ]),
+    ]).start();
+  }, []);
+
   return (
     <>
-      {Platform.OS === "ios" ? (
-        <StatusBar
-          backgroundColor={colors.blueTheme}
-          hidden={true}
-          translucent={false}
-        />
-      ) : (
-        <StatusBar backgroundColor={colors.blueTheme} hidden={false} />
-      )}
-      {/* <Animated.View style={[styles.imageWrapper, { opacity: fadeAnim }]}>
-        <LinearGradient
-          // Background Linear Gradient
-          colors={[colors.blueTheme, colors.white]}
-          style={{
-            position: "absolute",
-            left: 0,
-            right: 0,
-            bottom: 0,
-            top: 0,
-            flex: 1,
-          }}
-          end={{ x: 0, y: 3.5 }}
-        />
-        <Animated.Image
-          source={require("../../../assets/Splash.png")}
-          style={{
-            width: width,
-            height: height,
-            resizeMode: "contain",
-          }}
-        /> */}
-        {/* <Text style={styles.text1}>Climee</Text>
-        <Text style={styles.text2}>Dont worry about</Text>
-        <Text style={styles.text2}>the weather we all here</Text>
-      </Animated.View> */}
-       <Video
+      <Video
         // ref={video}
         style={{flex: 1}}
         source={require("../../../assets/video3.mov")}
         // useNativeControls
         resizeMode="cover"
         shouldPlay
-        isLooping={false}
+        isLooping={false} 
         // onPlaybackStatusUpdate={status => setStatus(() => status)}
       />
+      {/* <Animated.View style={{ backgroundColor: boxInterpolation1, flex: 1 }}>
+        <Animated.Image
+          source={require("../../../assets/Applogo.png")}
+          style={{
+            width: width,
+            height: height,
+            resizeMode: "contain",
+            transform: [{ translateY: top }, { translateX: bottom }],
+            opacity: fadeAnim,
+          }}
+        />
+        <Animated.Image
+          source={require("../../../assets/Applogo.png")}
+          style={{
+            width: 350,
+            height: 350,
+            top: 0,
+            alignSelf: "center",
+            bottom: 0,
+            resizeMode: "contain",
+            opacity: fadeAnimIn,
+            // transform: [{ translateY: top }, { translateX: bottom }],
+          }}
+        />
+      </Animated.View> */} 
     </>
   );
 };
+
 export default SplashScreen;

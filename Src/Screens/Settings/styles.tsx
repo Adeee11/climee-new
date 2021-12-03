@@ -43,8 +43,7 @@ const styles = StyleSheet.create({
   grey12: {
     fontFamily: fontFamily.light,
     fontSize: typography.FONT_SIZE_12,
-    color: colors.grey,
-    marginTop: Spacing.MARGIN_10,
+    color: colors.greyTextcolor,
   },
   rowStart: {
     flexDirection: "row",

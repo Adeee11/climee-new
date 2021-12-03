@@ -351,7 +351,7 @@ const Setting = (props: any) => {
             </View>
           </ScrollView>
         </View>
-        <View style={{ flex: 0.05, backgroundColor: colors.appBackground }}>
+        <View style={{ flex: 0.08, backgroundColor: colors.appBackground, alignItems: "center", justifyContent: 'center'}}>
           <View style={styles.bottomWrapper}>
             <Text style={styles.grey12}>
               Made with ❤ by
