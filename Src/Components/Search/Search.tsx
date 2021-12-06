@@ -90,12 +90,12 @@ const Search = ({ ModalVisible, weatherDetail }: any) => {
   useEffect(() => {
     (async () => {
       try {
-        setLoading(true);
+        // setLoading(true);
         const res: any = await axios.get(
           `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${searchText}&types=geocode&key=AIzaSyBXG8JrE9C2wKktMK-lDJkHNbYyuL4cr34`
-        );
-        await setSearchResult(res?.data?.predictions);        
-        setLoading(false);
+        );        
+        setSearchResult(res?.data?.predictions);        
+        // setLoading(false);
       } catch (Err) {
         console.log(Err);
       }
@@ -105,9 +105,12 @@ const Search = ({ ModalVisible, weatherDetail }: any) => {
   useEffect(() => {
     (async () => {
       try {
+        const currLoc: any= await AsyncStorage.getItem("climeeCurrentLocation");
+        if(placeId === null) {
+          return
+        }
         setLoading(true);
         weatherDetailsLoading(true);
-        const currLoc: any= await AsyncStorage.getItem("climeeCurrentLocation");
         const res: any = await axios.get(
           `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=AIzaSyBXG8JrE9C2wKktMK-lDJkHNbYyuL4cr34`
         );
@@ -310,6 +313,7 @@ const Search = ({ ModalVisible, weatherDetail }: any) => {
         )}
 
         {/* Favourite Cities */}
+        {searchResult.length > 0 ? null : (
         <View style={{ marginBottom: Spacing.MARGIN_5 }}>
           <FlatList
             data={uniqueKeepLAst(favouriteCity, (it: any) => it.street)}
@@ -332,8 +336,11 @@ const Search = ({ ModalVisible, weatherDetail }: any) => {
             )}
           />
         </View>
+        )}
 
         {/* Recent Searchs*/}
+        {searchResult.length > 0 ? null : (
+          <>
         {recents === null ? null : (
           <FlatList
           data={uniqueKeepLAst(recents?.filter((e) => e?.street !== ""), it => it.street)}
@@ -353,6 +360,8 @@ const Search = ({ ModalVisible, weatherDetail }: any) => {
             />
             )}
             </>
+        )}
+        </>
             }
       </SafeAreaView>
     </>
