@@ -37,6 +37,7 @@ const App = ({ notify, alert }: any) => {
       trigger: { seconds: 2 },
     });
   }
+
   //Handle Show notification functionality
   useEffect(() => {
     AsyncStorage.getItem("ClimeeNotifications").then(() => {
@@ -56,6 +57,8 @@ const App = ({ notify, alert }: any) => {
             }),
           });
     });
+   console.log('n', notify);
+       
   }, [notify]);
   useEffect(() => {
     getLocationPermission();
@@ -135,6 +138,7 @@ const App = ({ notify, alert }: any) => {
     </>
   );
 };
+
 const mapStateToProps = (state: any) => {
   return {
     notify: state.switchReducer.toggleNotifications,

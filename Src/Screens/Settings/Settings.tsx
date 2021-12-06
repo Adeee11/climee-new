@@ -37,6 +37,7 @@ const Setting = (props: any) => {
   const actionSheetRef = createRef<any>();
   const [openIOSModal, setOpenIOSModal] = useState<boolean>(false);
   const [notifyValue, setNotifyValue] = useState<any>("ON");
+
   const handleShare = async () => {
     try {
       const result = await Share.share({
@@ -80,7 +81,7 @@ const Setting = (props: any) => {
   };
 
   const handleNotifications = (value: string) => {
-    toggleNotification(value);
+    toggleNotification(value);    
   };
 
   return (

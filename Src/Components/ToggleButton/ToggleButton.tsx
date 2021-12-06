@@ -12,6 +12,7 @@ const ToggleButton = ({
   onSelectSwitch,
 }: any) => {
   const [getSelectionMode, setSelectionMode] = useState(selectionMode);
+
   const updatedSwitchData = (val: any) => {
     setSelectionMode(val);
     onSelectSwitch(val);
@@ -40,8 +41,7 @@ const ToggleButton = ({
         <Text
           style={{
             fontFamily: fontFamily.regular,
-            color:
-              getSelectionMode == option1 ? colors.white : colors.grey,
+            color: getSelectionMode == option1 ? colors.white : colors.grey,
           }}
         >
           {option1}
@@ -69,8 +69,7 @@ const ToggleButton = ({
         <Text
           style={{
             fontFamily: fontFamily.regular,
-            color:
-              getSelectionMode == option2 ? colors.white : colors.grey,
+            color: getSelectionMode == option2 ? colors.white : colors.grey,
           }}
         >
           {option2}
