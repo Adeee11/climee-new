@@ -27,9 +27,9 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily.semiBold,
   },
   buttonText: {
-    color: "white",
+    color: colors.textColor,
     fontSize: typography.FONT_SIZE_12,
-    textAlign: "center",
+    // textAlign: "center",
     fontFamily: fontFamily.regular,
   },
   cardContainer: {
@@ -52,10 +52,10 @@ const styles = StyleSheet.create({
   },
   seeMoreButton: {
     marginVertical: Spacing.MARGIN_5,
-    padding: Spacing.PADDING_10,
-    backgroundColor: colors.darkBlue,
-    width: "80%",
-    borderRadius: Spacing.RADIUS_10,
+    // padding: Spacing.PADDING_10,
+    // backgroundColor: colors.darkBlue,
+    // width: "80%",
+    // borderRadius: Spacing.RADIUS_10,
   },
 });
 export default styles;

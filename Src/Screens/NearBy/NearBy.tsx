@@ -1,6 +1,13 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React, { useEffect, useState, createRef } from "react";
-import { View, Text, SafeAreaView, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  SafeAreaView,
+  TouchableOpacity,
+  Platform,
+  Image,
+} from "react-native";
 import ActionSheet from "react-native-actions-sheet";
 import { connect } from "react-redux";
 import * as location from "expo-location";
@@ -17,8 +24,15 @@ import AirQuality from "../../Components/AirQuality/AirQuality";
 import colors from "../../globalStyles/colors";
 import Loader from "../../Components/Loader";
 import Spacing from "../../globalStyles/Spacing";
+import navigationStrings from "../../constants/navigationStrings";
+import assets from "../../../assets";
 
-const NearBy = ({ weatherDetails, navigation }: any) => {
+const NearBy = ({
+  weatherDetails,
+  navigation,
+  weatherDegree,
+  windDegree,
+}: any) => {
   const [coordinates, setCoordinates] = useState<any>({
     latitude: weatherDetails[0]?.locationDetails?.latitude,
     longitude: weatherDetails[0]?.locationDetails?.longitude,
@@ -30,8 +44,10 @@ const NearBy = ({ weatherDetails, navigation }: any) => {
     country: "",
   });
   const [loading, setLoading] = useState<boolean>(false);
+  const [openIOSModal, setOpenIOSModal] = useState<boolean>(false);
   const actionSheetRef = createRef<any>();
   const [airQuality, setAirQuality] = useState();
+
   const getCoordinates = (val: any) => {
     setCoordinates(val);
   };
@@ -59,7 +75,8 @@ const NearBy = ({ weatherDetails, navigation }: any) => {
           country: r[0]?.country,
         });
         setLoading(false);
-      } catch (err) {
+        getCoordinates
+      } catch (err: any) {
         console.log(err.message);
       }
     })();
@@ -71,6 +88,17 @@ const NearBy = ({ weatherDetails, navigation }: any) => {
         <View style={styles.subHeaderComponent} />
       </View>
     );
+  };
+  const handleActionSheet = () => {
+    Platform.OS === "ios"
+      ? setOpenIOSModal(true)
+      : actionSheetRef.current?.setModalVisible();
+  };
+
+  const handleClose = () => {
+    Platform.OS === "ios"
+      ? setOpenIOSModal(false)
+      : actionSheetRef.current?.setModalVisible(false);
   };
 
   return (
@@ -95,11 +123,41 @@ const NearBy = ({ weatherDetails, navigation }: any) => {
             <View style={styles.locationContainer}>
               <Location height={35} width={35} />
               <View style={{ marginLeft: 15 }}>
-                <Text style={styles.streetText}>
-                  {currLocation?.street === null
-                    ? "unnamed"
-                    : currLocation?.street}
-                </Text>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <Text style={styles.streetText}>
+                    {currLocation?.street === null
+                      ? "unnamed"
+                      : currLocation?.street}
+                  </Text>
+                  <TouchableOpacity
+                    onPress={() =>
+                      setCoordinates({
+                        latitude: weatherDetails[0]?.locationDetails?.latitude,
+                        longitude:
+                          weatherDetails[0]?.locationDetails?.longitude,
+                      })
+                    }
+                  >
+                    <Image
+                      source={assets.windDirection}
+                      style={{
+                        width: 15,
+                        height: 15,
+                        marginHorizontal: 5,
+                        marginTop:-5,
+                        transform: [{ rotate: "320deg" }],
+                      }}
+                      resizeMode={"contain"}
+                    />
+                  </TouchableOpacity>
+                </View>
+
                 <Text style={styles.locationText}>
                   {currLocation?.city === null ? "unnamed" : currLocation?.city}
                   , {currLocation?.country}
@@ -110,7 +168,8 @@ const NearBy = ({ weatherDetails, navigation }: any) => {
             {/* Temperature Container */}
             <View style={styles.tempContainer}>
               <LinearGradient
-                colors={[colors.darkBlue, colors.blueTheme]}
+                // Background Linear Gradient
+                colors={[colors.darkBlue, colors.white]}
                 style={{
                   position: "absolute",
                   left: 0,
@@ -120,11 +179,14 @@ const NearBy = ({ weatherDetails, navigation }: any) => {
                   flex: 0,
                   borderRadius: 20,
                 }}
-                end={{ x: 0.5, y: 1.2 }}
+                end={{ x: 0.2, y: 2.5 }}
               />
               <View style={{ alignItems: "center", flex: 0.7 }}>
                 <Text style={styles.tempText}>
-                  {parseInt(weather?.current?.temp)}&deg;
+                  {weatherDegree == "F"
+                    ? (parseInt(weather?.current?.temp) * 1.8 + 32)?.toFixed(0)
+                    : weather?.current?.temp?.toFixed(0)}
+                  &deg;
                 </Text>
                 <Text style={styles.weatherText}>
                   {weather?.current?.weather[0]?.description}
@@ -143,7 +205,8 @@ const NearBy = ({ weatherDetails, navigation }: any) => {
               onPress={() => actionSheetRef.current?.setModalVisible()}
             >
               <LinearGradient
-                colors={[colors.darkBlue, colors.blueTheme]}
+                // Background Linear Gradient
+                colors={[colors.darkBlue, colors.white]}
                 style={{
                   position: "absolute",
                   left: 0,
@@ -153,7 +216,7 @@ const NearBy = ({ weatherDetails, navigation }: any) => {
                   flex: 0,
                   borderRadius: 20,
                 }}
-                end={{ x: 0.5, y: 1.2 }}
+                end={{ x: 0.2, y: 5 }}
               />
               <View style={styles.seemore}>
                 <Text style={styles.seemoreText}>See More Details</Text>
@@ -165,13 +228,18 @@ const NearBy = ({ weatherDetails, navigation }: any) => {
       </SafeAreaView>
 
       <ActionSheet
+        bounceOnOpen
+        bounciness={15}
         ref={actionSheetRef}
         headerAlwaysVisible={true}
         CustomHeaderComponent={headerComponent()}
       >
         <View style={{ backgroundColor: colors.appBackground }}>
           <View style={{ marginTop: Spacing.MARGIN_10 }}>
-            <AdditionalDetails details={weather?.current} />
+            <AdditionalDetails
+              details={weather?.current}
+              windDegree={windDegree}
+            />
           </View>
           <View
             style={{
@@ -179,7 +247,13 @@ const NearBy = ({ weatherDetails, navigation }: any) => {
               marginBottom: Spacing.MARGIN_20,
             }}
           >
-            <AirQuality navigation={navigation} val={airQuality} />
+            <AirQuality
+              onPressSeeMore={() => {
+                actionSheetRef.current?.setModalVisible(false);
+                navigation.navigate(navigationStrings.AIRPOLLUTION);
+              }}
+              val={airQuality}
+            />
           </View>
         </View>
       </ActionSheet>

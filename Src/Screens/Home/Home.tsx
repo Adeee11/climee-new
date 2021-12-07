@@ -142,6 +142,7 @@ const Home = ({
                 backgroundColor={true}
                 weatherDegree={weatherDegree}
                 navigation={navigation}
+                tab={false}
               />
             </View>
 
@@ -191,6 +192,7 @@ const Home = ({
           <Search
             ModalVisible={handleModalVisible}
             weatherDetail={weatherDetails}
+            weatherDegree={weatherDegree}
           />
         </View>
         <TouchableWithoutFeedback

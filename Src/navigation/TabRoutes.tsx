@@ -9,6 +9,8 @@ import SettingStack from "./SettingStack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import fontFamily from "../globalStyles/fontFamily";
 import typography from "../globalStyles/typography";
+import { TransitionPresets } from "@react-navigation/stack";
+import NearByStack from "./NearByStack";
 
 const Tab = createBottomTabNavigator();
 
@@ -20,6 +22,7 @@ const TabRoutes = () => {
         component={Hourly}
         options={{
           headerShown: false,
+          ...TransitionPresets.RevealFromBottomAndroid,
           tabBarIcon: ({ color }) => (
             <Image
               source={assets.hourly}
@@ -55,6 +58,7 @@ const TabRoutes = () => {
         component={Weekly}
         options={{
           headerShown: false,
+          ...TransitionPresets.RevealFromBottomAndroid,
           tabBarIcon: ({ color }) => (
             <Image
               source={assets.weekly}
@@ -89,6 +93,7 @@ const TabRoutes = () => {
         component={HomeStack}
         options={{
           headerShown: false,
+          ...TransitionPresets.RevealFromBottomAndroid,
           tabBarIcon: () => (
             <Image
               source={assets.homeButton}
@@ -114,9 +119,10 @@ const TabRoutes = () => {
       />
       <Tab.Screen
         name={"Near By"}
-        component={NearBy}
+        component={NearByStack}
         options={{
           headerShown: false,
+          ...TransitionPresets.RevealFromBottomAndroid,
           tabBarIcon: ({ color }) => (
             <Image
               source={assets.nearBy}
@@ -151,6 +157,7 @@ const TabRoutes = () => {
         component={SettingStack}
         options={{
           headerShown: false,
+          ...TransitionPresets.RevealFromBottomAndroid,
           tabBarIcon: ({ color }) => (
             <Image
               source={assets.settings}

@@ -28,55 +28,57 @@ const AdditionalDetails = ({ details, windDegree }: any) => {
             <AdditionalElements
               name={"Wind"}
               value={
-                windDegree == "mph"
-                  ? (details?.wind_speed * 2.237)?.toFixed(2)
-                  : details?.wind_speed?.toFixed(2)
+                details?.wind_speed
+                  ? windDegree == "mph"
+                    ? (details?.wind_speed * 2.237)?.toFixed(2)
+                    : details?.wind_speed?.toFixed(2)
+                  : "NA"
               }
               img={assets.newWind}
             />
           </View>
           <AdditionalElements
             name={"Humidity"}
-            value={details?.humidity + "%"}
+            value={details?.humidity ? details?.humidity + "%" : "NA"}
             img={assets.newHumidity}
           />
           <AdditionalElements
             name={"Uv Index"}
-            value={details?.uvi}
+            value={details?.uvi ? details?.uvi : "NA"}
             img={assets.newUv}
           />
         </View>
         <View style={styles.elementSection}>
           <AdditionalElements
             name={"Dew Point"}
-            value={details?.dew_point}
+            value={details?.dew_point ? details?.dew_point : "NA"}
             img={assets.newDewPoint}
           />
           <AdditionalElements
             name={"Pressure"}
-            value={details?.pressure}
+            value={details?.pressure ? details?.pressure : "NA"}
             img={assets.newPressure}
           />
           <AdditionalElements
             name={"Sunrise"}
-            value={time(details?.sunrise)?.strTime}
+            value={details?.sunrise ? time(details?.sunrise)?.strTime : "NA"}
             img={assets.newSunrise}
           />
         </View>
         <View style={styles.elementSection}>
           <AdditionalElements
             name={"Sunset"}
-            value={time(details?.sunset)?.strTime}
+            value={details?.sunset ? time(details?.sunset)?.strTime : "NA"}
             img={assets.newSunset}
           />
           <AdditionalElements
             name={"Moonrise"}
-            value={time(details?.moonrise)?.strTime}
+            value={details?.moonrise ? time(details?.moonrise)?.strTime : "NA"}
             img={assets.newMoonrise}
           />
           <AdditionalElements
             name={"Moonset"}
-            value={time(details?.moonset)?.strTime}
+            value={details?.moonset ? time(details?.moonset)?.strTime : "NA"}
             img={assets.newMoonset}
           />
         </View>

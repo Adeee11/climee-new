@@ -18,11 +18,11 @@ const locationReducer = (state: any, action: any) => {
 const getLocation = (dispatch: any) => {
   return async () => {
     try {
-      const { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        Alert.alert("Please grant location permission.");
-        await Location.requestForegroundPermissionsAsync();
-      }
+      // const { status } = await Location.requestForegroundPermissionsAsync();
+      // if (status !== "granted") {
+      //   Alert.alert("Please grant location permission.");
+      //   await Location.requestForegroundPermissionsAsync();
+      // }
       const location = await Location.getCurrentPositionAsync({});
       const place = await Location.reverseGeocodeAsync({
         latitude: location?.coords?.latitude,
@@ -66,7 +66,7 @@ const getLocation = (dispatch: any) => {
         await AsyncStorage.setItem("ClimeeCities", JSON.stringify(details));
       }
       dispatch({ type: "get_location", payload: loc });
-    } catch (err) {
+    } catch (err:any) {
       console.log(err.message);
     }
   };

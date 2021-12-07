@@ -6,7 +6,12 @@ import navigationStrings from "../../constants/navigationStrings";
 import styles from "./styles";
 import { Right } from "../../../assets/svg";
 import ProgressBar from "../ProgressBar/ProgressBar";
-const AirQuality = ({ navigation, background = false, val }: any) => {
+const AirQuality = ({
+  navigation,
+  background = false,
+  val,
+  onPressSeeMore,
+}: any) => {
   const cond = (item: any) => {
     return item < 20
       ? { condition: "Good" }
@@ -55,9 +60,7 @@ const AirQuality = ({ navigation, background = false, val }: any) => {
           </Text>
           {background ? null : (
             <TouchableOpacity
-              onPress={() =>
-                navigation.navigate(navigationStrings.AIRPOLLUTION)
-              }
+              onPress={onPressSeeMore}
               style={styles.seeMoreButton}
             >
               <Text style={styles.buttonText}>See More</Text>

@@ -7,7 +7,7 @@ const Loader = () => {
   return (
     <SafeAreaView style={[styles.container, styles.horizontal]}>
       <StatusBar backgroundColor={colors.darkBlue} hidden={false} barStyle="light-content" />
-      <ActivityIndicator size={100} color={colors.darkBlue} />
+      <ActivityIndicator size={50} color={colors.darkBlue} />
     </SafeAreaView>
   );
 };

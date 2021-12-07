@@ -1,6 +1,6 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React, { useState, useEffect, useRef } from "react";
-import { StatusBar, Platform, Animated } from "react-native";
+import { StatusBar, Platform, Animated, Alert } from "react-native";
 import { heightLessNum } from "../../constants/dimensions";
 import * as Location from "expo-location";
 import axios from "../../api/axios";
@@ -31,114 +31,47 @@ const SplashScreen = () => {
   // const height = new Animated.Value(300);
   // const width = new Animated.Value(350);
 
-  useEffect(() => {
-    // Animated.timing()
-    // Animated.timing(fadeAnim, {
-    //   toValue: 1,
-    //   duration: 500,
-    //   useNativeDriver: true,
-    // }).start();
-    // Animated.sequence([
-    //   Animated.parallel([
-    //     Animated.timing(width, {
-    //       toValue: 180,
-    //       delay: 1000,
-    //       duration: 500,
-    //       useNativeDriver: false,
-    //     }),
-    //     Animated.timing(height, {
-    //       toValue: 80,
-    //       delay: 1000,
-    //       duration: 500,
-    //       useNativeDriver: false,
-    //     }),
-    //   ]),
-    //   Animated.parallel([
-    //     Animated.timing(width, {
-    //       toValue: heightLessNum ? 1800 : 2500,
-    //       duration: 500,
-    //       useNativeDriver: false,
-    //     }),
-    //     Animated.timing(height, {
-    //       toValue: heightLessNum ? 1300 : 5000,
-    //       duration: 500,
-    //       useNativeDriver: false,
-    //     }), // Starts the animation
-    //     Animated.timing(fadeAnim, {
-    //       toValue: 0,
-    //       duration: 500,
-    //       useNativeDriver: true,
-    //     }),
-    //   ]),
-    // ]).start();
-  }, []);
-
-  useEffect(() => {
-    (async () => {
-      try {
-        weatherDetailsLoading(true);
-        const location = await Location.getCurrentPositionAsync({});
-        const place = await Location.reverseGeocodeAsync({
-          latitude: location?.coords?.latitude,
-          longitude: location?.coords?.longitude,
-        });
-        const locationObj = {
-          longitude: location?.coords?.longitude,
-          latitude: location?.coords?.latitude,
-          city: place[0]?.city,
-          country: place[0]?.country,
-          street: place[0]?.street,
-        };
-       await AsyncStorage.setItem("climeeCurrentLocation", JSON.stringify(locationObj));
-        const response: any = await axios.get(
-          `/onecall?lat=${location?.coords?.latitude}&lon=${location?.coords?.longitude}&appid=${api}&units=metric`
-        );
-        const resp: any = await axios.get(
-          `/air_pollution?lat=${location?.coords?.latitude}&lon=${location?.coords?.longitude}&appid=${api}`
-        );
-        changeAppTheme(response.data.current.weather[0].main);
-        const details = [];
-        const pollution = [];
-        details.push({
-          weatherDetails: response?.data,
-          locationDetails: locationObj,
-        });
-        pollution.push({
-          pollutionDetails: resp?.data?.list[0],
-        });
-        weatherDetails(details);
-        pollutionDetails(pollution);
-        weatherDetailsLoading(false);
-      } catch (err) {
-        console.log(err, "error");
-      }
-    })();
-  }, []);
-
-  const changeAppTheme = (weather: string) => {
-    return weather === "Thunderstorm"
-      ? (themeColorOne(colors.thunderStormFirstColor),
-        themeColorTwo(colors.thunderStormSecondColor))
-      : weather === "Drizzle"
-      ? (themeColorOne(colors.rainyFirstColor),
-        themeColorTwo(colors.rainySecondColor))
-      : weather === "Rain"
-      ? (themeColorOne(colors.rainyFirstColor),
-        themeColorTwo(colors.rainySecondColor))
-      : weather === "Snow"
-      ? (themeColorOne(colors.snowFirstColor),
-        themeColorTwo(colors.snowSecondColor))
-      : weather === "Clear"
-      ? (themeColorOne(colors.sunnyFirstColor),
-        themeColorTwo(colors.sunnySecondColor))
-      : weather === "Clouds"
-      ? (themeColorOne(colors.cloudyFirstColor),
-        themeColorTwo(colors.cloudySecondColor))
-      : (themeColorOne(colors.hazeFirstColor),
-        themeColorTwo(colors.hazeSecondColor));
-  };
-  // const animation = useStatnew Animated.Value(0))
-  // .current;
+  // useEffect(() => {            
+  //   // Animated.timing()
+  //   // Animated.timing(fadeAnim, {
+  //   //   toValue: 1,
+  //   //   duration: 500,
+  //   //   useNativeDriver: true,
+  //   // }).start();
+  //   // Animated.sequence([
+  //   //   Animated.parallel([
+  //   //     Animated.timing(width, {
+  //   //       toValue: 180,
+  //   //       delay: 1000,
+  //   //       duration: 500,
+  //   //       useNativeDriver: false,
+  //   //     }),
+  //   //     Animated.timing(height, {
+  //   //       toValue: 80,
+  //   //       delay: 1000,
+  //   //       duration: 500,
+  //   //       useNativeDriver: false,
+  //   //     }),
+  //   //   ]),
+  //   //   Animated.parallel([
+  //   //     Animated.timing(width, {
+  //   //       toValue: heightLessNum ? 1800 : 2500,
+  //   //       duration: 500,
+  //   //       useNativeDriver: false,
+  //   //     }),
+  //   //     Animated.timing(height, {
+  //   //       toValue: heightLessNum ? 1300 : 5000,
+  //   //       duration: 500,
+  //   //       useNativeDriver: false,
+  //   //     }), // Starts the animation
+  //   //     Animated.timing(fadeAnim, {
+  //   //       toValue: 0,
+  //   //       duration: 500,
+  //   //       useNativeDriver: true,
+  //   //     }),
+  //   //   ]),
+  //   // ]).start();
+  // }, []);
   const animation = new Animated.Value(0);
   const animation1 = new Animated.Value(0);
   const height = new Animated.Value(0);
@@ -220,17 +153,105 @@ const SplashScreen = () => {
       ]),
     ]).start();
   }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     try {
+  //       const { status } = await Location.requestForegroundPermissionsAsync();
+  //       if (status !== "granted") {
+  //         Alert.alert("Please grant location permission.");
+  //         await Location.requestForegroundPermissionsAsync();
+  //       }
+  //     } catch (err: any) {
+  //       console.log(err.message);
+  //     }
+  //   })();
+  // }, []);
+  useEffect(() => {
+    (async () => {
+      try {
+        weatherDetailsLoading(true);
+        const { status } = await Location.requestForegroundPermissionsAsync();
+        if (status !== "granted") {
+          Alert.alert("Please grant location permission.");
+          await Location.requestForegroundPermissionsAsync();
+        }
+
+        const location = await Location.getCurrentPositionAsync({});
+        const place = await Location.reverseGeocodeAsync({
+          latitude: location?.coords?.latitude,
+          longitude: location?.coords?.longitude,
+        });
+        const locationObj = {
+          longitude: location?.coords?.longitude,
+          latitude: location?.coords?.latitude,
+          city: place[0]?.city,
+          country: place[0]?.country,
+          street: place[0]?.street,
+        };
+        await AsyncStorage.setItem(
+          "climeeCurrentLocation",
+          JSON.stringify(locationObj)
+        );
+        const response: any = await axios.get(
+          `/onecall?lat=${location?.coords?.latitude}&lon=${location?.coords?.longitude}&appid=${api}&units=metric`
+        );
+        const resp: any = await axios.get(
+          `/air_pollution?lat=${location?.coords?.latitude}&lon=${location?.coords?.longitude}&appid=${api}`
+        );
+        changeAppTheme(response.data.current.weather[0].main);
+        const details = [];
+        const pollution = [];
+        details.push({
+          weatherDetails: response?.data,
+          locationDetails: locationObj,
+        });
+        pollution.push({
+          pollutionDetails: resp?.data?.list[0],
+        });
+        weatherDetails(details);
+        pollutionDetails(pollution);
+        weatherDetailsLoading(false);
+      } catch (err) {
+        console.log(err, "erroaaasr");
+      }
+    })();
+  }, []);
+
+  const changeAppTheme = (weather: string) => {
+    return weather === "Thunderstorm"
+      ? (themeColorOne(colors.thunderStormFirstColor),
+        themeColorTwo(colors.thunderStormSecondColor))
+      : weather === "Drizzle"
+      ? (themeColorOne(colors.rainyFirstColor),
+        themeColorTwo(colors.rainySecondColor))
+      : weather === "Rain"
+      ? (themeColorOne(colors.rainyFirstColor),
+        themeColorTwo(colors.rainySecondColor))
+      : weather === "Snow"
+      ? (themeColorOne(colors.snowFirstColor),
+        themeColorTwo(colors.snowSecondColor))
+      : weather === "Clear"
+      ? (themeColorOne(colors.sunnyFirstColor),
+        themeColorTwo(colors.sunnySecondColor))
+      : weather === "Clouds"
+      ? (themeColorOne(colors.cloudyFirstColor),
+        themeColorTwo(colors.cloudySecondColor))
+      : (themeColorOne(colors.hazeFirstColor),
+        themeColorTwo(colors.hazeSecondColor));
+  };
+  // const animation = useStatnew Animated.Value(0))
+  // .current;
 
   return (
     <>
       <Video
         // ref={video}
-        style={{flex: 1}}
+        style={{ flex: 1 }}
         source={require("../../../assets/video3.mov")}
         // useNativeControls
         resizeMode="cover"
         shouldPlay
-        isLooping={false} 
+        isLooping={false}
         // onPlaybackStatusUpdate={status => setStatus(() => status)}
       />
       {/* <Animated.View style={{ backgroundColor: boxInterpolation1, flex: 1 }}>
@@ -257,7 +278,7 @@ const SplashScreen = () => {
             // transform: [{ translateY: top }, { translateX: bottom }],
           }}
         />
-      </Animated.View> */} 
+      </Animated.View> */}
     </>
   );
 };

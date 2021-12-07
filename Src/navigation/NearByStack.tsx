@@ -5,20 +5,19 @@ import {
   TransitionPresets,
 } from "@react-navigation/stack";
 import navigationStrings from "../constants/navigationStrings";
-import { AboutApp, Settings } from "../Screens";
+import { AirPollution, NearBy } from "../Screens";
 
 const Stack = createStackNavigator();
-function SettingStack() {
+function NearByStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen
         options={{
           headerShown: false,
-
           cardStyleInterpolator: CardStyleInterpolators.forFadeFromCenter,
         }}
-        name={navigationStrings.SETTINGS}
-        component={Settings}
+        name={navigationStrings.NEARBY}
+        component={NearBy}
       />
 
       <Stack.Screen
@@ -26,10 +25,10 @@ function SettingStack() {
           headerShown: false,
           ...TransitionPresets.RevealFromBottomAndroid,
         }}
-        name={navigationStrings.ABOUT}
-        component={AboutApp}
+        name={navigationStrings.AIRPOLLUTION}
+        component={AirPollution}
       />
     </Stack.Navigator>
   );
 }
-export default SettingStack;
+export default NearByStack;

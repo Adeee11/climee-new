@@ -24,8 +24,9 @@ import {
 import api from "../../globalStyles/api";
 import Loader from "../Loader";
 import { deviceHeight } from "../../constants/dimensions";
+import colors from "../../globalStyles/colors";
 
-const Search = ({ ModalVisible, weatherDetail }: any) => {
+const Search = ({ ModalVisible, weatherDetail, weatherDegree }: any) => {
   interface Searchresult {
     place_id: string;
     description: string;
@@ -37,14 +38,21 @@ const Search = ({ ModalVisible, weatherDetail }: any) => {
     street: string;
     city: string;
     country: string;
-    place_id: string
+    place_id: string;
   }
 
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false);
   const [searchText, setSearchText] = useState<string>("");
   const [favouriteCity, setFavouriteCity] = useState<Array<string>>([]);
   const [recents, setRecents] = useState<Array<location>>([
-    { latitude: 0, longitude: 0, street: "", city: "", country: "", place_id: '' },
+    {
+      latitude: 0,
+      longitude: 0,
+      street: "",
+      city: "",
+      country: "",
+      place_id: "",
+    },
   ]);
   const [searchResult, setSearchResult] = useState<Array<Searchresult>>([]);
   const [placeId, setPlaceId] = useState<string | null>(null);
@@ -61,10 +69,10 @@ const Search = ({ ModalVisible, weatherDetail }: any) => {
         d.push(item);
         await AsyncStorage.setItem("climeeFavouriteCity", JSON.stringify(d));
         const Recent: any = await AsyncStorage.getItem("climeeRecentsCity");
-        const r :any = JSON.parse(Recent);
+        const r: any = JSON.parse(Recent);
         const ds = r?.filter((e: any) => e?.street !== item?.street);
         await AsyncStorage.setItem("climeeRecentsCity", JSON.stringify(ds));
-        const Recents: any= await AsyncStorage.getItem("climeeRecentsCity");
+        const Recents: any = await AsyncStorage.getItem("climeeRecentsCity");
         setRecents(JSON.parse(Recents));
         const datas: any = await AsyncStorage.getItem("climeeFavouriteCity");
         setFavouriteCity(JSON.parse(datas));
@@ -77,9 +85,9 @@ const Search = ({ ModalVisible, weatherDetail }: any) => {
   useEffect(() => {
     (async () => {
       try {
-        const data: any= await AsyncStorage.getItem("climeeFavouriteCity");
+        const data: any = await AsyncStorage.getItem("climeeFavouriteCity");
         setFavouriteCity(JSON.parse(data));
-        const Recent: any= await AsyncStorage.getItem("climeeRecentsCity");
+        const Recent: any = await AsyncStorage.getItem("climeeRecentsCity");
         setRecents(JSON.parse(Recent));
       } catch (error) {
         console.log(error);
@@ -93,8 +101,8 @@ const Search = ({ ModalVisible, weatherDetail }: any) => {
         // setLoading(true);
         const res: any = await axios.get(
           `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${searchText}&types=geocode&key=AIzaSyBXG8JrE9C2wKktMK-lDJkHNbYyuL4cr34`
-        );        
-        setSearchResult(res?.data?.predictions);        
+        );
+        setSearchResult(res?.data?.predictions);
         // setLoading(false);
       } catch (Err) {
         console.log(Err);
@@ -105,9 +113,11 @@ const Search = ({ ModalVisible, weatherDetail }: any) => {
   useEffect(() => {
     (async () => {
       try {
-        const currLoc: any= await AsyncStorage.getItem("climeeCurrentLocation");
-        if(placeId === null) {
-          return
+        const currLoc: any = await AsyncStorage.getItem(
+          "climeeCurrentLocation"
+        );
+        if (placeId === null) {
+          return;
         }
         setLoading(true);
         weatherDetailsLoading(true);
@@ -146,12 +156,15 @@ const Search = ({ ModalVisible, weatherDetail }: any) => {
         });
         weatherDetails(details);
         pollutionDetails(pollution);
-        if (JSON.parse(currLoc)?.street?.toLowerCase() !== place[0]?.street?.toLowerCase()) {
+        if (
+          JSON.parse(currLoc)?.street?.toLowerCase() !==
+          place[0]?.street?.toLowerCase()
+        ) {
           handleSearchSubmit(locationObj);
           weatherDetailsLoading(false);
           setSearchResult([]);
           ModalVisible(false);
-          return
+          return;
         }
         handleSearchSubmit(locationObj);
         weatherDetailsLoading(false);
@@ -167,7 +180,7 @@ const Search = ({ ModalVisible, weatherDetail }: any) => {
   const handleRemoveLocation = async (item: any) => {
     try {
       const d: any = await AsyncStorage.getItem("climeeFavouriteCity");
-      const data = JSON.parse(d);      
+      const data = JSON.parse(d);
       const newLocations = await data?.filter(
         (e: any) => e?.street?.toLowerCase() !== item?.street?.toLowerCase()
       );
@@ -185,7 +198,7 @@ const Search = ({ ModalVisible, weatherDetail }: any) => {
     const str = `${item?.street}, ${item?.city}, ${item?.country}`;
     const res: any = await axios.get(
       `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${str}&types=geocode&key=AIzaSyBXG8JrE9C2wKktMK-lDJkHNbYyuL4cr34`
-    );    
+    );
     setPlaceId(res?.data?.predictions[0]?.place_id);
   };
 
@@ -216,7 +229,7 @@ const Search = ({ ModalVisible, weatherDetail }: any) => {
           style={{ flex: 0.1 }}
           onPress={() => handleFavourite(item)}
         >
-          <AntDesign name="staro" size={24} color="#363B64" />
+          <AntDesign name="staro" size={24} color={colors.purple} />
         </TouchableOpacity>
       </View>
       <View style={[styles.borderBottom, { width: "70%" }]} />
@@ -233,7 +246,7 @@ const Search = ({ ModalVisible, weatherDetail }: any) => {
       place_id: value?.place_id,
     };
     const m = [];
-    const data: any= await AsyncStorage.getItem("climeeRecentsCity");
+    const data: any = await AsyncStorage.getItem("climeeRecentsCity");
     const d = JSON.parse(data);
     if (d === undefined || d === null || d?.length === 0) {
       m.push(locationobj);
@@ -242,127 +255,142 @@ const Search = ({ ModalVisible, weatherDetail }: any) => {
       d.push(locationobj);
       AsyncStorage.setItem("climeeRecentsCity", JSON.stringify(d));
     }
-    const Recent: any= await AsyncStorage.getItem("climeeRecentsCity");
+    const Recent: any = await AsyncStorage.getItem("climeeRecentsCity");
     setRecents(JSON.parse(Recent));
     setSearchText("");
   };
 
-   function uniqueKeepLAst(data:any, key:any) {
-     return [
-       ...new Map(data?.map((x: any) => [key(x), x])).values()
-     ]
-   }
+  function uniqueKeepLAst(data: any, key: any) {
+    return [...new Map(data?.map((x: any) => [key(x), x])).values()];
+  }
 
   return (
     <>
       <SafeAreaView>
         {/* Search Bar */}
-          {loading ? 
-          <View style={{height: (deviceHeight * 100) / 100, position: 'absolute', top: 0, bottom: 0, left: 0, right: 0}}>
+        {loading ? (
+          <View
+            style={{
+              height: (deviceHeight * 100) / 100,
+              position: "absolute",
+              top: 0,
+              bottom: 0,
+              left: 0,
+              right: 0,
+            }}
+          >
             <Loader />
-          </View> 
-           :   
+          </View>
+        ) : (
           <>
-      <View style={styles.searchContainer}>
-          <TouchableOpacity onPress={() => ModalVisible(false)}>
-            <Back />
-          </TouchableOpacity>
-          <TextInput
-            placeholder="Search City"
-            value={searchText}
-            style={styles.searchInput}
-            onChangeText={(text: string) => setSearchText(text)}
-            onSubmitEditing={() => handleSearchSubmit(searchText)}
-          />
-        </View>
+            <View style={styles.searchContainer}>
+              <TouchableOpacity onPress={() => ModalVisible(false)}>
+                <Back />
+              </TouchableOpacity>
+              <TextInput
+                placeholder="Search City"
+                value={searchText}
+                style={styles.searchInput}
+                onChangeText={(text: string) => setSearchText(text)}
+                onSubmitEditing={() => handleSearchSubmit(searchText)}
+              />
+            </View>
 
-        {/* <SearchBar value={handleSearchValue} /> */}
-        {searchResult.length !== 0 ? (
-          <View style={styles.bottomView1}>
-            <FlatList
-              data={searchResult}
-              keyExtractor={(item) => item?.place_id}
-              renderItem={({ item }) => {
-                return (
-                  <TouchableOpacity
-                    onPress={() => setPlaceId(item?.place_id)}
-                    style={styles.searchTextWrapper}
-                  >
-                    <Text style={styles.searchTextStyle}>
-                      {item?.description}
-                    </Text>
-                  </TouchableOpacity>
-                );
-              }}
-            />
-          </View>
-        ) : null}
+            {/* <SearchBar value={handleSearchValue} /> */}
+            {searchResult.length !== 0 ? (
+              <View style={styles.bottomView1}>
+                <FlatList
+                  data={searchResult}
+                  keyExtractor={(item) => item?.place_id}
+                  renderItem={({ item }) => {
+                    return (
+                      <TouchableOpacity
+                        onPress={() => setPlaceId(item?.place_id)}
+                        style={styles.searchTextWrapper}
+                      >
+                        <Text style={styles.searchTextStyle}>
+                          {item?.description}
+                        </Text>
+                      </TouchableOpacity>
+                    );
+                  }}
+                />
+              </View>
+            ) : null}
 
-        {/* Current location */}
-        {searchResult.length > 0 ? null : (
-          <View style={{ marginVertical: Spacing.MARGIN_5 }}>
-            <LocationCard
-              current={true}
-              latitude={weatherDetail[0]?.locationDetails?.latitude}
-              longitude={weatherDetail[0]?.locationDetails?.longitude}
-              city={weatherDetail[0]?.locationDetails?.city}
-              country={weatherDetail[0]?.locationDetails?.country}
-              showDetails={handleShowDetails}
-            />
-          </View>
-        )}
-
-        {/* Favourite Cities */}
-        {searchResult.length > 0 ? null : (
-        <View style={{ marginBottom: Spacing.MARGIN_5 }}>
-          <FlatList
-            data={uniqueKeepLAst(favouriteCity, (it: any) => it.street)}
-            bounces={false}
-            keyExtractor={(item) => item?.id}
-            renderItem={({ item }) => (
-              <>
+            {/* Current location */}
+            {searchResult.length > 0 ? null : (
+              <View style={{ marginVertical: Spacing.MARGIN_5 }}>
                 <LocationCard
-                  removeLocation={handleRemoveLocation}
-                  current={false}
-                  latitude={item?.latitude}
-                  longitude={item?.longitude}
-                  city={item?.city}
-                  street={item?.street}
-                  country={item?.country}
+                  weatherDegree={weatherDegree}
+                  current={true}
+                  latitude={weatherDetail[0]?.locationDetails?.latitude}
+                  longitude={weatherDetail[0]?.locationDetails?.longitude}
+                  city={weatherDetail[0]?.locationDetails?.city}
+                  country={weatherDetail[0]?.locationDetails?.country}
                   showDetails={handleShowDetails}
                 />
-                <View style={[styles.borderBottom, { width: "50%" }]} />
+              </View>
+            )}
+
+            {/* Favourite Cities */}
+            {searchResult.length > 0 ? null : (
+              <View style={{ marginBottom: Spacing.MARGIN_5 }}>
+                <FlatList
+                  data={uniqueKeepLAst(favouriteCity, (it: any) => it.street)}
+                  bounces={false}
+                  keyExtractor={(item) => item?.id}
+                  renderItem={({ item }) => (
+                    <>
+                      <LocationCard
+                        removeLocation={handleRemoveLocation}
+                        current={false}
+                        latitude={item?.latitude}
+                        longitude={item?.longitude}
+                        city={item?.city}
+                        street={item?.street}
+                        country={item?.country}
+                        showDetails={handleShowDetails}
+                      />
+                      <View style={[styles.borderBottom, { width: "50%" }]} />
+                    </>
+                  )}
+                />
+              </View>
+            )}
+
+            {/* Recent Searchs*/}
+            {searchResult.length > 0 ? null : (
+              <>
+                {recents === null ? null : (
+                  <FlatList
+                    data={uniqueKeepLAst(
+                      recents?.filter((e) => e?.street !== ""),
+                      (it) => it.street
+                    )}
+                    bounces={false}
+                    keyExtractor={(item) => item?.id}
+                    renderItem={({ item }) => renderRecentSearchs(item)}
+                    ListHeaderComponent={() => {
+                      return (
+                        <View style={styles.recentContainer}>
+                          <Text style={styles.recentText}>Recents</Text>
+                          <TouchableOpacity onPress={handleAllRemoveLocation}>
+                            <FontAwesome
+                              name="trash-o"
+                              size={24}
+                              color={colors.darkGrey}
+                            />
+                          </TouchableOpacity>
+                        </View>
+                      );
+                    }}
+                  />
+                )}
               </>
             )}
-          />
-        </View>
+          </>
         )}
-
-        {/* Recent Searchs*/}
-        {searchResult.length > 0 ? null : (
-          <>
-        {recents === null ? null : (
-          <FlatList
-          data={uniqueKeepLAst(recents?.filter((e) => e?.street !== ""), it => it.street)}
-          bounces={false}
-          keyExtractor={(item) => item?.id}
-          renderItem={({ item }) => renderRecentSearchs(item)}
-          ListHeaderComponent={() => {
-            return (
-              <View style={styles.recentContainer}>
-                  <Text style={styles.recentText}>Recents</Text>
-                  <TouchableOpacity onPress={handleAllRemoveLocation}>
-                    <FontAwesome name="trash-o" size={24} color="#9B9B9B" />
-                  </TouchableOpacity>
-                </View>
-              );
-            }}
-            />
-            )}
-            </>
-        )}
-        </>
-            }
       </SafeAreaView>
     </>
   );

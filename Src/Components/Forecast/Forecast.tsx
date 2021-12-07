@@ -15,6 +15,7 @@ const Forecast = ({
   title,
   weatherDegree,
   navigation,
+  tab
 }: any) => {
   interface data {
     id: string;
@@ -99,12 +100,9 @@ const Forecast = ({
           backgroundColor: backgroundColor ? colors.darkBlue : "transparent",
           paddingHorizontal: backgroundColor ? Spacing.PADDING_15 : 0,
         }}
-        onPress={() =>
-          navigation.navigate(
-            backgroundColor
-              ? navigationStrings.WEEKLY
-              : navigationStrings.HOURLY
-          )
+        onPress={backgroundColor?
+        ()=>navigation.navigate(navigationStrings.WEEKLY,{tab:tab}):
+        ()=>navigation.navigate(navigationStrings.HOURLY,{tab:tab})
         }
       >
         <Text style={styles.cardTitle}>{title}</Text>

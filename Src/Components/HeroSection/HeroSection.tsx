@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text} from "react-native";
+import { View, Text } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import moment from "moment";
@@ -8,6 +8,7 @@ import WeatherImage from "../WeatherImage/WeatherImage";
 import Forecast from "../Forecast/Forecast";
 import colors from "../../globalStyles/colors";
 import Spacing from "../../globalStyles/Spacing";
+import typography from "../../globalStyles/typography";
 
 const HeroSection = ({
   weatherData,
@@ -43,7 +44,17 @@ const HeroSection = ({
                   )?.toFixed(0)
                 : weatherData[0]?.weatherDetails?.current?.temp?.toFixed(0)}
             </Text>
-            <Text style={styles.degreeSymbol}>&deg;</Text>
+            <Text style={styles.degreeSymbol}>&deg; </Text>
+            <Text
+              style={{
+                ...styles.degreeSymbol,
+                marginLeft: -10,
+                fontSize: typography.FONT_SIZE_30,
+                marginTop: 8,
+              }}
+            >
+              {weatherDegree == "null" ? "C" : weatherDegree}
+            </Text>
           </View>
           <Text style={styles.weatherTypeText}>
             {weatherData[0]?.weatherDetails?.current?.weather[0]?.description}
@@ -94,6 +105,7 @@ const HeroSection = ({
           title="Hourly Forecast"
           weatherDegree={weatherDegree}
           navigation={navigation}
+          tab={false}
         />
       </View>
     </View>

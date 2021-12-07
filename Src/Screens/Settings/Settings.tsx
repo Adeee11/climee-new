@@ -81,7 +81,7 @@ const Setting = (props: any) => {
   };
 
   const handleNotifications = (value: string) => {
-    toggleNotification(value);    
+    toggleNotification(value);
   };
 
   return (
@@ -128,7 +128,7 @@ const Setting = (props: any) => {
                 >
                   <Image
                     source={assets.facebook}
-                    resizeMode={"contain"}
+                    resizeMode={"cover"}
                     style={styles.iconStyle}
                   />
                 </TouchableOpacity>
@@ -145,7 +145,7 @@ const Setting = (props: any) => {
                         ? assets.appStore
                         : assets.googlePlay
                     }
-                    resizeMode={"contain"}
+                    resizeMode={"cover"}
                     style={
                       Platform.OS === "ios"
                         ? { ...styles.iconStyle, tintColor: colors.darkBlue }
@@ -158,7 +158,7 @@ const Setting = (props: any) => {
                 >
                   <Image
                     source={assets.twitter}
-                    resizeMode={"contain"}
+                    resizeMode={"cover"}
                     style={styles.iconStyle}
                   />
                 </TouchableOpacity>
@@ -168,7 +168,7 @@ const Setting = (props: any) => {
                   }
                 >
                   <Image
-                    resizeMode={"contain"}
+                    resizeMode={"cover"}
                     source={assets.instagram}
                     style={styles.iconStyle}
                   />
@@ -360,7 +360,14 @@ const Setting = (props: any) => {
             </View>
           </ScrollView>
         </View>
-        <View style={{ flex: 0.08, backgroundColor: colors.appBackground, alignItems: "center", justifyContent: 'center'}}>
+        <View
+          style={{
+            flex: 0.08,
+            backgroundColor: colors.appBackground,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           <View style={styles.bottomWrapper}>
             <Text style={styles.grey12}>
               Made with ❤ by

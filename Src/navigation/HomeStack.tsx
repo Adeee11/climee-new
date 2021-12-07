@@ -31,7 +31,7 @@ function HomeStack() {
       <Stack.Screen
         options={{
           headerShown: false,
-          ...TransitionPresets.ModalPresentationIOS,
+          ...TransitionPresets.RevealFromBottomAndroid,
         }}
         name={navigationStrings.AIRPOLLUTION}
         component={AirPollution}
@@ -39,7 +39,7 @@ function HomeStack() {
       <Stack.Screen
         options={{
           headerShown: false,
-          ...TransitionPresets.ModalPresentationIOS,
+          ...TransitionPresets.RevealFromBottomAndroid,
         }}
         name={navigationStrings.TODAYSDETAILS}
         component={TodaysDetails}
@@ -47,7 +47,7 @@ function HomeStack() {
       <Stack.Screen
         options={{
           headerShown: false,
-          ...TransitionPresets.ModalPresentationIOS,
+          ...TransitionPresets.RevealFromBottomAndroid,
         }}
         name={navigationStrings.NEWS}
         component={News}
@@ -55,7 +55,7 @@ function HomeStack() {
       <Stack.Screen
         options={{
           headerShown: false,
-          ...TransitionPresets.ModalPresentationIOS,
+          ...TransitionPresets.RevealFromBottomAndroid,
         }}
         name={navigationStrings.HOURLY}
         component={Hourly}
@@ -63,7 +63,7 @@ function HomeStack() {
       <Stack.Screen
         options={{
           headerShown: false,
-          ...TransitionPresets.ModalPresentationIOS,
+          ...TransitionPresets.RevealFromBottomAndroid,
         }}
         name={navigationStrings.WEEKLY}
         component={Weekly}

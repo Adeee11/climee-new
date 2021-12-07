@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     height: 24,
     width: 24,
     marginHorizontal: Spacing.MARGIN_4,
-    borderRadius: Spacing.RADIUS_10,
+    borderRadius: Spacing.RADIUS_5,
     // tintColor: colors.darkBlue,
   },
   actionsheetTextStyle: {

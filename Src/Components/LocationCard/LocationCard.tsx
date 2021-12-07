@@ -9,6 +9,7 @@ import api from "../../globalStyles/api";
 import weatherApi from "../../api/axios";
 import WeatherImage from "../WeatherImage/WeatherImage";
 import Loader from "../Loader";
+import colors from "../../globalStyles/colors";
 
 const LocationCard = ({
   current,
@@ -19,6 +20,7 @@ const LocationCard = ({
   latitude,
   longitude,
   showDetails,
+  weatherDegree,
 }: any) => {
   const [currentDetails, setCurrentDetails] = useState();
   const [temperature, setTemperature] = useState<number>(0);
@@ -70,7 +72,7 @@ const LocationCard = ({
         setTemperature(response?.data?.main?.temp);
         setWeatherMain(response?.data?.weather[0]?.main);
         setLoading(false);
-      } catch (err) {
+      } catch (err:any) {
         console.log(err.message);
       }
     })();
@@ -103,7 +105,10 @@ const LocationCard = ({
                   { color: !current ? "#9B9B9B" : "#363B64" },
                 ]}
               >
-                {temperature?.toFixed(0)}&deg;
+                {weatherDegree == "F"
+                  ? (temperature * 1.8 + 32)?.toFixed(0)
+                  : temperature?.toFixed(0)}
+                &deg;
               </Text>
             </View>
           </>
@@ -135,7 +140,7 @@ const LocationCard = ({
             onPress={handleRemoveLocation}
             style={{ flex: 0.1 }}
           >
-            <AntDesign name="star" size={24} color="#F5CA04" />
+            <AntDesign name="star" size={24} color={colors.mustard} />
           </TouchableOpacity>
         )}
       </TouchableOpacity>

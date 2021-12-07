@@ -14,10 +14,26 @@ import AppLoading from "expo-app-loading";
 import { MenuProvider } from "react-native-popup-menu";
 import InternetError from "./Src/Components/InternetError";
 import FlashMessage from "react-native-flash-message";
-
+import { Alert } from "react-native";
+import * as Location from "expo-location";
 const AppWrapper = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [intConnection, setIntConnection] = useState<any>("");
+
+  useEffect(() => {
+    setLoading(true);
+    (async () => {
+      try {
+        const { status } = await Location.requestForegroundPermissionsAsync();
+        if (status !== "granted") {
+          Alert.alert("Please grant location permission.");
+          await Location.requestForegroundPermissionsAsync();
+        }
+      } catch (err: any) {
+        console.log(err.message);
+      }
+    })();
+  }, []);
 
   useEffect(() => {
     strapi
@@ -30,9 +46,10 @@ const AppWrapper = () => {
       });
     const unsubscribe = NetInfo.addEventListener((state) => {});
     unsubscribe();
+
     setTimeout(() => {
       setLoading(false);
-    }, 1500);
+    }, 2000);
   }, []);
 
   NetInfo.fetch().then((state) => {

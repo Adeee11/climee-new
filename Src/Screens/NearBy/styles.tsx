@@ -7,7 +7,7 @@ import typography from "../../globalStyles/typography";
 const styles = StyleSheet.create({
   locationContainer: {
     position: "absolute",
-    top: 80,
+    top: 110,
     right: 20,
     left: 20,
     backgroundColor: colors.white,
@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
     color: colors.purple,
     fontFamily: fontFamily.semiBold,
     fontSize: typography.FONT_SIZE_14,
+    width:"80%"
   },
   locationText: {
     color: colors.purple,
@@ -29,9 +30,9 @@ const styles = StyleSheet.create({
   },
   tempContainer: {
     position: "absolute",
-    top: 155,
-    right: 90,
-    left: 90,
+    top: 185,
+    right: 50,
+    left: 50,
     borderRadius: Spacing.RADIUS_20,
     flexDirection: "row",
     alignItems: "center",
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
   tempText: {
     color: colors.white,
     fontFamily: fontFamily.semiBold,
-    fontSize: typography.FONT_SIZE_24,
+    fontSize: typography.FONT_SIZE_30,
     alignSelf: "center",
   },
   weatherText: {

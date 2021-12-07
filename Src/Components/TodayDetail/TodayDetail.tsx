@@ -46,7 +46,8 @@ const TodayDetail = ({ weatherDetails, navigation, windDegree }: any) => {
                   )?.toFixed(2)
                 : weatherDetails[0]?.weatherDetails?.current?.wind_speed?.toFixed(
                     2
-                  )}
+                  )}{" "}
+              {windDegree == "null" ? "m/s" : windDegree}
             </Text>
           ) : item?.id === "2" ? (
             <Text style={styles.detailText}>

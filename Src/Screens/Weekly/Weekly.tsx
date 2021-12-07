@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+
+import React, { useState,useEffect } from "react";
 import { ScrollView } from "react-native";
 import { connect } from "react-redux";
 import AdditionalDetails from "../../Components/AdditionalDetails/AdditionalDetails";
@@ -12,6 +13,8 @@ const Weekly = ({
   windDegree,
   weatherDetails,
   navigation,
+  route
+  // props,
 }: any) => {
   const [selectedDay, setSelectedDay] = useState();
   const handleSelectedDay = (val: any) => {
@@ -26,6 +29,7 @@ const Weekly = ({
       />
       <Header
         title={"7 Days"}
+        tab={route?.params?.tab}
         backButton={true}
         onPress={() => navigation.goBack()}
       />

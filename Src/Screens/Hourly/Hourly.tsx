@@ -7,12 +7,22 @@ import colors from "../../globalStyles/colors";
 import { connect } from "react-redux";
 import moment from "moment";
 import { useState } from "react";
+import Loader from "../../Components/Loader";
 
-const Hourly = ({ weatherDetails, weatherDegree, windDegree }: any) => {
+const Hourly = ({
+  weatherDetails,
+  weatherDegree,
+  windDegree,
+  route,
+  navigation,
+}: any) => {
   const [todayHourly, setTodayHourly] = useState<any>();
   const [tomorrowHourly, setTomorrowHourly] = useState<any>();
-
+  const [loader, setLoader] = useState(true);
   useEffect(() => {
+    console.log(route);
+    
+    setLoader(true);
     const today = new Date()?.toISOString()?.split("T")[0];
     const tomorrow = new Date(new Date()?.getTime() + 24 * 60 * 60 * 1000)
       ?.toISOString()
@@ -27,6 +37,7 @@ const Hourly = ({ weatherDetails, weatherDegree, windDegree }: any) => {
       return new Date(e?.dt * 1000)?.toISOString()?.split("T")[0] == tomorrow;
     });
     setTomorrowHourly(filt);
+    setLoader(false);
   }, []);
 
   return (
@@ -35,25 +46,34 @@ const Hourly = ({ weatherDetails, weatherDegree, windDegree }: any) => {
         barStyle={"light-content"}
         backgroundColor={colors.darkBlue}
       />
-      <Header title={"Hourly"} />
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        bounces={false}
-        style={{ backgroundColor: colors.appBackground }}
-      >
-        <HourlyInformation
-          data={todayHourly}
-          date={moment(new Date())?.format("dddd, D MMMM")}
-          weatherDegree={weatherDegree}
-          windDegree={windDegree}
-        />
-        <HourlyInformation
-          data={tomorrowHourly}
-          date={moment().add(1, "days").format("dddd, D MMMM").toString()}
-          weatherDegree={weatherDegree}
-          windDegree={windDegree}
-        />
-      </ScrollView>
+      <Header
+        title={"Hourly"}
+        tab={route?.params?.tab}
+        backButton={true}
+        onPress={() => navigation.goBack()}
+      />
+      {loader ? (
+        <Loader />
+      ) : (
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          bounces={false}
+          style={{ backgroundColor: colors.appBackground }}
+        >
+          <HourlyInformation
+            data={todayHourly}
+            date={moment(new Date())?.format("dddd, D MMMM")}
+            weatherDegree={weatherDegree}
+            windDegree={windDegree}
+          />
+          <HourlyInformation
+            data={tomorrowHourly}
+            date={moment().add(1, "days").format("dddd, D MMMM").toString()}
+            weatherDegree={weatherDegree}
+            windDegree={windDegree}
+          />
+        </ScrollView>
+      )}
     </>
   );
 };

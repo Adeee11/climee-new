@@ -12,6 +12,7 @@ import AdditionalDetails from "../../Components/AdditionalDetails/AdditionalDeta
 import AirQuality from "../../Components/AirQuality/AirQuality";
 import { useEffect } from "react";
 import { connect } from "react-redux";
+import navigationStrings from "../../constants/navigationStrings";
 
 const TodaysDetails = ({
   weatherDetails,
@@ -59,7 +60,7 @@ const TodaysDetails = ({
         <View style={styles.heading}>
           <Text style={styles.headingText}>Temperature Track</Text>
         </View>
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={{marginLeft:-30}}>
           <LineChart
             data={{
               labels,
@@ -72,7 +73,7 @@ const TodaysDetails = ({
             width={dataPoints?.length * 50}
             height={250}
             // withDots={false}
-            // withInnerLines={false}
+            withInnerLines={false}
             withShadow={false}
             withOuterLines={false}
             withHorizontalLabels={false}
@@ -112,7 +113,10 @@ const TodaysDetails = ({
         </ScrollView>
         <View style={{ margin: Spacing.MARGIN_16 }}>
           <AirQuality
-            navigation={navigation}
+            // navigation={navigation}
+            onPressSeeMore={() =>
+              navigation.navigate(navigationStrings.AIRPOLLUTION)
+            }
             val={pollutionDetails[0]?.pollutionDetails?.components.pm2_5?.toFixed(
               2
             )}

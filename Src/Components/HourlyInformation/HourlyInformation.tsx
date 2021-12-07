@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList, Image, Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
 import assets from "../../../assets";
 import WeatherImage from "../WeatherImage/WeatherImage";
 import styles from "./styles";
@@ -69,7 +69,7 @@ const HourlyInformation = (props: any) => {
         <Text style={styles.dateText}>{date}</Text>
       </View>
       <View style={styles.mainContainer}>
-        {data?.map((item: any, index: number) => renderItems(item, index))}
+        {data?.map((item: any, index: number) => renderItems(item))}
         {/* <FlatList
           data={data}
           keyExtractor={(item) => item?.id}
