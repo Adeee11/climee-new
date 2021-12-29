@@ -51,7 +51,7 @@ const AdditionalDetails = ({ details, windDegree }: any) => {
         <View style={styles.elementSection}>
           <AdditionalElements
             name={"Dew Point"}
-            value={details?.dew_point ? details?.dew_point : "NA"}
+            value={details?.dew_point ? details?.dew_point+ "°" : "NA"}
             img={assets.newDewPoint}
           />
           <AdditionalElements
@@ -71,7 +71,7 @@ const AdditionalDetails = ({ details, windDegree }: any) => {
             value={details?.sunset ? time(details?.sunset)?.strTime : "NA"}
             img={assets.newSunset}
           />
-          <AdditionalElements
+          {/* <AdditionalElements
             name={"Moonrise"}
             value={details?.moonrise ? time(details?.moonrise)?.strTime : "NA"}
             img={assets.newMoonrise}
@@ -80,7 +80,7 @@ const AdditionalDetails = ({ details, windDegree }: any) => {
             name={"Moonset"}
             value={details?.moonset ? time(details?.moonset)?.strTime : "NA"}
             img={assets.newMoonset}
-          />
+          /> */}
         </View>
       </View>
     </View>

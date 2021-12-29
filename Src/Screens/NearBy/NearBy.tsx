@@ -33,6 +33,13 @@ const NearBy = ({
   weatherDegree,
   windDegree,
 }: any) => {
+
+  useEffect(() => {
+   setCoordinates({
+    latitude: weatherDetails[0]?.locationDetails?.latitude,
+    longitude: weatherDetails[0]?.locationDetails?.longitude,
+   })
+  }, [weatherDetails])
   const [coordinates, setCoordinates] = useState<any>({
     latitude: weatherDetails[0]?.locationDetails?.latitude,
     longitude: weatherDetails[0]?.locationDetails?.longitude,

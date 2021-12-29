@@ -35,7 +35,7 @@ export default {
   settings: require("./images/settings.png"),
   weekly: require("./images/weekly.png"),
   homeButton: require("./images/homeButton.png"),
-
+  splashIcon: require("./Applogo.png"),
   //newIcons
   newDewPoint: require("./images/newDewPoint.png"),
   newHumidity: require("./images/newHumidity.png"),

@@ -38,7 +38,7 @@ const Hourly = ({
     });
     setTomorrowHourly(filt);
     setLoader(false);
-  }, []);
+  }, [weatherDetails]);
 
   return (
     <>

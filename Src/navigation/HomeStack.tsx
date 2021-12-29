@@ -3,7 +3,6 @@ import {
   CardStyleInterpolators,
   createStackNavigator,
   TransitionPresets,
-  TransitionSpecs,
 } from "@react-navigation/stack";
 import navigationStrings from "../constants/navigationStrings";
 import {

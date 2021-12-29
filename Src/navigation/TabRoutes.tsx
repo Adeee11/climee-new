@@ -1,15 +1,15 @@
 import React from "react";
+import { Image, Platform, StyleSheet } from "react-native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { TransitionPresets } from "@react-navigation/stack";
 import colors from "../globalStyles/colors";
-import { Hourly, NearBy, Weekly } from "../Screens";
-import { Image, Platform } from "react-native";
+import { Hourly, Weekly } from "../Screens";
 import Spacing from "../globalStyles/Spacing";
 import assets from "../../assets";
 import HomeStack from "./HomeStack";
 import SettingStack from "./SettingStack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import fontFamily from "../globalStyles/fontFamily";
 import typography from "../globalStyles/typography";
-import { TransitionPresets } from "@react-navigation/stack";
 import NearByStack from "./NearByStack";
 
 const Tab = createBottomTabNavigator();
@@ -27,27 +27,15 @@ const TabRoutes = () => {
             <Image
               source={assets.hourly}
               style={{
-                height: Spacing.HEIGHT_28,
-                width: Spacing.WIDTH_28,
                 tintColor: color,
-                marginTop:
-                  Platform.OS == "ios" ? Spacing.MARGIN_10 : Spacing.MARGIN_8,
+                ...styles.tabBottom,
               }}
               resizeMode="contain"
             />
           ),
 
-          tabBarStyle: {
-            backgroundColor: colors.darkBlue,
-            height: Spacing.HEIGHT_80,
-          },
-          tabBarLabelStyle: {
-            fontFamily: fontFamily.regular,
-            fontSize: typography.FONT_SIZE_10,
-            marginTop:
-              Platform.OS == "ios" ? Spacing.MARGIN_5 : Spacing.MARGIN_5,
-            marginBottom: Platform.OS == "android" ? Spacing.MARGIN_10 : 0,
-          },
+          tabBarStyle: styles.tabBarStyle,
+          tabBarLabelStyle: styles.tabBarLabelStyle,
           tabBarActiveTintColor: colors.textColor,
           tabBarInactiveTintColor: colors.white,
         }}
@@ -63,27 +51,15 @@ const TabRoutes = () => {
             <Image
               source={assets.weekly}
               style={{
-                height: Spacing.HEIGHT_28,
-                width: Spacing.WIDTH_28,
                 tintColor: color,
-                marginTop:
-                  Platform.OS == "ios" ? Spacing.MARGIN_10 : Spacing.MARGIN_8,
+                ...styles.tabBottom,
               }}
               resizeMode="contain"
             />
           ),
 
-          tabBarStyle: {
-            backgroundColor: colors.darkBlue,
-            height: Spacing.HEIGHT_80,
-          },
-          tabBarLabelStyle: {
-            fontFamily: fontFamily.regular,
-            fontSize: typography.FONT_SIZE_10,
-            marginTop:
-              Platform.OS == "ios" ? Spacing.MARGIN_5 : Spacing.MARGIN_5,
-            marginBottom: Platform.OS == "android" ? Spacing.MARGIN_10 : 0,
-          },
+          tabBarStyle: styles.tabBarStyle,
+          tabBarLabelStyle: styles.tabBarLabelStyle,
           tabBarActiveTintColor: colors.textColor,
           tabBarInactiveTintColor: colors.white,
         }}
@@ -97,24 +73,14 @@ const TabRoutes = () => {
           tabBarIcon: () => (
             <Image
               source={assets.homeButton}
-              style={{
-                height: Spacing.HEIGHT_55,
-                width: Spacing.HEIGHT_55,
-                borderRadius: Spacing.RADIUS_82,
-                marginTop:
-                  Platform.OS == "ios" ? Spacing.MARGIN_24 : Spacing.MARGIN_10,
-              }}
-              resizeMode="contain"
+              style={styles.homeTabImage}
+              resizeMode="cover"
             />
           ),
           tabBarLabel: "",
-          tabBarStyle: {
-            backgroundColor: colors.darkBlue,
-            height: Spacing.HEIGHT_80,
-          },
+          tabBarStyle: styles.tabBarStyle,
           tabBarActiveTintColor: colors.blueTheme,
           tabBarInactiveTintColor: colors.white,
-          //   tabBarShowLabel: false,
         }}
       />
       <Tab.Screen
@@ -127,27 +93,15 @@ const TabRoutes = () => {
             <Image
               source={assets.nearBy}
               style={{
-                height: Spacing.HEIGHT_28,
-                width: Spacing.WIDTH_28,
                 tintColor: color,
-                marginTop:
-                  Platform.OS == "ios" ? Spacing.MARGIN_10 : Spacing.MARGIN_8,
+                ...styles.tabBottom,
               }}
               resizeMode="contain"
             />
           ),
 
-          tabBarStyle: {
-            backgroundColor: colors.darkBlue,
-            height: Spacing.HEIGHT_80,
-          },
-          tabBarLabelStyle: {
-            fontFamily: fontFamily.regular,
-            fontSize: typography.FONT_SIZE_10,
-            marginTop:
-              Platform.OS == "ios" ? Spacing.MARGIN_5 : Spacing.MARGIN_5,
-            marginBottom: Platform.OS == "android" ? Spacing.MARGIN_10 : 0,
-          },
+          tabBarStyle: styles.tabBarStyle,
+          tabBarLabelStyle: styles.tabBarLabelStyle,
           tabBarActiveTintColor: colors.textColor,
           tabBarInactiveTintColor: colors.white,
         }}
@@ -162,27 +116,15 @@ const TabRoutes = () => {
             <Image
               source={assets.settings}
               style={{
-                height: Spacing.HEIGHT_28,
-                width: Spacing.WIDTH_28,
                 tintColor: color,
-                marginTop:
-                  Platform.OS == "ios" ? Spacing.MARGIN_10 : Spacing.MARGIN_8,
+                ...styles.tabBottom,
               }}
               resizeMode="contain"
             />
           ),
 
-          tabBarStyle: {
-            backgroundColor: colors.darkBlue,
-            height: Spacing.HEIGHT_80,
-          },
-          tabBarLabelStyle: {
-            fontFamily: fontFamily.regular,
-            fontSize: typography.FONT_SIZE_10,
-            marginTop:
-              Platform.OS == "ios" ? Spacing.MARGIN_5 : Spacing.MARGIN_5,
-            marginBottom: Platform.OS == "android" ? Spacing.MARGIN_10 : 0,
-          },
+          tabBarStyle: styles.tabBarStyle,
+          tabBarLabelStyle: styles.tabBarLabelStyle,
           tabBarActiveTintColor: colors.textColor,
           tabBarInactiveTintColor: colors.white,
         }}
@@ -190,5 +132,27 @@ const TabRoutes = () => {
     </Tab.Navigator>
   );
 };
-
+const styles = StyleSheet.create({
+  tabBottom: {
+    height: Spacing.HEIGHT_28,
+    width: Spacing.WIDTH_28,
+    marginTop: Platform.OS == "ios" ? Spacing.MARGIN_10 : Spacing.MARGIN_8,
+  },
+  tabBarStyle: {
+    backgroundColor: colors.darkBlue,
+    height: Spacing.HEIGHT_80,
+  },
+  tabBarLabelStyle: {
+    fontFamily: fontFamily.regular,
+    fontSize: typography.FONT_SIZE_10,
+    marginTop: Platform.OS == "ios" ? Spacing.MARGIN_5 : Spacing.MARGIN_5,
+    marginBottom: Platform.OS == "android" ? Spacing.MARGIN_10 : 0,
+  },
+  homeTabImage: {
+    height: Spacing.HEIGHT_55,
+    width: Spacing.HEIGHT_55,
+    borderRadius: Spacing.RADIUS_82,
+    marginTop: Platform.OS == "ios" ? Spacing.MARGIN_24 : Spacing.MARGIN_10,
+  },
+});
 export default TabRoutes;

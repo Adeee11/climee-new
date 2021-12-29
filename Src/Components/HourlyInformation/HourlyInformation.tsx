@@ -28,17 +28,21 @@ const HourlyInformation = (props: any) => {
           <WeatherImage img={item?.weather[0]?.main} height={30} width={30} />
         </View>
         <View style={styles.tempView}>
+          <View style={{flex:0.2,justifyContent:"flex-end",alignItems:"flex-end"}}>
+
           <Text style={styles.tempText}>
             {weatherDegree == "F"
               ? (item.temp.toFixed(0) * 1.8 + 32)?.toFixed(0)
               : item.temp.toFixed(0)}
             &deg;
           </Text>
+              </View>
           <View
             style={{
               flexDirection: "row",
               alignItems: "center",
-              justifyContent: "center",
+              justifyContent: "space-between",
+              flex: 0.58,
             }}
           >
             <Image
@@ -47,6 +51,8 @@ const HourlyInformation = (props: any) => {
                 width: 12,
                 height: 12,
                 marginHorizontal: 5,
+                alignItems: "flex-start",
+                justifyContent: "flex-start",
                 transform: [{ rotate: item?.wind_deg + "deg" }],
               }}
               resizeMode={"contain"}

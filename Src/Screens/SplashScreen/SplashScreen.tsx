@@ -12,143 +12,54 @@ import {
   weatherDetailsLoading,
 } from "../../redux/actions/weatherActions";
 import api from "../../globalStyles/api";
-import { Video } from "expo-av";
-// import { useSharedValue, interpolate } from 'react-native-reanimated' // version 2.x
-import Chroma from "chroma-js";
-
 import {
   themeColorOne,
   themeColorTwo,
 } from "../../redux/actions/colorThemeAction";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { GradientHelper } from "../../Components/GradientHelper";
+import assets from "../../../assets";
 
 const SplashScreen = () => {
-  const AnimatedGradientHelper =
-    Animated.createAnimatedComponent(GradientHelper);
-
-  // const [fadeAnim] = useState(new Animated.Value(0));
-  // const height = new Animated.Value(300);
-  // const width = new Animated.Value(350);
-
-  // useEffect(() => {            
-  //   // Animated.timing()
-  //   // Animated.timing(fadeAnim, {
-  //   //   toValue: 1,
-  //   //   duration: 500,
-  //   //   useNativeDriver: true,
-  //   // }).start();
-  //   // Animated.sequence([
-  //   //   Animated.parallel([
-  //   //     Animated.timing(width, {
-  //   //       toValue: 180,
-  //   //       delay: 1000,
-  //   //       duration: 500,
-  //   //       useNativeDriver: false,
-  //   //     }),
-  //   //     Animated.timing(height, {
-  //   //       toValue: 80,
-  //   //       delay: 1000,
-  //   //       duration: 500,
-  //   //       useNativeDriver: false,
-  //   //     }),
-  //   //   ]),
-  //   //   Animated.parallel([
-  //   //     Animated.timing(width, {
-  //   //       toValue: heightLessNum ? 1800 : 2500,
-  //   //       duration: 500,
-  //   //       useNativeDriver: false,
-  //   //     }),
-  //   //     Animated.timing(height, {
-  //   //       toValue: heightLessNum ? 1300 : 5000,
-  //   //       duration: 500,
-  //   //       useNativeDriver: false,
-  //   //     }), // Starts the animation
-  //   //     Animated.timing(fadeAnim, {
-  //   //       toValue: 0,
-  //   //       duration: 500,
-  //   //       useNativeDriver: true,
-  //   //     }),
-  //   //   ]),
-  //   // ]).start();
-  // }, []);
-  const animation = new Animated.Value(0);
-  const animation1 = new Animated.Value(0);
-  const height = new Animated.Value(0);
-  const width = new Animated.Value(0);
-  const top = new Animated.Value(0);
-  const bottom = new Animated.Value(0);
-  const [fadeAnim] = useState(new Animated.Value(1));
-  const [fadeAnimIn] = useState(new Animated.Value(0));
-
-  const boxInterpolation = animation.interpolate({
-    inputRange: [0, 1],
-    outputRange: ["blue", "red"],
-  });
-
-  const boxInterpolation1 = animation1.interpolate({
-    inputRange: [0, 1],
-    outputRange: ["red", "blue"],
-  });
+  const [fadeAnim] = useState(new Animated.Value(0));
+  const height = new Animated.Value(300);
+  const width = new Animated.Value(350);
 
   useEffect(() => {
-    Animated.timing(animation, {
+    Animated.timing(fadeAnim, {
       toValue: 1,
-      duration: 2000,
-      useNativeDriver: false,
+      duration: 500,
+      useNativeDriver: true,
     }).start();
-
-    Animated.timing(animation1, {
-      toValue: 1,
-      duration: 2000,
-      useNativeDriver: false,
-    }).start();
-
     Animated.sequence([
       Animated.parallel([
-        Animated.timing(height, {
-          toValue: 400,
-          duration: 2000,
-          useNativeDriver: false,
-        }),
         Animated.timing(width, {
-          toValue: 400,
-          duration: 2000,
+          toValue: 180,
+          delay: 1000,
+          duration: 500,
           useNativeDriver: false,
         }),
-        Animated.timing(top, {
-          toValue: 280,
-          duration: 2000,
-          useNativeDriver: false,
-        }),
-        Animated.timing(bottom, {
-          toValue: 50,
-          duration: 2000,
+        Animated.timing(height, {
+          toValue: 80,
+          delay: 1000,
+          duration: 500,
           useNativeDriver: false,
         }),
       ]),
       Animated.parallel([
-        Animated.timing(height, {
-          toValue: 350,
-          duration: 1000,
-          useNativeDriver: false,
-        }),
         Animated.timing(width, {
-          toValue: 350,
-          duration: 1000,
+          toValue: heightLessNum ? 1800 : 2500,
+          duration: 500,
           useNativeDriver: false,
         }),
-      ]),
-      Animated.sequence([
+        Animated.timing(height, {
+          toValue: heightLessNum ? 1300 : 5000,
+          duration: 500,
+          useNativeDriver: false,
+        }), // Starts the animation
         Animated.timing(fadeAnim, {
           toValue: 0,
-          duration: 400,
-          useNativeDriver: false,
-        }),
-        Animated.timing(fadeAnimIn, {
-          toValue: 1,
-          duration: 400,
-          useNativeDriver: false,
+          duration: 500,
+          useNativeDriver: true,
         }),
       ]),
     ]).start();
@@ -202,7 +113,7 @@ const SplashScreen = () => {
         const details = [];
         const pollution = [];
         details.push({
-          weatherDetails: response?.data,
+          weatherDetails: response?.data,                                                                                                           
           locationDetails: locationObj,
         });
         pollution.push({
@@ -239,46 +150,46 @@ const SplashScreen = () => {
       : (themeColorOne(colors.hazeFirstColor),
         themeColorTwo(colors.hazeSecondColor));
   };
-  // const animation = useStatnew Animated.Value(0))
-  // .current;
-
   return (
     <>
-      <Video
-        // ref={video}
-        style={{ flex: 1 }}
-        source={require("../../../assets/video3.mov")}
-        // useNativeControls
-        resizeMode="cover"
-        shouldPlay
-        isLooping={false}
-        // onPlaybackStatusUpdate={status => setStatus(() => status)}
-      />
-      {/* <Animated.View style={{ backgroundColor: boxInterpolation1, flex: 1 }}>
+      {Platform.OS === "ios" ? (
+        <StatusBar
+          backgroundColor={colors.darkBlue}
+          hidden={true}
+          translucent={false}
+          barStyle="light-content"
+        />
+      ) : (
+        <StatusBar
+          backgroundColor={colors.darkBlue}
+          hidden={false}
+          barStyle="light-content"
+        />
+      )}
+      <Animated.View style={[styles.imageWrapper, { opacity: fadeAnim }]}>
+        <LinearGradient
+          // Background Linear Gradient
+          colors={[colors.darkBlue, colors.white]}
+          style={{
+            position: "absolute",
+            left: 0,
+            right: 0,
+            bottom: 0,
+            top: 0,
+            flex: 0,
+            // borderRadius: 20,
+          }}
+          end={{ x: 0.2, y: 2.5 }}
+        />
         <Animated.Image
-          source={require("../../../assets/Applogo.png")}
+          source={assets.splashIcon}
           style={{
             width: width,
             height: height,
             resizeMode: "contain",
-            transform: [{ translateY: top }, { translateX: bottom }],
-            opacity: fadeAnim,
           }}
         />
-        <Animated.Image
-          source={require("../../../assets/Applogo.png")}
-          style={{
-            width: 350,
-            height: 350,
-            top: 0,
-            alignSelf: "center",
-            bottom: 0,
-            resizeMode: "contain",
-            opacity: fadeAnimIn,
-            // transform: [{ translateY: top }, { translateX: bottom }],
-          }}
-        />
-      </Animated.View> */}
+      </Animated.View>
     </>
   );
 };

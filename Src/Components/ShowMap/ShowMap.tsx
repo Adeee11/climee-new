@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import styles from "./style";
 
@@ -9,13 +9,21 @@ const ShowMap = ({
   updatedCoordinates,
 }: any) => {
   const [marker, setMarker] = useState<any>(null);
-
+  const [region, setRegion] = useState({
+    latitude: latitude === undefined ? 0 : latitude,
+    longitude: longitude === undefined ? 0 : longitude,
+    latitudeDelta: 10,
+    longitudeDelta: 10,
+  });
   const handleCoordinates = (val: any) => {
     if (val.latitude !== undefined) {
       setMarker(val);
       updatedCoordinates(val);
     }
   };
+  useEffect(() => {
+    handleCoordinates;
+  }, [region]);
 
   return (
     <>
@@ -175,12 +183,8 @@ const ShowMap = ({
         zoomEnabled={true}
         showsUserLocation={true}
         style={[styles.mapView, customStyles]}
-        initialRegion={{
-          latitude: latitude === undefined ? 0 : latitude,
-          longitude: longitude === undefined ? 0 : longitude,
-          latitudeDelta: 0.008,
-          longitudeDelta: 0.008,
-        }}
+        initialRegion={region}
+        onRegionChange={(region) => setRegion(region)}
       >
         {marker === null ? (
           <Marker
