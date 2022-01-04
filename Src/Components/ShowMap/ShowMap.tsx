@@ -22,8 +22,10 @@ const ShowMap = ({
     }
   };
   useEffect(() => {
+    setMarker(null);
     handleCoordinates;
-  }, [region]);
+  }, [latitude]);
+  const mapRef = useRef(null);
 
   return (
     <>
@@ -185,7 +187,16 @@ const ShowMap = ({
         style={[styles.mapView, customStyles]}
         initialRegion={region}
         onRegionChange={(region) => setRegion(region)}
+        ref={mapRef}
+        // onUserLocationChange={locationChangedResult => setRegion(locationChangedResult.nativeEvent.coordinate)}
       >
+        {/* <Marker
+            
+            coordinate={{
+              latitude: latitude === undefined ? 0 : latitude,
+              longitude: longitude === undefined ? 0 : longitude,
+            }}
+          /> */}
         {marker === null ? (
           <Marker
             coordinate={{

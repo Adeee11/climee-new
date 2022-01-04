@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
@@ -17,6 +17,14 @@ const HeroSection = ({
   firstColor,
   secondColor,
 }: any) => {
+  const [todayHourly, setTodayHourly] = useState<any>();
+  useEffect(() => {
+    const today = new Date()?.toISOString()?.split("T")[0];
+    const r = weatherData[0]?.weatherDetails?.hourly?.filter((e: any) => {
+      return new Date(e?.dt * 1000)?.toISOString()?.split("T")[0] == today;
+    });
+    setTodayHourly(r);
+  }, [weatherData]);
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -101,7 +109,7 @@ const HeroSection = ({
       </View>
       <View style={styles.lowerView}>
         <Forecast
-          data={weatherData[0]?.weatherDetails?.hourly}
+          data={todayHourly}
           title="Hourly Forecast"
           weatherDegree={weatherDegree}
           navigation={navigation}

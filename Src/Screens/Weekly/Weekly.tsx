@@ -55,7 +55,7 @@ const Weekly = ({
         <AdditionalDetails
           details={
             selectedDay === undefined
-              ? weatherDetails[0]?.weatherDetails?.daily[0]
+              ? weatherDetails[0]?.weatherDetails?.current
               : selectedDay
           }
           windDegree={windDegree}

@@ -82,7 +82,7 @@ const TodaysDetails = ({
             <ScrollView
               horizontal={true}
               showsHorizontalScrollIndicator={false}
-              style={{ marginLeft: -30, paddingBottom: 20 }}
+              style={{ marginLeft: -25, paddingBottom: 20 }}
             >
               <LineChart
                 data={{
@@ -93,7 +93,7 @@ const TodaysDetails = ({
                     },
                   ],
                 }}
-                width={dataPoints?.length * 70}
+                width={dataPoints?.length * 65}
                 height={250}
                 // withDots={false}
                 withInnerLines={false}

@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
   },
   mainContainer: {
     flex: 0.07,
+    // backgroundColor:"red",
     // paddingTop: Spacing.PADDING_8,
     marginHorizontal: Spacing.MARGIN_10,
     justifyContent: "flex-start",
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     backgroundColor: colors.white,
   },
-  imageWrapper: { flex: 0.55, alignItems: "center", justifyContent: "center" },
+  imageWrapper: { flex: 0.6, alignItems: "center", justifyContent: "center" },
   headingStyle: {
     fontFamily: fontFamily.semiBold,
     fontSize: 12,

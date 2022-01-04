@@ -20,8 +20,6 @@ const Hourly = ({
   const [tomorrowHourly, setTomorrowHourly] = useState<any>();
   const [loader, setLoader] = useState(true);
   useEffect(() => {
-    console.log(route);
-    
     setLoader(true);
     const today = new Date()?.toISOString()?.split("T")[0];
     const tomorrow = new Date(new Date()?.getTime() + 24 * 60 * 60 * 1000)

@@ -64,19 +64,6 @@ const SplashScreen = () => {
       ]),
     ]).start();
   }, []);
-  // useEffect(() => {
-  //   (async () => {
-  //     try {
-  //       const { status } = await Location.requestForegroundPermissionsAsync();
-  //       if (status !== "granted") {
-  //         Alert.alert("Please grant location permission.");
-  //         await Location.requestForegroundPermissionsAsync();
-  //       }
-  //     } catch (err: any) {
-  //       console.log(err.message);
-  //     }
-  //   })();
-  // }, []);
   useEffect(() => {
     (async () => {
       try {
