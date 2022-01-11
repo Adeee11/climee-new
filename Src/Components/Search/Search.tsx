@@ -195,10 +195,17 @@ const Search = ({ ModalVisible, weatherDetail, weatherDegree }: any) => {
   };
 
   const handleShowDetails = async (item: any) => {
-    const str = `${item?.street}, ${item?.city}, ${item?.country}`;
+    // console.log(item);
+
+    const str = `${item?.city}, ${item?.country}`;
+    // const str = `${item?.street}, ${item?.city}, ${item?.country}`;
+    // console.log(str);
+
     const res: any = await axios.get(
       `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${str}&types=geocode&key=AIzaSyBXG8JrE9C2wKktMK-lDJkHNbYyuL4cr34`
     );
+    console.log(res?.data);
+
     setPlaceId(res?.data?.predictions[0]?.place_id);
   };
 
@@ -339,8 +346,8 @@ const Search = ({ ModalVisible, weatherDetail, weatherDegree }: any) => {
                 <FlatList
                   data={uniqueKeepLAst(favouriteCity, (it: any) => it.street)}
                   bounces={false}
-                  keyExtractor={(item) => item?.id}
-                  renderItem={({ item }) => (
+                  keyExtractor={(item: any) => item?.id}
+                  renderItem={({ item }: any) => (
                     <>
                       <LocationCard
                         removeLocation={handleRemoveLocation}
@@ -366,10 +373,10 @@ const Search = ({ ModalVisible, weatherDetail, weatherDegree }: any) => {
                   <FlatList
                     data={uniqueKeepLAst(
                       recents?.filter((e) => e?.street !== ""),
-                      (it) => it.street
+                      (it: { street: any }) => it.street
                     )}
                     bounces={false}
-                    keyExtractor={(item) => item?.id}
+                    keyExtractor={(item: any) => item?.id}
                     renderItem={({ item }) => renderRecentSearchs(item)}
                     ListHeaderComponent={() => {
                       return (

@@ -47,6 +47,7 @@ const LocationCard = ({
       longitude: longitude,
     };
     showDetails(current ? currentDetails : locationObject);
+    
   };
 
   useEffect(() => {

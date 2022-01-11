@@ -91,11 +91,11 @@ const App = ({ notify, alert }: any) => {
     registerForPushNotificationsAsync().then((token) => {
       setExpoPushToken(token);
     });
-    // notificationListener.current =
-    //   Notifications.addNotificationReceivedListener((notification) => {});
-    // responseListener.current =
-    //   Notifications.addNotificationResponseReceivedListener((response) => {
-    //   });
+    notificationListener.current =
+      Notifications.addNotificationReceivedListener((notification) => {});
+    responseListener.current =
+      Notifications.addNotificationResponseReceivedListener((response) => {
+      });
     return () => {
       Notifications.removeNotificationSubscription(
         notificationListener.current
@@ -103,6 +103,7 @@ const App = ({ notify, alert }: any) => {
       Notifications.removeNotificationSubscription(responseListener.current);
     };
   }, []);
+  
   async function registerForPushNotificationsAsync() {
     let token;
     if (Constants.isDevice) {

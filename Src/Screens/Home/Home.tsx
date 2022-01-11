@@ -23,7 +23,7 @@ import { connect } from "react-redux";
 import strapi from "../../api/strapi";
 import Loader from "../../Components/Loader";
 import navigationStrings from "../../constants/navigationStrings";
-import { deviceHeight } from "../../constants/dimensions";
+import { deviceHeight, heightLessNum } from "../../constants/dimensions";
 import Header from "../../Components/Header/Header";
 import AirQuality from "../../Components/AirQuality/AirQuality";
 import colors from "../../globalStyles/colors";
@@ -65,28 +65,29 @@ const Home = ({
   const renderNews = (data: any) => {
     return data?.map((item: any, index: any) => {
       return (
-        <View key={index} style={styles.newsContainer}>
-          <TouchableOpacity
-            style={styles.cardContainer}
-            onPress={() =>
-              navigation.navigate(navigationStrings.NEWS, { data: item })
-            }
-          >
-            <Text style={styles.cardTitle}>{"News"}</Text>
-            <Right />
-          </TouchableOpacity>
-          <View style={styles.imgContainer}>
-            <Image
-              source={{ uri: `${url}${item?.image?.url}` }}
-              style={styles.newsImg}
-            />
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate(navigationStrings.NEWS, { data: item })
+          }
+        >
+          <View key={index} style={styles.newsContainer}>
+            <View style={styles.cardContainer}>
+              <Text style={styles.cardTitle}>{"News"}</Text>
+              <Right />
+            </View>
+            <View style={styles.imgContainer}>
+              <Image
+                source={{ uri: `${url}${item?.image?.url}` }}
+                style={styles.newsImg}
+              />
+            </View>
+            <View style={styles.newsTtile}>
+              <Text style={styles.newsHeadline} numberOfLines={2}>
+                {item.Title}
+              </Text>
+            </View>
           </View>
-          <View style={styles.newsTtile}>
-            <Text style={styles.newsHeadline} numberOfLines={2}>
-              {item.Title}
-            </Text>
-          </View>
-        </View>
+        </TouchableOpacity>
       );
     });
   };
@@ -163,7 +164,12 @@ const Home = ({
                 pagingEnabled={true}
                 loop={true}
                 key={news.length}
-                style={{ height: (deviceHeight / 7) * 3.1 }}
+                style={{
+                  height:
+                  heightLessNum
+                      ? (deviceHeight / 7) * 3.1
+                      : (deviceHeight / 7) * 3.2,
+                }}
               >
                 {renderNews(news)}
               </Swiper>

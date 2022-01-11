@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
   },
   mainContainer: {
-    padding: Spacing.PADDING_16,
+    paddingHorizontal: Spacing.PADDING_16,
     backgroundColor: colors.white,
     borderTopWidth: 0.2,
     borderTopColor: colors.grey,
@@ -45,12 +45,19 @@ const styles = StyleSheet.create({
   subContainer: {
     flex: 0.2,
     alignItems: "flex-start",
+    // backgroundColor:"red"
+  },
+  subContainerImage:{
+    flex: 0.3,
+    alignItems: "center",
+    // backgroundColor:"red"
   },
   tempView: {
-    flex: 0.5,
+    flex: 0.55,
     justifyContent: "space-between",
     alignItems: "center",
     flexDirection: "row",
+    // backgroundColor:"yellow"
   },
 });
 export default styles;

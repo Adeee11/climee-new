@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     paddingVertical: Spacing.PADDING_15,
     // height: Platform.OS === 'ios' ?  Spacing.HEIGHT_28 : Spacing.HEIGHT_55,
     // backgroundColor: "red",
-    textAlignVertical: 'center',
+    textAlignVertical: "center",
     fontFamily: fontFamily.regular,
   },
   currentLocationContainer: {
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     // borderBottomRightRadius: 20,
     // height: 200,
     padding: Spacing.PADDING_10,
-    alignItems: "flex-start",
+    // alignItems: "flex-start",
     // position: "absolute",
   },
   searchTextWrapper: {

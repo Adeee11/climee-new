@@ -1,6 +1,6 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React, { useState, useEffect, useRef } from "react";
-import { StatusBar, Platform, Animated, Alert } from "react-native";
+import { StatusBar, Platform, Animated, Alert, Text, View } from "react-native";
 import { heightLessNum } from "../../constants/dimensions";
 import * as Location from "expo-location";
 import axios from "../../api/axios";
@@ -18,6 +18,7 @@ import {
 } from "../../redux/actions/colorThemeAction";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import assets from "../../../assets";
+import { Iwebcode } from "../../../assets/svg";
 
 const SplashScreen = () => {
   const [fadeAnim] = useState(new Animated.Value(0));
@@ -100,7 +101,7 @@ const SplashScreen = () => {
         const details = [];
         const pollution = [];
         details.push({
-          weatherDetails: response?.data,                                                                                                           
+          weatherDetails: response?.data,
           locationDetails: locationObj,
         });
         pollution.push({
@@ -168,14 +169,30 @@ const SplashScreen = () => {
           }}
           end={{ x: 0.2, y: 2.5 }}
         />
-        <Animated.Image
-          source={assets.splashIcon}
+        <Animated.View
           style={{
-            width: width,
-            height: height,
-            resizeMode: "contain",
+            flex: 0.6,
+            justifyContent: "flex-end",
+            alignItems: "center",
+            opacity: fadeAnim,
+            // backgroundColor: "yellow",
           }}
-        />
+        >
+          <Animated.Image
+            source={assets.splashIcon}
+            style={{
+              width: width,
+              height: height,
+              resizeMode: "contain",
+            }}
+          />
+          <Text style={styles.text1}>Climee</Text>
+        </Animated.View>
+
+        <View style={styles.bottomWrapper}>
+          {/* <Text style={styles.text2}>from</Text> */}
+          <Iwebcode height={120} width={120} color="white" />
+        </View>
       </Animated.View>
     </>
   );

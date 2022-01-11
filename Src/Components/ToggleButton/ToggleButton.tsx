@@ -33,7 +33,7 @@ const ToggleButton = ({
               right: 0,
               bottom: 0,
               top: 0,
-              borderRadius: 15,
+              borderRadius: 20,
             }}
             end={{ x: 0.1, y: 10 }}
           />
@@ -61,7 +61,7 @@ const ToggleButton = ({
               right: 0,
               bottom: 0,
               top: 0,
-              borderRadius: 15,
+              borderRadius: 20,
             }}
             end={{ x: 0.1, y: 10 }}
           />

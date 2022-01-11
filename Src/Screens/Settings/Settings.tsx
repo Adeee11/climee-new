@@ -146,11 +146,7 @@ const Setting = (props: any) => {
                         : assets.googlePlay
                     }
                     resizeMode={"cover"}
-                    style={
-                      Platform.OS === "ios"
-                        ? { ...styles.iconStyle, tintColor: colors.darkBlue }
-                        : styles.iconStyle
-                    }
+                    style={styles.iconStyle}
                   />
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -239,7 +235,7 @@ const Setting = (props: any) => {
                           marginHorizontal: Spacing.MARGIN_5,
                         }}
                       >
-                        About Climee App
+                        {"About Climee App"}
                       </Text>
                     </View>
                     <MaterialIcons

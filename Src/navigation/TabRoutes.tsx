@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
   tabBottom: {
     height: Spacing.HEIGHT_28,
     width: Spacing.WIDTH_28,
-    marginTop: Platform.OS == "ios" ? Spacing.MARGIN_10 : Spacing.MARGIN_8,
+    marginTop: Platform.OS == "ios" ? Spacing.MARGIN_5 : Spacing.MARGIN_8,
   },
   tabBarStyle: {
     backgroundColor: colors.darkBlue,
@@ -145,14 +145,14 @@ const styles = StyleSheet.create({
   tabBarLabelStyle: {
     fontFamily: fontFamily.regular,
     fontSize: typography.FONT_SIZE_10,
-    marginTop: Platform.OS == "ios" ? Spacing.MARGIN_5 : Spacing.MARGIN_5,
-    marginBottom: Platform.OS == "android" ? Spacing.MARGIN_10 : 0,
+    marginTop: Platform.OS == "ios" ? 0 : Spacing.MARGIN_5,
+    marginBottom: Platform.OS == "android" ? Spacing.MARGIN_10 : Spacing.MARGIN_10,
   },
   homeTabImage: {
     height: Spacing.HEIGHT_55,
     width: Spacing.HEIGHT_55,
     borderRadius: Spacing.RADIUS_82,
-    marginTop: Platform.OS == "ios" ? Spacing.MARGIN_24 : Spacing.MARGIN_10,
+    marginTop: Platform.OS == "ios" ? Spacing.MARGIN_15 : Spacing.MARGIN_10,
   },
 });
 export default TabRoutes;

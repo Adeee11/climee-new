@@ -20,8 +20,8 @@ const styles = StyleSheet.create({
   text2: {
     color: colors.white,
     fontFamily: fontFamily.regular,
-    fontSize: typography.FONT_SIZE_15,
-    paddingHorizontal: Spacing.PADDING_48,
+    fontSize: typography.FONT_SIZE_20,
+    // paddingHorizontal: Spacing.PADDING_48,
   },
   image: {
     resizeMode: "contain",
@@ -34,10 +34,16 @@ const styles = StyleSheet.create({
   },
   imageWrapper: {
     flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: "space-between",
+    // alignItems: "center",
     flex: 1,
   },
+  bottomWrapper:{
+    flex:0.4,
+    // backgroundColor:"red",
+    justifyContent:"flex-end",
+    alignItems:"center"
+  }
 });
 
 export default styles;

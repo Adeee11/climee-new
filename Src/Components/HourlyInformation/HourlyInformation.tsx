@@ -24,28 +24,33 @@ const HourlyInformation = (props: any) => {
         <View style={styles.subContainer}>
           <Text style={styles.timeText}>{time(item.dt)?.strTime}</Text>
         </View>
-        <View style={styles.subContainer}>
+        <View style={styles.subContainerImage}>
           <WeatherImage img={item?.weather[0]?.main} height={30} width={30} />
         </View>
         <View style={styles.tempView}>
-          <View style={{flex:0.2,justifyContent:"flex-end",alignItems:"flex-end"}}>
-
-          <Text style={styles.tempText}>
-            {weatherDegree == "F"
-              ? (item.temp.toFixed(0) * 1.8 + 32)?.toFixed(0)
-              : item.temp.toFixed(0)}
-            &deg;
-          </Text>
-              </View>
+          <View
+            style={{
+              flex: 0.5,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Text style={styles.tempText}>
+              {weatherDegree == "F"
+                ? (item.temp.toFixed(0) * 1.8 + 32)?.toFixed(0)
+                : item.temp.toFixed(0)}
+              &deg;
+            </Text>
+          </View>
           <View
             style={{
               flexDirection: "row",
               alignItems: "center",
-              justifyContent: "space-between",
-              flex: 0.58,
+              justifyContent: "flex-end",
+              flex: 0.5,
             }}
           >
-            <Image
+            {/* <Image
               source={assets.windDirection}
               style={{
                 width: 12,
@@ -56,7 +61,7 @@ const HourlyInformation = (props: any) => {
                 transform: [{ rotate: item?.wind_deg + "deg" }],
               }}
               resizeMode={"contain"}
-            />
+            /> */}
             <Text style={styles.timeText}>
               {windDegree == "mph"
                 ? ((item.wind_speed / 3.6) * 2.237)?.toFixed(2)
@@ -75,13 +80,50 @@ const HourlyInformation = (props: any) => {
         <Text style={styles.dateText}>{date}</Text>
       </View>
       <View style={styles.mainContainer}>
+        <View style={styles.infoContainer}>
+          <View style={styles.subContainer}>
+            <Text style={{ ...styles.timeText, fontSize: 12 }}>Time</Text>
+          </View>
+          <View style={styles.subContainerImage}></View>
+          <View style={styles.tempView}>
+            <View
+              style={{
+                flex: 0.7,
+                justifyContent: "flex-end",
+                alignItems: "center",
+              }}
+            >
+              <Text style={{ ...styles.timeText, fontSize: 12 }}>
+                Temperature
+              </Text>
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "flex-end",
+                // backgroundColor: "red",
+                flex: 0.5,
+              }}
+            >
+              {/* <Text
+                style={{
+                  marginHorizontal: 5,
+                  alignItems: "flex-start",
+                  justifyContent: "flex-start",
+                  ...styles.timeText,
+                  fontSize: 12,
+                }}
+              >
+                Direction
+              </Text> */}
+              <Text style={{ ...styles.timeText, fontSize: 12 }}>
+                Wind Speed
+              </Text>
+            </View>
+          </View>
+        </View>
         {data?.map((item: any, index: number) => renderItems(item))}
-        {/* <FlatList
-          data={data}
-          keyExtractor={(item) => item?.id}
-          renderItem={({ item }) => renderItems(item)}
-          bounces={false}
-        /> */}
       </View>
     </>
   );
