@@ -40,14 +40,14 @@ const Home = ({
   windDegree,
   pollutionDetails,
 }: any) => {
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [news, setNews] = useState<Array<any>>([]);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
 
   useEffect(() => {
+    setLoading(true);
     (async () => {
       try {
-        setLoading(true);
         const Token = await AsyncStorage.getItem("cmsAuthToken");
         const result: any = await strapi.get("/news", {
           headers: {
@@ -167,7 +167,7 @@ const Home = ({
                 style={{
                   height:
                   heightLessNum
-                      ? (deviceHeight / 7) * 3.1
+                      ? (deviceHeight / 7) * 3.5
                       : (deviceHeight / 7) * 3.2,
                 }}
               >
