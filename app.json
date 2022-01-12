@@ -13,7 +13,6 @@
       "**/*"
     ],
     "ios": {
-      "icon": "./assets/ClimeeLogo.png",
       "config": {
         "googleMapsApiKey": "AIzaSyDTeX5eQeX0sTl8BTNUOu9s0iMCYUzvHDo"
       },
