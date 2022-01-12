@@ -4,7 +4,6 @@ import Spacing from "../../globalStyles/Spacing";
 import typography from "../../globalStyles/typography";
 
 const styles = StyleSheet.create({
-
   currentLocationContainer: {
     backgroundColor: "white",
     padding: Spacing.PADDING_10,
@@ -21,7 +20,7 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily.regular,
     fontSize: typography.FONT_SIZE_14,
     color: "#363B64",
-    marginLeft: Spacing.MARGIN_2
+    marginHorizontal: Spacing.MARGIN_5,
   },
   locationText: {
     color: "#9B9B9B",

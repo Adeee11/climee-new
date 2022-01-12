@@ -10,6 +10,7 @@ import weatherApi from "../../api/axios";
 import WeatherImage from "../WeatherImage/WeatherImage";
 import Loader from "../Loader";
 import colors from "../../globalStyles/colors";
+import Spacing from "../../globalStyles/Spacing";
 
 const LocationCard = ({
   current,
@@ -47,7 +48,6 @@ const LocationCard = ({
       longitude: longitude,
     };
     showDetails(current ? currentDetails : locationObject);
-    
   };
 
   useEffect(() => {
@@ -73,7 +73,7 @@ const LocationCard = ({
         setTemperature(response?.data?.main?.temp);
         setWeatherMain(response?.data?.weather[0]?.main);
         setLoading(false);
-      } catch (err:any) {
+      } catch (err: any) {
         console.log(err.message);
       }
     })();
@@ -89,7 +89,7 @@ const LocationCard = ({
           <Loader />
         ) : (
           <>
-            <View
+            {/* <View
               style={{
                 flex: 0.2,
                 flexDirection: "row",
@@ -111,20 +111,45 @@ const LocationCard = ({
                   : temperature?.toFixed(0)}
                 &deg;
               </Text>
-            </View>
+            </View> */}
           </>
         )}
-        <View style={{ alignItems: "flex-start", flex: 0.7 }}>
+        <View style={{ alignItems: "flex-start", flex: 1 }}>
           {current ? (
-            <>
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <Location height={18} width={18} />
-                <Text style={styles.currentLocationText}>Current Location</Text>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <View style={{ flex: 0.8 }}>
+                <Text
+                  style={[
+                    styles.tempText,
+                    { color: !current ? "#9B9B9B" : "#363B64" },
+                  ]}
+                >
+                  {weatherDegree == "F"
+                    ? (temperature * 1.8 + 32)?.toFixed(0)
+                    : temperature?.toFixed(0)}
+                  &deg;
+                </Text>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    marginHorizontal: Spacing.MARGIN_10,
+                  }}
+                >
+                  <Location height={18} width={18} style={{ marginRight: 5 }} />
+                  <Text style={[styles.locationText]}>
+                    {currentDetails?.city}, {currentDetails?.country}
+                  </Text>
+                </View>
               </View>
-              <Text style={styles.locationText}>
-                {currentDetails?.city}, {currentDetails?.country}
-              </Text>
-            </>
+            </View>
           ) : (
             <>
               {street === null ? null : (
@@ -136,7 +161,11 @@ const LocationCard = ({
             </>
           )}
         </View>
-        {current ? null : (
+        {current ? (
+          <View style={{ marginHorizontal: 10, flex: 0.1 }}>
+            <WeatherImage img={weatherMain} height={40} width={40} />
+          </View>
+        ) : (
           <TouchableOpacity
             onPress={handleRemoveLocation}
             style={{ flex: 0.1 }}
