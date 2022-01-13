@@ -84,7 +84,9 @@ const HourlyInformation = (props: any) => {
           <View style={styles.subContainer}>
             <Text style={{ ...styles.timeText, fontSize: 12 }}>Time</Text>
           </View>
-          <View style={styles.subContainerImage}></View>
+          <View style={styles.subContainerImage}>
+            <Text style={{ ...styles.timeText, fontSize: 12 }}>Feels like</Text>
+          </View>
           <View style={styles.tempView}>
             <View
               style={{
