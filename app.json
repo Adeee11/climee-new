@@ -15,7 +15,7 @@
     "ios": {
       "icon": "./assets/ClimeeLogo.png",
       "config": {
-        "googleMapsApiKey": "AIzaSyDTeX5eQeX0sTl8BTNUOu9s0iMCYUzvHDo"
+        "googleMapsApiKey": "AIzaSyAkMFkA0pigLncl2pRMYfVNMN1HkxaBy1Q"
       },
       "supportsTablet": true,
       "bundleIdentifier": "com.iwebcode.climee",
@@ -29,7 +29,7 @@
       },
       "config": {
         "googleMaps": {
-          "apiKey": "AIzaSyBnQv-UUFlaFRNQ1AF-50uELApinSpUf2k"
+          "apiKey": "AIzaSyAkMFkA0pigLncl2pRMYfVNMN1HkxaBy1Q"
         }
       },
       "package": "com.iwebcode.climee"

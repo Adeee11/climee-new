@@ -21,7 +21,7 @@ const WeatherDetailsReducer = (
     case types.LOADING: {
       return {
         ...state,
-        laoding: action.payload,
+        loading: action.payload,
       };
     }
     case types.POLLUTIONDETAILS: {

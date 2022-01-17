@@ -29,6 +29,7 @@ const AirQuality = ({
     <View style={styles.AirPollutionView}>
       {background ? (
         <TouchableOpacity
+        hitSlop={{top: 20, bottom: 20, left: 50, right: 50}}
           style={styles.cardContainer}
           onPress={() => navigation.navigate(navigationStrings.AIRPOLLUTION)}
         >
@@ -60,6 +61,7 @@ const AirQuality = ({
           </Text>
           {background ? null : (
             <TouchableOpacity
+            hitSlop={{top: 20, bottom: 20, left: 50, right: 50}}
               onPress={onPressSeeMore}
               style={styles.seeMoreButton}
             >

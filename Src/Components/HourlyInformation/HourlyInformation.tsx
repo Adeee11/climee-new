@@ -46,8 +46,8 @@ const HourlyInformation = (props: any) => {
             style={{
               flexDirection: "row",
               alignItems: "center",
-              justifyContent: "flex-end",
-              flex: 0.5,
+              justifyContent: "flex-start",
+              flex: 0.38,
             }}
           >
             {/* <Image

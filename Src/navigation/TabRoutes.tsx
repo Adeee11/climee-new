@@ -11,10 +11,11 @@ import SettingStack from "./SettingStack";
 import fontFamily from "../globalStyles/fontFamily";
 import typography from "../globalStyles/typography";
 import NearByStack from "./NearByStack";
+import { connect } from "react-redux";
 
 const Tab = createBottomTabNavigator();
 
-const TabRoutes = () => {
+const TabRoutes = ({ hourlyTab, weeklyTab }: any) => {
   return (
     <Tab.Navigator initialRouteName={"Home"}>
       <Tab.Screen
@@ -27,16 +28,18 @@ const TabRoutes = () => {
             <Image
               source={assets.hourly}
               style={{
-                tintColor: color,
+                tintColor: hourlyTab ? colors.textColor : colors.white,
                 ...styles.tabBottom,
               }}
               resizeMode="contain"
             />
           ),
-
           tabBarStyle: styles.tabBarStyle,
-          tabBarLabelStyle: styles.tabBarLabelStyle,
-          tabBarActiveTintColor: colors.textColor,
+          tabBarLabelStyle: {
+            ...styles.tabBarLabelStyle,
+            color: hourlyTab ? colors.textColor : colors.white,
+          },
+          tabBarActiveTintColor: hourlyTab ? colors.textColor : colors.white,
           tabBarInactiveTintColor: colors.white,
         }}
       />
@@ -51,7 +54,7 @@ const TabRoutes = () => {
             <Image
               source={assets.weekly}
               style={{
-                tintColor: color,
+                tintColor: weeklyTab ? colors.textColor : colors.white,
                 ...styles.tabBottom,
               }}
               resizeMode="contain"
@@ -59,8 +62,11 @@ const TabRoutes = () => {
           ),
 
           tabBarStyle: styles.tabBarStyle,
-          tabBarLabelStyle: styles.tabBarLabelStyle,
-          tabBarActiveTintColor: colors.textColor,
+          tabBarLabelStyle: {
+            ...styles.tabBarLabelStyle,
+            color: weeklyTab ? colors.textColor : colors.white,
+          },
+          tabBarActiveTintColor: weeklyTab ? colors.textColor : colors.white,
           tabBarInactiveTintColor: colors.white,
         }}
       />
@@ -146,7 +152,8 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily.regular,
     fontSize: typography.FONT_SIZE_10,
     marginTop: Platform.OS == "ios" ? 0 : Spacing.MARGIN_5,
-    marginBottom: Platform.OS == "android" ? Spacing.MARGIN_10 : Spacing.MARGIN_10,
+    marginBottom:
+      Platform.OS == "android" ? Spacing.MARGIN_10 : Spacing.MARGIN_10,
   },
   homeTabImage: {
     height: Spacing.HEIGHT_55,
@@ -155,4 +162,11 @@ const styles = StyleSheet.create({
     marginTop: Platform.OS == "ios" ? Spacing.MARGIN_15 : Spacing.MARGIN_10,
   },
 });
-export default TabRoutes;
+const mapStateToProps = (state: any) => {
+  return {
+    hourlyTab: state?.tabColorReducer?.hourlyTab,
+    weeklyTab: state?.tabColorReducer?.weeklyTab,
+  };
+};
+
+export default connect(mapStateToProps)(TabRoutes);

@@ -1,5 +1,5 @@
-
-import React, { useState,useEffect } from "react";
+import { useFocusEffect } from "@react-navigation/native";
+import React, { useState, useEffect } from "react";
 import { ScrollView } from "react-native";
 import { connect } from "react-redux";
 import AdditionalDetails from "../../Components/AdditionalDetails/AdditionalDetails";
@@ -8,19 +8,25 @@ import GeneralStatusBarColor from "../../Components/generateStatusBarColor/Gener
 import Header from "../../Components/Header/Header";
 import WeeklyHeroSection from "../../Components/WeeklyHeroSection/WeeklyHeroSection";
 import colors from "../../globalStyles/colors";
+import { weeklyTab } from "../../redux/actions/tabColorAction";
 const Weekly = ({
   weatherDegree,
   windDegree,
   weatherDetails,
   navigation,
-  route
-  // props,
-}: any) => {
+  route,
+}: // props,
+any) => {
   const [selectedDay, setSelectedDay] = useState();
   const handleSelectedDay = (val: any) => {
     setSelectedDay(val);
   };
-
+  useFocusEffect(
+    React.useCallback(() => {
+      weeklyTab(true);
+      return () => weeklyTab(false);
+    }, [])
+  );
   return (
     <>
       <GeneralStatusBarColor

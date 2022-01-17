@@ -1,14 +1,13 @@
-import React from"react";
+import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import MainStack from "./MainStack";
 import TabRoutes from "./TabRoutes";
-const Routes=()=>{
-return(
+const Routes = () => {
+  return (
     <>
-    <NavigationContainer>
-        <TabRoutes/>
-    </NavigationContainer>
+      <NavigationContainer>
+        <TabRoutes />
+      </NavigationContainer>
     </>
-)
-}
+  );
+};
 export default Routes;

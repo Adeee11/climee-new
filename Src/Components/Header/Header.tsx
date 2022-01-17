@@ -10,11 +10,17 @@ export default function Header(props: any) {
   return (
     <View style={styles.headerContainer}>
       {tab ? null : backButton ? (
-        <TouchableOpacity onPress={onPress}>
+        <TouchableOpacity
+          onPress={onPress}
+          hitSlop={{ top: 20, bottom: 20, left: 50, right: 50 }}
+        >
           <Ionicons name="arrow-back" size={30} color={colors.white} />
         </TouchableOpacity>
       ) : (
-        <TouchableOpacity onPress={onPress}>
+        <TouchableOpacity
+          onPress={onPress}
+          hitSlop={{ top: 20, bottom: 20, left: 50, right: 50 }}
+        >
           <AntDesign name="search1" size={30} color={colors.white} />
         </TouchableOpacity>
       )}
