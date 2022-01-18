@@ -233,6 +233,7 @@ const Search = ({ ModalVisible, weatherDetail, weatherDegree }: any) => {
         </View>
 
         <TouchableOpacity
+          hitSlop={{ top: 20, bottom: 20, left: 50, right: 50 }}
           style={{ flex: 0.1 }}
           onPress={() => handleFavourite(item)}
         >
@@ -286,12 +287,15 @@ const Search = ({ ModalVisible, weatherDetail, weatherDegree }: any) => {
               right: 0,
             }}
           >
-            <Loader />
+            {/* <Loader /> */}
           </View>
         ) : (
           <>
             <View style={styles.searchContainer}>
-              <TouchableOpacity onPress={() => ModalVisible(false)}>
+              <TouchableOpacity
+                hitSlop={{ top: 20, bottom: 20, left: 50, right: 50 }}
+                onPress={() => ModalVisible(false)}
+              >
                 <Back />
               </TouchableOpacity>
               <TextInput
@@ -312,6 +316,7 @@ const Search = ({ ModalVisible, weatherDetail, weatherDegree }: any) => {
                   renderItem={({ item }) => {
                     return (
                       <TouchableOpacity
+                        hitSlop={{ top: 20, bottom: 20, left: 50, right: 50 }}
                         onPress={() => setPlaceId(item?.place_id)}
                         style={styles.searchTextWrapper}
                       >
@@ -382,7 +387,7 @@ const Search = ({ ModalVisible, weatherDetail, weatherDegree }: any) => {
                       return (
                         <View style={styles.recentContainer}>
                           <Text style={styles.recentText}>Recents</Text>
-                          <TouchableOpacity onPress={handleAllRemoveLocation}>
+                          <TouchableOpacity hitSlop={{top: 20, bottom: 20, left: 50, right: 50}} onPress={handleAllRemoveLocation}>
                             <FontAwesome
                               name="trash-o"
                               size={24}

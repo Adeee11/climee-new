@@ -65,6 +65,7 @@ const SplashScreen = () => {
       ]),
     ]).start();
   }, []);
+
   useEffect(() => {
     (async () => {
       try {

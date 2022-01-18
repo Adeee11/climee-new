@@ -82,6 +82,7 @@ const LocationCard = ({
   return (
     <>
       <TouchableOpacity
+      hitSlop={{top: 20, bottom: 20, left: 50, right: 50}}
         style={styles.currentLocationContainer}
         onPress={handleDetails}
       >
@@ -167,6 +168,7 @@ const LocationCard = ({
           </View>
         ) : (
           <TouchableOpacity
+          hitSlop={{top: 20, bottom: 20, left: 50, right: 50}}
             onPress={handleRemoveLocation}
             style={{ flex: 0.1 }}
           >

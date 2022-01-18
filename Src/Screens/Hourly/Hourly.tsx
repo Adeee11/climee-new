@@ -8,6 +8,8 @@ import { connect } from "react-redux";
 import moment from "moment";
 import { useState } from "react";
 import Loader from "../../Components/Loader";
+import { useFocusEffect } from "@react-navigation/native";
+import { hourlyTab } from "../../redux/actions/tabColorAction";
 
 const Hourly = ({
   weatherDetails,
@@ -19,6 +21,13 @@ const Hourly = ({
   const [todayHourly, setTodayHourly] = useState<any>();
   const [tomorrowHourly, setTomorrowHourly] = useState<any>();
   const [loader, setLoader] = useState(true);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      hourlyTab(true);
+      return () => hourlyTab(false);
+    }, [])
+  );
   useEffect(() => {
     setLoader(true);
     const today = new Date()?.toISOString()?.split("T")[0];

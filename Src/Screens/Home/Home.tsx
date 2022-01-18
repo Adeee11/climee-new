@@ -45,6 +45,8 @@ const Home = ({
   const [modalVisible, setModalVisible] = useState<boolean>(false);
 
   useEffect(() => {
+    console.log(weatherLoading,"weatherloading");
+    
     setLoading(true);
     (async () => {
       try {
@@ -165,10 +167,9 @@ const Home = ({
                 loop={true}
                 key={news.length}
                 style={{
-                  height:
-                  heightLessNum
-                      ? (deviceHeight / 7) * 3.5
-                      : (deviceHeight / 7) * 3.2,
+                  height: heightLessNum
+                    ? (deviceHeight / 7) * 3.3
+                    : (deviceHeight / 7) * 3.1,
                 }}
               >
                 {renderNews(news)}

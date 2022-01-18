@@ -95,6 +95,7 @@ const Forecast = ({
       }
     >
       <TouchableOpacity
+      hitSlop={{top: 20, bottom: 20, left: 50, right: 50}}
         style={{
           ...styles.cardContainer,
           backgroundColor: backgroundColor ? colors.darkBlue : "transparent",
