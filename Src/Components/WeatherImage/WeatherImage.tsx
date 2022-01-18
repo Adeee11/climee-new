@@ -2,7 +2,7 @@ import React from "react";
 import { Image } from "react-native";
 import assets from "../../../assets";
 
-const WeatherImage = ({ img, height, width, time = true }: any) => {
+const WeatherImage = ({ img, height, width }: any) => {
   const showImage = (item: string) => {
     return item === "Thunderstorm"
       ? { img: assets.thunder }
@@ -13,9 +13,7 @@ const WeatherImage = ({ img, height, width, time = true }: any) => {
       : item === "Snow"
       ? { img: assets.snow }
       : item === "Clear"
-      ? time
-        ? { img: assets.sunny }
-        : { img: assets.moon }
+      ? { img: assets.sunny }
       : item === "Clouds"
       ? { img: assets.cloudy }
       : { img: assets.haze };
@@ -27,9 +25,10 @@ const WeatherImage = ({ img, height, width, time = true }: any) => {
         source={showImage(img)?.img}
         style={{
           resizeMode: "contain",
-          height: time ? height : 25,
-          width: time ? width : 25,
+          height: height,
+          width: width,
         }}
+        resizeMode="contain"
       />
     </>
   );

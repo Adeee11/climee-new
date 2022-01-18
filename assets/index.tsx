@@ -36,7 +36,6 @@ export default {
   weekly: require("./images/weekly.png"),
   homeButton: require("./images/homeButton.png"),
   splashIcon: require("./Applogo.png"),
-  moon: require("./images/moon.png"),
   //newIcons
   newDewPoint: require("./images/newDewPoint.png"),
   newHumidity: require("./images/newHumidity.png"),

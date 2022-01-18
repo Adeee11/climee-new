@@ -3,7 +3,7 @@ import { Image, Text, View } from "react-native";
 import WeatherImage from "../WeatherImage/WeatherImage";
 import styles from "./styles";
 const HourlyInformation = (props: any) => {
-  const { data, date, weatherDegree, windDegree,sunset } = props;
+  const { data, date, weatherDegree, windDegree } = props;
 
   const time = (time: number) => {
     const date = new Date(time * 1000);
@@ -27,14 +27,7 @@ const HourlyInformation = (props: any) => {
           <Text style={styles.timeText}>{time(item.dt)?.strTime}</Text>
         </View>
         <View style={styles.subContainerImage}>
-          <WeatherImage
-            img={item?.weather[0]?.main}
-            height={30}
-            width={30}
-             time={
-              item.dt > sunset? false:true
-             }
-          />
+          <WeatherImage img={item?.weather[0]?.main} height={30} width={30} />
         </View>
         <View style={styles.tempView}>
           <View
