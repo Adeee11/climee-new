@@ -13,7 +13,6 @@
       "**/*"
     ],
     "ios": {
-      "icon": "./assets/ClimeeLogo.png",
       "config": {
         "googleMapsApiKey": "AIzaSyAkMFkA0pigLncl2pRMYfVNMN1HkxaBy1Q"
       },
@@ -32,10 +31,20 @@
           "apiKey": "AIzaSyAkMFkA0pigLncl2pRMYfVNMN1HkxaBy1Q"
         }
       },
-      "package": "com.iwebcode.climee"
+      "package": "com.iwebcode.climee",
+      "versionCode": 2
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/Applogo.png",
+          "color": "#3C6FD1"
+        }
+      ]
+    ]
   }
 }

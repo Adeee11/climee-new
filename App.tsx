@@ -1,29 +1,32 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
 import Routes from "./Src/navigation/Routes";
 import strapi from "./Src/api/strapi";
-// import * as Sentry from "sentry-expo";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Notifications from "expo-notifications";
-import { Context as LocationContext } from "./Src/Context/locationContext"
-import Constants from "expo-constants";
-// import LogRocket from "@logrocket/react-native";
+import { Context as LocationContext } from "./Src/Context/locationContext";
+import * as Device from "expo-device";
 import { connect } from "react-redux";
 import { Platform } from "react-native";
 const BACKGROUND_NOTIFICATION_TASK = "BACKGROUND-NOTIFICATION-TASK";
-//logrocket
-// LogRocket.init("z8yv7b/climee");
-// //Sentry
-// Sentry.init({
-//   dsn: "https://6d027a142809449094af9dd701fd642f@o1050950.ingest.sentry.io/6033743",
-//   enableInExpoDevelopment: true,
-//   debug: true, // Sentry will try to print out useful debugging information if something goes wrong with sending an event. Set this to `false` in production.
-// });
+
 const App = ({ notify, alert }: any) => {
   const [expoPushToken, setExpoPushToken] = useState<string | undefined>("");
   const notificationListener = useRef<any>();
   const { getLocation }: any = useContext(LocationContext);
   const responseListener = useRef<any>();
-  
+
+  useEffect(() => {
+    strapi
+      .post("/auth/local", {
+        identifier: "anmolpreet@techhiedunia.com",
+        password: "Iwebc0de",
+      })
+      .then((res: any) => {
+        AsyncStorage.setItem("cmsAuthToken", res?.data?.jwt);
+      });
+
+  }, []);
+
   useEffect(() => {
     schedulePushNotification(alert);
   }, [alert]);
@@ -57,18 +60,19 @@ const App = ({ notify, alert }: any) => {
             }),
           });
     });
-   console.log('n', notify);
-       
   }, [notify]);
+
   useEffect(() => {
     getLocationPermission();
     Notifications.registerTaskAsync(BACKGROUND_NOTIFICATION_TASK);
-  }, [expoPushToken]);
+  }, [expoPushToken?.length !== 0, expoPushToken !== undefined]);
 
   const getLocationPermission = async () => {
     try {
       const Token = await AsyncStorage.getItem("cmsAuthToken");
-      const currentCity: any = await AsyncStorage.getItem("ClimeeCurrentLocation")
+      const currentCity: any = await AsyncStorage.getItem(
+        "ClimeeCurrentLocation"
+      );
       await strapi.post(
         "/deviceinfos",
         {
@@ -81,7 +85,7 @@ const App = ({ notify, alert }: any) => {
           },
         }
       );
-    } catch (err:any) {
+    } catch (err: any) {
       console.log(err.message);
     }
   };
@@ -94,8 +98,7 @@ const App = ({ notify, alert }: any) => {
     notificationListener.current =
       Notifications.addNotificationReceivedListener((notification) => {});
     responseListener.current =
-      Notifications.addNotificationResponseReceivedListener((response) => {
-      });
+      Notifications.addNotificationResponseReceivedListener((response) => {});
     return () => {
       Notifications.removeNotificationSubscription(
         notificationListener.current
@@ -103,10 +106,10 @@ const App = ({ notify, alert }: any) => {
       Notifications.removeNotificationSubscription(responseListener.current);
     };
   }, []);
-  
+
   async function registerForPushNotificationsAsync() {
     let token;
-    if (Constants.isDevice) {
+    if (Device.isDevice) {
       const { status: existingStatus } =
         await Notifications.getPermissionsAsync();
       let finalStatus = existingStatus;
@@ -115,13 +118,12 @@ const App = ({ notify, alert }: any) => {
         finalStatus = status;
       }
       if (finalStatus !== "granted") {
-        // alert('Failed to get push token for push notification!');
+        // Alert.alert('Failed to get push token for push notification!');
         return;
       }
       token = (await Notifications.getExpoPushTokenAsync()).data;
-      // console.log('token', token);
     } else {
-      // alert('Must use physical device for Push Notifications');
+      // Alert.alert('Must use physical device for Push Notifications');
     }
     if (Platform.OS === "android") {
       Notifications.setNotificationChannelAsync("default", {
