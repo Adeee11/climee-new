@@ -1,16 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Image, Text, View } from "react-native";
-import assets from "../../../assets";
 import WeatherImage from "../WeatherImage/WeatherImage";
 import styles from "./styles";
 const HourlyInformation = (props: any) => {
-  const { data, date, weatherDegree, windDegree } = props;
+  const { data, date, weatherDegree, windDegree,sunset } = props;
 
   const time = (time: number) => {
     const date = new Date(time * 1000);
     let hours = date.getHours();
     let minutes: number | string = date?.getMinutes();
     const ampm = hours >= 12 ? "PM" : "AM";
+    // setmoon(ampm);
     hours = hours % 12;
     hours = hours ? hours : 12; // the hour '0' should be '12'
     minutes = minutes < 10 ? "0" + minutes : minutes;
@@ -19,13 +19,22 @@ const HourlyInformation = (props: any) => {
   };
 
   const renderItems = (item: any) => {
+    // console.log(item,"item");
+
     return (
       <View key={item?.id} style={styles.infoContainer}>
         <View style={styles.subContainer}>
           <Text style={styles.timeText}>{time(item.dt)?.strTime}</Text>
         </View>
         <View style={styles.subContainerImage}>
-          <WeatherImage img={item?.weather[0]?.main} height={30} width={30} />
+          <WeatherImage
+            img={item?.weather[0]?.main}
+            height={30}
+            width={30}
+             time={
+              item.dt > sunset? false:true
+             }
+          />
         </View>
         <View style={styles.tempView}>
           <View

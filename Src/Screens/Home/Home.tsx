@@ -45,8 +45,6 @@ const Home = ({
   const [modalVisible, setModalVisible] = useState<boolean>(false);
 
   useEffect(() => {
-    console.log(weatherLoading,"weatherloading");
-    
     setLoading(true);
     (async () => {
       try {

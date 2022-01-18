@@ -72,12 +72,14 @@ const Hourly = ({
             date={moment(new Date())?.format("dddd, D MMMM")}
             weatherDegree={weatherDegree}
             windDegree={windDegree}
+            sunset={weatherDetails[0]?.weatherDetails?.current.sunset}
           />
           <HourlyInformation
             data={tomorrowHourly}
             date={moment().add(1, "days").format("dddd, D MMMM").toString()}
             weatherDegree={weatherDegree}
             windDegree={windDegree}
+            sunset={weatherDetails[0]?.weatherDetails?.current.sunset}
           />
         </ScrollView>
       )}
