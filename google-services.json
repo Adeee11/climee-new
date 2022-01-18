@@ -1,33 +1,41 @@
 {
   "project_info": {
-    "project_number": "821887706308",
-    "project_id": "climee-761dc",
-    "storage_bucket": "climee-761dc.appspot.com"
+    "project_number": "944814889631",
+    "project_id": "climee-338610",
+    "storage_bucket": "climee-338610.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:821887706308:android:fe6b649bbcea5433d41591",
+        "mobilesdk_app_id": "1:944814889631:android:6dbc51cb31546528c0e0aa",
         "android_client_info": {
           "package_name": "com.iwebcode.climee"
         }
       },
       "oauth_client": [
         {
-          "client_id": "821887706308-oa0m2lp866rq4ovjtt2cs1otcea8k2bk.apps.googleusercontent.com",
+          "client_id": "944814889631-m10t261teo4revgkcn982p6dpepttk22.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.iwebcode.climee",
+            "certificate_hash": "77e153040ba4554b9ade34e273d22ed81fc5735d"
+          }
+        },
+        {
+          "client_id": "944814889631-h1b7fbt46bin6buharqodeo09ouo5qj3.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAjEQTSo3zM9UxhG03oMy-afgBFGlbhkbA"
+          "current_key": "AIzaSyAw74V_ew2JeieR5cUGqzAX5NCFvVJ-PJs"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "821887706308-oa0m2lp866rq4ovjtt2cs1otcea8k2bk.apps.googleusercontent.com",
+              "client_id": "944814889631-h1b7fbt46bin6buharqodeo09ouo5qj3.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
