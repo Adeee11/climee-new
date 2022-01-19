@@ -19,6 +19,7 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import assets from "../../../assets";
 import { Iwebcode } from "../../../assets/svg";
+import strapi from "../../api/strapi";
 
 const SplashScreen = () => {
   const [fadeAnim] = useState(new Animated.Value(0));
@@ -70,12 +71,19 @@ const SplashScreen = () => {
     (async () => {
       try {
         weatherDetailsLoading(true);
+        //Get Authorization token for the CMS
+        const res: any = await strapi.post("/auth/local", {
+          identifier: "anmolpreet@techhiedunia.com",
+          password: "Iwebc0de",
+        });
+        AsyncStorage.setItem("cmsAuthToken", res?.data?.jwt);
+
+        //Get current location and weather details
         const { status } = await Location.requestForegroundPermissionsAsync();
         if (status !== "granted") {
           Alert.alert("Please grant location permission.");
           await Location.requestForegroundPermissionsAsync();
         }
-
         const location = await Location.getCurrentPositionAsync({});
         const place = await Location.reverseGeocodeAsync({
           latitude: location?.coords?.latitude,
@@ -139,6 +147,7 @@ const SplashScreen = () => {
       : (themeColorOne(colors.hazeFirstColor),
         themeColorTwo(colors.hazeSecondColor));
   };
+
   return (
     <>
       {Platform.OS === "ios" ? (
@@ -176,7 +185,6 @@ const SplashScreen = () => {
             justifyContent: "flex-end",
             alignItems: "center",
             opacity: fadeAnim,
-            // backgroundColor: "yellow",
           }}
         >
           <Animated.Image
@@ -191,7 +199,6 @@ const SplashScreen = () => {
         </Animated.View>
 
         <View style={styles.bottomWrapper}>
-          {/* <Text style={styles.text2}>from</Text> */}
           <Iwebcode height={120} width={120} color="white" />
         </View>
       </Animated.View>

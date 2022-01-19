@@ -11,15 +11,13 @@ const colorThemeReducer = (
   switch (action.type) {
     case types.FIRSTCOLOR: {
       const data = action.payload;
-      console.log(data, "FirstColor");
-
       return {
         ...state,
         firstColor: data,
       };
     }
+
     case types.SECONDCOLOR: {
-      console.log(action.payload, "SecondColor");
       return {
         ...state,
         secondColor: action.payload,
