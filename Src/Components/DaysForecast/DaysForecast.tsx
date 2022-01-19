@@ -25,7 +25,6 @@ const DaysForecast = ({
         <View>
           <View style={styles.mainContainer}>
             <TouchableOpacity
-            hitSlop={{top: 20, bottom: 20, left: 50, right: 50}}
               onPress={() => [setSelected(item?.dt), handleSelectedDay(item)]}
             >
               <View

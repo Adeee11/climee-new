@@ -316,7 +316,6 @@ const Search = ({ ModalVisible, weatherDetail, weatherDegree }: any) => {
                   renderItem={({ item }) => {
                     return (
                       <TouchableOpacity
-                        hitSlop={{ top: 20, bottom: 20, left: 50, right: 50 }}
                         onPress={() => setPlaceId(item?.place_id)}
                         style={styles.searchTextWrapper}
                       >

@@ -21,6 +21,7 @@ const Hourly = ({
   const [todayHourly, setTodayHourly] = useState<any>();
   const [tomorrowHourly, setTomorrowHourly] = useState<any>();
   const [loader, setLoader] = useState(true);
+  // console.log(weatherDetails[0]?.weatherDetails.daily[0].sunrise);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -72,12 +73,16 @@ const Hourly = ({
             date={moment(new Date())?.format("dddd, D MMMM")}
             weatherDegree={weatherDegree}
             windDegree={windDegree}
+            sunrise={weatherDetails[0]?.weatherDetails?.current.sunrise}
+            sunset={weatherDetails[0]?.weatherDetails?.current.sunset}
           />
           <HourlyInformation
             data={tomorrowHourly}
             date={moment().add(1, "days").format("dddd, D MMMM").toString()}
-            weatherDegree={weatherDegree}
+            weatherDegree={weatherDegree}   
             windDegree={windDegree}
+            sunrise={weatherDetails[0]?.weatherDetails.daily[1].sunrise}
+            sunset={weatherDetails[0]?.weatherDetails?.daily[1].sunset}
           />
         </ScrollView>
       )}

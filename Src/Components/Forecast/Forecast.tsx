@@ -40,7 +40,7 @@ const Forecast = ({
 
   const renderItems = (item: any) => {
     return (
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
+      <View key={item.dt} style={{ flexDirection: "row", alignItems: "center" }}>
         <View style={styles.dataContainer}>
           {backgroundColor ? (
             <Text style={styles.timeText}>
@@ -95,7 +95,6 @@ const Forecast = ({
       }
     >
       <TouchableOpacity
-      hitSlop={{top: 20, bottom: 20, left: 50, right: 50}}
         style={{
           ...styles.cardContainer,
           backgroundColor: backgroundColor ? colors.darkBlue : "transparent",

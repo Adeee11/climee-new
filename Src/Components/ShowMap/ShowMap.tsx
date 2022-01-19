@@ -8,6 +8,7 @@ const ShowMap = ({
   customStyles,
   updatedCoordinates,
 }: any) => {
+  const mapRef = useRef(null);
   const [marker, setMarker] = useState<any>(null);
   const [region, setRegion] = useState({
     latitude: latitude === undefined ? 0 : latitude,
@@ -15,17 +16,21 @@ const ShowMap = ({
     latitudeDelta: 10,
     longitudeDelta: 10,
   });
+  const [val, setVal] = useState({
+    latitude: latitude,
+    longitude: longitude,
+  });
+  useEffect(() => {
+    setMarker(null);
+    handleCoordinates;
+  }, [val]);
+
   const handleCoordinates = (val: any) => {
     if (val.latitude !== undefined) {
       setMarker(val);
       updatedCoordinates(val);
     }
   };
-  useEffect(() => {
-    setMarker(null);
-    handleCoordinates;
-  }, [latitude]);
-  const mapRef = useRef(null);
 
   return (
     <>
@@ -188,15 +193,10 @@ const ShowMap = ({
         initialRegion={region}
         onRegionChange={(region) => setRegion(region)}
         ref={mapRef}
-        // onUserLocationChange={locationChangedResult => setRegion(locationChangedResult.nativeEvent.coordinate)}
+        // onUserLocationChange={(locationChangedResult) =>
+        //   setRegion(locationChangedResult.nativeEvent.coordinate)
+        // }
       >
-        {/* <Marker
-            
-            coordinate={{
-              latitude: latitude === undefined ? 0 : latitude,
-              longitude: longitude === undefined ? 0 : longitude,
-            }}
-          /> */}
         {marker === null ? (
           <Marker
             coordinate={{

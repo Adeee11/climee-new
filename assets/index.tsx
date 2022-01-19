@@ -47,6 +47,6 @@ export default {
   newUv: require("./images/newUv.png"),
   newWind: require("./images/newWind.png"),
   windDirection: require("./images/windDirection.png"),
-
   newSunnyImage: require("./images/imgSunny.png"),
+  moon: require("./images/moon.png"),
 };

@@ -33,13 +33,10 @@ const NearBy = ({
   weatherDegree,
   windDegree,
 }: any) => {
-
-  useEffect(() => {
-   setCoordinates({
-    latitude: weatherDetails[0]?.locationDetails?.latitude,
-    longitude: weatherDetails[0]?.locationDetails?.longitude,
-   })
-  }, [weatherDetails])
+  const [loading, setLoading] = useState<boolean>(false);
+  const [openIOSModal, setOpenIOSModal] = useState<boolean>(false);
+  const actionSheetRef = createRef<any>();
+  const [airQuality, setAirQuality] = useState();
   const [coordinates, setCoordinates] = useState<any>({
     latitude: weatherDetails[0]?.locationDetails?.latitude,
     longitude: weatherDetails[0]?.locationDetails?.longitude,
@@ -50,10 +47,13 @@ const NearBy = ({
     city: "",
     country: "",
   });
-  const [loading, setLoading] = useState<boolean>(false);
-  const [openIOSModal, setOpenIOSModal] = useState<boolean>(false);
-  const actionSheetRef = createRef<any>();
-  const [airQuality, setAirQuality] = useState();
+
+  useEffect(() => {
+    setCoordinates({
+      latitude: weatherDetails[0]?.locationDetails?.latitude,
+      longitude: weatherDetails[0]?.locationDetails?.longitude,
+    });
+  }, [weatherDetails]);
 
   const getCoordinates = (val: any) => {
     setCoordinates(val);
@@ -82,7 +82,7 @@ const NearBy = ({
           country: r[0]?.country,
         });
         setLoading(false);
-        getCoordinates
+        getCoordinates;
       } catch (err: any) {
         console.log(err.message);
       }
@@ -117,8 +117,8 @@ const NearBy = ({
       <SafeAreaView style={{ flex: 1 }}>
         <Header title={"Nearby"} />
         <ShowMap
-          latitude={weatherDetails[0]?.locationDetails?.latitude}
-          longitude={weatherDetails[0]?.locationDetails?.longitude}
+          latitude={coordinates?.latitude}
+          longitude={coordinates?.longitude}
           updatedCoordinates={getCoordinates}
         />
 
@@ -127,7 +127,7 @@ const NearBy = ({
           <Loader />
         ) : (
           <>
-            <View style={styles.locationContainer}>
+            <View style={styles.locationContainer} pointerEvents="none">
               <Location height={35} width={35} />
               <View style={{ marginLeft: 15 }}>
                 <View
@@ -157,7 +157,7 @@ const NearBy = ({
                         width: 15,
                         height: 15,
                         marginHorizontal: 5,
-                        marginTop:-5,
+                        marginTop: -5,
                         transform: [{ rotate: "320deg" }],
                       }}
                       resizeMode={"contain"}
@@ -173,7 +173,7 @@ const NearBy = ({
             </View>
 
             {/* Temperature Container */}
-            <View style={styles.tempContainer}>
+            <View style={styles.tempContainer} pointerEvents="none">
               <LinearGradient
                 // Background Linear Gradient
                 colors={[colors.darkBlue, colors.white]}
