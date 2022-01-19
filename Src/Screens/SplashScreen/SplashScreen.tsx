@@ -187,6 +187,7 @@ const SplashScreen = () => {
             opacity: fadeAnim,
           }}
         >
+          
           <Animated.Image
             source={assets.splashIcon}
             style={{
