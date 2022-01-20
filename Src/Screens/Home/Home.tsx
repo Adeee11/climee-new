@@ -65,8 +65,8 @@ const Home = ({
   const renderNews = (data: any) => {
     return data?.map((item: any, index: any) => {
       return (
-        <TouchableOpacity 
-          key={item.id}
+        <TouchableOpacity
+           key={index}
           onPress={() =>
             navigation.navigate(navigationStrings.NEWS, { data: item })
           }

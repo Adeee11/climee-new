@@ -16,18 +16,6 @@ const App = ({ notify, alert }: any) => {
   const responseListener = useRef<any>();
 
   useEffect(() => {
-    strapi
-      .post("/auth/local", {
-        identifier: "anmolpreet@techhiedunia.com",
-        password: "Iwebc0de",
-      })
-      .then((res: any) => {
-        AsyncStorage.setItem("cmsAuthToken", res?.data?.jwt);
-      });
-
-  }, []);
-
-  useEffect(() => {
     schedulePushNotification(alert);
   }, [alert]);
 
@@ -135,6 +123,7 @@ const App = ({ notify, alert }: any) => {
     }
     return token;
   }
+
   return (
     <>
       <Routes />

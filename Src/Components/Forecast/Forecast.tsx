@@ -9,6 +9,8 @@ import Shadow from "../Shadow/Shadow";
 import WeatherImage from "../WeatherImage/WeatherImage";
 import styles from "./style";
 
+
+
 const Forecast = ({
   data,
   backgroundColor,
@@ -17,14 +19,7 @@ const Forecast = ({
   navigation,
   tab
 }: any) => {
-  interface data {
-    id: string;
-    temp: string;
-    dt: number;
-    img?: any;
-    min?: number;
-    max: number;
-  }
+
 
   const time = (time: number) => {
     const date = new Date(time * 1000);
@@ -38,7 +33,7 @@ const Forecast = ({
     return { strTime };
   };
 
-  const renderItems = (item: any) => {
+  const renderItems = (item: any) => {    
     return (
       <View key={item.dt} style={{ flexDirection: "row", alignItems: "center" }}>
         <View style={styles.dataContainer}>
@@ -111,9 +106,9 @@ const Forecast = ({
       <View>
         <FlatList
           data={data}
+          keyExtractor={(item) => item?.dt}
           horizontal
           showsHorizontalScrollIndicator={false}
-          keyExtractor={(item) => item?.id}
           renderItem={({ item }) => renderItems(item)}
         />
       </View>
