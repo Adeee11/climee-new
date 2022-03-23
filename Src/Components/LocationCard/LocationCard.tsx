@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { View, Image, Text, TouchableOpacity } from "react-native";
-import assets from "../../../assets";
 import { Location } from "../../../assets/svg";
 import { AntDesign } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -23,7 +22,7 @@ const LocationCard = ({
   showDetails,
   weatherDegree,
 }: any) => {
-  const [currentDetails, setCurrentDetails] = useState();
+  const [currentDetails, setCurrentDetails] = useState<any>();
   const [temperature, setTemperature] = useState<number>(0);
   const [weatherMain, setWeatherMain] = useState();
   const [loading, setLoading] = useState(false);
@@ -167,7 +166,7 @@ const LocationCard = ({
           </View>
         ) : (
           <TouchableOpacity
-          hitSlop={{top: 20, bottom: 20, left: 50, right: 50}}
+            hitSlop={{ top: 20, bottom: 20, left: 50, right: 50 }}
             onPress={handleRemoveLocation}
             style={{ flex: 0.1 }}
           >
